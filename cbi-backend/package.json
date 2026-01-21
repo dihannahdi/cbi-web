@@ -1,0 +1,20 @@
+{
+  "name": "cbi-backend-local",
+  "version": "1.0.0",
+  "description": "Local API server for CBI data",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "start:safe": "node start-with-validation.js",
+    "dev": "node server.js",
+    "extract": "node extract-data.js",
+    "health": "node comprehensive-health-check.js",
+    "validate": "node comprehensive-health-check.js",
+    "test": "node run-tests.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "sql.js": "^1.12.0"
+  }
+}

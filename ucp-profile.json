@@ -1,0 +1,67 @@
+{
+  "ucp": {
+    "version": "2026-01-11",
+    "capabilities": [
+      {
+        "name": "com.centrabiotechindonesia.discovery.products",
+        "version": "2026-01-11",
+        "spec": "https://www.centrabiotechindonesia.com/ucp/spec",
+        "schema": "https://www.centrabiotechindonesia.com/ucp/schema/products.json"
+      },
+      {
+        "name": "com.centrabiotechindonesia.discovery.company",
+        "version": "2026-01-11",
+        "spec": "https://www.centrabiotechindonesia.com/ucp/spec",
+        "schema": "https://www.centrabiotechindonesia.com/ucp/schema/company.json"
+      }
+    ]
+  },
+  "company": {
+    "name": "PT. Centra Biotech Indonesia",
+    "legal_name": "PT. Centra Biotech Indonesia",
+    "description": "Indonesian biotechnology company specializing in organic fertilizers and agricultural solutions. Provider of RAJABIO certified organic liquid fertilizer.",
+    "industry": ["Agriculture", "Biotechnology", "Organic Fertilizers"],
+    "founded": "2020",
+    "website": "https://www.centrabiotechindonesia.com",
+    "contact": {
+      "phone": "+6281235003655",
+      "email": "info@centrabiotechindonesia.com",
+      "whatsapp": "+6281235003655"
+    },
+    "address": {
+      "city": "Klaten",
+      "region": "Central Java",
+      "country": "Indonesia",
+      "country_code": "ID"
+    },
+    "social_media": {
+      "linkedin": "https://www.linkedin.com/company/centra-biotech-indonesia",
+      "instagram": "@centrabiotech",
+      "facebook": "CentraBiotechIndonesia"
+    }
+  },
+  "certifications": [
+    {
+      "name": "Ministry of Agriculture RI",
+      "number": "02.02.2023.883",
+      "issued_by": "Kementerian Pertanian Republik Indonesia",
+      "issued_date": "2023-02-02",
+      "type": "product_registration"
+    },
+    {
+      "name": "LeSOS Organic Certificate",
+      "number": "442-LSO-005-IDN-08-22",
+      "issued_by": "LeSOS Certification Body",
+      "issued_date": "2022-08-01",
+      "type": "organic_certification"
+    },
+    {
+      "name": "SNI Standard",
+      "number": "SNI 6729:2016",
+      "issued_by": "Badan Standardisasi Nasional",
+      "type": "quality_standard"
+    }
+  ],
+  "products_endpoint": "https://cbi-backend.my.id/ucp/products",
+  "api_version": "1.0"
+}

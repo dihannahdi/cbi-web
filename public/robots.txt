@@ -1,0 +1,86 @@
+# Robots.txt for Centra Biotech Indonesia
+# https://www.centrabiotechindonesia.com
+# Multi-language site with Indonesian (id) and English (en) support
+
+# Global rules for all crawlers
+User-agent: *
+Allow: /
+Allow: /id/
+Allow: /en/
+Allow: /_next/static/
+Allow: /_next/image/
+Allow: /images/
+
+# Disallow internal/private paths
+Disallow: /api/
+Disallow: /admin/
+Disallow: /private/
+Disallow: /_vercel/
+Disallow: /scripts/
+
+# Googlebot - allow full crawling with specific rules
+User-agent: Googlebot
+Allow: /
+Allow: /id/
+Allow: /en/
+
+# Googlebot Images - optimize image crawling
+User-agent: Googlebot-Image
+Allow: /
+Allow: /images/
+Allow: /_next/image/
+Disallow: /admin/
+
+# Bingbot - allow with crawl delay
+User-agent: Bingbot
+Allow: /
+Allow: /id/
+Allow: /en/
+Crawl-delay: 1
+
+# Social media crawlers - essential for Open Graph previews
+User-agent: facebookexternalhit
+Allow: /
+Allow: /id/
+Allow: /en/
+
+User-agent: Twitterbot
+Allow: /
+Allow: /id/
+Allow: /en/
+
+User-agent: LinkedInBot
+Allow: /
+Allow: /id/
+Allow: /en/
+
+User-agent: WhatsApp
+Allow: /
+Allow: /id/
+Allow: /en/
+
+User-agent: TelegramBot
+Allow: /
+Allow: /id/
+Allow: /en/
+
+# Bad bots - block aggressive crawlers
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# Sitemap locations - includes both locales
+Sitemap: https://www.centrabiotechindonesia.com/sitemap.xml
+Sitemap: https://www.centrabiotechindonesia.com/id/sitemap.xml
+Sitemap: https://www.centrabiotechindonesia.com/en/sitemap.xml
+
+# Host directive
+Host: https://www.centrabiotechindonesia.com

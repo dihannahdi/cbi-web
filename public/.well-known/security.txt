@@ -1,0 +1,31 @@
+# Centra Biotech Indonesia - Security Policy
+# Indonesia's Leading Agro-Biotech Innovation & Manufacturing Hub
+
+## Security.txt
+# Our security address
+Contact: mailto:centrabioindo@gmail.com
+Contact: https://www.centrabiotechindonesia.com/en/contact
+Contact: tel:+62-812-3500-3655
+
+# Our security policy
+Policy: https://www.centrabiotechindonesia.com/en/documents
+
+# Our preferred languages
+Preferred-Languages: id, en
+
+# Canonical URL for this file
+Canonical: https://www.centrabiotechindonesia.com/.well-known/security.txt
+
+# Expiration date
+Expires: 2026-12-31T23:59:59.000Z
+
+# Additional information
+Acknowledgments: https://www.centrabiotechindonesia.com/en/about-us
+Hiring: https://www.centrabiotechindonesia.com/en/career
+
+# Company Information
+# PT Centra Biotech Indonesia
+# Address: Sawahan RT 02 RW 07 Pasungan, Ceper, Klaten, Jawa Tengah, Indonesia 57465
+# Phone: +62 812-3500-3655
+# Email: centrabioindo@gmail.com
+# Website: https://www.centrabiotechindonesia.com

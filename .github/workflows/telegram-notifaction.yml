@@ -1,0 +1,39 @@
+name: Telegram Notification on Push
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Get commit details
+        id: commit
+        run: |
+          echo "message=$(git log -1 --pretty=format:%s)" >> $GITHUB_OUTPUT
+          echo "author=$(git log -1 --pretty=format:%an)" >> $GITHUB_OUTPUT
+          echo "sha=$(git log -1 --pretty=format:%h)" >> $GITHUB_OUTPUT
+
+      - name: Send Telegram notification
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          format: html
+          message: |
+            🔔 <b>New Push to ${{ github.repository }}</b>
+
+            📌 Branch: <code>${{ github.ref_name }}</code>
+            👤 Author: <code>${{ steps.commit.outputs.author }}</code>
+            📝 Commit: <code>${{ steps.commit.outputs.sha }}</code>
+
+            💬 Message:
+            <pre>${{ steps.commit.outputs.message }}</pre>
+
+            🔗 <a href="${{ github.event.repository.html_url }}/commit/${{ github.sha }}">View Changes</a>

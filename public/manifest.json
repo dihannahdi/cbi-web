@@ -1,0 +1,69 @@
+{
+  "name": "Centra Biotech Indonesia - Indonesia's Leading Agro-Biotech Manufacturing Hub",
+  "short_name": "CBI",
+  "description": "Pusat Inovasi & Manufaktur Agro-Bioteknologi Terdepan di Indonesia. Layanan maklon pupuk hayati & organik terbaik, produk bersertifikat Kementan: FLORAONE, RAJABIO, BIO KILLER, SIMBIOS. 14+ tahun pengalaman. Hubungi: 0851 8328 4691",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#10b981",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/apple-icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["business", "agriculture", "technology", "biotechnology", "science", "manufacturing", "b2b"],
+  "lang": "id",
+  "dir": "ltr",
+  "scope": "/",
+  "iarc_rating_id": "e",
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Layanan Maklon Pupuk",
+      "short_name": "Maklon",
+      "description": "Jasa maklon pupuk hayati & organik terbaik di Indonesia",
+      "url": "/id/maklon-pupuk",
+      "icons": [{
+        "src": "/apple-icon.png",
+        "sizes": "192x192"
+      }]
+    },
+    {
+      "name": "Produk Pertanian",
+      "short_name": "Produk",
+      "description": "FLORAONE, RAJABIO, BIO KILLER, SIMBIOS - Bersertifikat Kementan",
+      "url": "/id/product/agriculture",
+      "icons": [{
+        "src": "/apple-icon.png",
+        "sizes": "192x192"
+      }]
+    },
+    {
+      "name": "Hubungi Kami",
+      "short_name": "Kontak",
+      "description": "WhatsApp: 0851 8328 4691 | centrabioindo@gmail.com",
+      "url": "/id/contact",
+      "icons": [{
+        "src": "/apple-icon.png",
+        "sizes": "192x192"
+      }]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

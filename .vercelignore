@@ -1,0 +1,57 @@
+# Backend
+cbi-backend/
+cbi-strapi-sqlite/
+
+# Backups and large files
+*.tar.gz
+*.zip
+*.rar
+cbi_*.tar.gz
+cbi_*.zip
+
+# Large videos (host elsewhere or optimize)
+*.mp4
+public/cbi-video-profile.mp4
+
+# Database files
+*.db
+*.sqlite
+*.sql
+
+# Node modules (already in .gitignore but ensure)
+node_modules/
+
+# Build artifacts
+.next/
+out/
+dist/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Documentation
+*.md
+!README.md
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Scripts
+scripts/

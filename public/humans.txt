@@ -1,0 +1,49 @@
+/* TEAM */
+Company: PT Centra Biotech Indonesia
+Title: Southeast Asia's Premier Agro-Biotech Innovation & Manufacturing Hub
+Site: https://www.centrabiotechindonesia.com
+Established: 2011
+Experience: 14+ Years
+
+Contact: centrabioindo@gmail.com
+Phone: +62 851 8328 4691
+Location: Sawahan RT 02 RW 07 Pasungan, Ceper, Klaten, Jawa Tengah 57465, Indonesia
+
+/* SERVICES */
+Primary: Maklon/Contract Manufacturing (Pupuk Hayati, Pupuk Organik, Insektisida Hayati)
+Capacity: 100L to 200,000+ L per batch
+MOQ: Flexible for startups to corporations
+Certifications: Kementerian Pertanian RI, GMP, Quality Testing
+
+/* FLAGSHIP PRODUCTS */
+FLORAONE: Pupuk Hayati Cair Premium - Biological Fertilizer
+RAJABIO: Pupuk Organik Cair Premium - Organic Fertilizer
+BIO KILLER: Insektisida Hayati Cair - Bio-Pesticide
+SIMBIOS: Pupuk Hayati Cair Multifungsi - Multi-function Biological Fertilizer
+
+All products certified by Ministry of Agriculture of Republic of Indonesia.
+
+/* TECHNOLOGY */
+Frontend: Next.js 16+, TypeScript, Tailwind CSS
+Backend: Strapi 5 CMS
+Hosting: Vercel (Frontend), VPS (Backend)
+Languages: Indonesian (id), English (en)
+
+/* PHILOSOPHY */
+"Anda bukan sekadar penjual pupuk. Anda adalah sumber teknologi."
+"You're not just selling fertilizer. You are the source of technology."
+
+For Farmers: We are your harvest solution.
+For Businesses: We are your OEM manufacturing partner.
+For Students: We are your biotechnology encyclopedia.
+
+/* WHY CHOOSE CBI */
+- #1 Maklon Service Provider in Indonesia
+- 14+ Years of Manufacturing Excellence
+- Complete Government Certifications
+- Largest Production Capacity
+- Most Competitive Pricing
+- Thousands of Satisfied Customers
+
+Contact us for maklon inquiries: +62 812-3500-3655
+Email: centrabioindo@gmail.com
