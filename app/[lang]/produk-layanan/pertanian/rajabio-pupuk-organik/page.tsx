@@ -17,6 +17,12 @@ import {
   MultipleStructuredData 
 } from "@/utils/structuredData";
 import {
+  fetchStrapiProduct,
+  transformFAQ,
+  transformVideos,
+  transformExternalLinks,
+} from "@/utils/strapiProductData";
+import {
   Accordion,
   AccordionContent,
   AccordionItem,
@@ -444,9 +450,49 @@ export default async function RajabioProductPage({
 }) {
   const { lang } = await params;
   const dict = await getDictionary(lang);
-  const data = productData[lang];
-  const whatsappMessage = lang === 'id' ? WHATSAPP_MESSAGE_ID : WHATSAPP_MESSAGE_EN;
-  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
+  
+  // Fetch data from Strapi CMS (for text editability)
+  const strapiData = await fetchStrapiProduct("rajabio-pupuk-organik");
+  
+  // Use static fallback data as base
+  const staticData = productData[lang];
+  
+  // Merge Strapi data with static fallback (Strapi text takes precedence if available)
+  // This allows editing text via Strapi while keeping exact same design
+  const data = {
+    ...staticData,
+    // Override text fields from Strapi if available
+    name: strapiData?.name || staticData.name,
+    subtitle: strapiData?.subtitle || staticData.subtitle,
+    tagline: strapiData?.tagline || staticData.tagline,
+    heroTitle: strapiData?.heroTitle || staticData.heroTitle,
+    heroSubtitle: strapiData?.heroSubtitle || staticData.heroSubtitle,
+    description: strapiData?.description || staticData.description,
+    ctaWhatsapp: strapiData?.ctaWhatsapp || staticData.ctaWhatsapp,
+    ctaShopee: strapiData?.ctaShopee || staticData.ctaShopee,
+    ctaCatalog: strapiData?.ctaCatalog || staticData.ctaCatalog,
+    ctaBrochure: strapiData?.ctaBrochure || staticData.ctaBrochure,
+    ctaCertificate: strapiData?.ctaCertificate || staticData.ctaCertificate,
+    // FAQ from Strapi or fallback
+    faq: transformFAQ(strapiData?.faq, staticData.faq),
+    // Video section titles from Strapi
+    videoSection: {
+      ...staticData.videoSection,
+      title: strapiData?.videoSectionTitle || staticData.videoSection.title,
+      subtitle: strapiData?.videoSectionSubtitle || staticData.videoSection.subtitle,
+    },
+  };
+  
+  // Videos from Strapi or fallback to static rajabiVideos
+  const videos = transformVideos(strapiData?.videos, rajabiVideos);
+  
+  // External links from Strapi or fallback
+  const externalLinks = transformExternalLinks(strapiData?.externalLinks, EXTERNAL_LINKS);
+  
+  // WhatsApp URL (can be customized via Strapi)
+  const whatsappNumber = strapiData?.whatsappNumber || WHATSAPP_NUMBER;
+  const whatsappMessage = strapiData?.whatsappMessage || (lang === 'id' ? WHATSAPP_MESSAGE_ID : WHATSAPP_MESSAGE_EN);
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 
   // Generate comprehensive structured data for maximum SEO + AI Search Engines
   const schemas = [
@@ -922,7 +968,7 @@ export default async function RajabioProductPage({
                   {data.ctaWhatsapp}
                 </Link>
                 <Link
-                  href={EXTERNAL_LINKS.shopee}
+                  href={externalLinks.shopee}
                   target="_blank"
                   className="flex items-center gap-2 rounded-xl bg-[#EE4D2D] hover:bg-[#D73211] px-6 py-4 font-semibold text-white transition-all shadow-sm hover:shadow-lg"
                 >
@@ -956,7 +1002,7 @@ export default async function RajabioProductPage({
               
               {/* CTA Button - Download Demplot */}
               <Link
-                href={EXTERNAL_LINKS.brochure}
+                href={externalLinks.brochure}
                 target="_blank"
                 className="inline-flex items-center gap-3 bg-[#006622] hover:bg-[#004d1a] text-white font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all w-fit"
               >
@@ -1204,7 +1250,7 @@ export default async function RajabioProductPage({
         <ContainerSection>
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 lg:text-4xl mb-4">
-              {lang === 'id' ? 'Lihat RAJABIO Beraksi' : 'Watch RAJABIO in Action'}
+              {data.videoSection.title}
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               {lang === 'id' 
@@ -1213,7 +1259,7 @@ export default async function RajabioProductPage({
             </p>
           </div>
 
-          <VideoGallerySlider videos={rajabiVideos} />
+          <VideoGallerySlider videos={videos} />
         </ContainerSection>
       </section>
 

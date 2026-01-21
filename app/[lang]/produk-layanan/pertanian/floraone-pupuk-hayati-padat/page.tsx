@@ -17,6 +17,12 @@ import {
   MultipleStructuredData 
 } from "@/utils/structuredData";
 import {
+  fetchStrapiProduct,
+  transformFAQ,
+  transformVideos,
+  transformExternalLinks,
+} from "@/utils/strapiProductData";
+import {
   Accordion,
   AccordionContent,
   AccordionItem,
@@ -315,9 +321,33 @@ export default async function FloraOneProductPage({
 }) {
   const { lang } = await params;
   const dict = await getDictionary(lang);
-  const data = productData[lang];
-  const whatsappMessage = lang === 'id' ? WHATSAPP_MESSAGE_ID : WHATSAPP_MESSAGE_EN;
-  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
+  
+  // Fetch data from Strapi CMS
+  const strapiData = await fetchStrapiProduct("floraone-pupuk-hayati-padat");
+  
+  // Use static fallback data as base
+  const staticData = productData[lang];
+  
+  // Merge Strapi data with static fallback
+  const data = {
+    ...staticData,
+    name: strapiData?.name || staticData.name,
+    subtitle: strapiData?.subtitle || staticData.subtitle,
+    tagline: strapiData?.tagline || staticData.tagline,
+    heroTitle: strapiData?.heroTitle || staticData.heroTitle,
+    heroSubtitle: strapiData?.heroSubtitle || staticData.heroSubtitle,
+    description: strapiData?.description || staticData.description,
+    faq: transformFAQ(strapiData?.faq, staticData.faq),
+  };
+  
+  // Videos and links from Strapi or fallback
+  const videos = transformVideos(strapiData?.videos, floraoneVideos);
+  const externalLinks = transformExternalLinks(strapiData?.externalLinks, EXTERNAL_LINKS);
+  
+  // WhatsApp URL
+  const whatsappNumber = strapiData?.whatsappNumber || WHATSAPP_NUMBER;
+  const whatsappMessage = strapiData?.whatsappMessage || (lang === 'id' ? WHATSAPP_MESSAGE_ID : WHATSAPP_MESSAGE_EN);
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 
   // Generate comprehensive structured data
   const schemas = [
