@@ -85,6 +85,12 @@ const rajabiVideos: Array<{
   type: 'youtube' | 'tiktok';
 }> = [
   {
+    id: "qFHAOivPp1A",
+    title: "Video Testimoni Pupuk Organik RAJABIO",
+    embedUrl: "https://www.youtube.com/embed/qFHAOivPp1A",
+    type: "youtube"
+  },
+  {
     id: "rRbK3D_gvS4",
     title: "DULU BEKAS PRODUKSI BATU BATA, KINI SUDAH BERPRODUKSI LAGI BERKAT RAJABIO",
     embedUrl: "https://www.youtube.com/embed/rRbK3D_gvS4",
