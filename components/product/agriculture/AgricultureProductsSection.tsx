@@ -85,6 +85,18 @@ const getProductSlug = (title: string | undefined, lang: 'id' | 'en'): string =>
       id: 'biokalsi-dolomit',
       en: 'biokalsi-dolomit'
     },
+    'FLORAONE PADAT': {
+      id: 'floraone-pupuk-hayati-padat',
+      en: 'floraone-pupuk-hayati-padat'
+    },
+    'FLORA ONE PADAT': {
+      id: 'floraone-pupuk-hayati-padat',
+      en: 'floraone-pupuk-hayati-padat'
+    },
+    'BIOJAGAT': {
+      id: 'biojagat-pupuk-hayati-cair',
+      en: 'biojagat-pupuk-hayati-cair'
+    },
   };
   
   const mapping = slugMap[normalizedTitle];

@@ -1,7 +1,17 @@
-import { Locale } from "@/i18n-config";
-import BiokalsiPage from "@/app/[lang]/produk-layanan/pertanian/biokalsi-dolomit/page";
+import { redirect } from "next/navigation";
+import { Locale, i18n } from "@/i18n-config";
 
-// Re-export the same component with proper English routing
-export { generateStaticParams, generateMetadata } from "@/app/[lang]/produk-layanan/pertanian/biokalsi-dolomit/page";
+// Generate static params for all locales
+export async function generateStaticParams() {
+  return i18n.locales.map((locale) => ({ lang: locale }));
+}
 
-export default BiokalsiPage;
+// Redirect to the Indonesian product URL path
+export default async function BiokalsiDolomitePage({ 
+  params 
+}: { 
+  params: Promise<{ lang: Locale }> 
+}) {
+  const { lang } = await params;
+  redirect(`/${lang}/produk-layanan/pertanian/biokalsi-dolomit`);
+}
