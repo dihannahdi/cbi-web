@@ -98,7 +98,7 @@ const Contact = async ({ params }: PageProps) => {
             description={data.description}
             contactInfo={data.addressAndContact}
           />
-          <FormSection dict={dict.contact} />
+          <FormSection dict={dict.contact} lang={lang} />
         </ContainerSection>
       </>
     );

@@ -1,11 +1,12 @@
 "use client";
 
 import { toast } from "sonner";
-import emailjs from "@emailjs/browser";
 import { useState, ChangeEvent, FormEvent } from "react";
 
 import { FormField } from "./FormField";
 import { SubmitButton } from "./SubmitButton";
+import { sendWhatsAppContactMessage, getBusinessWhatsAppNumber } from "@/utils/whatsappContact";
+import { Locale } from "@/i18n-config";
 
 // Types
 interface FormData {
@@ -40,6 +41,7 @@ interface ContactDict {
 
 interface FormSectionProps {
   dict: ContactDict;
+  lang?: Locale;
 }
 
 // Constants
@@ -53,14 +55,7 @@ const INITIAL_FORM_STATE: FormData = {
   agreement: false,
 };
 
-const EMAIL_CONFIG = {
-  TO_EMAIL: "mushoddaqt@gmail.com",
-  SERVICE_ID: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-  TEMPLATE_ID: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
-  PUBLIC_KEY: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
-};
-
-const FormSection = ({ dict }: FormSectionProps) => {
+const FormSection = ({ dict, lang = 'id' }: FormSectionProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState<FormData>(INITIAL_FORM_STATE);
 
@@ -80,58 +75,38 @@ const FormSection = ({ dict }: FormSectionProps) => {
     setFormData(INITIAL_FORM_STATE);
   };
 
-  const createEmailTemplateParams = (
-    formData: FormData,
-  ): Record<string, unknown> => ({
-    to_email: EMAIL_CONFIG.TO_EMAIL,
-    from_name: `${formData.firstName} ${formData.lastName}`,
-    from_email: formData.email,
-    company: formData.company,
-    phone: formData.phone,
-    message: formData.message,
-  });
-
-  const validateEmailConfig = () => {
-    if (
-      !EMAIL_CONFIG.SERVICE_ID ||
-      !EMAIL_CONFIG.TEMPLATE_ID ||
-      !EMAIL_CONFIG.PUBLIC_KEY
-    ) {
-      throw new Error("EmailJS credentials are not properly configured");
-    }
-  };
-
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
+    // Validate form
+    if (!formData.agreement) {
+      toast.error(lang === 'id' ? 'Harap setujui kebijakan privasi' : 'Please agree to the privacy policy');
+      return;
+    }
+
     setIsSubmitting(true);
 
-    const emailPromise = new Promise(async (resolve, reject) => {
-      try {
-        validateEmailConfig();
-
-        const templateParams = createEmailTemplateParams(formData);
-
-        await emailjs.send(
-          EMAIL_CONFIG.SERVICE_ID!,
-          EMAIL_CONFIG.TEMPLATE_ID!,
-          templateParams,
-          EMAIL_CONFIG.PUBLIC_KEY,
-        );
-
-        resetForm();
-        resolve("Pesan berhasil dikirim! Kami akan menghubungi Anda segera.");
-      } catch (error) {
-        reject(error);
-      } finally {
-        setIsSubmitting(false);
-      }
-    });
-
-    toast.promise(emailPromise, {
-      loading: dict.sending,
-      success: (data) => data as string,
-      error: dict.error,
-    });
+    try {
+      // Show loading toast
+      toast.loading(dict.sending);
+      
+      // Send via WhatsApp with pre-filled message
+      const businessPhone = getBusinessWhatsAppNumber();
+      sendWhatsAppContactMessage(formData, businessPhone, lang);
+      
+      // Show success message
+      toast.dismiss();
+      toast.success(dict.success);
+      
+      // Reset form after successful submission
+      resetForm();
+    } catch (error) {
+      console.error('WhatsApp contact error:', error);
+      toast.dismiss();
+      toast.error(dict.error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
