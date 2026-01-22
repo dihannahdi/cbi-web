@@ -192,23 +192,38 @@ const productVideos: Record<string, VideoData[]> = {
 
 /**
  * Generate video sitemap entries following Google's protocol
+ * 
+ * Per Google Search Central documentation:
+ * - video:content_loc should point to actual video file (mp4, etc.) - NOT embed URLs
+ * - video:player_loc should point to the video player/embed URL
+ * - For YouTube/TikTok, we only have player URLs (embeds), not direct file URLs
+ * - Therefore, we ONLY use video:player_loc for third-party hosted videos
+ * 
+ * @see https://developers.google.com/search/docs/crawling-indexing/sitemaps/video-sitemaps
  */
 function generateVideoEntries(productSlug: string): string {
   const videos = productVideos[productSlug];
   if (!videos || videos.length === 0) return '';
 
-  return videos.map(video => `
+  return videos.map(video => {
+    // For YouTube videos, use the standard watch URL format for better compatibility
+    let playerUrl = video.embedUrl;
+    if (video.type === 'youtube') {
+      playerUrl = `https://www.youtube.com/watch?v=${video.id}`;
+    }
+    
+    return `
     <video:video>
       <video:thumbnail_loc>${escapeXml(video.thumbnailUrl)}</video:thumbnail_loc>
       <video:title>${escapeXml(video.title)}</video:title>
       <video:description>${escapeXml(video.description)}</video:description>
-      <video:content_loc>${escapeXml(video.embedUrl)}</video:content_loc>
-      <video:player_loc>${escapeXml(video.embedUrl)}</video:player_loc>
+      <video:player_loc allow_embed="yes">${escapeXml(playerUrl)}</video:player_loc>
       ${video.duration ? `<video:duration>${video.duration}</video:duration>` : ''}
       <video:family_friendly>yes</video:family_friendly>
       <video:requires_subscription>no</video:requires_subscription>
       <video:live>no</video:live>
-    </video:video>`).join('');
+    </video:video>`;
+  }).join('');
 }
 
 /**
