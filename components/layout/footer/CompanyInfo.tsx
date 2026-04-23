@@ -45,8 +45,8 @@ const CompanyInfo = ({ lang, dict }: CompanyInfoProps) => {
         </div>
         <div className="flex flex-col">
           <h4 className="font-semibold text-white">{dict.footer.contact}</h4>
-          <Link href="https://wa.me/6281235003655" className="underline">
-            0812-3500-3655
+          <Link href="https://wa.me/6285196214187" className="underline">
+            0851-9621-4187
           </Link>
           <Link href="mailto:centrabioindo@gmail.com" className="underline">
             centrabioindo@gmail.com

@@ -69,7 +69,7 @@ export async function generateStaticParams() {
 }
 
 // Constants
-const WHATSAPP_NUMBER = "6281235003655";
+const WHATSAPP_NUMBER = "6285196214187";
 const WHATSAPP_MESSAGE_ID = "Halo, saya tertarik dengan produk RAJABIO Pupuk Organik Cair. Mohon informasi lebih lanjut.";
 const WHATSAPP_MESSAGE_EN = "Hello, I'm interested in RAJABIO Liquid Organic Fertilizer. Please provide more information.";
 
@@ -520,7 +520,7 @@ export default async function RajabioProductPage({
         name: 'PT Centra Biotech Indonesia',
         alternateName: 'Centra Biotech Indonesia',
         url: SITE_CONFIG.url,
-        telephone: '+62-812-3500-3655',
+        telephone: '+62-851-9621-4187',
         email: 'centrabioindo@gmail.com',
         address: {
           '@type': 'PostalAddress',

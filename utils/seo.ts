@@ -55,9 +55,9 @@ export const SITE_CONFIG = {
   
   // Contact information - UPDATED
   email: 'centrabioindo@gmail.com',
-  phone: '+62-812-3500-3655',
-  whatsapp: '+62-812-3500-3655',
-  phoneDisplay: '0812 3500 3655',
+  phone: '+62-851-9621-4187',
+  whatsapp: '+62-851-9621-4187',
+  phoneDisplay: '0851 9621 4187',
   
   // Address - UPDATED WITH FULL ADDRESS
   address: {

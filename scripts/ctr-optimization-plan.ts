@@ -57,7 +57,7 @@ const CRITICAL_PAGES: PageOptimization[] = [
     currentTitle: 'Pengertian Pupuk Organik: Jenis dan Manfaatnya',
     suggestedTitle: 'Pupuk Organik Terbaik 2026: 7 Jenis, Manfaat & Cara Pakai [Panduan Lengkap]',
     currentDescription: 'Artikel lengkap tentang pupuk organik, jenis-jenis pupuk organik dan manfaatnya untuk tanaman.',
-    suggestedDescription: '✅ Panduan lengkap pupuk organik cair & padat terbaik! Jenis, manfaat, cara aplikasi & rekomendasi produk bersertifikat. GRATIS konsultasi ahli: 0812-3500-3655',
+    suggestedDescription: '✅ Panduan lengkap pupuk organik cair & padat terbaik! Jenis, manfaat, cara aplikasi & rekomendasi produk bersertifikat. GRATIS konsultasi ahli: 0851-9621-4187',
     priority: 'CRITICAL',
     reasoning: 'Position #1 with 0% CTR - likely competing with featured snippet. Need compelling title with year, numbers, and benefit-driven copy.'
   },
@@ -70,7 +70,7 @@ const CRITICAL_PAGES: PageOptimization[] = [
     currentTitle: 'Penyakit Ganoderma Kelapa Sawit',
     suggestedTitle: 'Cara Mengatasi Penyakit Ganoderma Kelapa Sawit: Pencegahan & Solusi Terbukti',
     currentDescription: 'Informasi tentang penyakit ganoderma pada kelapa sawit.',
-    suggestedDescription: '🛡️ Solusi efektif atasi Ganoderma kelapa sawit! Ciri-ciri, cara pencegahan & pengobatan terbukti. Konsultasi GRATIS dengan ahli: 0812-3500-3655',
+    suggestedDescription: '🛡️ Solusi efektif atasi Ganoderma kelapa sawit! Ciri-ciri, cara pencegahan & pengobatan terbukti. Konsultasi GRATIS dengan ahli: 0851-9621-4187',
     priority: 'CRITICAL',
     reasoning: 'Position #2 with 0% CTR - title too generic. Add action verbs "Cara Mengatasi" and solution-focused approach.'
   },
@@ -96,7 +96,7 @@ const CRITICAL_PAGES: PageOptimization[] = [
     currentTitle: 'Centra Biotech Indonesia - Pusat Inovasi Agro-Bioteknologi',
     suggestedTitle: '🌱 Centra Biotech Indonesia: Pabrik Pupuk Hayati & Bio Pestisida Bersertifikat Kementan',
     currentDescription: 'PT Centra Biotech Indonesia adalah perusahaan agro-bioteknologi yang memproduksi pupuk hayati dan bio pestisida.',
-    suggestedDescription: '🏭 Produsen #1 Pupuk Hayati Cair & Insektisida Hayati di Indonesia! Bersertifikat Kementan RI. Jasa Maklon & Distributor Resmi. Hub: 0812-3500-3655',
+    suggestedDescription: '🏭 Produsen #1 Pupuk Hayati Cair & Insektisida Hayati di Indonesia! Bersertifikat Kementan RI. Jasa Maklon & Distributor Resmi. Hub: 0851-9621-4187',
     priority: 'MEDIUM',
     reasoning: 'Already performing above expected CTR (+166%). Minor optimization to include emojis and stronger CTA for conversion.'
   },
@@ -109,7 +109,7 @@ const CRITICAL_PAGES: PageOptimization[] = [
     currentTitle: 'RAJABIO - Pupuk Organik Cair Premium Bersertifikat',
     suggestedTitle: '🏆 RAJABIO Pupuk Organik Cair: Hasil Panen +40% | Bersertifikat Kementan RI',
     currentDescription: 'RAJABIO pupuk organik cair premium dengan sertifikat Kementerian Pertanian RI.',
-    suggestedDescription: '✅ RAJABIO pupuk organik cair terbaik! Tingkatkan panen hingga 40%. C-Organik >10%, harga terjangkau. Shopee/WA ready. 📞 0812-3500-3655',
+    suggestedDescription: '✅ RAJABIO pupuk organik cair terbaik! Tingkatkan panen hingga 40%. C-Organik >10%, harga terjangkau. Shopee/WA ready. 📞 0851-9621-4187',
     priority: 'MEDIUM',
     reasoning: 'Already excellent CTR (+401% above expected). Add quantified benefit "+40%" and direct purchase channels for conversion.'
   }

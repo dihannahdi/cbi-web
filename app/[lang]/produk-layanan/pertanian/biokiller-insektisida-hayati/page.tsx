@@ -74,7 +74,7 @@ export async function generateStaticParams() {
 }
 
 // Constants
-const WHATSAPP_NUMBER = "6281235003655";
+const WHATSAPP_NUMBER = "6285196214187";
 const WHATSAPP_MESSAGE_ID = "Halo, saya tertarik dengan produk BIOKILLER Insektisida Hayati. Mohon informasi lebih lanjut.";
 const WHATSAPP_MESSAGE_EN = "Hello, I'm interested in BIOKILLER Biological Insecticide. Please provide more information.";
 
@@ -647,7 +647,7 @@ export default async function BioKillerPage({
       },
       "contactPoint": {
         "@type": "ContactPoint",
-        "telephone": "+62-812-3500-3655",
+        "telephone": "+62-851-9621-4187",
         "contactType": "sales",
         "availableLanguage": ["Indonesian", "English"]
       },

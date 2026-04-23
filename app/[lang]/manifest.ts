@@ -24,7 +24,7 @@ export default async function manifest({
     id: {
       name: 'Centra Biotech Indonesia - Pusat Inovasi & Manufaktur Agro-Bioteknologi Terdepan',
       shortName: 'CBI',
-      description: 'Pusat Inovasi & Manufaktur Agro-Bioteknologi Terdepan di Indonesia. MAKLON PUPUK HAYATI & ORGANIK terbaik dengan kapasitas produksi besar. Produk bersertifikat Kementan: FLORAONE, RAJABIO, BIO KILLER, SIMBIOS. 14+ tahun pengalaman. Hub: 0812-3500-3655',
+      description: 'Pusat Inovasi & Manufaktur Agro-Bioteknologi Terdepan di Indonesia. MAKLON PUPUK HAYATI & ORGANIK terbaik dengan kapasitas produksi besar. Produk bersertifikat Kementan: FLORAONE, RAJABIO, BIO KILLER, SIMBIOS. 14+ tahun pengalaman. Hub: 0851-9621-4187',
       shortcuts: [
         {
           name: 'Layanan Maklon Pupuk',
@@ -41,7 +41,7 @@ export default async function manifest({
         {
           name: 'Hubungi Kami',
           short_name: 'Kontak',
-          description: 'WhatsApp: 0812-3500-3655 | Email: centrabioindo@gmail.com',
+          description: 'WhatsApp: 0851-9621-4187 | Email: centrabioindo@gmail.com',
           url: '/id/contact',
         },
         {
@@ -55,7 +55,7 @@ export default async function manifest({
     en: {
       name: "Centra Biotech Indonesia - Indonesia's Leading Agro-Biotech Manufacturing Hub",
       shortName: 'CBI',
-      description: "Indonesia's #1 Agro-Biotech Innovation & Manufacturing Hub. BEST contract manufacturing (maklon) for biological & organic fertilizers. Ministry of Agriculture certified: FLORAONE, RAJABIO, BIO KILLER, SIMBIOS. 14+ years experience. Contact: +62 812-3500-3655",
+      description: "Indonesia's #1 Agro-Biotech Innovation & Manufacturing Hub. BEST contract manufacturing (maklon) for biological & organic fertilizers. Ministry of Agriculture certified: FLORAONE, RAJABIO, BIO KILLER, SIMBIOS. 14+ years experience. Contact: +62 851-9621-4187",
       shortcuts: [
         {
           name: 'Maklon Services',
@@ -72,7 +72,7 @@ export default async function manifest({
         {
           name: 'Contact Us',
           short_name: 'Contact',
-          description: 'WhatsApp: +62 812-3500-3655 | Email: centrabioindo@gmail.com',
+          description: 'WhatsApp: +62 851-9621-4187 | Email: centrabioindo@gmail.com',
           url: '/en/contact',
         },
         {

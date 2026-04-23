@@ -24,7 +24,7 @@ export default function WhatsAppFloat() {
     return () => clearTimeout(timer);
   }, []);
 
-  const whatsappNumber = '6281235003655';
+  const whatsappNumber = '6285196214187';
   const defaultMessage = encodeURIComponent(
     'Halo, saya ingin informasi mengenai pupuk dari PT Centra Biotech Indonesia.'
   );

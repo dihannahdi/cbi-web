@@ -97,7 +97,7 @@ export function createWhatsAppURL(phoneNumber: string, message: string): string 
  */
 export function sendWhatsAppContactMessage(
   formData: ContactFormData,
-  businessPhone: string = '6281235003655', // Default CBI WhatsApp (0812-3500-3655)
+  businessPhone: string = '6285196214187', // Default CBI WhatsApp (0851-9621-4187)
   lang: 'id' | 'en' = 'id'
 ): void {
   const message = formatWhatsAppMessage(formData, lang);
@@ -114,5 +114,5 @@ export function sendWhatsAppContactMessage(
  */
 export function getBusinessWhatsAppNumber(): string {
   // This matches the number in utils/seo.ts SITE_CONFIG
-  return '6281235003655'; // +62-812-3500-3655
+  return '6285196214187'; // +62-851-9621-4187
 }
