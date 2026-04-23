@@ -1,7 +1,7 @@
 {
   "name": "Centra Biotech Indonesia - Indonesia's Leading Agro-Biotech Manufacturing Hub",
   "short_name": "CBI",
-  "description": "Pusat Inovasi & Manufaktur Agro-Bioteknologi Terdepan di Indonesia. Layanan maklon pupuk hayati & organik terbaik, produk bersertifikat Kementan: FLORAONE, RAJABIO, BIO KILLER, SIMBIOS. 14+ tahun pengalaman. Hubungi: +62 812-3500-3655",
+  "description": "Pusat Inovasi & Manufaktur Agro-Bioteknologi Terdepan di Indonesia. Layanan maklon pupuk hayati & organik terbaik, produk bersertifikat Kementan: FLORAONE, RAJABIO, BIO KILLER, SIMBIOS. 14+ tahun pengalaman. Hubungi: +62 851-9621-4187",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -56,7 +56,7 @@
     {
       "name": "Hubungi Kami",
       "short_name": "Kontak",
-      "description": "WhatsApp: +62 812-3500-3655 | centrabiotech.id@gmail.com",
+      "description": "WhatsApp: +62 851-9621-4187 | centrabiotech.id@gmail.com",
       "url": "/id/contact",
       "icons": [{
         "src": "/apple-icon.png",

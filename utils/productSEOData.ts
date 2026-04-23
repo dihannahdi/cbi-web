@@ -62,7 +62,7 @@ export const COMPANY_DATA = {
     postalCode: '57465',
     addressCountry: 'ID',
   },
-  telephone: '+6281235003655',
+  telephone: '+6285196214187',
   email: 'centrabiotech.id@gmail.com',
   foundingDate: '2011',
   slogan: 'Solusi Bioteknologi Terintegrasi untuk Pertanian dan Peternakan Indonesia',

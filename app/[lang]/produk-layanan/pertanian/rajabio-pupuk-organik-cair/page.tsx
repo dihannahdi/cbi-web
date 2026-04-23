@@ -70,7 +70,7 @@ export async function generateStaticParams() {
 }
 
 // Constants
-const WHATSAPP_NUMBER = "6281235003655";
+const WHATSAPP_NUMBER = "6285196214187";
 const WHATSAPP_MESSAGE_ID = "Halo, saya tertarik dengan produk RAJABIO Pupuk Organik Cair. Mohon informasi lebih lanjut.";
 const WHATSAPP_MESSAGE_EN = "Hello, I'm interested in RAJABIO Liquid Organic Fertilizer. Please provide more information.";
 

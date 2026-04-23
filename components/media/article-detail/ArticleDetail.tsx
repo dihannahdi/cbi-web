@@ -84,7 +84,7 @@ const ArticleDetail = ({
   const ctaTitle = dict?.blog?.ctaTitle || (locale === 'en' ? 'Need Biotechnology Solutions?' : 'Butuh Solusi Bioteknologi?');
   const ctaDesc = dict?.blog?.ctaDescription || (locale === 'en' ? 'Consult your agriculture, livestock, or fishery needs with our expert team.' : 'Konsultasikan kebutuhan pertanian, peternakan, atau perikanan Anda dengan tim ahli kami.');
   const ctaWhatsapp = dict?.blog?.ctaWhatsapp || (locale === 'en' ? 'Contact via WhatsApp' : 'Hubungi via WhatsApp');
-  const ctaPhone = dict?.blog?.ctaPhone || '+62 812-3500-3655';
+  const ctaPhone = dict?.blog?.ctaPhone || '+62 851-9621-4187';
   const ctaEmail = dict?.blog?.ctaEmail || 'centrabiotech.id@gmail.com';
 
   return (
@@ -98,7 +98,7 @@ const ArticleDetail = ({
           <p className="text-sm text-[#555] lg:text-base mb-5">{ctaDesc}</p>
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             <Link
-              href="https://wa.me/6281235003655"
+              href="https://wa.me/6285196214187"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg bg-green-600 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-green-700"

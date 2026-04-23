@@ -148,7 +148,7 @@ export const PRODUCT_KEYWORDS = {
       },
       {
         question: 'Berapa harga Flora One?',
-        answer: 'Harga Flora One mulai dari Rp 85.000 per liter untuk kemasan retail. Untuk pembelian partai besar (grosir), harga lebih kompetitif. Hubungi distributor resmi CBI di 0812-3500-3655 untuk penawaran terbaik.',
+        answer: 'Harga Flora One mulai dari Rp 85.000 per liter untuk kemasan retail. Untuk pembelian partai besar (grosir), harga lebih kompetitif. Hubungi distributor resmi CBI di 0851-9621-4187 untuk penawaran terbaik.',
       },
       {
         question: 'Bagaimana cara menggunakan Flora One?',
@@ -372,7 +372,7 @@ export const PRODUCT_KEYWORDS = {
       },
       {
         question: 'Berapa harga Rajabio?',
-        answer: 'Harga Rajabio mulai dari Rp 85.000 per 25kg sack untuk kemasan retail. Tersedia juga dalam kemasan drum 200L untuk kebutuhan perkebunan. Cek harga terbaru di E-Katalog INAPROC atau hubungi 0812-3500-3655.',
+        answer: 'Harga Rajabio mulai dari Rp 85.000 per 25kg sack untuk kemasan retail. Tersedia juga dalam kemasan drum 200L untuk kebutuhan perkebunan. Cek harga terbaru di E-Katalog INAPROC atau hubungi 0851-9621-4187.',
       },
     ],
   },

@@ -289,8 +289,8 @@ const CopyrightPage = async ({ params }: { params: Promise<{ lang: Locale }> }) 
                 </p>
                 <p className="text-gray-700">
                   <strong>WhatsApp:</strong>{' '}
-                  <a href="https://wa.me/6281235003655" className="text-green-600 hover:underline">
-                    +62 812-3500-3655
+                  <a href="https://wa.me/6285196214187" className="text-green-600 hover:underline">
+                    +62 851-9621-4187
                   </a>
                 </p>
               </div>

@@ -2549,7 +2549,7 @@ export const CBI_PRODUCT_FAQS = {
     },
     {
       question: 'Berapa harga Flora One per liter?',
-      answer: 'Harga Flora One mulai dari Rp 85.000 per liter untuk kemasan retail. Untuk pembelian partai besar (grosir), tersedia harga khusus yang lebih kompetitif. Hubungi distributor resmi PT Centra Biotech Indonesia di 0812-3500-3655 atau WhatsApp untuk penawaran terbaik.',
+      answer: 'Harga Flora One mulai dari Rp 85.000 per liter untuk kemasan retail. Untuk pembelian partai besar (grosir), tersedia harga khusus yang lebih kompetitif. Hubungi distributor resmi PT Centra Biotech Indonesia di 0851-9621-4187 atau WhatsApp untuk penawaran terbaik.',
     },
     {
       question: 'Bagaimana cara menggunakan Flora One yang benar?',
@@ -2565,7 +2565,7 @@ export const CBI_PRODUCT_FAQS = {
     },
     {
       question: 'Di mana beli Flora One asli?',
-      answer: 'Flora One asli tersedia di: 1) Shopee Indonesia - toko resmi Centra Biotech, 2) Tokopedia - Centra Biotech Official, 3) E-Katalog INAPROC untuk pengadaan pemerintah, 4) Distributor resmi di seluruh Indonesia. Untuk pemesanan langsung hubungi WhatsApp 0812-3500-3655. Pastikan membeli dari sumber resmi untuk mendapat produk asli bersertifikat.',
+      answer: 'Flora One asli tersedia di: 1) Shopee Indonesia - toko resmi Centra Biotech, 2) Tokopedia - Centra Biotech Official, 3) E-Katalog INAPROC untuk pengadaan pemerintah, 4) Distributor resmi di seluruh Indonesia. Untuk pemesanan langsung hubungi WhatsApp 0851-9621-4187. Pastikan membeli dari sumber resmi untuk mendapat produk asli bersertifikat.',
     },
   ],
   
@@ -2576,7 +2576,7 @@ export const CBI_PRODUCT_FAQS = {
     },
     {
       question: 'Berapa harga Simbios per kemasan?',
-      answer: 'Harga Simbios kemasan 5kg mulai dari Rp 175.000. Tersedia juga kemasan 25kg untuk kebutuhan perkebunan dengan harga lebih ekonomis. Hubungi 0812-3500-3655 untuk harga grosir dan pengiriman ke seluruh Indonesia.',
+      answer: 'Harga Simbios kemasan 5kg mulai dari Rp 175.000. Tersedia juga kemasan 25kg untuk kebutuhan perkebunan dengan harga lebih ekonomis. Hubungi 0851-9621-4187 untuk harga grosir dan pengiriman ke seluruh Indonesia.',
     },
     {
       question: 'Simbios cocok untuk tanaman apa?',
@@ -2603,7 +2603,7 @@ export const CBI_PRODUCT_FAQS = {
     },
     {
       question: 'Berapa harga Bio Killer?',
-      answer: 'Harga Bio Killer Rp 95.000 per liter untuk kemasan retail. Tersedia juga kemasan 5L dan 20L dengan harga lebih hemat untuk petani dan kelompok tani. Hubungi 0812-3500-3655 untuk harga grosir.',
+      answer: 'Harga Bio Killer Rp 95.000 per liter untuk kemasan retail. Tersedia juga kemasan 5L dan 20L dengan harga lebih hemat untuk petani dan kelompok tani. Hubungi 0851-9621-4187 untuk harga grosir.',
     },
     {
       question: 'Bagaimana cara aplikasi Bio Killer?',
@@ -2641,7 +2641,7 @@ export const CBI_PRODUCT_FAQS = {
     },
     {
       question: 'Berapa harga Biokalsi per karung?',
-      answer: 'Harga Biokalsi Rp 45.000 per karung 25kg (paling ekonomis di kelasnya). Untuk pembelian partai besar (ton), tersedia harga khusus. Hubungi 0812-3500-3655 untuk penawaran harga grosir dan pengiriman.',
+      answer: 'Harga Biokalsi Rp 45.000 per karung 25kg (paling ekonomis di kelasnya). Untuk pembelian partai besar (ton), tersedia harga khusus. Hubungi 0851-9621-4187 untuk penawaran harga grosir dan pengiriman.',
     },
   ],
   
@@ -2663,7 +2663,7 @@ export const CBI_PRODUCT_FAQS = {
     },
     {
       question: 'Berapa harga Rajabio dan dimana belinya?',
-      answer: 'Harga Rajabio: kemasan 1L Rp 62.000, kemasan 5L Rp 250.000, kemasan 25L Rp 1.100.000. Beli di: Shopee (https://shopee.co.id/Rajabio), Tokopedia, E-Katalog INAPROC untuk pengadaan pemerintah, atau langsung WhatsApp 0812-3500-3655.',
+      answer: 'Harga Rajabio: kemasan 1L Rp 62.000, kemasan 5L Rp 250.000, kemasan 25L Rp 1.100.000. Beli di: Shopee (https://shopee.co.id/Rajabio), Tokopedia, E-Katalog INAPROC untuk pengadaan pemerintah, atau langsung WhatsApp 0851-9621-4187.',
     },
     {
       question: 'Rajabio bisa meningkatkan hasil panen berapa persen?',

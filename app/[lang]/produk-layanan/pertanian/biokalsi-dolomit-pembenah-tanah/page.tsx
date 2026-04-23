@@ -47,7 +47,7 @@ export async function generateStaticParams() {
 }
 
 // Constants
-const WHATSAPP_NUMBER = "6281235003655";
+const WHATSAPP_NUMBER = "6285196214187";
 const WHATSAPP_MESSAGE_ID = "Halo, saya tertarik dengan produk BIOKALSI Dolomit. Mohon informasi lebih lanjut.";
 const WHATSAPP_MESSAGE_EN = "Hello, I'm interested in BIOKALSI Dolomite. Please provide more information.";
 

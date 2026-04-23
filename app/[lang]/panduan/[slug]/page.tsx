@@ -411,7 +411,7 @@ export default async function PillarPage({
     generateFAQSchema(content.faqs),
   ];
 
-  const WHATSAPP_NUMBER = "6281235003655";
+  const WHATSAPP_NUMBER = "6285196214187";
 
   return (
     <main>

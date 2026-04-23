@@ -57,7 +57,7 @@ export const SITE_CONFIG = {
   email: 'centrabiotech.id@gmail.com',
   phone: '+62-812-3500-3655',
   whatsapp: '+62-812-3500-3655',
-  phoneDisplay: '+62 812-3500-3655',
+  phoneDisplay: '+62 851-9621-4187',
   mapsUrl: 'https://maps.app.goo.gl/jrzvpmv3gxQXVSST7',
   
   // Address - UPDATED WITH FULL ADDRESS

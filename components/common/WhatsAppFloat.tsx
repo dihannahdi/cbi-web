@@ -39,7 +39,7 @@ export default function WhatsAppFloat({ lang = 'id' }: { lang?: Locale }) {
   }, []);
 
   const t = waTexts[lang] || waTexts.id;
-  const whatsappNumber = '6281235003655';
+  const whatsappNumber = '6285196214187';
   const defaultMessage = encodeURIComponent(t.message);
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${defaultMessage}`;
 
