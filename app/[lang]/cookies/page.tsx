@@ -428,7 +428,7 @@ const CookiesPolicy = async ({ params }: { params: Promise<{ lang: Locale }> }) 
               <div className="space-y-2">
                 <p><strong>PT Centra Biotech Indonesia</strong></p>
                 <p>Email: centrabioindo@gmail.com</p>
-                <p>{lang === 'en' ? 'Phone: ' : 'Telepon: '}0812-3500-3655</p>
+                <p>{lang === 'en' ? 'Phone: ' : 'Telepon: '}0851-9621-4187</p>
                 <p>{lang === 'en' ? 'Address: ' : 'Alamat: '}Sawahan RT 02 RW 07 Pasungan, Ceper, Klaten, Jawa Tengah 57465</p>
               </div>
               <Link 

@@ -5,7 +5,7 @@
 # Our security address
 Contact: mailto:centrabioindo@gmail.com
 Contact: https://www.centrabiotechindonesia.com/en/contact
-Contact: tel:+62-812-3500-3655
+Contact: tel:+62-851-9621-4187
 
 # Our security policy
 Policy: https://www.centrabiotechindonesia.com/en/documents
@@ -26,6 +26,6 @@ Hiring: https://www.centrabiotechindonesia.com/en/career
 # Company Information
 # PT Centra Biotech Indonesia
 # Address: Sawahan RT 02 RW 07 Pasungan, Ceper, Klaten, Jawa Tengah, Indonesia 57465
-# Phone: +62 812-3500-3655
+# Phone: +62 851-9621-4187
 # Email: centrabioindo@gmail.com
 # Website: https://www.centrabiotechindonesia.com

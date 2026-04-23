@@ -202,7 +202,7 @@ H2: FAQ Insektisida Hayati
 **Template:**
 ```
 Title: [Primary Keyword] - [Benefit] | Centra Biotech Indonesia
-Description: [Action verb] [Primary Keyword] bersertifikat Kementan RI. [Key benefit]. Harga terbaik, stok ready. Hubungi: 0812-3500-3655
+Description: [Action verb] [Primary Keyword] bersertifikat Kementan RI. [Key benefit]. Harga terbaik, stok ready. Hubungi: 0851-9621-4187
 ```
 
 #### 5. Add FAQ Schema to All Product Pages
