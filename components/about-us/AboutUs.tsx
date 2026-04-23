@@ -91,64 +91,7 @@ const AboutUsSection = ({ aboutUs, lang }: AboutUsSectionProps) => {
             className="h-60 rounded-2xl object-cover object-center lg:h-[25rem]"
           />
         )}
-
-        {/* Integrated SEO Content - What is Biotech */}
-        <div className="mt-8 rounded-2xl bg-gradient-to-br from-[#f0f9f4] to-white p-8 lg:p-12">
-          <h3 className="mb-6 text-2xl font-bold text-[#083F19] lg:text-3xl">
-            {t.seoTitle}
-          </h3>
-          <div className="space-y-4 text-gray-700">
-            <p className="leading-relaxed">
-              <strong>{lang === 'id' ? 'Bioteknologi' : 'Biotechnology'}</strong> {t.seoP1} <strong>{t.organisms}</strong> 
-              {t.seoP1b} <strong>{t.variousFields}</strong> {t.seoP1c} <strong>{t.geneticEngineering}</strong> {t.seoP1d}
-            </p>
-            <p className="leading-relaxed">
-              {t.seoP2a} <strong>{t.biotechCompany}</strong> {t.seoP2b} <strong>{t.biotechIndo}</strong> {t.seoP2c}
-              <Link href={`/${lang}/product/agriculture`} className="mx-1 text-green-600 hover:underline">{t.bioFertilizer}</Link>,
-              <Link href={`/${lang}/product/agriculture`} className="mx-1 text-green-600 hover:underline">{t.bioInsecticide}</Link>, {t.and}
-              <Link href={`/${lang}/product/livestock`} className="mx-1 text-green-600 hover:underline">{t.livestockProbiotic}</Link>.
-            </p>
-          </div>
-
-          {/* Key Points Grid */}
-          <div className="mt-8 grid gap-6 md:grid-cols-3">
-            <div className="rounded-xl bg-white p-6 shadow-sm">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-green-100 text-2xl">
-                🔬
-              </div>
-              <h4 className="mb-2 text-lg font-semibold text-gray-800">
-                {t.card1Title}
-              </h4>
-              <p className="text-sm text-gray-600">
-                {t.card1Desc}
-              </p>
-            </div>
-
-            <div className="rounded-xl bg-white p-6 shadow-sm">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100 text-2xl">
-                🌱
-              </div>
-              <h4 className="mb-2 text-lg font-semibold text-gray-800">
-                {t.card2Title}
-              </h4>
-              <p className="text-sm text-gray-600">
-                {t.card2Desc}
-              </p>
-            </div>
-
-            <div className="rounded-xl bg-white p-6 shadow-sm">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-orange-100 text-2xl">
-                🏭
-              </div>
-              <h4 className="mb-2 text-lg font-semibold text-gray-800">
-                {t.card3Title}
-              </h4>
-              <p className="text-sm text-gray-600">
-                {t.card3Desc}
-              </p>
-            </div>
-          </div>
-        </div>
+        {/* ...existing code... */}
       </ContainerSection>
     </section>
   );

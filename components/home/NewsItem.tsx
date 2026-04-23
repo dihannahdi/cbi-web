@@ -5,6 +5,9 @@ import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getImageUrl } from "@/utils/getImageUrl";
 import { ArticleItem } from "@/types/responseTypes/article/articleItem";
+
+// Default branded thumbnail for articles without images
+const DEFAULT_THUMBNAIL = "/og-image.jpg";
 import { Locale } from "@/i18n-config";
 import { Dictionary } from "@/dictionaries";
 
@@ -31,7 +34,7 @@ const ArticleImage: React.FC<ArticleImageProps> = ({ image, type, dict }) => {
   return (
     <div className="relative h-[19.375rem] w-[19.375rem] overflow-hidden rounded-lg border border-gray-200 lg:rounded-3xl">
       <Image
-        src={getImageUrl(image?.url)}
+        src={getImageUrl(image?.url, DEFAULT_THUMBNAIL)}
         alt={image?.alternativeText ?? "Image article"}
         width={image?.width ?? 300}
         height={image?.height ?? 300}

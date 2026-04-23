@@ -2,11 +2,13 @@ import { FC, JSX } from "react";
 import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 import { formatWhatsAppNumber } from "@/utils/formatWhatsappNumber";
 import { AddressAndContact } from "@/types/responseTypes/contactPageData";
+import { Locale } from "@/i18n-config";
 
 interface ContactAddressProps {
   title: string;
   description: string;
   contactInfo: AddressAndContact;
+  lang?: Locale;
 }
 
 interface ContactLink {
@@ -19,6 +21,7 @@ const ContactAddress: FC<ContactAddressProps> = ({
   title,
   description,
   contactInfo,
+  lang,
 }) => {
   // Organize contact links data
   const contactLinks: ContactLink[] = [
@@ -69,7 +72,7 @@ const ContactAddress: FC<ContactAddressProps> = ({
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-sm text-green-600 underline lg:text-base"
           >
-            Buka di Google Maps
+            {lang === 'en' ? 'Open in Google Maps' : 'Buka di Google Maps'}
             <ArrowRight className="h-3 w-3" />
           </a>
         </div>

@@ -52,7 +52,7 @@ export interface ApiRequestConfig {
   locale?: string; // i18n locale parameter for Strapi
 }
 
-const BASE_URL = process.env.NEXT_PUBLIC_URL_API || 'https://cbi-backend.my.id';
+const BASE_URL = (process.env.NEXT_PUBLIC_URL_API || 'https://backend.centrabiotechindonesia.com').trim();
 // Temporarily disable token to use Public permissions
 const TOKEN = undefined; // process.env.NEXT_PUBLIC_TOKEN_API;
 

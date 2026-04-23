@@ -7,6 +7,7 @@
 
 import { useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function Error({
   error,
@@ -15,6 +16,9 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  const pathname = usePathname();
+  const isEn = pathname?.startsWith('/en');
+
   useEffect(() => {
     // Log the error to an error reporting service
     console.error('Application error:', error);
@@ -42,13 +46,15 @@ export default function Error({
         
         {/* Error Title */}
         <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-          Terjadi Kesalahan
+          {isEn ? 'Something Went Wrong' : 'Terjadi Kesalahan'}
         </h1>
         
         {/* Error Description */}
         <p className="text-lg text-gray-600 mb-8">
-          Maaf, terjadi kesalahan yang tidak terduga. Tim kami telah diberi tahu 
-          dan sedang bekerja untuk memperbaikinya.
+          {isEn 
+            ? 'Sorry, an unexpected error occurred. Our team has been notified and is working to fix it.'
+            : 'Maaf, terjadi kesalahan yang tidak terduga. Tim kami telah diberi tahu dan sedang bekerja untuk memperbaikinya.'
+          }
         </p>
         
         {/* Action Buttons */}
@@ -60,16 +66,16 @@ export default function Error({
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
             </svg>
-            Coba Lagi
+            {isEn ? 'Try Again' : 'Coba Lagi'}
           </button>
           <Link 
-            href="/"
+            href={isEn ? '/en' : '/'}
             className="inline-flex items-center justify-center px-6 py-3 border-2 border-primary text-primary font-semibold rounded-lg hover:bg-primary/5 transition-colors"
           >
             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
             </svg>
-            Kembali ke Beranda
+            {isEn ? 'Back to Home' : 'Kembali ke Beranda'}
           </Link>
         </div>
         

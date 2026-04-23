@@ -1,11 +1,13 @@
+const API_URL = (process.env.NEXT_PUBLIC_URL_API || 'https://backend.centrabiotechindonesia.com').trim();
+
 export const getImageUrl = (
   imageUrl: string | null | undefined,
-  placeholder = "/img-placeholder.png",
+  placeholder = "/og-image.jpg",
 ): string => {
   // Check if imageUrl exists AND is not empty/whitespace
-  // This prevents invalid URLs like "https://cbi-backend.my.id" without an image path
+  // This prevents invalid URLs like "https://backend.centrabiotechindonesia.com" without an image path
   if (imageUrl && imageUrl.trim() !== "") {
-    return `${process.env.NEXT_PUBLIC_URL_API}${imageUrl}`;
+    return `${API_URL}${imageUrl}`;
   }
   return placeholder;
 };

@@ -74,14 +74,10 @@ export function middleware(request: NextRequest) {
     const pathLocale = segments[1];
     
     if (isValidLocale(pathLocale)) {
-      // Set locale cookie for future visits
-      const response = NextResponse.next();
-      response.cookies.set('NEXT_LOCALE', pathLocale, {
-        maxAge: 60 * 60 * 24 * 365, // 1 year
-        sameSite: 'lax',
-        secure: process.env.NODE_ENV === 'production',
-      });
-      return response;
+      // Don't set cookies when locale is already in URL path
+      // Setting Set-Cookie on every request prevents Vercel ISR caching
+      // which blocks Googlebot from getting cached responses
+      return NextResponse.next();
     }
   }
 
@@ -92,11 +88,12 @@ export function middleware(request: NextRequest) {
     ? cookieLocale! 
     : i18n.defaultLocale; // Always default to 'id' instead of detecting language
 
-  // Redirect to localized path
+  // Redirect to localized path with 301 (permanent) for SEO
+  // 301 tells Google to update the index with the new canonical URL
   const newUrl = new URL(request.url);
   newUrl.pathname = `/${locale}${pathname}`;
   
-  const response = NextResponse.redirect(newUrl);
+  const response = NextResponse.redirect(newUrl, 301);
   response.cookies.set('NEXT_LOCALE', locale, {
     maxAge: 60 * 60 * 24 * 365, // 1 year
     sameSite: 'lax',

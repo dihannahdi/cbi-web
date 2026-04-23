@@ -57,8 +57,8 @@ const WHATSAPP_MESSAGE_ID = "Halo, saya tertarik dengan produk RAJABIO Pupuk Org
 const WHATSAPP_MESSAGE_EN = "Hello, I'm interested in RAJABIO Liquid Organic Fertilizer. Please provide more information.";
 
 const EXTERNAL_LINKS = {
-  brochure: "https://cbi-backend.my.id/uploads/e_brochure_Rajabio_0a91d17adf.pdf",
-  certificate: "https://cbi-backend.my.id/uploads/SK_RAJABIO_9ec75a4ec2.pdf",
+  brochure: "https://backend.centrabiotechindonesia.com/uploads/e_brochure_Rajabio_0a91d17adf.pdf",
+  certificate: "https://backend.centrabiotechindonesia.com/uploads/SK_RAJABIO_9ec75a4ec2.pdf",
   inaproc: "https://katalog.inaproc.id/search?keyword=rajabio&page=1",
   shopee: "https://shopee.co.id/Rajabio-Pupuk-Cair-Organik-Nutrisi-Lengkap-i.1083634538.23485056818",
   newsArticle: "/news/rajabio-revolusi-organik-untuk-padi-sawah-indonesia-janjikan-panen-berlimpah-dan-lahan-lestari",
@@ -392,8 +392,8 @@ export default async function RajabioProductPage({
     }),
     generateBreadcrumbSchema([
       { name: lang === 'id' ? 'Beranda' : 'Home', url: `/${lang}` },
-      { name: lang === 'id' ? 'Produk' : 'Products', url: `/${lang}/product` },
-      { name: lang === 'id' ? 'Pertanian' : 'Agriculture', url: `/${lang}/product/agriculture` },
+      { name: lang === 'id' ? 'Produk' : 'Products', url: `/${lang}/produk-layanan` },
+      { name: lang === 'id' ? 'Pertanian' : 'Agriculture', url: `/${lang}/produk-layanan/pertanian` },
       { name: 'RAJABIO', url: `/${lang}/rajabio-pupuk-organik-cair` },
     ]),
     generateVideoSchema({

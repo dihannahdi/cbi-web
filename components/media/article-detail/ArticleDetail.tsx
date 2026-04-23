@@ -14,6 +14,7 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import BlocksRendererClient from "@/components/common/BlockRendererClient";
 import { Locale } from "@/i18n-config";
 import { Dictionary } from "@/dictionaries";
+import { Phone, Mail } from "lucide-react";
 
 const getApiPathByType = (type: string): ApiPath => {
   return type === "news" ? ApiPath.NEWS : ApiPath.BLOGS;
@@ -80,10 +81,43 @@ const ArticleDetail = ({
   locale = 'id',
   dict,
 }: ArticleDetailProps) => {
+  const ctaTitle = dict?.blog?.ctaTitle || (locale === 'en' ? 'Need Biotechnology Solutions?' : 'Butuh Solusi Bioteknologi?');
+  const ctaDesc = dict?.blog?.ctaDescription || (locale === 'en' ? 'Consult your agriculture, livestock, or fishery needs with our expert team.' : 'Konsultasikan kebutuhan pertanian, peternakan, atau perikanan Anda dengan tim ahli kami.');
+  const ctaWhatsapp = dict?.blog?.ctaWhatsapp || (locale === 'en' ? 'Contact via WhatsApp' : 'Hubungi via WhatsApp');
+  const ctaPhone = dict?.blog?.ctaPhone || '+62 812-3500-3655';
+  const ctaEmail = dict?.blog?.ctaEmail || 'centrabiotech.id@gmail.com';
+
   return (
     <section>
       <ContainerBlog>
         <BlocksRendererClient content={content} />
+
+        {/* Article CTA */}
+        <div className="mt-12 rounded-xl bg-green-50 border border-green-100 p-6 lg:p-8">
+          <h3 className="text-lg font-bold text-[#222] lg:text-xl mb-2">{ctaTitle}</h3>
+          <p className="text-sm text-[#555] lg:text-base mb-5">{ctaDesc}</p>
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Link
+              href="https://wa.me/6281235003655"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg bg-green-600 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-green-700"
+            >
+              <Phone className="h-4 w-4" />
+              {ctaWhatsapp}
+            </Link>
+            <div className="flex flex-col gap-1 text-sm text-[#555]">
+              <span className="flex items-center gap-1.5">
+                <Phone className="h-3.5 w-3.5 text-green-600" />
+                {ctaPhone}
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Mail className="h-3.5 w-3.5 text-green-600" />
+                {ctaEmail}
+              </span>
+            </div>
+          </div>
+        </div>
       </ContainerBlog>
       <ContainerSection>
         <OtherArticle type={type} locale={locale} dict={dict} />

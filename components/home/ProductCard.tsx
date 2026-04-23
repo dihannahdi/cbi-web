@@ -13,7 +13,7 @@ interface ProductCardProps {
   color1: string;
   color2: string;
   url: string;
-  readMoreText?: string;
+  readMoreText: string;
 }
 
 const ProductCard = ({
@@ -24,7 +24,7 @@ const ProductCard = ({
   color1,
   color2,
   url,
-  readMoreText = "Read More",
+  readMoreText,
 }: ProductCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
 

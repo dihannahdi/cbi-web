@@ -1,8 +1,11 @@
 # Robots.txt for Centra Biotech Indonesia
 # https://www.centrabiotechindonesia.com
 # Multi-language site with Indonesian (id) and English (en) support
+# Updated: January 2026 - Includes AI/LLM Crawler Rules for GEO Optimization
 
-# Global rules for all crawlers
+# ============================================
+# GLOBAL RULES FOR ALL CRAWLERS
+# ============================================
 User-agent: *
 Allow: /
 Allow: /id/
@@ -10,6 +13,10 @@ Allow: /en/
 Allow: /_next/static/
 Allow: /_next/image/
 Allow: /images/
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /openapi.json
+Allow: /humans.txt
 
 # Disallow internal/private paths
 Disallow: /api/
@@ -18,7 +25,11 @@ Disallow: /private/
 Disallow: /_vercel/
 Disallow: /scripts/
 
-# Googlebot - allow full crawling with specific rules
+# ============================================
+# SEARCH ENGINE CRAWLERS
+# ============================================
+
+# Googlebot - allow full crawling
 User-agent: Googlebot
 Allow: /
 Allow: /id/
@@ -38,7 +49,119 @@ Allow: /id/
 Allow: /en/
 Crawl-delay: 1
 
-# Social media crawlers - essential for Open Graph previews
+# Yandex
+User-agent: Yandex
+Allow: /
+Allow: /id/
+Allow: /en/
+Crawl-delay: 2
+
+# DuckDuckGo
+User-agent: DuckDuckBot
+Allow: /
+
+# ============================================
+# AI/LLM CRAWLERS (GEO 2026 Standard)
+# ============================================
+
+# OpenAI - ChatGPT
+User-agent: GPTBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /openapi.json
+Allow: /ai-training-data.json
+
+User-agent: ChatGPT-User
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /ai-training-data.json
+
+# Anthropic - Claude
+User-agent: Claude-Web
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /ai-training-data.json
+
+User-agent: ClaudeBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /ai-training-data.json
+
+User-agent: anthropic-ai
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /ai-training-data.json
+
+# Google - Gemini AI
+User-agent: Google-Extended
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /ai-training-data.json
+
+User-agent: GoogleOther
+Allow: /
+Allow: /llms.txt
+Allow: /ai-training-data.json
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /ai-training-data.json
+
+# Apple - Siri/Apple Intelligence
+User-agent: Applebot
+Allow: /
+Allow: /llms.txt
+Allow: /ai-training-data.json
+
+User-agent: Applebot-Extended
+Allow: /
+Allow: /llms.txt
+Allow: /ai-training-data.json
+
+# Meta AI (Facebook/Instagram)
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Meta-ExternalFetcher
+Allow: /
+
+# Microsoft - Copilot
+User-agent: bingbot
+Allow: /
+
+# You.com AI Search
+User-agent: YouBot
+Allow: /
+
+# Cohere AI
+User-agent: cohere-ai
+Allow: /
+
+# ByteDance (TikTok AI)
+User-agent: Bytespider
+Allow: /
+
+# Common Crawl (AI training data)
+User-agent: CCBot
+Allow: /
+
+# Omgili/Brandwatch
+User-agent: Omgilibot
+Allow: /
+
+# ============================================
+# SOCIAL MEDIA CRAWLERS
+# ============================================
+
 User-agent: facebookexternalhit
 Allow: /
 Allow: /id/
@@ -64,7 +187,16 @@ Allow: /
 Allow: /id/
 Allow: /en/
 
-# Bad bots - block aggressive crawlers
+User-agent: Slackbot
+Allow: /
+
+User-agent: Discordbot
+Allow: /
+
+# ============================================
+# BLOCKED BOTS (Aggressive SEO crawlers)
+# ============================================
+
 User-agent: SemrushBot
 Disallow: /
 
@@ -77,10 +209,29 @@ Disallow: /
 User-agent: DotBot
 Disallow: /
 
-# Sitemap locations - includes both locales
+User-agent: PetalBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+# ============================================
+# AI CONTEXT FILES (GEO Standard 2026)
+# These files help AI systems understand our company
+# ============================================
+# Primary AI context: https://www.centrabiotechindonesia.com/llms.txt
+# Extended context: https://www.centrabiotechindonesia.com/llms-full.txt
+# API documentation: https://www.centrabiotechindonesia.com/openapi.json
+# Human-readable: https://www.centrabiotechindonesia.com/humans.txt
+
+# ============================================
+# SITEMAP LOCATIONS
+# ============================================
 Sitemap: https://www.centrabiotechindonesia.com/sitemap.xml
-Sitemap: https://www.centrabiotechindonesia.com/id/sitemap.xml
-Sitemap: https://www.centrabiotechindonesia.com/en/sitemap.xml
+Sitemap: https://www.centrabiotechindonesia.com/sitemap-static.xml
+Sitemap: https://www.centrabiotechindonesia.com/sitemap-products.xml
+Sitemap: https://www.centrabiotechindonesia.com/sitemap-news.xml
+Sitemap: https://www.centrabiotechindonesia.com/sitemap-blog.xml
 
 # Host directive
 Host: https://www.centrabiotechindonesia.com

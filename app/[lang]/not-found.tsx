@@ -102,19 +102,19 @@ export default function NotFound() {
               {t.aboutUs}
             </Link>
             <Link 
-              href={`/${lang}/product/agriculture`}
+              href={`/${lang}/produk-layanan/pertanian`}
               className="text-primary hover:underline"
             >
               {t.agriculture}
             </Link>
             <Link 
-              href={`/${lang}/product/livestock`}
+              href={`/${lang}/produk-layanan/peternakan`}
               className="text-primary hover:underline"
             >
               {t.livestock}
             </Link>
             <Link 
-              href={`/${lang}/product/fishery`}
+              href={`/${lang}/produk-layanan/perikanan`}
               className="text-primary hover:underline"
             >
               {t.fishery}

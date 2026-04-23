@@ -14,6 +14,7 @@ import {
   generateVideoSchema,
   generateFAQSchema,
   generateHowToSchema,
+  generateImageObjectSchema,
   MultipleStructuredData 
 } from "@/utils/structuredData";
 import {
@@ -225,19 +226,26 @@ export async function generateMetadata({
   params: Promise<{ lang: Locale }>;
 }): Promise<Metadata> {
   const { lang } = await params;
-  const data = productData[lang];
-
-  const title = lang === 'id' 
-    ? "Insektisida Hayati BIOKILLER - Basmi Wereng & Hama Tanpa Resistensi | Bersertifikat Kementan"
-    : "BIOKILLER Biological Insecticide - Eliminate Planthoppers & Pests Without Resistance | Certified";
   
-  const description = lang === 'id'
-    ? "Insektisida hayati BIOKILLER mengandung Beauveria bassiana & Metarhizium anisopliae. Insektisida hayati terbaik untuk mengendalikan wereng coklat, kutu daun, ulat grayak tanpa resistensi. Bersertifikat Kementan RI & LeSOS Organik. Pesan sekarang!"
-    : "BIOKILLER biological insecticide contains Beauveria bassiana & Metarhizium anisopliae. Best biological insecticide for controlling brown planthopper, aphids, armyworms without resistance. Certified by Ministry of Agriculture. Order now!";
+  // Fetch from Strapi CMS for SEO metadata
+  const strapiData = await fetchStrapiProduct("biokiller-insektisida-hayati", lang);
+  const data = strapiData || productData[lang]; // Fallback to static if Strapi unavailable
 
-  const keywords = lang === 'id'
-    ? "jual insektisida hayati, insektisida hayati, insektisida hayati terbaik, biokiller, jual biokiller, bio pestisida, biopestisida, pestisida hayati, pestisida organik, insektisida organik, beauveria bassiana, metarhizium anisopliae, pengendali wereng coklat, pengendali hama padi, insektisida hayati untuk padi, insektisida hayati bersertifikat, pestisida biologis, pengendalian hama alami, insektisida ramah lingkungan, centra biotech, pertanian organik, jual bio pestisida"
-    : "biological insecticide for sale, best biological insecticide, biokiller, buy biological insecticide, bio pesticide, biological pesticide, organic pesticide, organic insecticide, beauveria bassiana, metarhizium anisopliae, brown planthopper control, rice pest control, certified biological insecticide, natural pest control, eco-friendly insecticide, centra biotech, organic farming, buy bio pesticide";
+  // Use Strapi data if available, fallback to hardcoded optimized titles
+  const title = strapiData?.metaTitle || strapiData?.heroTitle || (lang === 'id' 
+    ? "Bio Pestisida & Insektisida Hayati BIOKILLER - Basmi Wereng & Hama Tanpa Residu Kimia"
+    : "BIOKILLER Biological Insecticide - Eliminate Planthoppers & Pests Without Resistance | Certified");
+  
+  const description = strapiData?.metaDescription || strapiData?.heroSubtitle || (lang === 'id'
+    ? "BIOKILLER adalah bio pestisida dan insektisida hayati alami berbahan jamur entomopatogen. Efektif basmi wereng, ulat grayak, dan hama tanpa residu kimia. Bersertifikat Kementan RI."
+    : "BIOKILLER biological insecticide contains Beauveria bassiana & Metarhizium anisopliae. Best biological insecticide for controlling brown planthopper, aphids, armyworms without resistance. Certified by Ministry of Agriculture. Order now!");
+
+  // Extract keywords from Strapi focus_keyphrase if available
+  const keywords = strapiData?.focusKeyphrase 
+    ? strapiData.focusKeyphrase.split(',').map(k => k.trim()).join(', ')
+    : (lang === 'id'
+      ? "jual insektisida hayati, insektisida hayati, insektisida hayati terbaik, biokiller, jual biokiller, bio pestisida, biopestisida, pestisida hayati, pestisida organik, insektisida organik, beauveria bassiana, metarhizium anisopliae, pengendali wereng coklat, pengendali hama padi, insektisida hayati untuk padi, insektisida hayati bersertifikat, pestisida biologis, pengendalian hama alami, insektisida ramah lingkungan, centra biotech, pertanian organik, jual bio pestisida"
+      : "biological insecticide for sale, best biological insecticide, biokiller, buy biological insecticide, bio pesticide, biological pesticide, organic pesticide, organic insecticide, beauveria bassiana, metarhizium anisopliae, brown planthopper control, rice pest control, certified biological insecticide, natural pest control, eco-friendly insecticide, centra biotech, organic farming, buy bio pesticide");
 
   return {
     title,
@@ -664,7 +672,24 @@ export default async function BioKillerPage({
         "Agricultural Biotechnology",
         "Organic Pest Control"
       ]
-    }
+    },
+    // ImageObject Schema for Product Images - Google Image License Metadata
+    // Fixes GSC issue: "Missing field 'acquireLicensePage'" and "Missing field 'creator'"
+    generateImageObjectSchema({
+      url: '/products/biokiller/biokiller-cover.webp',
+      name: `BIOKILLER - ${lang === 'id' ? 'Insektisida Hayati Premium' : 'Premium Biological Insecticide'}`,
+      caption: lang === 'id' 
+        ? 'BIOKILLER Insektisida Hayati - Pengendalian Hama Organik'
+        : 'BIOKILLER Biological Insecticide - Organic Pest Control',
+      description: lang === 'id'
+        ? 'Gambar produk BIOKILLER insektisida hayati bersertifikat dengan Beauveria bassiana & Metarhizium'
+        : 'BIOKILLER biological insecticide product image, certified with Beauveria bassiana & Metarhizium',
+      width: 600,
+      height: 600,
+      encodingFormat: 'image/webp',
+      representativeOfPage: true,
+      keywords: ['biokiller', 'insektisida hayati', 'biological insecticide', 'beauveria', 'centra biotech'],
+    })
   ];
 
   return (

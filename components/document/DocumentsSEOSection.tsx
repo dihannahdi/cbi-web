@@ -169,14 +169,14 @@ const DocumentsSEOSection = ({ lang = "id" }: DocumentsSEOSectionProps) => {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link 
-              href={`/${lang}/product/agriculture`} 
+              href={`/${lang}/produk-layanan/pertanian`} 
               className="inline-flex items-center px-6 py-3 bg-green-600 text-white rounded-full hover:bg-green-700 transition-colors font-medium"
             >
               <Leaf className="w-5 h-5 mr-2" />
               {t.agriProducts}
             </Link>
             <Link 
-              href={`/${lang}/product/livestock`} 
+              href={`/${lang}/produk-layanan/peternakan`} 
               className="inline-flex items-center px-6 py-3 bg-orange-600 text-white rounded-full hover:bg-orange-700 transition-colors font-medium"
             >
               <Award className="w-5 h-5 mr-2" />

@@ -44,10 +44,10 @@ export const COMPANY_LINKS: NavigationLink[] = [
 ];
 
 export const PRODUCT_LINKS: NavigationLink[] = [
-  { label: "Semua Produk", href: "/product" }, // Added main product page
-  { label: "Pertanian", href: "/product/agriculture" },
-  { label: "Peternakan", href: "/product/livestock" },
-  { label: "Perikanan", href: "/product/fishery" },
+  { label: "Semua Produk", href: "/produk-layanan" },
+  { label: "Pertanian", href: "/produk-layanan/pertanian" },
+  { label: "Peternakan", href: "/produk-layanan/peternakan" },
+  { label: "Perikanan", href: "/produk-layanan/perikanan" },
   { label: "Maklon Pupuk", href: "/maklon-pupuk" }, // SEO landing page
   {
     label: "Dokter Tani",

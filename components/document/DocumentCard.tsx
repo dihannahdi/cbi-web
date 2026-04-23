@@ -10,13 +10,16 @@ import {
   Brochure,
   Certificate,
 } from "@/types/responseTypes/MediaInformationData";
+import { Locale } from "@/i18n-config";
 
 interface DocumentCardProps {
   document: Certificate | Brochure;
+  lang?: Locale;
 }
 
-export const DocumentCard: FC<DocumentCardProps> = ({ document }) => {
+export const DocumentCard: FC<DocumentCardProps> = ({ document, lang }) => {
   const [isDownloading, setIsDownloading] = useState<boolean>(false);
+  const isEn = lang === 'en';
 
   const onDownload = async () => {
     try {
@@ -56,7 +59,7 @@ export const DocumentCard: FC<DocumentCardProps> = ({ document }) => {
         onClick={onDownload}
         disabled={isDownloading}
       >
-        {isDownloading ? "Mengunduh..." : "Unduh"}
+        {isDownloading ? (isEn ? "Downloading..." : "Mengunduh...") : (isEn ? "Download" : "Unduh")}
       </Button>
     </div>
   );

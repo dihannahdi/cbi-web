@@ -71,9 +71,9 @@ const AboutSEOSection = ({ lang = "id" }: AboutSEOSectionProps) => {
               />
               <p className="leading-relaxed">
                 <span dangerouslySetInnerHTML={{ __html: t.bioP2 }} />
-                <Link href={`/${lang}/product/agriculture`} className="mx-1 text-green-600 hover:underline">{t.bioFertilizer}</Link>,
-                <Link href={`/${lang}/product/agriculture`} className="mx-1 text-green-600 hover:underline">{t.bioInsecticide}</Link>, {t.and}
-                <Link href={`/${lang}/product/livestock`} className="mx-1 text-green-600 hover:underline">{t.livestockProbiotic}</Link>.
+                <Link href={`/${lang}/produk-layanan/pertanian`} className="mx-1 text-green-600 hover:underline">{t.bioFertilizer}</Link>,
+                <Link href={`/${lang}/produk-layanan/pertanian`} className="mx-1 text-green-600 hover:underline">{t.bioInsecticide}</Link>, {t.and}
+                <Link href={`/${lang}/produk-layanan/peternakan`} className="mx-1 text-green-600 hover:underline">{t.livestockProbiotic}</Link>.
               </p>
             </div>
           </div>

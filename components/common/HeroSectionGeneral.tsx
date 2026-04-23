@@ -26,7 +26,7 @@ const HeroSectionGeneral = ({
         priority
         fetchPriority="high"
         sizes="100vw"
-        className="h-[500px] w-full object-cover object-center"
+        className="h-[500px] w-full object-cover object-[center_20%]"
       />
 
       {/* Multi-step Blur Gradient */}

@@ -14,6 +14,7 @@ import {
   generateVideoSchema,
   generateFAQSchema,
   generateHowToSchema,
+  generateImageObjectSchema,
   MultipleStructuredData 
 } from "@/utils/structuredData";
 import {
@@ -379,6 +380,24 @@ export default async function FloraOneProductPage({
     
     // FAQ Schema
     generateFAQSchema(data.faq.map(item => ({ question: item.q, answer: item.a }))),
+    
+    // ImageObject Schema for Product Images - Google Image License Metadata
+    // Fixes GSC issue: "Missing field 'acquireLicensePage'" and "Missing field 'creator'"
+    generateImageObjectSchema({
+      url: '/mockup-flora-one-padat.png',
+      name: `FLORAONE - ${lang === 'id' ? 'Pupuk Hayati Padat' : 'Solid Biofertilizer'}`,
+      caption: lang === 'id' 
+        ? 'FLORAONE Pupuk Hayati Padat - 5 Mikroba Benefisial Aktif'
+        : 'FLORAONE Solid Biofertilizer - 5 Active Beneficial Microbes',
+      description: lang === 'id'
+        ? 'Gambar produk FLORAONE pupuk hayati padat bersertifikat organik dengan 5 jenis mikroba unggul'
+        : 'FLORAONE solid biofertilizer product image, organically certified with 5 superior microbes',
+      width: 600,
+      height: 600,
+      encodingFormat: 'image/png',
+      representativeOfPage: true,
+      keywords: ['floraone', 'pupuk hayati padat', 'solid biofertilizer', 'organic fertilizer', 'centra biotech'],
+    })
   ];
 
   return (

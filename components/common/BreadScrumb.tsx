@@ -38,6 +38,7 @@ const Breadcrumb = ({ className, lang, dict }: BreadcrumbProps) => {
         "/documents": dict.nav.documents,
         "/career": dict.nav.career,
         "/maklon-pupuk": dict.nav.maklonPupuk,
+        "/top-articles": currentLang === 'id' ? 'Top Artikel' : 'Top Articles',
         "/privacy-policy": dict.footer.privacyPolicy,
         "/terms-of-service": dict.footer.termsOfService,
         "/cookies": dict.footer.cookiesSettings,
@@ -50,7 +51,7 @@ const Breadcrumb = ({ className, lang, dict }: BreadcrumbProps) => {
       // Handle product names with better formatting
       const lastSegment = path.split("/").pop() || "";
       if (lastSegment.includes("rajabio")) {
-        return "RAJABIO Pupuk Organik";
+        return currentLang === 'en' ? "RAJABIO Organic Fertilizer" : "RAJABIO Pupuk Organik";
       }
       
       return lastSegment.replace(/-/g, " ").split(' ').map(word => 
@@ -58,34 +59,39 @@ const Breadcrumb = ({ className, lang, dict }: BreadcrumbProps) => {
       ).join(' ');
     }
 
-    // Fallback to Indonesian
-    const pathMapId: { [key: string]: string } = {
-      "/": "Beranda",
-      "/about-us": "Tentang Kami",
-      "/product": "Produk & Layanan",
-      "/product/agriculture": "Pertanian",
-      "/product/livestock": "Peternakan",
-      "/product/fishery": "Perikanan",
-      "/produk-layanan": "Produk & Layanan",
-      "/produk-layanan/pertanian": "Pertanian",
-      "/produk-layanan/peternakan": "Peternakan",
-      "/produk-layanan/perikanan": "Perikanan",
-      "/news": "Berita",
+    // Fallback bilingual map when dict is not available
+    const isEn = currentLang === 'en';
+    const pathMapFallback: { [key: string]: string } = {
+      "/": isEn ? "Home" : "Beranda",
+      "/about-us": isEn ? "About Us" : "Tentang Kami",
+      "/product": isEn ? "Products & Services" : "Produk & Layanan",
+      "/product/agriculture": isEn ? "Agriculture" : "Pertanian",
+      "/product/livestock": isEn ? "Livestock" : "Peternakan",
+      "/product/fishery": isEn ? "Fishery" : "Perikanan",
+      "/produk-layanan": isEn ? "Products & Services" : "Produk & Layanan",
+      "/produk-layanan/pertanian": isEn ? "Agriculture" : "Pertanian",
+      "/produk-layanan/peternakan": isEn ? "Livestock" : "Peternakan",
+      "/produk-layanan/perikanan": isEn ? "Fishery" : "Perikanan",
+      "/news": isEn ? "News" : "Berita",
       "/blog": "Blog",
-      "/contact": "Kontak",
-      "/documents": "Brosur & Dokumen",
-      "/career": "Karir",
-      "/maklon-pupuk": "Maklon Pupuk",
+      "/contact": isEn ? "Contact" : "Kontak",
+      "/documents": isEn ? "Brochures & Documents" : "Brosur & Dokumen",
+      "/career": isEn ? "Career" : "Karir",
+      "/maklon-pupuk": isEn ? "Contract Manufacturing" : "Maklon Pupuk",
+      "/top-articles": isEn ? "Top Articles" : "Top Artikel",
+      "/privacy-policy": isEn ? "Privacy Policy" : "Kebijakan Privasi",
+      "/terms-of-service": isEn ? "Terms of Service" : "Syarat Layanan",
+      "/cookies": isEn ? "Cookies Settings" : "Pengaturan Cookie",
     };
 
-    if (pathMapId[cleanPath]) {
-      return pathMapId[cleanPath];
+    if (pathMapFallback[cleanPath]) {
+      return pathMapFallback[cleanPath];
     }
     
     // Handle product names with better formatting
     const lastSegment = path.split("/").pop() || "";
     if (lastSegment.includes("rajabio")) {
-      return "RAJABIO Pupuk Organik";
+      return isEn ? "RAJABIO Organic Fertilizer" : "RAJABIO Pupuk Organik";
     }
     
     return lastSegment.replace(/-/g, " ").split(' ').map(word => 
@@ -111,7 +117,7 @@ const Breadcrumb = ({ className, lang, dict }: BreadcrumbProps) => {
   };
 
   const breadcrumbs = generateBreadcrumbs();
-  const homeLabel = dict?.nav.home || "Beranda";
+  const homeLabel = dict?.nav.home || (currentLang === 'en' ? "Home" : "Beranda");
 
   return (
     <div className={className}>

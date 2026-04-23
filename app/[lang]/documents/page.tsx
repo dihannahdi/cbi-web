@@ -117,6 +117,7 @@ const MediaInformation = async ({ params }: { params: Promise<{ lang: Locale }> 
         <DocumentBrochure
           certificates={data.certificates}
           brochures={data.brochures}
+          lang={lang}
         />
       </section>
     );

@@ -56,10 +56,10 @@ const NavigationLinks: FC<NavigationLinksProps> = ({ lang, dict }) => {
       target: "_blank",
     },
   ] : [
-    { label: dict.nav.products, href: `/${lang}/product` },
-    { label: dict.nav.agriculture, href: `/${lang}/product/agriculture` },
-    { label: dict.nav.livestock, href: `/${lang}/product/livestock` },
-    { label: dict.nav.fishery, href: `/${lang}/product/fishery` },
+    { label: dict.nav.products, href: `/${lang}/produk-layanan` },
+    { label: dict.nav.agriculture, href: `/${lang}/produk-layanan/pertanian` },
+    { label: dict.nav.livestock, href: `/${lang}/produk-layanan/peternakan` },
+    { label: dict.nav.fishery, href: `/${lang}/produk-layanan/perikanan` },
     {
       label: dict.nav.dokterTani,
       href: "https://www.doktertani.co.id/",

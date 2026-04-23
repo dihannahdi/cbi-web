@@ -18,7 +18,7 @@ import { NextResponse } from 'next/server';
 import { i18n } from '@/i18n-config';
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.centrabiotechindonesia.com';
-const API_URL = process.env.NEXT_PUBLIC_URL_API || 'https://cbi-backend.my.id';
+const API_URL = process.env.NEXT_PUBLIC_URL_API || 'https://backend.centrabiotechindonesia.com';
 const locales = i18n.locales;
 const defaultLocale = i18n.defaultLocale;
 
@@ -159,6 +159,7 @@ const productVideos: Record<string, VideoData[]> = {
     { id: "7512399240962854161", title: "BIOKILLER di Lapangan #4", embedUrl: "https://www.tiktok.com/embed/v2/7512399240962854161", type: "tiktok", thumbnailUrl: "https://www.centrabiotechindonesia.com/products/biokiller/biokiller-cover.webp", duration: "60", description: "Hasil panen optimal dengan BIOKILLER Insektisida Hayati" }
   ],
   'floraone': [
+    { id: "CoPEoCY6QgM", title: "TESTIMONI PETANI - FLORA ONE PUPUK HAYATI CAIR", embedUrl: "https://www.youtube.com/embed/CoPEoCY6QgM", type: "youtube", thumbnailUrl: "https://i.ytimg.com/vi/CoPEoCY6QgM/maxresdefault.jpg", duration: "300", description: "Testimoni petani tentang keberhasilan menggunakan FLORA ONE Pupuk Hayati Cair dari Centra Biotech Indonesia" },
     { id: "rRbK3D_gvS4", title: "DULU BEKAS PRODUKSI BATU BATA, KINI SUDAH BERPRODUKSI LAGI BERKAT CENTRA BIOTECH", embedUrl: "https://www.youtube.com/embed/rRbK3D_gvS4", type: "youtube", thumbnailUrl: "https://i.ytimg.com/vi/rRbK3D_gvS4/maxresdefault.jpg", duration: "300", description: "Testimoni petani tentang keberhasilan menggunakan produk FLORAONE Pupuk Hayati dari Centra Biotech Indonesia" },
     { id: "_B3pONNfGEI", title: "TESTIMONI PAK PARJAN DARI INDRAMAYU - CENTRA BIOTECH", embedUrl: "https://www.youtube.com/embed/_B3pONNfGEI", type: "youtube", thumbnailUrl: "https://i.ytimg.com/vi/_B3pONNfGEI/maxresdefault.jpg", duration: "180", description: "Testimoni Pak Parjan dari Indramayu tentang penggunaan FLORAONE Pupuk Hayati untuk padi" },
     { id: "IkHUqxjLuIE", title: "CARA EFEKTIF MENEKAN BIAYA PRODUKSI PADI HINGGA 60%", embedUrl: "https://www.youtube.com/embed/IkHUqxjLuIE", type: "youtube", thumbnailUrl: "https://i.ytimg.com/vi/IkHUqxjLuIE/maxresdefault.jpg", duration: "240", description: "Tutorial cara efektif menekan biaya produksi padi menggunakan produk FLORAONE dari Centra Biotech" },
@@ -266,7 +267,7 @@ export async function GET() {
 
   // Add hardcoded RAJABIO product page
   const rajabioEntries = locales.map((locale) => {
-    const path = '/produk-layanan/pertanian/rajabio-pupuk-organik';
+    const path = '/produk-layanan/pertanian/rajabio-pupuk-organik-cair';
     const lastModified = new Date().toISOString();
     const imageUrl = `${BASE_URL}/products/rajabio/rajabio-cover.webp`;
     const videoEntries = generateVideoEntries('rajabio');
@@ -329,7 +330,7 @@ export async function GET() {
 
   // Add hardcoded SIMBIOS product page
   const simbiosEntries = locales.map((locale) => {
-    const path = '/produk-layanan/pertanian/simbios-pupuk-hayati';
+    const path = '/produk-layanan/pertanian/simbios-pupuk-hayati-cair';
     const lastModified = new Date().toISOString();
     const imageUrl = `${BASE_URL}/products/simbios/simbios-cover.webp`;
     const videoEntries = generateVideoEntries('simbios');
@@ -348,13 +349,93 @@ export async function GET() {
   </url>`;
   }).join('');
 
+  // Add hardcoded FLORAONE PADAT product page
+  const floraonePadatEntries = locales.map((locale) => {
+    const path = '/produk-layanan/pertanian/floraone-pupuk-hayati-padat';
+    const lastModified = new Date().toISOString();
+    const imageUrl = `${BASE_URL}/mockup-flora-one-padat.png`;
+    
+    return `
+  <url>
+    <loc>${BASE_URL}/${locale}${path}</loc>${generateAlternates(path)}
+    <image:image>
+      <image:loc>${imageUrl}</image:loc>
+      <image:title>FLORAONE Pupuk Hayati Padat</image:title>
+      <image:caption>FLORAONE Pupuk Hayati Padat - Jual Pupuk Hayati Padat Terbaik - Certified by Ministry of Agriculture RI</image:caption>
+    </image:image>
+    <lastmod>${lastModified}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>`;
+  }).join('');
+
+  // Add hardcoded BIOJAGAT product page
+  const biojagatEntries = locales.map((locale) => {
+    const path = '/produk-layanan/pertanian/biojagat-pupuk-hayati-cair';
+    const lastModified = new Date().toISOString();
+    const imageUrl = `${BASE_URL}/mockup-biojagat.png`;
+    
+    return `
+  <url>
+    <loc>${BASE_URL}/${locale}${path}</loc>${generateAlternates(path)}
+    <image:image>
+      <image:loc>${imageUrl}</image:loc>
+      <image:title>BIOJAGAT Pupuk Hayati Cair</image:title>
+      <image:caption>BIOJAGAT Pupuk Hayati Cair - Nitrogen Fixer &amp; Phosphate Solubilizer - Certified by Ministry of Agriculture RI</image:caption>
+    </image:image>
+    <lastmod>${lastModified}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>`;
+  }).join('');
+
+  // Add hardcoded BLACKTURBO product page
+  const blackturboEntries = locales.map((locale) => {
+    const path = '/produk-layanan/pertanian/blackturbo-asam-humat-cair';
+    const lastModified = new Date().toISOString();
+    const imageUrl = `${BASE_URL}/mockup-black-turbo.png`;
+    
+    return `
+  <url>
+    <loc>${BASE_URL}/${locale}${path}</loc>${generateAlternates(path)}
+    <image:image>
+      <image:loc>${imageUrl}</image:loc>
+      <image:title>BLACKTURBO Asam Humat</image:title>
+      <image:caption>BLACKTURBO Asam Humat Fulvat - Soil Conditioner Premium - Certified by Ministry of Agriculture RI</image:caption>
+    </image:image>
+    <lastmod>${lastModified}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>`;
+  }).join('');
+
+  // Add hardcoded BIOKALSI product page
+  const biokalsiEntries = locales.map((locale) => {
+    const path = '/produk-layanan/pertanian/biokalsi-dolomit-pembenah-tanah';
+    const lastModified = new Date().toISOString();
+    const imageUrl = `${BASE_URL}/dolomit-biokalsi-mockup.png`;
+    
+    return `
+  <url>
+    <loc>${BASE_URL}/${locale}${path}</loc>${generateAlternates(path)}
+    <image:image>
+      <image:loc>${imageUrl}</image:loc>
+      <image:title>BIOKALSI Dolomit</image:title>
+      <image:caption>BIOKALSI Dolomit - Kapur Pertanian Premium - Certified by Ministry of Agriculture RI</image:caption>
+    </image:image>
+    <lastmod>${lastModified}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>`;
+  }).join('');
+
   const productsSitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset 
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
   xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
   xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-  ${rajabioEntries}${biokillerEntries}${floraoneEntries}${simbiosEntries}${productEntries}
+  ${rajabioEntries}${biokillerEntries}${floraoneEntries}${simbiosEntries}${floraonePadatEntries}${biojagatEntries}${blackturboEntries}${biokalsiEntries}${productEntries}
 </urlset>`;
 
   return new NextResponse(productsSitemap, {

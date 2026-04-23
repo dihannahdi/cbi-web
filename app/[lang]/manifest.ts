@@ -24,7 +24,7 @@ export default async function manifest({
     id: {
       name: 'Centra Biotech Indonesia - Pusat Inovasi & Manufaktur Agro-Bioteknologi Terdepan',
       shortName: 'CBI',
-      description: 'Pusat Inovasi & Manufaktur Agro-Bioteknologi Terdepan di Indonesia. MAKLON PUPUK HAYATI & ORGANIK terbaik dengan kapasitas produksi besar. Produk bersertifikat Kementan: FLORAONE, RAJABIO, BIO KILLER, SIMBIOS. 14+ tahun pengalaman. Hub: 0812-3500-3655',
+      description: 'Pusat Inovasi & Manufaktur Agro-Bioteknologi Terdepan di Indonesia. MAKLON PUPUK HAYATI & ORGANIK terbaik dengan kapasitas produksi besar. Produk bersertifikat Kementan: FLORAONE, RAJABIO, BIO KILLER, SIMBIOS. 14+ tahun pengalaman. Hub: +62 812-3500-3655',
       shortcuts: [
         {
           name: 'Layanan Maklon Pupuk',
@@ -36,12 +36,12 @@ export default async function manifest({
           name: 'Produk Pertanian',
           short_name: 'Produk',
           description: 'FLORAONE, RAJABIO, BIO KILLER, SIMBIOS - Bersertifikat Kementerian Pertanian RI',
-          url: '/id/product/agriculture',
+          url: '/id/produk-layanan/pertanian',
         },
         {
           name: 'Hubungi Kami',
           short_name: 'Kontak',
-          description: 'WhatsApp: 0812-3500-3655 | Email: centrabioindo@gmail.com',
+          description: 'WhatsApp: +62 812-3500-3655 | Email: centrabiotech.id@gmail.com',
           url: '/id/contact',
         },
         {
@@ -67,12 +67,12 @@ export default async function manifest({
           name: 'Agriculture Products',
           short_name: 'Products',
           description: 'FLORAONE, RAJABIO, BIO KILLER, SIMBIOS - Ministry of Agriculture Certified',
-          url: '/en/product/agriculture',
+          url: '/en/produk-layanan/pertanian',
         },
         {
           name: 'Contact Us',
           short_name: 'Contact',
-          description: 'WhatsApp: +62 812-3500-3655 | Email: centrabioindo@gmail.com',
+          description: 'WhatsApp: +62 812-3500-3655 | Email: centrabiotech.id@gmail.com',
           url: '/en/contact',
         },
         {

@@ -6,7 +6,7 @@
     {
       "source": "/",
       "destination": "/id",
-      "permanent": false
+      "permanent": true
     },
     {
       "source": "/:path*",

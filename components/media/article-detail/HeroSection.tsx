@@ -3,10 +3,13 @@ import HeroSectionGeneral from "@/components/common/HeroSectionGeneral";
 import { ArticleDetail } from "@/types/responseTypes/article/articleDetailTypes";
 import { getImageUrl } from "@/utils/getImageUrl";
 
+// Default hero banner for articles without images (blog listing hero from CMS)
+const DEFAULT_HERO_BANNER = "/og-image.jpg";
+
 const HeroSection = ({ data }: { data: ArticleDetail }) => {
   return (
     <HeroSectionGeneral
-      imgUrl={getImageUrl(data?.image?.url)}
+      imgUrl={getImageUrl(data?.image?.url, DEFAULT_HERO_BANNER)}
       category={data.type}
       title={
         <>

@@ -8,13 +8,21 @@ interface WhySectionProps {
   data: WhySectionType;
   introTitle?: string;
   introDescription?: string;
+  sectionTitle?: string;
+  sectionDescription?: string;
 }
 
 /**
  * WhySection with optional integrated SEO intro
  * Used for Product pages
  */
-const WhySection = ({ data, introTitle, introDescription }: WhySectionProps) => {
+const WhySection = ({
+  data,
+  introTitle,
+  introDescription,
+  sectionTitle,
+  sectionDescription,
+}: WhySectionProps) => {
   return (
     <section className="w-full bg-[#eee]">
       {/* Integrated SEO Intro (if provided) */}
@@ -34,8 +42,8 @@ const WhySection = ({ data, introTitle, introDescription }: WhySectionProps) => 
       <ContainerSection className="flex flex-col items-center justify-between gap-8 md:flex-row xl:gap-16">
         {/* Text */}
         <div className="flex flex-1 flex-col gap-y-6">
-          <h2>{data.title}</h2>
-          <p>{data.description}</p>
+          <h2>{sectionTitle ?? data.title}</h2>
+          <p>{sectionDescription ?? data.description}</p>
         </div>
 
         {/* Image */}

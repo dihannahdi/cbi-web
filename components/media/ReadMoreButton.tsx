@@ -2,10 +2,10 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 const ReadMoreButton = ({
-  text = "Selengkapnya",
+  text,
   link = "/",
 }: {
-  text?: string;
+  text: string;
   link?: string;
 }) => {
   return (

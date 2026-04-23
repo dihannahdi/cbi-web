@@ -85,10 +85,10 @@ export async function generateMetadata({
       title: defaultTitle,
       description: defaultDescription,
       alternates: {
-        canonical: `${SITE_CONFIG.url}/${lang}/product/agriculture`,
+        canonical: `${SITE_CONFIG.url}/${lang}/produk-layanan/pertanian`,
         languages: {
-          'id': `${SITE_CONFIG.url}/id/product/agriculture`,
-          'en': `${SITE_CONFIG.url}/en/product/agriculture`,
+          'id': `${SITE_CONFIG.url}/id/produk-layanan/pertanian`,
+          'en': `${SITE_CONFIG.url}/en/produk-layanan/pertanian`,
         },
       },
     };
@@ -122,10 +122,10 @@ export async function generateMetadata({
       images: [imageUrl],
     },
     alternates: {
-      canonical: `${SITE_CONFIG.url}/${lang}/product/agriculture`,
+      canonical: `${SITE_CONFIG.url}/${lang}/produk-layanan/pertanian`,
       languages: {
-        'id': `${SITE_CONFIG.url}/id/product/agriculture`,
-        'en': `${SITE_CONFIG.url}/en/product/agriculture`,
+        'id': `${SITE_CONFIG.url}/id/produk-layanan/pertanian`,
+        'en': `${SITE_CONFIG.url}/en/produk-layanan/pertanian`,
       },
     },
     keywords: lang === 'id' 
@@ -171,7 +171,7 @@ const Agriculture = async ({
   const products = data.productCategoriesSection?.flatMap((category: any) => 
     category.products?.map((product: any) => ({
       name: product.name || product.title,
-      url: `/${lang}/product/agriculture/${product.slug || product.documentId || product.id}`,
+      url: `/${lang}/produk-layanan/pertanian/${product.slug || product.documentId || product.id}`,
       image: product.image?.url,
       description: product.description,
     })) || []
@@ -181,7 +181,7 @@ const Agriculture = async ({
   const schemas = generateProductCategorySchemas({
     name: dict.products.agriculture.title,
     description: PAGE_METADATA.agriculture.description,
-    url: `/${lang}/product/agriculture`,
+    url: `/${lang}/produk-layanan/pertanian`,
     products,
   });
 
@@ -311,8 +311,19 @@ const Agriculture = async ({
         </ContainerSection>
       </section>
 
-      <section>
-        <ContainerSection>
+      <section className="relative overflow-hidden">
+        {/* CBI Logo Watermark Background */}
+        <div className="absolute right-0 top-0 h-[64rem] w-[64rem] translate-x-[17rem] -translate-y-[20rem]">
+          <Image
+            draggable={false}
+            src="/logo-only.png"
+            alt=""
+            width={600}
+            height={600}
+            className="h-full w-full object-cover opacity-[0.04] brightness-0"
+          />
+        </div>
+        <ContainerSection className="relative z-20">
           <div>
             <h2 className="leading-[50px] lg:leading-[80px]">
               {whyTitle.split(' ').slice(0, 2).join(' ')} <br />
@@ -361,7 +372,7 @@ const Agriculture = async ({
         lang={lang}
       />
 
-      <BannerContactSection data={data.bannerCTA} />
+      <BannerContactSection data={data.bannerCTA} lang={lang} />
     </>
   );
 };

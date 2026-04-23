@@ -1,6 +1,7 @@
 import { ProductFisheryResponse } from "@/types/responseTypes";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 
 import { getImageUrl } from "@/utils/getImageUrl";
 import { ApiPath, apiRequest } from "@/utils/apiClient";
@@ -73,7 +74,7 @@ export async function generateMetadata({
   const dict = await getDictionary(lang);
   const data = await getFisheryData(lang);
 
-  const defaultTitle = dict.products.fishery.title + " | Centra Biotech Indonesia";
+  const defaultTitle = dict.products.fishery.title;
   const defaultDescription = dict.products.fishery.description;
 
   if (!data || !data.metadata) {
@@ -81,10 +82,10 @@ export async function generateMetadata({
       title: defaultTitle,
       description: defaultDescription,
       alternates: {
-        canonical: `${SITE_CONFIG.url}/${lang}/product/fishery`,
+        canonical: `${SITE_CONFIG.url}/${lang}/produk-layanan/perikanan`,
         languages: {
-          'id': `${SITE_CONFIG.url}/id/product/fishery`,
-          'en': `${SITE_CONFIG.url}/en/product/fishery`,
+          'id': `${SITE_CONFIG.url}/id/produk-layanan/perikanan`,
+          'en': `${SITE_CONFIG.url}/en/produk-layanan/perikanan`,
         },
       },
     };
@@ -118,10 +119,10 @@ export async function generateMetadata({
       images: [imageUrl],
     },
     alternates: {
-      canonical: `${SITE_CONFIG.url}/${lang}/product/fishery`,
+      canonical: `${SITE_CONFIG.url}/${lang}/produk-layanan/perikanan`,
       languages: {
-        'id': `${SITE_CONFIG.url}/id/product/fishery`,
-        'en': `${SITE_CONFIG.url}/en/product/fishery`,
+        'id': `${SITE_CONFIG.url}/id/produk-layanan/perikanan`,
+        'en': `${SITE_CONFIG.url}/en/produk-layanan/perikanan`,
       },
     },
     keywords: lang === 'id'
@@ -167,7 +168,7 @@ const Fishery = async ({
   const products = data.productCategoriesSection?.flatMap((category: any) => 
     category.products?.map((product: any) => ({
       name: product.name || product.title,
-      url: `/${lang}/product/fishery/${product.slug || product.documentId || product.id}`,
+      url: `/${lang}/produk-layanan/perikanan/${product.slug || product.documentId || product.id}`,
       image: product.image?.url,
       description: product.description,
     })) || []
@@ -177,7 +178,7 @@ const Fishery = async ({
   const schemas = generateProductCategorySchemas({
     name: dict.products.fishery.title,
     description: PAGE_METADATA.fishery.description,
-    url: `/${lang}/product/fishery`,
+    url: `/${lang}/produk-layanan/perikanan`,
     products,
   });
 
@@ -223,8 +224,19 @@ const Fishery = async ({
         </ContainerSection>
       </section>
 
-      <section>
-        <ContainerSection>
+      <section className="relative overflow-hidden">
+        {/* CBI Logo Watermark Background */}
+        <div className="absolute right-0 top-0 h-[64rem] w-[64rem] translate-x-[17rem] -translate-y-[20rem]">
+          <Image
+            draggable={false}
+            src="/logo-only.png"
+            alt=""
+            width={600}
+            height={600}
+            className="h-full w-full object-cover opacity-[0.04] brightness-0"
+          />
+        </div>
+        <ContainerSection className="relative z-20">
           <div>
             <h2 className="leading-[50px] lg:leading-[80px]">
               {whyTitle.split(' ').slice(0, 2).join(' ')} <br />
@@ -266,7 +278,7 @@ const Fishery = async ({
         productCategories={data.productCategoriesSection}
       />
 
-      <BannerContactSection data={data.bannerCTA} />
+      <BannerContactSection data={data.bannerCTA} lang={lang} />
     </>
   );
 };

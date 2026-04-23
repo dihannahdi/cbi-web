@@ -7,8 +7,8 @@ import { ArticleItem } from "@/types/responseTypes/article/articleItem";
 import { Locale } from "@/i18n-config";
 import { Dictionary } from "@/dictionaries";
 
-// Default placeholder image for articles without images
-const DEFAULT_ARTICLE_IMAGE = "/placeholder-image.png";
+// Default branded image for articles without images
+const DEFAULT_ARTICLE_IMAGE = "/og-image.jpg";
 
 interface ArticleCardProps {
   articleItemData: ArticleItem;
@@ -31,7 +31,7 @@ const ArticleCard = ({ articleItemData, lang, dict }: ArticleCardProps) => {
   const imageWidth = articleItemData.image?.width ?? 421;
   const imageHeight = articleItemData.image?.height ?? 280;
 
-  const readMoreText = dict?.blog?.readMore ?? "Read More";
+  const readMoreText = dict?.blog?.readMore ?? (lang === 'en' ? 'Read More' : 'Selengkapnya');
 
   return (
     <div className="w-[280px] flex-none snap-center lg:w-[306px] xl:w-[421px]">

@@ -111,7 +111,19 @@
     "benefits": "Benefits",
     "howToUse": "How to Use",
     "relatedProducts": "Related Products",
-    "backToProducts": "Back to Products"
+    "backToProducts": "Back to Products",
+    "page": {
+      "heroCategory": "Products & Services",
+      "heroTitle": "Increase Your Productivity with High-Quality Biotechnology Products",
+      "introTitle": "Leading Biotechnology Solutions for Indonesian Agribusiness",
+      "introDescription": "Centra Biotech Indonesia provides a range of high-quality biotechnology products for the agriculture, livestock, and fisheries sectors. Our products are developed through in-depth research and modern fermentation technology to produce biological fertilizers, probiotics, and eco-friendly bioactivators.",
+      "whyTitle": "Why Us?",
+      "whyDescription": "PT Centra Biotech Indonesia is one of the leading biotechnology companies in Indonesia. Many of our research-driven biotechnology innovations have become pioneering products and have been proven to help the agriculture, livestock, and fisheries industries improve productivity. We are committed to empowering Indonesia's future through high-quality biotechnology innovation. Backed by nearly 14 years of experience, certified products, and professional human resources, we continue to provide the best biotechnology products.",
+      "servicesTitle": "Our Services",
+      "servicesDescription": "Dokter Tani is a clinic that provides consultation, diagnosis, and treatment recommendations to improve productivity in agriculture, livestock, and fisheries. Consult your agriculture, livestock, and fisheries solution needs with our expert team.",
+      "ctaTitle": "Ready to Increase Your Productivity with Our Biotechnology Products?",
+      "ctaButton": "Contact Us"
+    }
   },
   "maklon": {
     "title": "Fertilizer Contract Manufacturing",
@@ -194,13 +206,13 @@
     "ctaDesc": "Consult your fertilizer contract manufacturing needs with our expert team. Get the best offer and start producing fertilizer with your own brand!",
     "ctaButton": "Free Consultation",
     "ctaWhatsapp": "WhatsApp Us",
-    "ctaContact": "📞 0812-3500-3655 | ✉️ centrabioindo@gmail.com"
+    "ctaContact": "📞 +62 812-3500-3655 | ✉️ centrabiotech.id@gmail.com"
   },
   "contact": {
     "title": "Contact Us",
     "subtitle": "We're here to help you",
     "teamTitle": "Contact the Centra Biotech Indonesia Team",
-    "description": "We're ready to answer your questions about biotechnology products, agricultural, livestock, and fishery consulting services. Our customer service team has experience providing the best solutions for your agribusiness needs. Please fill out the form below or contact us directly by phone and email. Our headquarters is located in Boyolali, Central Java, with a distribution network throughout Indonesia. PT Centra Biotech Indonesia provides free consulting services for farmers, ranchers, and fish farmers who want to increase their business productivity using environmentally friendly biological products.",
+    "description": "We're ready to answer your questions about biotechnology products, agricultural, livestock, and fishery consulting services. Our customer service team has experience providing the best solutions for your agribusiness needs. Please fill out the form below or contact us directly by phone and email. Our headquarters is located in Klaten, Central Java, with a distribution network throughout Indonesia. PT Centra Biotech Indonesia provides free consulting services for farmers, ranchers, and fish farmers who want to increase their business productivity using environmentally friendly biological products.",
     "formTitle": "Send a Message",
     "name": "Full Name",
     "firstName": "First Name",
@@ -246,7 +258,12 @@
     "backToBlog": "Back to Blog",
     "categories": "Categories",
     "tags": "Tags",
-    "searchPlaceholder": "Search articles..."
+    "searchPlaceholder": "Search articles...",
+    "ctaTitle": "Need Biotechnology Solutions?",
+    "ctaDescription": "Consult your agriculture, livestock, or fishery needs with our expert team.",
+    "ctaWhatsapp": "Contact via WhatsApp",
+    "ctaPhone": "+62 812-3500-3655",
+    "ctaEmail": "centrabiotech.id@gmail.com"
   },
   "news": {
     "title": "News",
@@ -265,14 +282,25 @@
     "apply": "Apply Now",
     "requirements": "Requirements",
     "responsibilities": "Responsibilities",
-    "benefits": "Benefits"
+    "benefits": "Benefits",
+    "heroCategory": "Career",
+    "heroTitle": "Join Our Team, Build a Better Future Together",
+    "joinUsTitle": "Be Part of Our Team!",
+    "joinUsDescription": "We believe that innovation and collaboration are the keys to creating environmentally friendly biotechnology solutions that have a significant impact on the agriculture, fishery, and livestock sectors. If you are passionate about contributing to a sustainable future, join our team. Find career opportunities that match your expertise and be part of our journey in delivering real benefits to communities and the environment.",
+    "lifeAtTitle": "Life at Centra Biotech Indonesia",
+    "testimonyName": "Bayu Subeni",
+    "testimonyJobTitle": "Digital Marketing Staff",
+    "testimonyText": "Working as a Marketer at PT Centra Biotech Indonesia has been an incredible experience. I feel valued because my creative ideas are fully supported to expand the reach of our eco-friendly products. Moreover, the company's collaborative culture and focus on innovation keep me motivated to give my best. Every day is an opportunity to learn something new and make a positive impact on Indonesia's agriculture, fishery, and livestock sectors."
   },
   "documents": {
     "title": "Documents & Brochures",
     "subtitle": "Download our product information materials",
     "download": "Download",
+    "downloading": "Downloading...",
     "fileSize": "File Size",
-    "lastUpdated": "Last Updated"
+    "lastUpdated": "Last Updated",
+    "brochures": "Brochures",
+    "certificates": "Fertilizer Certificates"
   },
   "common": {
     "loading": "Loading...",
@@ -303,13 +331,14 @@
     },
     "500": {
       "title": "Something Went Wrong",
-      "description": "Sorry, a server error occurred. Please try again later.",
-      "retry": "Try Again"
+      "description": "Sorry, an unexpected error occurred. Our team has been notified and is working to fix it.",
+      "retry": "Try Again",
+      "backHome": "Back to Home"
     }
   },
   "seo": {
-    "homeTitle": "PT CBI Centra Biotech Indonesia - Biotechnology Industry Indonesia",
-    "homeDescription": "PT Centra Biotech Indonesia is a leading biotechnology industry company. Biotechnology for developing countries with quality raw materials. Integrated biotechnology solutions for agriculture, livestock, and fishery in Indonesia.",
+    "homeTitle": "Centra Biotech Indonesia - #1 Agricultural Biotechnology Solutions",
+    "homeDescription": "✅ Leading biotech company in Indonesia. Certified biological & organic fertilizers for agriculture, livestock & aquaculture. Increase yields up to 86%. Order now!",
     "aboutTitle": "About PT CBI - Leading Biotechnology Company in Indonesia",
     "aboutDescription": "PT Centra Biotech Indonesia (PT CBI) is a biotechnology company in Indonesia. What is biotech? Biotechnology uses living organisms to produce agricultural products. Learn about biotechnology for sustainable agriculture.",
     "productsTitle": "Products & Services - Centra Biotech Indonesia",

@@ -175,7 +175,7 @@ const HeroSection = ({ data, lang = "id" }: HeroSectionProps) => {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link 
-                href={`/${lang}/product/agriculture`} 
+                href={`/${lang}/produk-layanan/pertanian`} 
                 className="inline-flex items-center rounded-full bg-green-600 px-6 py-3 font-medium text-white transition-colors hover:bg-green-700"
               >
                 <Leaf className="mr-2 h-5 w-5" />

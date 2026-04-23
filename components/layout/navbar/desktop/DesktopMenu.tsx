@@ -31,9 +31,9 @@ const NavigationMenu: FC<NavigationMenuProps> = ({ lang, dict }) => {
     { title: dict.nav.livestock, href: `/${lang}/produk-layanan/peternakan` },
     { title: dict.nav.fishery, href: `/${lang}/produk-layanan/perikanan` },
   ] : [
-    { title: dict.nav.agriculture, href: `/${lang}/product/agriculture` },
-    { title: dict.nav.livestock, href: `/${lang}/product/livestock` },
-    { title: dict.nav.fishery, href: `/${lang}/product/fishery` },
+    { title: dict.nav.agriculture, href: `/${lang}/produk-layanan/pertanian` },
+    { title: dict.nav.livestock, href: `/${lang}/produk-layanan/peternakan` },
+    { title: dict.nav.fishery, href: `/${lang}/produk-layanan/perikanan` },
   ];
 
   const MEDIA_LINKS = [

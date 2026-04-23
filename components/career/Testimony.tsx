@@ -9,45 +9,54 @@ import type { Swiper as SwiperType } from "swiper";
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
 
 import ContainerSection from "@/components/layout/container";
+import { Locale } from "@/i18n-config";
 
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-const TestimonyData = [
-  {
-    id: 1,
-    image: "/testimony.jpeg",
-    name: "Bayu Subeni",
-    title: "Staff Digital Marketing",
-    testimony:
-      "Bekerja sebagai Marketing di PT Centra Biotech Indonesia adalah pengalaman yang luar biasa. Saya merasa dihargai karena ide-ide kreatif saya didukung penuh untuk memperluas jangkauan produk ramah lingkungan kami. Selain itu, budaya perusahaan yang kolaboratif dan fokus pada inovasi membuat saya terus termotivasi untuk memberikan yang terbaik. Setiap hari adalah kesempatan untuk belajar hal baru dan memberikan dampak positif bagi sektor pertanian, perikanan, dan peternakan di Indonesia.",
-  },
-  {
-    id: 2,
-    image: "/testimony.jpeg",
-    name: "Bayu Subeni",
-    title: "Staff Digital Marketing",
-    testimony:
-      "Bekerja sebagai Marketing di PT Centra Biotech Indonesia adalah pengalaman yang luar biasa. Saya merasa dihargai karena ide-ide kreatif saya didukung penuh untuk memperluas jangkauan produk ramah lingkungan kami. Selain itu, budaya perusahaan yang kolaboratif dan fokus pada inovasi membuat saya terus termotivasi untuk memberikan yang terbaik. Setiap hari adalah kesempatan untuk belajar hal baru dan memberikan dampak positif bagi sektor pertanian, perikanan, dan peternakan di Indonesia.",
-  },
-  {
-    id: 3,
-    image: "/testimony.jpeg",
-    name: "Bayu Subeni",
-    title: "Staff Digital Marketing",
-    testimony:
-      "Bekerja sebagai Marketing di PT Centra Biotech Indonesia adalah pengalaman yang luar biasa. Saya merasa dihargai karena ide-ide kreatif saya didukung penuh untuk memperluas jangkauan produk ramah lingkungan kami. Selain itu, budaya perusahaan yang kolaboratif dan fokus pada inovasi membuat saya terus termotivasi untuk memberikan yang terbaik. Setiap hari adalah kesempatan untuk belajar hal baru dan memberikan dampak positif bagi sektor pertanian, perikanan, dan peternakan di Indonesia.",
-  },
-];
+const getTestimonyData = (lang?: Locale) => {
+  const isEn = lang === 'en';
+  return [
+    {
+      id: 1,
+      image: "/testimony.jpeg",
+      name: "Bayu Subeni",
+      title: isEn ? "Digital Marketing Staff" : "Staff Digital Marketing",
+      testimony: isEn
+        ? "Working as a Marketer at PT Centra Biotech Indonesia has been an incredible experience. I feel valued because my creative ideas are fully supported to expand the reach of our eco-friendly products. Moreover, the company's collaborative culture and focus on innovation keep me motivated to give my best. Every day is an opportunity to learn something new and make a positive impact on Indonesia's agriculture, fishery, and livestock sectors."
+        : "Bekerja sebagai Marketing di PT Centra Biotech Indonesia adalah pengalaman yang luar biasa. Saya merasa dihargai karena ide-ide kreatif saya didukung penuh untuk memperluas jangkauan produk ramah lingkungan kami. Selain itu, budaya perusahaan yang kolaboratif dan fokus pada inovasi membuat saya terus termotivasi untuk memberikan yang terbaik. Setiap hari adalah kesempatan untuk belajar hal baru dan memberikan dampak positif bagi sektor pertanian, perikanan, dan peternakan di Indonesia.",
+    },
+    {
+      id: 2,
+      image: "/testimony.jpeg",
+      name: "Bayu Subeni",
+      title: isEn ? "Digital Marketing Staff" : "Staff Digital Marketing",
+      testimony: isEn
+        ? "Working as a Marketer at PT Centra Biotech Indonesia has been an incredible experience. I feel valued because my creative ideas are fully supported to expand the reach of our eco-friendly products. Moreover, the company's collaborative culture and focus on innovation keep me motivated to give my best. Every day is an opportunity to learn something new and make a positive impact on Indonesia's agriculture, fishery, and livestock sectors."
+        : "Bekerja sebagai Marketing di PT Centra Biotech Indonesia adalah pengalaman yang luar biasa. Saya merasa dihargai karena ide-ide kreatif saya didukung penuh untuk memperluas jangkauan produk ramah lingkungan kami. Selain itu, budaya perusahaan yang kolaboratif dan fokus pada inovasi membuat saya terus termotivasi untuk memberikan yang terbaik. Setiap hari adalah kesempatan untuk belajar hal baru dan memberikan dampak positif bagi sektor pertanian, perikanan, dan peternakan di Indonesia.",
+    },
+    {
+      id: 3,
+      image: "/testimony.jpeg",
+      name: "Bayu Subeni",
+      title: isEn ? "Digital Marketing Staff" : "Staff Digital Marketing",
+      testimony: isEn
+        ? "Working as a Marketer at PT Centra Biotech Indonesia has been an incredible experience. I feel valued because my creative ideas are fully supported to expand the reach of our eco-friendly products. Moreover, the company's collaborative culture and focus on innovation keep me motivated to give my best. Every day is an opportunity to learn something new and make a positive impact on Indonesia's agriculture, fishery, and livestock sectors."
+        : "Bekerja sebagai Marketing di PT Centra Biotech Indonesia adalah pengalaman yang luar biasa. Saya merasa dihargai karena ide-ide kreatif saya didukung penuh untuk memperluas jangkauan produk ramah lingkungan kami. Selain itu, budaya perusahaan yang kolaboratif dan fokus pada inovasi membuat saya terus termotivasi untuk memberikan yang terbaik. Setiap hari adalah kesempatan untuk belajar hal baru dan memberikan dampak positif bagi sektor pertanian, perikanan, dan peternakan di Indonesia.",
+    },
+  ];
+};
 
-const Testimony = () => {
+const Testimony = ({ lang }: { lang?: Locale }) => {
   const [swiper, setSwiper] = useState<SwiperType>();
+  const isEn = lang === 'en';
+  const TestimonyData = getTestimonyData(lang);
 
   return (
     <section>
       <ContainerSection>
-        <h2>Life at Centra Biotech Indonesia</h2>
+        <h2>{isEn ? "Life at Centra Biotech Indonesia" : "Kehidupan di Centra Biotech Indonesia"}</h2>
 
         <Swiper
           modules={[Pagination, Navigation, Autoplay]}

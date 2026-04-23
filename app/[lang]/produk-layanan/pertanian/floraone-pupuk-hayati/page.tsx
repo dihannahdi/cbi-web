@@ -14,6 +14,7 @@ import {
   generateVideoSchema,
   generateFAQSchema,
   generateHowToSchema,
+  generateImageObjectSchema,
   MultipleStructuredData 
 } from "@/utils/structuredData";
 import {
@@ -96,6 +97,12 @@ const floraoneVideos: Array<{
 }> = [
   // YouTube Videos
   {
+    id: "CoPEoCY6QgM",
+    title: "TESTIMONI PETANI - FLORA ONE PUPUK HAYATI CAIR TINGKATKAN HASIL PANEN",
+    embedUrl: "https://www.youtube.com/embed/CoPEoCY6QgM",
+    type: "youtube"
+  },
+  {
     id: "rRbK3D_gvS4",
     title: "DULU BEKAS PRODUKSI BATU BATA SEKARANG SAWAHNYA MENGHASILKAN PADI 86% LEBIH BANYAK",
     embedUrl: "https://www.youtube.com/embed/rRbK3D_gvS4",
@@ -152,8 +159,8 @@ const productData = {
     name: "FLORA ONE",
     subtitle: "Pupuk Hayati Cair & Padat",
     tagline: "Fungsi Ganda: Tingkatkan Panen & Kendalikan Penyakit",
-    heroTitle: "Pupuk Hayati Terbaik - FLORA ONE Tingkatkan Panen Hingga 86%",
-    heroSubtitle: "Pupuk hayati bersertifikat Kementan RI mengandung mikroba hidup. Fungsi ganda: meningkatkan produksi & mengendalikan penyakit tanaman. Tersedia cair & padat.",
+    heroTitle: "FLORA ONE Pupuk Hayati Cair Terbaik - Tingkatkan Panen Hingga 86%",
+    heroSubtitle: "Pupuk hayati cair & padat bersertifikat Kementan RI mengandung 5 mikroba hidup. Fungsi ganda: meningkatkan produksi & mengendalikan penyakit tanaman.",
     description: "FLORA ONE adalah pupuk hayati mengandung konsorsium mikroba hidup yang dirancang untuk memupuk tanah pertanian. Keunggulan fungsi ganda: melipatgandakan hasil produksi sekaligus mengendalikan penyakit tanaman yang sulit ditangani fungisida kimia. Dapat mengurangi penggunaan pupuk kimia (NPK/Urea) dan fungisida hingga 50%.",
     stats: [
       { value: "86%", label: "Peningkatan Panen" },
@@ -186,7 +193,7 @@ const productData = {
     name: "FLORA ONE",
     subtitle: "Liquid & Solid Biological Fertilizer",
     tagline: "Dual Function: Increase Yield & Control Diseases",
-    heroTitle: "Best Biological Fertilizer - FLORA ONE Increases Harvest Up to 86%",
+    heroTitle: "FLORA ONE Best Biological Fertilizer - Increases Harvest Up to 86%",
     heroSubtitle: "Biological fertilizer certified by Ministry of Agriculture RI containing living microbes. Dual function: boost production & control plant diseases. Available in liquid & solid forms.",
     description: "FLORA ONE is a biological fertilizer containing a consortium of living microbes designed to fertilize agricultural soil. Unique dual function: multiply production yields while controlling plant diseases difficult to manage with chemical fungicides. Can reduce chemical fertilizer (NPK/Urea) and fungicide use by up to 50%.",
     stats: [
@@ -225,19 +232,32 @@ export async function generateMetadata({
   params: Promise<{ lang: Locale }>;
 }): Promise<Metadata> {
   const { lang } = await params;
-  const data = productData[lang];
-
-  const title = lang === 'id' 
-    ? "Pupuk Hayati Terbaik FLORA ONE - Tingkatkan Panen 86% & Kendalikan Penyakit | Bersertifikat Kementan"
-    : "FLORA ONE Best Biological Fertilizer - Increase Yield 86% & Control Diseases | Certified";
   
-  const description = lang === 'id'
-    ? "Pupuk hayati FLORA ONE mengandung 5 jenis mikroba hidup. Fungsi ganda: tingkatkan panen hingga 86% & kendalikan penyakit tanaman. Bersertifikat Kementan RI & LeSOS Organik. Tersedia cair & padat. Pesan sekarang!"
-    : "FLORA ONE biological fertilizer contains 5 types of living microbes. Dual function: increase yield up to 86% & control plant diseases. Certified by Ministry of Agriculture. Available liquid & solid. Order now!";
+  // Fetch from Strapi CMS for SEO metadata
+  const strapiData = await fetchStrapiProduct("floraone-pupuk-hayati", lang);
+  const data = strapiData || productData[lang]; // Fallback to static if Strapi unavailable
 
-  const keywords = lang === 'id'
-    ? "jual pupuk hayati cair, jual pupuk hayati padat, pupuk hayati, pupuk hayati terbaik, pupuk hayati terbaik indonesia, flora one, floraone, jual floraone, pupuk organik, pupuk mikroba, trichoderma, pseudomonas, pengendalian penyakit tanaman, pupuk hayati bersertifikat, pupuk ramah lingkungan, centra biotech, pertanian organik, pupuk cair, pupuk padat, pupuk hayati cair terbaik, pupuk hayati padat terbaik, distributor pupuk hayati"
-    : "biological fertilizer for sale, liquid biological fertilizer, solid biological fertilizer, best biological fertilizer, best biofertilizer indonesia, flora one, floraone, buy floraone, organic fertilizer, microbial fertilizer, trichoderma, pseudomonas, plant disease control, certified biological fertilizer, eco-friendly fertilizer, centra biotech, organic farming, liquid fertilizer, solid fertilizer, biofertilizer distributor";
+  // NOTE: Strapi returns meta fields in snake_case (meta_title, meta_description, focus_keyphrase)
+  // Access both snake_case (actual API) and camelCase (interface) for safety
+  const strapiAny = strapiData as Record<string, any> | null;
+  
+  // OPTIMIZED FOR CTR: Short title (mobile-friendly), keyword-first, numbers
+  const title = strapiAny?.meta_title || strapiData?.metaTitle || (lang === 'id' 
+    ? "FLORA ONE Pupuk Hayati Cair Terbaik | Panen +86%"
+    : "FLORA ONE Biofertilizer - +86% Yield | Ministry Certified");
+  
+  // OPTIMIZED DESCRIPTION: Benefits, CTA, 150-160 chars for mobile
+  const description = strapiAny?.meta_description || strapiData?.metaDescription || (lang === 'id'
+    ? "Jual FLORA ONE pupuk hayati cair & padat No.1 Indonesia. 5 mikroba hidup tingkatkan panen 86% & kendalikan penyakit tanaman. Bersertifikat Kementan RI. Pesan sekarang!"
+    : "FLORA ONE biological fertilizer with 5 living microbes. Increase harvest up to 86% and control plant diseases naturally. Ministry of Agriculture RI certified. Order now!");
+
+  // Extract keywords from Strapi focus_keyphrase if available
+  const focusKeyphrase = strapiAny?.focus_keyphrase || strapiData?.focusKeyphrase;
+  const keywords = focusKeyphrase 
+    ? String(focusKeyphrase).split(',').map((k: string) => k.trim()).join(', ')
+    : (lang === 'id'
+      ? "jual pupuk hayati cair, jual pupuk hayati padat, pupuk hayati, pupuk hayati terbaik, pupuk hayati terbaik indonesia, flora one, floraone, jual floraone, pupuk organik, pupuk mikroba, trichoderma, pseudomonas, pengendalian penyakit tanaman, pupuk hayati bersertifikat, pupuk ramah lingkungan, centra biotech, pertanian organik, pupuk cair, pupuk padat, pupuk hayati cair terbaik, pupuk hayati padat terbaik, distributor pupuk hayati"
+      : "biological fertilizer for sale, liquid biological fertilizer, solid biological fertilizer, best biological fertilizer, best biofertilizer indonesia, flora one, floraone, buy floraone, organic fertilizer, microbial fertilizer, trichoderma, pseudomonas, plant disease control, certified biological fertilizer, eco-friendly fertilizer, centra biotech, organic farming, liquid fertilizer, solid fertilizer, biofertilizer distributor");
 
   return {
     title,
@@ -310,8 +330,8 @@ export default async function FloraOnePage({
   const { lang } = await params;
   const dictionary = await getDictionary(lang);
   
-  // Fetch data from Strapi CMS (for text editability)
-  const strapiData = await fetchStrapiProduct("floraone-pupuk-hayati");
+  // Fetch data from Strapi CMS (for text editability) - pass locale for correct language
+  const strapiData = await fetchStrapiProduct("floraone-pupuk-hayati", lang);
   
   // Use static fallback data as base
   const staticData = productData[lang];
@@ -655,7 +675,24 @@ export default async function FloraOnePage({
         "Agricultural Biotechnology",
         "Contract Manufacturing"
       ]
-    }
+    },
+    // ImageObject Schema for Product Images - Google Image License Metadata
+    // Fixes GSC issue: "Missing field 'acquireLicensePage'" and "Missing field 'creator'"
+    generateImageObjectSchema({
+      url: '/products/floraone/floraone-cover.webp',
+      name: `FLORA ONE - ${lang === 'id' ? 'Pupuk Hayati Premium' : 'Premium Biological Fertilizer'}`,
+      caption: lang === 'id' 
+        ? 'FLORA ONE Pupuk Hayati - 5 Mikroba Menguntungkan untuk Pertanian'
+        : 'FLORA ONE Biological Fertilizer - 5 Beneficial Microbes for Agriculture',
+      description: lang === 'id'
+        ? 'Gambar produk FLORA ONE pupuk hayati bersertifikat Kementan RI dengan 5 jenis mikroba menguntungkan'
+        : 'FLORA ONE biological fertilizer product image, certified by Indonesian Ministry of Agriculture with 5 beneficial microbes',
+      width: 600,
+      height: 600,
+      encodingFormat: 'image/webp',
+      representativeOfPage: true,
+      keywords: ['floraone', 'pupuk hayati', 'biological fertilizer', 'centra biotech', 'trichoderma'],
+    })
   ];
 
   return (
@@ -669,8 +706,8 @@ export default async function FloraOnePage({
         title={
           <h1 className="p-4 text-center text-3xl font-bold !leading-tight text-white lg:text-5xl xl:text-[56px]">
             {lang === 'id' 
-              ? `Tingkatkan Hasil Panen Anda dengan ${data.name} - ${data.subtitle}`
-              : `Boost Your Harvest with ${data.name} - ${data.subtitle}`}
+              ? `${data.name} - Pupuk Hayati Cair & Padat Terbaik Indonesia`
+              : `${data.name} - Best Liquid & Solid Biofertilizer Indonesia`}
           </h1>
         }
       />
@@ -699,7 +736,9 @@ export default async function FloraOnePage({
             {/* Right: Content */}
             <div className="lg:w-1/2 flex flex-col justify-center">
               <h2 className="text-2xl font-bold text-gray-900 mb-4 lg:text-3xl">
-                {data.heroTitle}
+                {lang === 'id' 
+                  ? 'FLORA ONE - Pupuk Hayati Cair Premium untuk Pertanian Indonesia'
+                  : 'FLORA ONE - Premium Liquid Biofertilizer for Indonesian Agriculture'}
               </h2>
               
               <p className="text-gray-600 mb-6 text-lg leading-relaxed">

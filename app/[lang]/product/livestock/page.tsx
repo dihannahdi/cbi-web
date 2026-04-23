@@ -1,6 +1,7 @@
 import { ProductLivestockResponse } from "@/types/responseTypes";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 
 import { getImageUrl } from "@/utils/getImageUrl";
 import { ApiPath, apiRequest } from "@/utils/apiClient";
@@ -73,7 +74,7 @@ export async function generateMetadata({
   const dict = await getDictionary(lang);
   const data = await getLivestockData(lang);
 
-  const defaultTitle = dict.products.livestock.title + " | Centra Biotech Indonesia";
+  const defaultTitle = dict.products.livestock.title;
   const defaultDescription = dict.products.livestock.description;
 
   if (!data || !data.metadata) {
@@ -81,10 +82,10 @@ export async function generateMetadata({
       title: defaultTitle,
       description: defaultDescription,
       alternates: {
-        canonical: `${SITE_CONFIG.url}/${lang}/product/livestock`,
+        canonical: `${SITE_CONFIG.url}/${lang}/produk-layanan/peternakan`,
         languages: {
-          'id': `${SITE_CONFIG.url}/id/product/livestock`,
-          'en': `${SITE_CONFIG.url}/en/product/livestock`,
+          'id': `${SITE_CONFIG.url}/id/produk-layanan/peternakan`,
+          'en': `${SITE_CONFIG.url}/en/produk-layanan/peternakan`,
         },
       },
     };
@@ -118,10 +119,10 @@ export async function generateMetadata({
       images: [imageUrl],
     },
     alternates: {
-      canonical: `${SITE_CONFIG.url}/${lang}/product/livestock`,
+      canonical: `${SITE_CONFIG.url}/${lang}/produk-layanan/peternakan`,
       languages: {
-        'id': `${SITE_CONFIG.url}/id/product/livestock`,
-        'en': `${SITE_CONFIG.url}/en/product/livestock`,
+        'id': `${SITE_CONFIG.url}/id/produk-layanan/peternakan`,
+        'en': `${SITE_CONFIG.url}/en/produk-layanan/peternakan`,
       },
     },
     keywords: lang === 'id'
@@ -167,7 +168,7 @@ const Livestock = async ({
   const products = data.productCategoriesSection?.flatMap((category: any) => 
     category.products?.map((product: any) => ({
       name: product.name || product.title,
-      url: `/${lang}/product/livestock/${product.slug || product.documentId || product.id}`,
+      url: `/${lang}/produk-layanan/peternakan/${product.slug || product.documentId || product.id}`,
       image: product.image?.url,
       description: product.description,
     })) || []
@@ -177,7 +178,7 @@ const Livestock = async ({
   const schemas = generateProductCategorySchemas({
     name: dict.products.livestock.title,
     description: PAGE_METADATA.livestock.description,
-    url: `/${lang}/product/livestock`,
+    url: `/${lang}/produk-layanan/peternakan`,
     products,
   });
 
@@ -223,8 +224,19 @@ const Livestock = async ({
         </ContainerSection>
       </section>
 
-      <section>
-        <ContainerSection>
+      <section className="relative overflow-hidden">
+        {/* CBI Logo Watermark Background */}
+        <div className="absolute right-0 top-0 h-[64rem] w-[64rem] translate-x-[17rem] -translate-y-[20rem]">
+          <Image
+            draggable={false}
+            src="/logo-only.png"
+            alt=""
+            width={600}
+            height={600}
+            className="h-full w-full object-cover opacity-[0.04] brightness-0"
+          />
+        </div>
+        <ContainerSection className="relative z-20">
           <div>
             <h2 className="leading-[50px] lg:leading-[80px]">
               {whyTitle.split(' ').slice(0, 2).join(' ')} <br />
@@ -266,7 +278,7 @@ const Livestock = async ({
         productCategories={data.productCategoriesSection}
       />
 
-      <BannerContactSection data={data.bannerCTA} />
+      <BannerContactSection data={data.bannerCTA} lang={lang} />
     </>
   );
 };

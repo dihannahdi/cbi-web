@@ -16,6 +16,20 @@ interface ProductServiceSectionProps {
   dict: Dictionary;
 }
 
+// Translation map for product titles/descriptions from Strapi that may not respect locale
+const productTranslations: Record<string, { id: string; en: string }> = {
+  "Agriculture": { id: "Pertanian", en: "Agriculture" },
+  "Livestock": { id: "Peternakan", en: "Livestock" },
+  "Fishery": { id: "Perikanan", en: "Fishery" },
+  "Pertanian": { id: "Pertanian", en: "Agriculture" },
+  "Peternakan": { id: "Peternakan", en: "Livestock" },
+  "Perikanan": { id: "Perikanan", en: "Fishery" },
+};
+
+const translateProductText = (text: string, lang: Locale): string => {
+  return productTranslations[text]?.[lang] ?? text;
+};
+
 /**
  * ProductServiceSection with integrated SEO content
  * Target keywords: perusahaan bioteknologi di Indonesia, PT Biotech, pupuk hayati, 
@@ -33,7 +47,7 @@ const ProductServiceSection = ({ data, lang, dict }: ProductServiceSectionProps)
           </div>
           <div className="flex max-w-[30rem] flex-col gap-5">
             <p className="text-gray-600">{lang === 'id' ? data.description : dict.home.productsSubtitle}</p>
-            <LinkGreen className="mt-2" href={lang === 'id' ? `/${lang}/produk-layanan` : `/${lang}/product`}>
+            <LinkGreen className="mt-2" href={`/${lang}/produk-layanan`}>
               {dict.home.learnMore}
             </LinkGreen>
           </div>
@@ -46,87 +60,16 @@ const ProductServiceSection = ({ data, lang, dict }: ProductServiceSectionProps)
               key={product.id}
               imgUrl={getImageUrl(product?.image?.url)}
               imgAlt={product.image?.alternativeText ?? "Product image"}
-              title1={product.title}
-              title2={product.description}
+              title1={translateProductText(product.title, lang)}
+              title2={translateProductText(product.description, lang)}
               color1={`#${product.color1}`}
               color2={`#${product.color2}`}
-              url={`/${lang}/product/${product.url}`}
+              url={`/${lang}/produk-layanan/${product.url === 'agriculture' ? 'pertanian' : product.url === 'livestock' ? 'peternakan' : product.url === 'fishery' ? 'perikanan' : product.url}`}
               readMoreText={dict.home.learnMore}
             />
           ))}
         </div>
-
-        {/* Integrated SEO Content - Company Description */}
-        <div className="mt-16 rounded-2xl bg-[#083F19] p-8 text-white lg:p-12">
-          <h3 className="mb-4 text-2xl font-bold lg:text-3xl">
-            {lang === 'id' 
-              ? 'PT Centra Biotech Indonesia - Perusahaan Bioteknologi Terdepan'
-              : 'PT Centra Biotech Indonesia - Leading Biotechnology Company'}
-          </h3>
-          <p className="mb-6 leading-relaxed text-gray-200">
-            {lang === 'id' ? (
-              <>
-                Sebagai <strong>perusahaan bioteknologi di Indonesia</strong> yang inovatif, 
-                <strong> PT Biotech</strong> CBI (Centra Biotech Indonesia) mengembangkan 
-                <strong> pupuk hayati</strong>, <strong>insektisida hayati</strong>, dan <strong>probiotik</strong> melalui 
-                <strong> penelitian dan pengembangan</strong> berbasis teknologi fermentasi modern. Dengan 
-                <strong> sumber daya manusia</strong> kompeten <strong>di bidang</strong> bioteknologi, kami menghasilkan 
-                <strong> vaksin dan produk bioteknologi</strong> yang terbukti meningkatkan produktivitas 
-                <strong> pangan dan</strong> pertanian berkelanjutan di Indonesia.
-              </>
-            ) : (
-              <>
-                As an innovative <strong>biotechnology company in Indonesia</strong>, 
-                <strong> PT Biotech</strong> CBI (Centra Biotech Indonesia) develops 
-                <strong> biological fertilizers</strong>, <strong>biological insecticides</strong>, and <strong>probiotics</strong> through 
-                <strong> research and development</strong> based on modern fermentation technology. With 
-                <strong> competent human resources</strong> in the <strong>field of</strong> biotechnology, we produce 
-                <strong> vaccines and biotechnology products</strong> that have been proven to increase 
-                <strong> food and</strong> sustainable agricultural productivity in Indonesia.
-              </>
-            )}
-          </p>
-          
-          {/* Quick Links Grid */}
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <Link href={lang === 'id' ? `/${lang}/produk-layanan/pertanian` : `/${lang}/product/agriculture`} className="flex items-center gap-3 rounded-lg bg-white/10 p-4 transition-colors hover:bg-white/20">
-              <span className="text-2xl">🌾</span>
-              <div>
-                <div className="font-semibold">{lang === 'id' ? 'Pupuk Organik Cair' : 'Liquid Organic Fertilizer'}</div>
-                <div className="text-xs text-gray-300">{dict.nav.agriculture}</div>
-              </div>
-            </Link>
-            <Link href={lang === 'id' ? `/${lang}/produk-layanan/peternakan` : `/${lang}/product/livestock`} className="flex items-center gap-3 rounded-lg bg-white/10 p-4 transition-colors hover:bg-white/20">
-              <span className="text-2xl">🐄</span>
-              <div>
-                <div className="font-semibold">{lang === 'id' ? 'Probiotik Peternakan' : 'Livestock Probiotics'}</div>
-                <div className="text-xs text-gray-300">{dict.nav.livestock}</div>
-              </div>
-            </Link>
-            <Link href={lang === 'id' ? `/${lang}/produk-layanan/perikanan` : `/${lang}/product/fishery`} className="flex items-center gap-3 rounded-lg bg-white/10 p-4 transition-colors hover:bg-white/20">
-              <span className="text-2xl">🐟</span>
-              <div>
-                <div className="font-semibold">{lang === 'id' ? 'Bioaktivator Perikanan' : 'Fishery Bioactivator'}</div>
-                <div className="text-xs text-gray-300">{dict.nav.fishery}</div>
-              </div>
-            </Link>
-            <Link href={`/${lang}/about-us`} className="flex items-center gap-3 rounded-lg bg-white/10 p-4 transition-colors hover:bg-white/20">
-              <span className="text-2xl">🏢</span>
-              <div>
-                <div className="font-semibold">{lang === 'id' ? 'Tentang PT CBI' : 'About PT CBI'}</div>
-                <div className="text-xs text-gray-300">{lang === 'id' ? 'Profil Perusahaan' : 'Company Profile'}</div>
-              </div>
-            </Link>
-          </div>
-
-          {/* Secondary Links */}
-          <div className="mt-6 flex flex-wrap justify-center gap-4 border-t border-white/20 pt-6 text-sm">
-            <Link href={`/${lang}/blog`} className="text-gray-300 hover:text-white hover:underline">📝 {dict.nav.blog}</Link>
-            <Link href={`/${lang}/news`} className="text-gray-300 hover:text-white hover:underline">📰 {dict.nav.news}</Link>
-            <Link href={`/${lang}/documents`} className="text-gray-300 hover:text-white hover:underline">📄 {dict.nav.documents}</Link>
-            <Link href={`/${lang}/contact`} className="text-gray-300 hover:text-white hover:underline">📞 {dict.nav.contact}</Link>
-          </div>
-        </div>
+        {/* ...existing code... */}
       </ContainerSection>
     </section>
   );

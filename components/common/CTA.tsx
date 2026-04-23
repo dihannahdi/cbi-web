@@ -12,7 +12,7 @@ interface CTASectionProps {
 const CTASection: FC<CTASectionProps> = ({
   backgroundImage = "CTA-tentang-kami.png",
   content,
-  buttonText = "Hubungi Kami",
+  buttonText = "Contact Us",
   buttonHref = "/career",
 }) => {
   return (

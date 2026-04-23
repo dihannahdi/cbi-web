@@ -82,7 +82,7 @@ const SEOLinksSection = ({ lang = "id" }: SEOLinksSectionProps) => {
         <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {/* Produk Pertanian */}
           <Link 
-            href={`/${lang}/product/agriculture`}
+            href={`/${lang}/produk-layanan/pertanian`}
             className="group rounded-xl border border-green-100 bg-white p-6 shadow-sm transition-all hover:border-green-300 hover:shadow-md"
           >
             <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-green-100 text-2xl group-hover:bg-green-200">
@@ -98,7 +98,7 @@ const SEOLinksSection = ({ lang = "id" }: SEOLinksSectionProps) => {
 
           {/* Produk Peternakan */}
           <Link 
-            href={`/${lang}/product/livestock`}
+            href={`/${lang}/produk-layanan/peternakan`}
             className="group rounded-xl border border-green-100 bg-white p-6 shadow-sm transition-all hover:border-green-300 hover:shadow-md"
           >
             <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-orange-100 text-2xl group-hover:bg-orange-200">
@@ -114,7 +114,7 @@ const SEOLinksSection = ({ lang = "id" }: SEOLinksSectionProps) => {
 
           {/* Produk Perikanan */}
           <Link 
-            href={`/${lang}/product/fishery`}
+            href={`/${lang}/produk-layanan/perikanan`}
             className="group rounded-xl border border-green-100 bg-white p-6 shadow-sm transition-all hover:border-green-300 hover:shadow-md"
           >
             <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-blue-100 text-2xl group-hover:bg-blue-200">
@@ -185,8 +185,8 @@ const SEOLinksSection = ({ lang = "id" }: SEOLinksSectionProps) => {
         <div className="mt-12 text-center">
           <p className="text-sm text-gray-600">
             <span dangerouslySetInnerHTML={{ __html: t.ctaText }} /> 
-            <Link href={`/${lang}/product`} className="mx-1 text-green-600 hover:underline">{t.ctaPupuk}</Link>, 
-            <Link href={`/${lang}/product/agriculture`} className="mx-1 text-green-600 hover:underline">{t.ctaInsektisida}</Link>, {lang === 'id' ? 'dan' : 'and'}
+            <Link href={`/${lang}/produk-layanan`} className="mx-1 text-green-600 hover:underline">{t.ctaPupuk}</Link>, 
+            <Link href={`/${lang}/produk-layanan/pertanian`} className="mx-1 text-green-600 hover:underline">{t.ctaInsektisida}</Link>, {lang === 'id' ? 'dan' : 'and'}
             <Link href={`/${lang}/contact`} className="mx-1 text-green-600 hover:underline">{t.ctaMaklon}</Link> 
             {t.ctaSuffix}
           </p>

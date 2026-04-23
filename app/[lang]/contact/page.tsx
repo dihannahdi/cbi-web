@@ -13,7 +13,7 @@ import { getDictionary } from "@/dictionaries";
 import { Locale, i18n, localeMetadata } from "@/i18n-config";
 import { generateMetadataFromProps, SITE_CONFIG } from "@/utils/seo";
 import { 
-  generateContactPageSchemas, 
+  generateEnhancedContactPageSchemas, 
   MultipleStructuredData 
 } from "@/utils/structuredData";
 
@@ -63,13 +63,25 @@ const Contact = async ({ params }: PageProps) => {
       queryParams: query,
       locale: lang,
     });
+    const normalizedContactInfo = {
+      ...data.addressAndContact,
+      email: SITE_CONFIG.email,
+      phoneNumber: SITE_CONFIG.phoneDisplay,
+      address:
+        data.addressAndContact?.address?.trim() || SITE_CONFIG.address.fullAddress,
+      urlAddress:
+        data.addressAndContact?.urlAddress?.trim() || SITE_CONFIG.mapsUrl,
+    };
+    const contactSectionTitle = data.title?.trim() || dict.contact.title;
+    const contactSectionDescription =
+      data.description?.trim() || dict.contact.subtitle;
 
-    // Generate structured data for SEO
-    const schemas = generateContactPageSchemas();
+    // Generate enhanced structured data with GeoCoordinates for SEO
+    const schemas = generateEnhancedContactPageSchemas({ locale: lang });
 
     return (
       <>
-        {/* Structured Data */}
+        {/* Enhanced Structured Data with LocalBusiness + GeoCoordinates */}
         <MultipleStructuredData dataArray={schemas} />
         
         <HeroSectionGeneral
@@ -94,9 +106,10 @@ const Contact = async ({ params }: PageProps) => {
         
         <ContainerSection className="flex flex-col gap-12 lg:flex-row">
           <ContactAddress
-            title={data.title}
-            description={data.description}
-            contactInfo={data.addressAndContact}
+            title={contactSectionTitle}
+            description={contactSectionDescription}
+            contactInfo={normalizedContactInfo}
+            lang={lang}
           />
           <FormSection dict={dict.contact} lang={lang} />
         </ContainerSection>

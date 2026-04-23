@@ -109,16 +109,203 @@ interface RootLayoutProps {
   children: React.ReactNode;
 }
 
+// Global Organization Schema for all pages (Google Knowledge Panel optimization)
+const globalOrganizationSchema = {
+  "@context": "https://schema.org",
+  "@type": ["Organization", "Corporation"],
+  "@id": `${SITE_CONFIG.url}#organization`,
+  name: SITE_CONFIG.name,
+  legalName: SITE_CONFIG.legalName,
+  alternateName: ["CBI", "Centra Biotech", "PT CBI", "Centra Biotech Indonesia"],
+  description: SITE_CONFIG.description,
+  url: SITE_CONFIG.url,
+  logo: {
+    "@type": "ImageObject",
+    "@id": `${SITE_CONFIG.url}#logo`,
+    url: `${SITE_CONFIG.url}/logo-only.png`,
+    contentUrl: `${SITE_CONFIG.url}/logo-only.png`,
+    caption: SITE_CONFIG.name,
+    width: 200,
+    height: 60,
+  },
+  image: `${SITE_CONFIG.url}/og-image.jpg`,
+  foundingDate: "2011",
+  foundingLocation: {
+    "@type": "Place",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Klaten",
+      addressRegion: "Jawa Tengah",
+      addressCountry: "ID",
+    },
+  },
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: SITE_CONFIG.address.streetAddress,
+    addressLocality: SITE_CONFIG.address.addressLocality,
+    addressRegion: SITE_CONFIG.address.addressRegion,
+    postalCode: SITE_CONFIG.address.postalCode,
+    addressCountry: SITE_CONFIG.address.addressCountry,
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: -7.7051,
+    longitude: 110.6577,
+  },
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      telephone: SITE_CONFIG.phone,
+      email: SITE_CONFIG.email,
+      contactType: "sales",
+      availableLanguage: ["Indonesian", "English"],
+      areaServed: "ID",
+    },
+    {
+      "@type": "ContactPoint",
+      telephone: SITE_CONFIG.whatsapp,
+      contactType: "customer service",
+      availableLanguage: ["Indonesian", "English"],
+      contactOption: "TollFree",
+    },
+  ],
+  sameAs: [
+    SITE_CONFIG.facebook,
+    SITE_CONFIG.instagram,
+    SITE_CONFIG.linkedin,
+    SITE_CONFIG.youtube,
+    "https://shopee.co.id/centrabiotech",
+    "https://katalog.inaproc.id/search?keyword=centra+biotech",
+  ].filter(Boolean),
+  knowsAbout: [
+    "Bioteknologi Pertanian",
+    "Pupuk Hayati",
+    "Pupuk Organik Cair",
+    "Insektisida Hayati",
+    "Maklon Pupuk",
+    "Contract Manufacturing Fertilizer",
+    "Agricultural Biotechnology",
+    "Organic Farming Indonesia",
+  ],
+  slogan: SITE_CONFIG.tagline,
+  hasCredential: [
+    {
+      "@type": "EducationalOccupationalCredential",
+      credentialCategory: "Certificate",
+      name: "Izin Edar Kementerian Pertanian RI",
+    },
+    {
+      "@type": "EducationalOccupationalCredential",
+      credentialCategory: "Certificate",
+      name: "SNI 6729:2016 Pertanian Organik",
+    },
+    {
+      "@type": "EducationalOccupationalCredential",
+      credentialCategory: "Certificate",
+      name: "Good Manufacturing Practice (GMP)",
+    },
+  ],
+  areaServed: {
+    "@type": "Country",
+    name: "Indonesia",
+  },
+  numberOfEmployees: {
+    "@type": "QuantitativeValue",
+    minValue: 50,
+    maxValue: 100,
+  },
+  naics: "325314", // Fertilizer Manufacturing
+  isicV4: "2012", // Manufacture of fertilisers and nitrogen compounds
+};
+
+// Global WebSite Schema for sitelinks search box
+const globalWebsiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${SITE_CONFIG.url}#website`,
+  name: SITE_CONFIG.name,
+  alternateName: ["Centra Biotech", "CBI Website"],
+  description: SITE_CONFIG.description,
+  url: SITE_CONFIG.url,
+  inLanguage: ["id-ID", "en-US"],
+  publisher: {
+    "@id": `${SITE_CONFIG.url}#organization`,
+  },
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${SITE_CONFIG.url}/search?q={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
+  },
+};
+
 export default function RootLayout({ children }: RootLayoutProps) {
   const GA_MEASUREMENT_ID = "G-16L2MWL33B";
 
   return (
     <html dir="ltr" suppressHydrationWarning>
       <head>
+        {/* Global Organization Schema for Google Knowledge Panel */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(globalOrganizationSchema).replace(/</g, '\\u003c'),
+          }}
+        />
+        {/* Global WebSite Schema for Sitelinks Search Box */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(globalWebsiteSchema).replace(/</g, '\\u003c'),
+          }}
+        />
+        
+        {/* ============== ULTRA-ADVANCED RESOURCE HINTS ============== */}
+        {/* Critical Preconnects - Establish early connections to reduce latency */}
+        <link rel="preconnect" href="https://backend.centrabiotechindonesia.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
+        {/* DNS Prefetch - Resolve DNS early for non-critical resources */}
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+        <link rel="dns-prefetch" href="https://backend.centrabiotechindonesia.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://region1.google-analytics.com" />
+        
+        {/* Preload Critical Resources for LCP Optimization */}
+        <link 
+          rel="preload" 
+          href="/og-image.jpg" 
+          as="image" 
+          type="image/jpeg"
+          fetchPriority="high"
+        />
+        
+        {/* Modulepreload for Critical JavaScript Chunks (Next.js optimization) */}
+        {/* Note: Next.js automatically handles most modulepreloads */}
+        
+        {/* AI/LLM Context Files */}
+        <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Context" />
+        <link rel="alternate" type="text/plain" href="/llms-full.txt" title="Full LLM Context" />
+        
+        {/* Prefetch for likely user navigation - improves perceived performance */}
+        <link rel="prefetch" href="/id/product" as="document" />
+        <link rel="prefetch" href="/id/about-us" as="document" />
+        
+        {/* Origin Trial for experimental web features (optional) */}
+        {/* <meta httpEquiv="origin-trial" content="TOKEN" /> */}
+        
+        {/* Client Hints meta tags for responsive images */}
+        <meta httpEquiv="Accept-CH" content="DPR, Viewport-Width, Width" />
+        
+        {/* Feature Policy / Permissions Policy */}
+        <meta 
+          httpEquiv="Permissions-Policy" 
+          content="accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()" 
+        />
       </head>
       <body className={`${plusJakartaSans.variable} antialiased`}>
         <GoogleAnalytics GA_MEASUREMENT_ID={GA_MEASUREMENT_ID} />

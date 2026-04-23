@@ -4,8 +4,9 @@ import LinkGreen from "@/components/home/LinkGreen";
 import ContainerSection from "@/components/layout/container";
 import { BannerCTA } from "@/types/responseTypes/bannerCTA";
 import { getImageUrl } from "@/utils/getImageUrl";
+import { Locale } from "@/i18n-config";
 
-const BannerContactSection = ({ data }: { data: BannerCTA }) => {
+const BannerContactSection = ({ data, lang }: { data: BannerCTA; lang?: Locale }) => {
   return (
     <section className="bg-[#EEE]">
       <ContainerSection>
@@ -33,7 +34,7 @@ const BannerContactSection = ({ data }: { data: BannerCTA }) => {
               </h2>
             </div>
             <div className="mt-4 flex items-center justify-end md:mt-0">
-              <LinkGreen href="/contact" withArrow={false}>
+              <LinkGreen href={`/${lang || 'id'}/contact`} withArrow={false}>
                 {data.ctaText}
               </LinkGreen>
             </div>

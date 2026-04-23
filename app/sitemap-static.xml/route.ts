@@ -81,12 +81,18 @@ export async function GET() {
   ${createMultilingualEntry('/product/fishery', currentDate, 'weekly', '0.9')}
   ${createMultilingualEntry('/news', currentDate, 'daily', '0.8')}
   ${createMultilingualEntry('/blog', currentDate, 'daily', '0.8')}
-  ${createMultilingualEntry('/maklon-pupuk', currentDate, 'weekly', '0.8')}
   ${createMultilingualEntry('/career', currentDate, 'weekly', '0.6')}
   ${createMultilingualEntry('/documents', currentDate, 'monthly', '0.5')}
   ${createMultilingualEntry('/privacy-policy', currentDate, 'yearly', '0.5')}
   ${createMultilingualEntry('/terms-of-service', currentDate, 'yearly', '0.5')}
   ${createMultilingualEntry('/cookies', currentDate, 'yearly', '0.5')}
+  ${createMultilingualEntry('/panduan', currentDate, 'weekly', '0.8')}
+  ${createMultilingualEntry('/panduan/pupuk-hayati-cair', currentDate, 'weekly', '0.9')}
+  ${createMultilingualEntry('/panduan/pupuk-organik-cair', currentDate, 'weekly', '0.9')}
+  ${createMultilingualEntry('/panduan/pembenah-tanah', currentDate, 'weekly', '0.9')}
+  ${createMultilingualEntry('/panduan/asam-humat-cair', currentDate, 'weekly', '0.9')}
+  ${createMultilingualEntry('/panduan/bio-pestisida', currentDate, 'weekly', '0.9')}
+  ${createMultilingualEntry('/panduan/distributor-pupuk-organik', currentDate, 'weekly', '0.9')}
 </urlset>`;
 
   return new NextResponse(staticSitemap, {
