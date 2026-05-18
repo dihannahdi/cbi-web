@@ -372,6 +372,55 @@ export default async function BiokalsiPage({
         </ContainerSection>
       </section>
 
+      <section className="bg-[#F9FAFB] py-12 lg:py-16">
+        <ContainerSection>
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-gray-900 lg:text-4xl mb-6">
+              {lang === 'id' ? 'Apa itu Pembenah Tanah?' : 'What is a Soil Conditioner?'}
+            </h2>
+            <div className="space-y-4 text-gray-700 leading-relaxed">
+              <p>
+                {lang === 'id'
+                  ? 'Pembenah tanah adalah bahan yang ditambahkan ke tanah untuk memperbaiki sifat fisik, kimia, dan biologinya. Berbeda dengan pupuk yang langsung menyuplai unsur hara, pembenah tanah bekerja dengan menyeimbangkan pH tanah, meningkatkan kapasitas tukar kation (KTK), dan memperbaiki struktur tanah agar lebih gembur, berdrainase baik, dan kaya mikroorganisme menguntungkan.'
+                  : 'A soil conditioner is a material added to soil to improve its physical, chemical, and biological properties. Unlike fertilizers that directly supply nutrients, soil conditioners work by balancing soil pH, increasing cation exchange capacity (CEC), and improving soil structure for better drainage and microbial life.'}
+              </p>
+              <h3 className="text-2xl font-bold text-gray-900 pt-4">
+                {lang === 'id' ? 'Mengapa Tanah Pertanian Indonesia Memerlukan Pembenah Tanah?' : 'Why Indonesian Farmland Needs a Soil Conditioner'}
+              </h3>
+              <p>
+                {lang === 'id'
+                  ? 'Mayoritas lahan pertanian di Indonesia — terutama di Sumatra, Kalimantan, dan dataran tinggi Jawa — memiliki masalah keasaman tinggi (pH 4-5) dan kandungan kalsium yang rendah. Kondisi ini menyebabkan unsur hara seperti fosfor menjadi tidak tersedia bagi tanaman, akar tanaman tidak berkembang optimal, dan hasil panen menurun drastis.'
+                  : 'Most farmland in Indonesia — especially in Sumatra, Kalimantan, and Java highlands — suffers from high acidity (pH 4-5) and low calcium. These conditions lock nutrients like phosphorus, stunt root development, and reduce yields drastically.'}
+              </p>
+              <p>
+                {lang === 'id'
+                  ? 'BIOKALSI adalah pembenah tanah berbahan dasar dolomit premium dengan kandungan kalsium karbonat (CaCO₃) dan magnesium karbonat (MgCO₃) yang dioptimalkan untuk menetralkan keasaman tanah dan menyediakan unsur kalsium yang esensial bagi pembentukan dinding sel tanaman dan kekuatan akar.'
+                  : 'BIOKALSI is a premium dolomite-based soil conditioner with optimized calcium carbonate (CaCO₃) and magnesium carbonate (MgCO₃) content to neutralize soil acidity and supply essential calcium for cell wall formation and root strength.'}
+              </p>
+              <p className="text-sm text-gray-500 italic pt-2">
+                {lang === 'id' ? (
+                  <>
+                    Pelajari juga:{' '}
+                    <Link href={`/${lang}/produk-layanan/pertanian/blackturbo-asam-humat-cair`} className="text-[#006622] underline hover:text-[#119f40]">Asam Humat Cair BLACK TURBO</Link>
+                    {' '}untuk memperbaiki struktur tanah, dan{' '}
+                    <Link href={`/${lang}/produk-layanan/pertanian/simbios-pupuk-hayati-cair`} className="text-[#006622] underline hover:text-[#119f40]">Pupuk Hayati Cair SIMBIOS</Link>
+                    {' '}untuk mengaktifkan mikroba tanah.
+                  </>
+                ) : (
+                  <>
+                    See also:{' '}
+                    <Link href={`/${lang}/produk-layanan/pertanian/blackturbo-asam-humat-cair`} className="text-[#006622] underline hover:text-[#119f40]">BLACK TURBO Liquid Humic Acid</Link>
+                    {' '}for soil structure, and{' '}
+                    <Link href={`/${lang}/produk-layanan/pertanian/simbios-pupuk-hayati-cair`} className="text-[#006622] underline hover:text-[#119f40]">SIMBIOS Liquid Biofertilizer</Link>
+                    {' '}to activate soil microbes.
+                  </>
+                )}
+              </p>
+            </div>
+          </div>
+        </ContainerSection>
+      </section>
+
       <section className="bg-[#EEE] py-20">
         <ContainerSection>
           <div className="text-center mb-16">

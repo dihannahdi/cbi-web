@@ -373,6 +373,58 @@ export default async function BlackTurboPage({
         </ContainerSection>
       </section>
 
+      <section className="bg-[#F9FAFB] py-12 lg:py-16">
+        <ContainerSection>
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-gray-900 lg:text-4xl mb-6">
+              {lang === 'id' ? 'Apa itu Asam Humat Cair?' : 'What is Liquid Humic Acid?'}
+            </h2>
+            <div className="space-y-4 text-gray-700 leading-relaxed">
+              <p>
+                {lang === 'id'
+                  ? 'Asam humat cair adalah ekstrak organik yang dihasilkan dari proses humifikasi bahan organik selama jutaan tahun, kemudian diekstraksi dalam bentuk cair siap pakai. Berbeda dengan asam humat padat atau granular, bentuk cair memungkinkan aplikasi lebih cepat diserap akar dan dapat dicampurkan langsung dengan pupuk lain dalam satu kali penyemprotan, sehingga efisien untuk skala perkebunan maupun lahan pangan.'
+                  : 'Liquid humic acid is an organic extract produced from the humification of organic matter over millions of years, then concentrated into a ready-to-use liquid form. Unlike solid or granular humic acid, the liquid form is absorbed by roots faster and can be tank-mixed with other fertilizers in a single spray, making it efficient for plantations and food crops.'}
+              </p>
+              <h3 className="text-2xl font-bold text-gray-900 pt-4">
+                {lang === 'id' ? 'Manfaat Asam Humat Cair untuk Tanaman' : 'Benefits of Liquid Humic Acid for Plants'}
+              </h3>
+              <p>
+                {lang === 'id'
+                  ? 'Asam humat cair berfungsi sebagai biostimulan yang merangsang pertumbuhan akar, meningkatkan penyerapan nutrisi melalui mekanisme kelasi (chelation), dan memperbaiki struktur tanah dari dalam. Penelitian agronomi menunjukkan aplikasi rutin asam humat cair mampu meningkatkan hasil panen hingga 25-40% pada padi, jagung, dan tanaman hortikultura, sekaligus mengurangi kebutuhan pupuk kimia hingga 30%.'
+                  : 'Liquid humic acid acts as a biostimulant that triggers root growth, improves nutrient uptake through chelation, and rebuilds soil structure from within. Agronomic studies show routine application of liquid humic acid can raise yields by 25-40% on rice, corn, and horticulture crops while reducing chemical fertilizer needs by up to 30%.'}
+              </p>
+              <h3 className="text-2xl font-bold text-gray-900 pt-4">
+                {lang === 'id' ? 'BLACK TURBO: Asam Humat Cair dengan Konsentrasi Premium 52,37%' : 'BLACK TURBO: Premium 52.37% Liquid Humic Acid'}
+              </h3>
+              <p>
+                {lang === 'id'
+                  ? 'BLACK TURBO adalah asam humat cair premium dengan konsentrasi 52,37% — jauh di atas standar produk sejenis di pasar Indonesia yang umumnya berkisar 8-15%. Konsentrasi tinggi ini berarti dosis aplikasi per hektar lebih hemat, efektivitas lebih cepat terlihat di lapangan, dan ROI per liter yang lebih tinggi untuk petani maupun distributor.'
+                  : 'BLACK TURBO is a premium liquid humic acid at 52.37% concentration — far above the 8-15% range typical in the Indonesian market. The higher concentration means lower per-hectare dosing, faster visible response, and better ROI per liter for farmers and distributors alike.'}
+              </p>
+              <p className="text-sm text-gray-500 italic pt-2">
+                {lang === 'id' ? (
+                  <>
+                    Pelajari juga:{' '}
+                    <Link href={`/${lang}/produk-layanan/pertanian/biokalsi-dolomit-pembenah-tanah`} className="text-[#006622] underline hover:text-[#119f40]">Pembenah Tanah BIOKALSI</Link>
+                    {' '}untuk menetralkan keasaman tanah, dan{' '}
+                    <Link href={`/${lang}/produk-layanan/pertanian/rajabio-pupuk-organik-cair`} className="text-[#006622] underline hover:text-[#119f40]">RAJABIO Pupuk Organik Cair</Link>
+                    {' '}sebagai pasangan asam humat untuk hasil panen maksimal.
+                  </>
+                ) : (
+                  <>
+                    See also:{' '}
+                    <Link href={`/${lang}/produk-layanan/pertanian/biokalsi-dolomit-pembenah-tanah`} className="text-[#006622] underline hover:text-[#119f40]">BIOKALSI Soil Conditioner</Link>
+                    {' '}for neutralizing soil acidity, and{' '}
+                    <Link href={`/${lang}/produk-layanan/pertanian/rajabio-pupuk-organik-cair`} className="text-[#006622] underline hover:text-[#119f40]">RAJABIO Liquid Organic Fertilizer</Link>
+                    {' '}as a humic-acid pairing for maximum yields.
+                  </>
+                )}
+              </p>
+            </div>
+          </div>
+        </ContainerSection>
+      </section>
+
       <section className="bg-[#EEE] py-20">
         <ContainerSection>
           <div className="text-center mb-16">

@@ -149,6 +149,18 @@ export interface StrapiResponse {
  * Returns null if product not found or error occurs
  * Falls back to 'en' locale if content not available in requested locale (since products are EN-only currently)
  */
+function normalizeSeoFields(data: StrapiProductData): StrapiProductData {
+  const raw = data as unknown as Record<string, unknown>;
+  return {
+    ...data,
+    metaTitle: data.metaTitle ?? (raw.meta_title as string | null | undefined) ?? null,
+    metaDescription: data.metaDescription ?? (raw.meta_description as string | null | undefined) ?? null,
+    focusKeyphrase: data.focusKeyphrase ?? (raw.focus_keyphrase as string | null | undefined) ?? null,
+    canonicalUrl: data.canonicalUrl ?? (raw.canonical_url as string | null | undefined) ?? null,
+    robotsDirective: data.robotsDirective ?? (raw.robots_directive as string | null | undefined) ?? null,
+  };
+}
+
 export async function fetchStrapiProduct(slug: string, locale: string = 'en'): Promise<StrapiProductData | null> {
   try {
     // Build explicit populate query for Strapi v5 (populate=* doesn't work for media relations)
@@ -197,11 +209,11 @@ export async function fetchStrapiProduct(slug: string, locale: string = 'en'): P
           headers: { 'Content-Type': 'application/json' },
         }
       );
-      
+
       if (fallbackRes.ok) {
         const fallbackJson: StrapiResponse = await fallbackRes.json();
         if (fallbackJson.data && fallbackJson.data.length > 0) {
-          return fallbackJson.data[0];
+          return normalizeSeoFields(fallbackJson.data[0]);
         }
       }
     }
@@ -211,7 +223,7 @@ export async function fetchStrapiProduct(slug: string, locale: string = 'en'): P
       return null;
     }
 
-    return json.data[0];
+    return normalizeSeoFields(json.data[0]);
   } catch (error) {
     console.error(`[Strapi] Error fetching product ${slug}:`, error);
     return null;

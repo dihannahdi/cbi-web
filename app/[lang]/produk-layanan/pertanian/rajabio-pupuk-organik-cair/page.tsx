@@ -1139,6 +1139,58 @@ export default async function RajabioProductPage({
         </ContainerSection>
       </section>
 
+      <section className="bg-[#F9FAFB] py-12 lg:py-16">
+        <ContainerSection>
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-gray-900 lg:text-4xl mb-6">
+              {lang === 'id' ? 'Distributor Pupuk Organik Cair RAJABIO: Jaringan & Kemitraan' : 'RAJABIO Liquid Organic Fertilizer Distributors: Network & Partnership'}
+            </h2>
+            <div className="space-y-4 text-gray-700 leading-relaxed">
+              <p>
+                {lang === 'id'
+                  ? 'RAJABIO Pupuk Organik Cair tersedia melalui jaringan distributor resmi di seluruh wilayah Indonesia. Untuk pembelian skala besar, kerjasama agen, atau distribusi regional, hubungi tim sales Centra Biotech Indonesia untuk informasi harga grosir, dukungan promosi, serta margin distribusi yang kompetitif untuk distributor pupuk organik cair di wilayah Anda.'
+                  : 'RAJABIO Liquid Organic Fertilizer is available through an official distributor network across Indonesia. For bulk purchases, agent partnerships, or regional distribution, contact the Centra Biotech Indonesia sales team for wholesale pricing, promotional support, and competitive distribution margins for liquid organic fertilizer distributors in your area.'}
+              </p>
+              <h3 className="text-2xl font-bold text-gray-900 pt-4">
+                {lang === 'id' ? 'Wilayah Distribusi Aktif Pupuk Organik Cair RAJABIO' : 'Active RAJABIO Distribution Regions'}
+              </h3>
+              <p>
+                {lang === 'id'
+                  ? 'Kami melayani distribusi pupuk organik cair RAJABIO untuk wilayah Jawa Tengah, Jawa Barat, Jawa Timur, DIY Yogyakarta, Sumatra Utara, Sumatra Selatan, Lampung, Kalimantan Selatan, Kalimantan Tengah, dan Sulawesi Selatan. Untuk wilayah di luar daftar, tim sales kami siap mengkoordinasikan pengiriman langsung dari pabrik dan support teknis lapangan untuk distributor maupun retailer.'
+                  : 'We serve RAJABIO liquid organic fertilizer distribution for Central Java, West Java, East Java, Yogyakarta, North Sumatra, South Sumatra, Lampung, South Kalimantan, Central Kalimantan, and South Sulawesi regions. For other areas, our sales team can coordinate direct shipping from the factory and on-site technical support for distributors and retailers.'}
+              </p>
+              <h3 className="text-2xl font-bold text-gray-900 pt-4">
+                {lang === 'id' ? 'Persyaratan Menjadi Distributor Resmi RAJABIO' : 'Requirements to Become an Official RAJABIO Distributor'}
+              </h3>
+              <p>
+                {lang === 'id'
+                  ? 'Untuk menjadi distributor resmi pupuk organik cair RAJABIO, calon mitra perlu memenuhi persyaratan minimum order, memiliki jaringan toko pertanian atau kelompok tani aktif di wilayah operasi, serta komitmen terhadap edukasi penggunaan produk yang benar kepada petani end-user. Kami menyediakan training produk, materi promosi, dan support after-sales sebagai bagian dari paket kemitraan distributor pupuk organik cair Centra Biotech.'
+                  : 'To become an official RAJABIO distributor, prospective partners need to meet a minimum order requirement, have an active network of agricultural stores or farmer groups in their operating area, and commit to educating end-user farmers on correct product usage. We provide product training, promotional materials, and after-sales support as part of the Centra Biotech liquid organic fertilizer distributor partnership package.'}
+              </p>
+              <p className="text-sm text-gray-500 italic pt-2">
+                {lang === 'id' ? (
+                  <>
+                    Pelajari juga:{' '}
+                    <Link href={`/${lang}/produk-layanan/pertanian/simbios-pupuk-hayati-cair`} className="text-[#006622] underline hover:text-[#119f40]">SIMBIOS Pupuk Hayati Cair</Link>
+                    {' '}sebagai pasangan pupuk organik, dan{' '}
+                    <Link href={`/${lang}/produk-layanan/pertanian/blackturbo-asam-humat-cair`} className="text-[#006622] underline hover:text-[#119f40]">BLACK TURBO Asam Humat Cair</Link>
+                    {' '}untuk paket distributor lengkap.
+                  </>
+                ) : (
+                  <>
+                    See also:{' '}
+                    <Link href={`/${lang}/produk-layanan/pertanian/simbios-pupuk-hayati-cair`} className="text-[#006622] underline hover:text-[#119f40]">SIMBIOS Liquid Biofertilizer</Link>
+                    {' '}as an organic fertilizer pairing, and{' '}
+                    <Link href={`/${lang}/produk-layanan/pertanian/blackturbo-asam-humat-cair`} className="text-[#006622] underline hover:text-[#119f40]">BLACK TURBO Liquid Humic Acid</Link>
+                    {' '}for a complete distributor package.
+                  </>
+                )}
+              </p>
+            </div>
+          </div>
+        </ContainerSection>
+      </section>
+
       {/* Documents & Certifications Section - Elegant Grid Layout */}
       <section className="bg-[#EEE] py-20">
         <ContainerSection>

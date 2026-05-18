@@ -824,6 +824,58 @@ export default async function SimbiosProductPage({
         </ContainerSection>
       </section>
 
+      <section className="bg-[#F9FAFB] py-12 lg:py-16">
+        <ContainerSection>
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-gray-900 lg:text-4xl mb-6">
+              {lang === 'id' ? 'Apa itu Pupuk Hayati Cair?' : 'What is Liquid Biofertilizer?'}
+            </h2>
+            <div className="space-y-4 text-gray-700 leading-relaxed">
+              <p>
+                {lang === 'id'
+                  ? 'Pupuk hayati cair adalah pupuk berbahan dasar mikroorganisme hidup — bakteri dan jamur menguntungkan — yang dikemas dalam bentuk cair untuk memudahkan aplikasi melalui penyemprotan atau pengocoran. Berbeda dengan pupuk kimia yang langsung menyuplai unsur hara dalam bentuk siap serap, pupuk hayati cair bekerja dengan mengaktifkan mikrobioma tanah sehingga tanah sendiri yang menyediakan nutrisi secara berkelanjutan untuk tanaman.'
+                  : 'Liquid biofertilizer is a fertilizer based on live microorganisms — beneficial bacteria and fungi — packaged in liquid form for easy spraying or drenching application. Unlike chemical fertilizers that supply nutrients directly, liquid biofertilizer works by activating the soil microbiome so the soil itself provides nutrients to plants on a continuous basis.'}
+              </p>
+              <h3 className="text-2xl font-bold text-gray-900 pt-4">
+                {lang === 'id' ? 'Keunggulan Pupuk Hayati Cair Dibanding Pupuk Padat' : 'Advantages of Liquid Biofertilizer over Solid Forms'}
+              </h3>
+              <p>
+                {lang === 'id'
+                  ? 'Aplikasi pupuk hayati cair lebih praktis karena bisa langsung dilarutkan dan disemprotkan, distribusi mikroorganisme lebih merata di area perakaran, dan onset aktivitas mikrobianya lebih cepat — biasanya 3-7 hari setelah aplikasi — dibanding bentuk granular yang harus menunggu kelembaban tanah agar mikroba aktif. Untuk skala perkebunan maupun lahan pangan, pupuk hayati cair juga lebih hemat dalam biaya tenaga kerja dan transportasi.'
+                  : 'Liquid biofertilizer is more practical because it can be diluted and sprayed directly, the microorganisms distribute evenly around the root zone, and microbial activity onset is faster — typically 3-7 days after application — compared with granular forms that depend on soil moisture to activate. At plantation or food-crop scale, liquid biofertilizer also saves on labor and transport.'}
+              </p>
+              <h3 className="text-2xl font-bold text-gray-900 pt-4">
+                {lang === 'id' ? 'SIMBIOS: Pupuk Hayati Cair Premium dengan Efektivitas 122% RAE' : 'SIMBIOS: Premium Liquid Biofertilizer with 122% RAE'}
+              </h3>
+              <p>
+                {lang === 'id'
+                  ? 'SIMBIOS adalah pupuk hayati cair premium yang diformulasi dengan konsorsium mikroorganisme penambat nitrogen, pelarut fosfat, dan penyedia kalium. Berdasarkan uji RAE (Relative Agronomic Effectiveness) independen, SIMBIOS terbukti memberikan efektivitas 122% — artinya satu liter SIMBIOS setara dengan 1,22 liter pupuk pembanding standar — sehingga lebih efisien untuk petani, perkebunan, maupun distributor pupuk hayati cair di seluruh Indonesia.'
+                  : 'SIMBIOS is a premium liquid biofertilizer formulated with a consortium of nitrogen-fixing, phosphate-solubilizing, and potassium-providing microorganisms. Independent RAE (Relative Agronomic Effectiveness) trials show SIMBIOS achieves 122% effectiveness — meaning one liter of SIMBIOS equals 1.22 liters of standard reference fertilizer — making it efficient for farmers, plantations, and liquid biofertilizer distributors across Indonesia.'}
+              </p>
+              <p className="text-sm text-gray-500 italic pt-2">
+                {lang === 'id' ? (
+                  <>
+                    Pelajari juga:{' '}
+                    <Link href={`/${lang}/produk-layanan/pertanian/floraone-pupuk-hayati`} className="text-[#006622] underline hover:text-[#119f40]">FLORAONE Pupuk Hayati</Link>
+                    {' '}sebagai alternatif rekomendasi BPTP, dan{' '}
+                    <Link href={`/${lang}/produk-layanan/pertanian/biojagat-pupuk-hayati-cair`} className="text-[#006622] underline hover:text-[#119f40]">BIOJAGAT Pupuk Hayati Cair</Link>
+                    {' '}untuk varian dengan spesifikasi berbeda.
+                  </>
+                ) : (
+                  <>
+                    See also:{' '}
+                    <Link href={`/${lang}/produk-layanan/pertanian/floraone-pupuk-hayati`} className="text-[#006622] underline hover:text-[#119f40]">FLORAONE Biofertilizer</Link>
+                    {' '}as a BPTP-recommended alternative, and{' '}
+                    <Link href={`/${lang}/produk-layanan/pertanian/biojagat-pupuk-hayati-cair`} className="text-[#006622] underline hover:text-[#119f40]">BIOJAGAT Liquid Biofertilizer</Link>
+                    {' '}for a different formulation profile.
+                  </>
+                )}
+              </p>
+            </div>
+          </div>
+        </ContainerSection>
+      </section>
+
       {/* Documents & Certifications Section - Matching RajaBio Layout */}
       <section className="bg-[#EEE] py-20">
         <ContainerSection>
