@@ -261,9 +261,9 @@ const AgricultureProductsSection = ({
                         <ChevronRight className="h-4 w-4" />
                       </Link>
                       <Link
-                        href={lang === 'id' 
-                          ? `https://wa.me/6281511115988?text=Halo%20Centra%20Biotech%2C%20saya%20tertarik%20dengan%20produk%20${encodeURIComponent(product.title || '')}`
-                          : `https://wa.me/6281511115988?text=Hello%20Centra%20Biotech%2C%20I%20am%20interested%20in%20${encodeURIComponent(product.title || '')}%20product`
+                        href={lang === 'id'
+                          ? `https://wa.me/6285196214187?text=Halo%20Centra%20Biotech%2C%20saya%20tertarik%20dengan%20produk%20${encodeURIComponent(product.title || '')}`
+                          : `https://wa.me/6285196214187?text=Hello%20Centra%20Biotech%2C%20I%20am%20interested%20in%20${encodeURIComponent(product.title || '')}%20product`
                         }
                         target="_blank"
                         className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20BD5A] text-white font-semibold px-6 py-3 rounded-xl transition-all hover:shadow-lg text-sm"
