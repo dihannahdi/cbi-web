@@ -655,7 +655,7 @@ export default async function BioKillerPage({
       },
       "contactPoint": {
         "@type": "ContactPoint",
-        "telephone": "+62-812-3500-3655",
+        "telephone": "+62-851-9621-4187",
         "contactType": "sales",
         "availableLanguage": ["Indonesian", "English"]
       },

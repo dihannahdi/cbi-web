@@ -632,7 +632,7 @@ address:
   addressCountry: ID
 contactPoint:
   @type: ContactPoint
-  telephone: +62-812-3500-3655
+  telephone: +62-851-9621-4187
   email: centrabiotech.id@gmail.com
   contactType: sales
   availableLanguage: [Indonesian, English]

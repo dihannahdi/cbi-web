@@ -114,5 +114,5 @@ export function sendWhatsAppContactMessage(
  */
 export function getBusinessWhatsAppNumber(): string {
   // This matches the number in utils/seo.ts SITE_CONFIG
-  return '6285196214187'; // +62-812-3500-3655
+  return '6285196214187'; // +62-851-9621-4187
 }

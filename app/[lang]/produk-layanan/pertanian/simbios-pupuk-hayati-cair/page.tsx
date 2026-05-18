@@ -465,7 +465,7 @@ export default async function SimbiosProductPage({
         '@id': `${SITE_CONFIG.url}#organization`,
         name: 'PT Centra Biotech Indonesia',
         url: SITE_CONFIG.url,
-        telephone: '+62-812-3500-3655',
+        telephone: '+62-851-9621-4187',
         email: 'centrabiotech.id@gmail.com',
       },
       brand: {
@@ -670,7 +670,7 @@ export default async function SimbiosProductPage({
       },
       "contactPoint": {
         "@type": "ContactPoint",
-        "telephone": "+62-812-3500-3655",
+        "telephone": "+62-851-9621-4187",
         "contactType": "sales",
         "availableLanguage": ["Indonesian", "English"]
       },

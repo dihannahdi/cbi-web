@@ -528,7 +528,7 @@ export default async function RajabioProductPage({
         name: 'PT Centra Biotech Indonesia',
         alternateName: 'Centra Biotech Indonesia',
         url: SITE_CONFIG.url,
-        telephone: '+62-812-3500-3655',
+        telephone: '+62-851-9621-4187',
         email: 'centrabiotech.id@gmail.com',
         address: {
           '@type': 'PostalAddress',
