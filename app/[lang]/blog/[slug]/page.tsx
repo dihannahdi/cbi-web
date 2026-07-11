@@ -243,6 +243,8 @@ const BlogDetail = async ({
           type={blogDetailData.type}
           locale={lang}
           dict={dict}
+          title={blogDetailData.title}
+          slug={slug}
         />
       </section>
     );

@@ -12,6 +12,10 @@ import ContainerSection from "@/components/layout/container";
 import ContainerBlog from "@/components/layout/ContainerBlog";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import BlocksRendererClient from "@/components/common/BlockRendererClient";
+import TrackedWhatsAppButton from "@/components/common/TrackedWhatsAppButton";
+import RelatedProduct from "@/components/product/RelatedProduct";
+import { buildWhatsAppUrl } from "@/constants/contact";
+import { getRelatedProduct } from "@/lib/relatedProduct";
 import { Locale } from "@/i18n-config";
 import { Dictionary } from "@/dictionaries";
 import { Phone, Mail } from "lucide-react";
@@ -73,6 +77,19 @@ interface ArticleDetailProps {
   type: string;
   locale?: string;
   dict?: Dictionary;
+  /**
+   * Article title, used to personalize the WhatsApp CTA message so the
+   * sales team sees what the reader was reading. Optional — callers that
+   * don't pass it yet (see app/[lang]/blog/[slug]/page.tsx and
+   * app/[lang]/news/[slug]/page.tsx) fall back to a generic message.
+   */
+  title?: string;
+  /**
+   * Article slug, used for click-tracking context and to look up a
+   * related product to surface next to the CTA. Optional for the same
+   * reason as `title`.
+   */
+  slug?: string;
 }
 
 const ArticleDetail = ({
@@ -80,12 +97,33 @@ const ArticleDetail = ({
   type,
   locale = 'id',
   dict,
+  title,
+  slug,
 }: ArticleDetailProps) => {
-  const ctaTitle = dict?.blog?.ctaTitle || (locale === 'en' ? 'Need Biotechnology Solutions?' : 'Butuh Solusi Bioteknologi?');
-  const ctaDesc = dict?.blog?.ctaDescription || (locale === 'en' ? 'Consult your agriculture, livestock, or fishery needs with our expert team.' : 'Konsultasikan kebutuhan pertanian, peternakan, atau perikanan Anda dengan tim ahli kami.');
-  const ctaWhatsapp = dict?.blog?.ctaWhatsapp || (locale === 'en' ? 'Contact via WhatsApp' : 'Hubungi via WhatsApp');
+  const isEn = locale === 'en';
+  const ctaTitle = dict?.blog?.ctaTitle || (isEn ? 'Need Biotechnology Solutions?' : 'Butuh Solusi Bioteknologi?');
+  const ctaDesc = dict?.blog?.ctaDescription || (isEn ? 'Consult your agriculture, livestock, or fishery needs with our expert team.' : 'Konsultasikan kebutuhan pertanian, peternakan, atau perikanan Anda dengan tim ahli kami.');
+  const ctaWhatsapp = dict?.blog?.ctaWhatsapp || (isEn ? 'Contact via WhatsApp' : 'Hubungi via WhatsApp');
   const ctaPhone = dict?.blog?.ctaPhone || '+62 851-9621-4187';
   const ctaEmail = dict?.blog?.ctaEmail || 'centrabiotech.id@gmail.com';
+
+  // Prefill the WA message with the article title/topic so sales can see
+  // what the reader was reading — falls back to a generic message when
+  // the caller hasn't passed a title yet.
+  const ctaMessage = title
+    ? (isEn
+        ? `Hello, I read the article "${title}" and would like to consult.`
+        : `Halo, saya membaca artikel "${title}" dan ingin konsultasi.`)
+    : (isEn
+        ? 'Hello, I would like to consult about agriculture, livestock, or fishery needs.'
+        : 'Halo, saya ingin konsultasi seputar kebutuhan pertanian, peternakan, atau perikanan.');
+  const ctaWhatsappUrl = buildWhatsAppUrl(ctaMessage);
+
+  // Only look up a related product when we actually have a slug to match.
+  const relatedProduct = slug ? getRelatedProduct(slug, isEn ? 'en' : 'id') : null;
+  const relatedProductUrl = relatedProduct
+    ? (isEn ? relatedProduct.url.replace(/^\/id\//, '/en/') : relatedProduct.url)
+    : null;
 
   return (
     <section>
@@ -97,15 +135,15 @@ const ArticleDetail = ({
           <h3 className="text-lg font-bold text-[#222] lg:text-xl mb-2">{ctaTitle}</h3>
           <p className="text-sm text-[#555] lg:text-base mb-5">{ctaDesc}</p>
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-            <Link
-              href="https://wa.me/6285196214187"
-              target="_blank"
-              rel="noopener noreferrer"
+            <TrackedWhatsAppButton
+              href={ctaWhatsappUrl}
+              source="article_cta"
+              context={{ slug, title }}
               className="inline-flex items-center gap-2 rounded-lg bg-green-600 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-green-700"
             >
               <Phone className="h-4 w-4" />
               {ctaWhatsapp}
-            </Link>
+            </TrackedWhatsAppButton>
             <div className="flex flex-col gap-1 text-sm text-[#555]">
               <span className="flex items-center gap-1.5">
                 <Phone className="h-3.5 w-3.5 text-green-600" />
@@ -118,6 +156,17 @@ const ArticleDetail = ({
             </div>
           </div>
         </div>
+
+        {/* Related product, when the article topic matches one of ours */}
+        {relatedProduct && relatedProductUrl && (
+          <RelatedProduct
+            name={relatedProduct.name}
+            url={relatedProductUrl}
+            blurb={relatedProduct.blurb}
+            locale={isEn ? 'en' : 'id'}
+            context={{ slug }}
+          />
+        )}
       </ContainerBlog>
       <ContainerSection>
         <OtherArticle type={type} locale={locale} dict={dict} />

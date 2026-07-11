@@ -209,6 +209,8 @@ const NewsDetail = async ({ params }: Props) => {
           type={newsDetailData.type}
           locale={lang}
           dict={dict}
+          title={newsDetailData.title}
+          slug={slug}
         />
       </section>
     </>

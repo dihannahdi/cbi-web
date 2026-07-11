@@ -14,6 +14,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import ContainerSection from "@/components/layout/container";
 import { cn } from "@/lib/utils";
 import { getImageUrl } from "@/utils/getImageUrl"; // Import the utility function
+import { buildWhatsAppUrl } from "@/constants/contact";
+import WhatsAppAnalytics from "@/lib/whatsapp-analytics";
 
 import type { Swiper as SwiperType } from "swiper";
 import {
@@ -261,11 +263,18 @@ const AgricultureProductsSection = ({
                         <ChevronRight className="h-4 w-4" />
                       </Link>
                       <Link
-                        href={lang === 'id'
-                          ? `https://wa.me/6285196214187?text=Halo%20Centra%20Biotech%2C%20saya%20tertarik%20dengan%20produk%20${encodeURIComponent(product.title || '')}`
-                          : `https://wa.me/6285196214187?text=Hello%20Centra%20Biotech%2C%20I%20am%20interested%20in%20${encodeURIComponent(product.title || '')}%20product`
-                        }
+                        href={buildWhatsAppUrl(
+                          lang === 'id'
+                            ? `Halo Centra Biotech, saya tertarik dengan produk ${product.title || ''}`
+                            : `Hello Centra Biotech, I am interested in ${product.title || ''} product`
+                        )}
                         target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() =>
+                          WhatsAppAnalytics.trackClick('agriculture_products', {
+                            product: product.title,
+                          })
+                        }
                         className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20BD5A] text-white font-semibold px-6 py-3 rounded-xl transition-all hover:shadow-lg text-sm"
                       >
                         <MessageCircle className="h-4 w-4" />

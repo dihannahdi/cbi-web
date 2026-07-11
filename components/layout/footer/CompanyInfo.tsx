@@ -2,6 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { SOCIAL_LINKS } from "@/constants/footer";
+import { buildWhatsAppUrl } from "@/constants/contact";
+import TrackedWhatsAppButton from "@/components/common/TrackedWhatsAppButton";
 import { Locale } from "@/i18n-config";
 import { Dictionary } from "@/dictionaries";
 
@@ -45,9 +47,13 @@ const CompanyInfo = ({ lang, dict }: CompanyInfoProps) => {
         </div>
         <div className="flex flex-col">
           <h4 className="font-semibold text-white">{dict.footer.contact}</h4>
-          <Link href="https://wa.me/6285196214187" className="underline">
+          <TrackedWhatsAppButton
+            href={buildWhatsAppUrl()}
+            source="footer"
+            className="underline"
+          >
             +62 851-9621-4187
-          </Link>
+          </TrackedWhatsAppButton>
           <Link href="mailto:centrabiotech.id@gmail.com" className="underline">
             centrabiotech.id@gmail.com
           </Link>
