@@ -109,6 +109,33 @@ export const MegaMenu: FC<MegaMenuProps> = ({
         <ArrowRight className="h-5 w-5 shrink-0 text-stone-400 transition-transform group-hover:translate-x-0.5 group-hover:text-brand" />
       </Link>
 
+      {/* Katalog Solusi (Paket Kombinasi) — the 145-package solution catalog.
+          Count is the static catalog size (CATALOG_TOTAL in lib/catalog);
+          hardcoded here to avoid bundling the dataset into the navbar. */}
+      <Link
+        href={`/${lang}/produk-layanan/solusi`}
+        onClick={onNavigate}
+        className="group mb-3 flex items-center gap-4 rounded-xl border border-lime-200 bg-lime-50/60 p-4 transition-colors hover:border-lime-300 hover:bg-lime-50"
+      >
+        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-lime-500 text-green-900">
+          <LayoutGrid className="h-5 w-5" />
+        </span>
+        <span className="flex-1">
+          <span className="flex items-center gap-2 font-bold text-stone-950">
+            {isId ? "Katalog Solusi" : "Solution Catalogue"}
+            <span className="cbi-mono rounded-full bg-lime-500/20 px-2 py-0.5 text-xs font-semibold text-lime-700">
+              145 {isId ? "paket" : "packages"}
+            </span>
+          </span>
+          <span className="block text-sm text-stone-500">
+            {isId
+              ? "Paket konsorsium mikroba per komoditas & fase budidaya"
+              : "Microbial consortium packages by commodity & phase"}
+          </span>
+        </span>
+        <ArrowRight className="h-5 w-5 shrink-0 text-stone-400 transition-transform group-hover:translate-x-0.5 group-hover:text-lime-700" />
+      </Link>
+
       {/* Sector grid */}
       <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
         {sectors.map((sector) => {

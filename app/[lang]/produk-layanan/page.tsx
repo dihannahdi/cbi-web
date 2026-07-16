@@ -21,6 +21,7 @@ import WhySection from "@/components/product/WhySection";
 import HeroSection from "@/components/product/HeroSection";
 import OurProductSection from "@/components/product/OurProduct";
 import BannerContactSection from "@/components/product/BannerContactSection";
+import CatalogBanner from "@/components/catalog/CatalogBanner";
 
 // Dynamic import for OurServiceSection (uses Swiper - heavy JS library)
 const OurServiceSection = dynamic(
@@ -101,6 +102,15 @@ const ProductsAndServices = async ({
   const { lang } = await params;
   const dict = await getDictionary(lang);
 
+  // Localized intro text
+  const introTitle = lang === 'id' 
+    ? "Solusi Bioteknologi Terdepan untuk Agribisnis Indonesia"
+    : "Leading Biotechnology Solutions for Indonesian Agribusiness";
+  
+  const introDescription = lang === 'id'
+    ? "Centra Biotech Indonesia menghadirkan rangkaian produk bioteknologi berkualitas tinggi untuk sektor pertanian, peternakan, dan perikanan. Produk kami dikembangkan melalui riset mendalam dan teknologi fermentasi modern untuk menghasilkan pupuk hayati, probiotik, dan bioaktivator yang ramah lingkungan."
+    : "Centra Biotech Indonesia provides a range of high-quality biotechnology products for the agriculture, livestock, and fisheries sectors. Our products are developed through in-depth research and modern fermentation technology to produce biological fertilizers, probiotics, and eco-friendly bioactivators.";
+
   // Localized breadcrumb
   const breadcrumbLabel = lang === 'id' ? 'Produk & Layanan' : 'Products & Services';
   const homeLabel = lang === 'id' ? 'Beranda' : 'Home';
@@ -131,34 +141,18 @@ const ProductsAndServices = async ({
         {/* Structured Data for SEO */}
         <MultipleStructuredData dataArray={structuredDataArray} />
         
-        <HeroSection
-          data={data.headline}
-          categoryText={dict.products.page.heroCategory}
-          titleText={dict.products.page.heroTitle}
-        />
+        <HeroSection data={data.headline} />
         <Breadcrumb className="bg-[#eee]" lang={lang} dict={dict} />
         
         <WhySection 
           data={data.whySection}
-          introTitle={dict.products.page.introTitle}
-          introDescription={dict.products.page.introDescription}
-          sectionTitle={dict.products.page.whyTitle}
-          sectionDescription={dict.products.page.whyDescription}
+          introTitle={introTitle}
+          introDescription={introDescription}
         />
         <OurProductSection data={data.productsSection} lang={lang} dict={dict} />
-        <OurServiceSection
-          data={data.servicesSection}
-          lang={lang}
-          title={dict.products.page.servicesTitle}
-          description={dict.products.page.servicesDescription}
-          readMoreText={dict.home.learnMore}
-        />
-        <BannerContactSection
-          data={data.bannerCTA}
-          lang={lang}
-          title={dict.products.page.ctaTitle}
-          ctaText={dict.products.page.ctaButton}
-        />
+        <CatalogBanner lang={lang} />
+        <OurServiceSection data={data.servicesSection} lang={lang} readMoreText={dict.home.learnMore} />
+        <BannerContactSection data={data.bannerCTA} />
       </>
     );
   } catch (e) {

@@ -16,6 +16,7 @@
 
 import { NextResponse } from 'next/server';
 import { i18n } from '@/i18n-config';
+import { getAllCodes } from '@/lib/catalog';
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.centrabiotechindonesia.com';
 const API_URL = process.env.NEXT_PUBLIC_URL_API || 'https://backend.centrabiotechindonesia.com';
@@ -429,13 +430,37 @@ export async function GET() {
   </url>`;
   }).join('');
 
+  // Paket Solusi catalogue + 145 solution-detail pages
+  const now = new Date().toISOString();
+  const catalogPath = '/produk-layanan/solusi';
+  const catalogEntries = locales.map((locale) => `
+  <url>
+    <loc>${BASE_URL}/${locale}${catalogPath}</loc>${generateAlternates(catalogPath)}
+    <lastmod>${now}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>`).join('');
+
+  const solutionEntries = getAllCodes()
+    .flatMap((code) => {
+      const path = `/produk-layanan/solusi/${code}`;
+      return locales.map((locale) => `
+  <url>
+    <loc>${BASE_URL}/${locale}${path}</loc>${generateAlternates(path)}
+    <lastmod>${now}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>`);
+    })
+    .join('');
+
   const productsSitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset 
+<urlset
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
   xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
   xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-  ${rajabioEntries}${biokillerEntries}${floraoneEntries}${simbiosEntries}${floraonePadatEntries}${biojagatEntries}${blackturboEntries}${biokalsiEntries}${productEntries}
+  ${rajabioEntries}${biokillerEntries}${floraoneEntries}${simbiosEntries}${floraonePadatEntries}${biojagatEntries}${blackturboEntries}${biokalsiEntries}${catalogEntries}${solutionEntries}${productEntries}
 </urlset>`;
 
   return new NextResponse(productsSitemap, {
