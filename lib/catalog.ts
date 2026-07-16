@@ -127,6 +127,26 @@ export function getRelatedSolutions(code: string, limit = 3): Solution[] {
 
 export const CATALOG_TOTAL = SOLUTIONS.length;
 
+// Umbrella mapping: the site's 3 product sectors span several catalog sectors.
+export const SECTOR_UMBRELLA: Record<string, string[]> = {
+  pertanian: ["Pangan", "Hortikultura", "Perkebunan"],
+  peternakan: ["Peternakan"],
+  perikanan: ["Akuakultur"],
+};
+
+/** Solution count + distinct komoditas for a site sector (via its umbrella). */
+export function getUmbrellaStats(siteSector: keyof typeof SECTOR_UMBRELLA | string): {
+  count: number;
+  komoditas: string[];
+} {
+  const names = SECTOR_UMBRELLA[siteSector] ?? [siteSector];
+  const inScope = SOLUTIONS.filter((s) => names.includes(s.sector));
+  return {
+    count: inScope.length,
+    komoditas: [...new Set(inScope.map((s) => s.komoditas))],
+  };
+}
+
 // ── Claim-safety framing ─────────────────────────────────────────────────
 // Efficacy figures in taglines/roi are target specs & field-trial ranges,
 // not guaranteed market claims. Always render one of these alongside them.

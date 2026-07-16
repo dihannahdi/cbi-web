@@ -17,6 +17,7 @@ import { getDictionary, Dictionary } from "@/dictionaries";
 
 import Breadcrumb from "@/components/common/BreadScrumb";
 import ContainerSection from "@/components/layout/container";
+import SectorSolutionsBand from "@/components/catalog/SectorSolutionsBand";
 import CustomSvgIcon from "@/components/common/CustomSvgIcon";
 import HeroSectionGeneral from "@/components/common/HeroSectionGeneral";
 import BannerContactSection from "@/components/product/livestock/BannerContactSection";
@@ -278,6 +279,12 @@ const Livestock = async ({
         productCategories={data.productCategoriesSection}
       />
 
+      <SectorSolutionsBand
+        lang={lang}
+        siteSector="peternakan"
+        accent="#A8730C"
+        label={{ id: "Peternakan", en: "Livestock" }}
+      />
       <BannerContactSection data={data.bannerCTA} lang={lang} />
     </>
   );

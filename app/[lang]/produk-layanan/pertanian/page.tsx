@@ -14,6 +14,7 @@ import { getDictionary, Dictionary } from "@/dictionaries";
 
 import Breadcrumb from "@/components/common/BreadScrumb";
 import ContainerSection from "@/components/layout/container";
+import SectorSolutionsBand from "@/components/catalog/SectorSolutionsBand";
 import CustomSvgIcon from "@/components/common/CustomSvgIcon";
 import HeroSectionGeneral from "@/components/common/HeroSectionGeneral";
 import BannerContactSection from "@/components/product/agriculture/BannerContactSection";
@@ -274,6 +275,12 @@ const Agriculture = async ({
         lang={lang}
       />
 
+      <SectorSolutionsBand
+        lang={lang}
+        siteSector="pertanian"
+        accent="#166B30"
+        label={{ id: "Pertanian", en: "Agriculture" }}
+      />
       <BannerContactSection data={data.bannerCTA} lang={lang} />
     </>
   );
