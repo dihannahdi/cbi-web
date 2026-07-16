@@ -32,12 +32,23 @@ const CompanyInfo = ({ lang, dict }: CompanyInfoProps) => {
   return (
     <>
       <div className="flex flex-1 flex-col gap-8">
-        <Image
-          src={"/logo-footer.png"}
-          alt="logo white"
-          width={166}
-          height={36}
-        />
+        <Link href={`/${lang}`} className="flex items-center gap-2.5">
+          <Image
+            src="/logo-mark.png"
+            alt="Centra Biotech Indonesia"
+            width={48}
+            height={48}
+            className="h-11 w-11"
+          />
+          <span className="flex flex-col leading-none">
+            <span className="text-lg font-extrabold tracking-tight text-white">
+              CENTRA BIOTECH
+            </span>
+            <span className="text-[0.65rem] font-semibold tracking-[0.2em] text-lime-300">
+              INDONESIA
+            </span>
+          </span>
+        </Link>
         <div>
           <h4 className="font-semibold text-white">{dict.footer.address}</h4>
           <p className="max-w-xs text-sm text-white/90">

@@ -94,7 +94,7 @@ export default async function manifest({
     start_url: `/${locale}`,
     display: 'standalone',
     background_color: '#ffffff',
-    theme_color: '#10b981',
+    theme_color: '#083F19',
     orientation: 'portrait-primary',
     icons: [
       {

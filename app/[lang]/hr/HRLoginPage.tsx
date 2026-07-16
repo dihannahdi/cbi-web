@@ -21,7 +21,7 @@ const HRLoginPage = () => {
   if (checking) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-[#EEE] pt-32">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-[#00802B]" />
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-300 border-t-[#083F19]" />
       </div>
     );
   }

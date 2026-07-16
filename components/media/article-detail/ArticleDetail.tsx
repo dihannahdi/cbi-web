@@ -54,7 +54,7 @@ const OtherArticle = async ({ type, locale = 'id', dict }: { type: string; local
         <div className="mt-20 flex flex-col gap-y-6">
           <h2>{dict?.blog?.otherArticles || t.otherArticles}</h2>
           <Link href={basePath}>
-            <Button className="w-fit bg-[#009933] text-sm">{dict?.home?.viewAll || t.viewAll}</Button>
+            <Button className="w-fit bg-[#166B30] text-sm">{dict?.home?.viewAll || t.viewAll}</Button>
           </Link>
         </div>
         <ScrollArea>

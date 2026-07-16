@@ -155,7 +155,7 @@ const ApplicationForm = ({ job, locale }: ApplicationFormProps) => {
     return (
       <div className="mx-auto max-w-2xl px-4 py-16 text-center">
         <div className="mb-6 inline-flex h-20 w-20 items-center justify-center rounded-full bg-green-100">
-          <CheckCircle className="h-10 w-10 text-[#00802B]" />
+          <CheckCircle className="h-10 w-10 text-[#083F19]" />
         </div>
         <h2 className="mb-4 text-2xl font-bold text-[#222] lg:text-3xl">
           {t.successTitle}
@@ -165,7 +165,7 @@ const ApplicationForm = ({ job, locale }: ApplicationFormProps) => {
         </p>
         <a
           href={`/${locale}/career`}
-          className="inline-flex items-center gap-2 rounded-xl bg-[#00802B] px-8 py-3 text-base font-semibold text-white transition-colors hover:bg-[#006B24]"
+          className="inline-flex items-center gap-2 rounded-xl bg-[#083F19] px-8 py-3 text-base font-semibold text-white transition-colors hover:bg-[#0E5424]"
         >
           <ArrowLeft className="h-4 w-4" />
           {t.backToCareer}
@@ -187,7 +187,7 @@ const ApplicationForm = ({ job, locale }: ApplicationFormProps) => {
           </div>
           <a
             href={`/${locale}/career`}
-            className="flex items-center gap-1.5 text-sm font-medium text-[#00802B] transition-colors hover:text-[#006B24]"
+            className="flex items-center gap-1.5 text-sm font-medium text-[#083F19] transition-colors hover:text-[#0E5424]"
           >
             <ArrowLeft className="h-4 w-4" />
             {t.backToCareer}
@@ -221,7 +221,7 @@ const ApplicationForm = ({ job, locale }: ApplicationFormProps) => {
             {/* Full Name */}
             <div>
               <label className="mb-1.5 flex items-center gap-2 text-sm font-medium text-[#222]">
-                <User className="h-4 w-4 text-[#00802B]" />
+                <User className="h-4 w-4 text-[#083F19]" />
                 {t.fullName}
                 <span className="text-xs text-red-500">*</span>
               </label>
@@ -230,14 +230,14 @@ const ApplicationForm = ({ job, locale }: ApplicationFormProps) => {
                 name="fullName"
                 required
                 placeholder={t.fullNamePlaceholder}
-                className="w-full rounded-xl border border-gray-200 bg-[#FAFAFA] px-4 py-3 text-sm text-[#222] placeholder:text-gray-400 focus:border-[#00802B] focus:outline-none focus:ring-1 focus:ring-[#00802B] transition-colors"
+                className="w-full rounded-xl border border-gray-200 bg-[#FAFAFA] px-4 py-3 text-sm text-[#222] placeholder:text-gray-400 focus:border-[#083F19] focus:outline-none focus:ring-1 focus:ring-[#083F19] transition-colors"
               />
             </div>
 
             {/* Email */}
             <div>
               <label className="mb-1.5 flex items-center gap-2 text-sm font-medium text-[#222]">
-                <Mail className="h-4 w-4 text-[#00802B]" />
+                <Mail className="h-4 w-4 text-[#083F19]" />
                 {t.email}
                 <span className="text-xs text-red-500">*</span>
               </label>
@@ -246,14 +246,14 @@ const ApplicationForm = ({ job, locale }: ApplicationFormProps) => {
                 name="email"
                 required
                 placeholder={t.emailPlaceholder}
-                className="w-full rounded-xl border border-gray-200 bg-[#FAFAFA] px-4 py-3 text-sm text-[#222] placeholder:text-gray-400 focus:border-[#00802B] focus:outline-none focus:ring-1 focus:ring-[#00802B] transition-colors"
+                className="w-full rounded-xl border border-gray-200 bg-[#FAFAFA] px-4 py-3 text-sm text-[#222] placeholder:text-gray-400 focus:border-[#083F19] focus:outline-none focus:ring-1 focus:ring-[#083F19] transition-colors"
               />
             </div>
 
             {/* Phone */}
             <div>
               <label className="mb-1.5 flex items-center gap-2 text-sm font-medium text-[#222]">
-                <Phone className="h-4 w-4 text-[#00802B]" />
+                <Phone className="h-4 w-4 text-[#083F19]" />
                 {t.phone}
                 <span className="text-xs text-red-500">*</span>
               </label>
@@ -262,25 +262,25 @@ const ApplicationForm = ({ job, locale }: ApplicationFormProps) => {
                 name="phone"
                 required
                 placeholder={t.phonePlaceholder}
-                className="w-full rounded-xl border border-gray-200 bg-[#FAFAFA] px-4 py-3 text-sm text-[#222] placeholder:text-gray-400 focus:border-[#00802B] focus:outline-none focus:ring-1 focus:ring-[#00802B] transition-colors"
+                className="w-full rounded-xl border border-gray-200 bg-[#FAFAFA] px-4 py-3 text-sm text-[#222] placeholder:text-gray-400 focus:border-[#083F19] focus:outline-none focus:ring-1 focus:ring-[#083F19] transition-colors"
               />
             </div>
 
             {/* Resume Upload */}
             <div>
               <label className="mb-1.5 flex items-center gap-2 text-sm font-medium text-[#222]">
-                <FileText className="h-4 w-4 text-[#00802B]" />
+                <FileText className="h-4 w-4 text-[#083F19]" />
                 {t.resume}
                 <span className="text-xs text-red-500">*</span>
               </label>
               <p className="mb-2 text-xs text-[#666]">{t.resumeDesc}</p>
               <div
                 onClick={() => fileInputRef.current?.click()}
-                className="cursor-pointer rounded-xl border-2 border-dashed border-gray-200 bg-[#FAFAFA] p-6 text-center transition-colors hover:border-[#00802B] hover:bg-green-50/30"
+                className="cursor-pointer rounded-xl border-2 border-dashed border-gray-200 bg-[#FAFAFA] p-6 text-center transition-colors hover:border-[#083F19] hover:bg-green-50/30"
               >
                 <Upload className="mx-auto mb-2 h-8 w-8 text-gray-400" />
                 {fileName ? (
-                  <p className="text-sm font-medium text-[#00802B]">{fileName}</p>
+                  <p className="text-sm font-medium text-[#083F19]">{fileName}</p>
                 ) : (
                   <>
                     <p className="text-sm font-medium text-[#222]">
@@ -304,7 +304,7 @@ const ApplicationForm = ({ job, locale }: ApplicationFormProps) => {
             {/* Cover Letter */}
             <div>
               <label className="mb-1.5 flex items-center gap-2 text-sm font-medium text-[#222]">
-                <FileText className="h-4 w-4 text-[#00802B]" />
+                <FileText className="h-4 w-4 text-[#083F19]" />
                 {t.coverLetter}
                 <span className="text-xs text-[#666]">({t.optional})</span>
               </label>
@@ -312,7 +312,7 @@ const ApplicationForm = ({ job, locale }: ApplicationFormProps) => {
                 name="coverLetter"
                 rows={4}
                 placeholder={t.coverLetterPlaceholder}
-                className="w-full resize-none rounded-xl border border-gray-200 bg-[#FAFAFA] px-4 py-3 text-sm text-[#222] placeholder:text-gray-400 focus:border-[#00802B] focus:outline-none focus:ring-1 focus:ring-[#00802B] transition-colors"
+                className="w-full resize-none rounded-xl border border-gray-200 bg-[#FAFAFA] px-4 py-3 text-sm text-[#222] placeholder:text-gray-400 focus:border-[#083F19] focus:outline-none focus:ring-1 focus:ring-[#083F19] transition-colors"
               />
             </div>
           </div>
@@ -328,7 +328,7 @@ const ApplicationForm = ({ job, locale }: ApplicationFormProps) => {
             {/* Current Position */}
             <div>
               <label className="mb-1.5 flex items-center gap-2 text-sm font-medium text-[#222]">
-                <Briefcase className="h-4 w-4 text-[#00802B]" />
+                <Briefcase className="h-4 w-4 text-[#083F19]" />
                 {t.currentPosition}
                 <span className="text-xs text-[#666]">({t.optional})</span>
               </label>
@@ -336,14 +336,14 @@ const ApplicationForm = ({ job, locale }: ApplicationFormProps) => {
                 type="text"
                 name="currentPosition"
                 placeholder={t.currentPositionPlaceholder}
-                className="w-full rounded-xl border border-gray-200 bg-[#FAFAFA] px-4 py-3 text-sm text-[#222] placeholder:text-gray-400 focus:border-[#00802B] focus:outline-none focus:ring-1 focus:ring-[#00802B] transition-colors"
+                className="w-full rounded-xl border border-gray-200 bg-[#FAFAFA] px-4 py-3 text-sm text-[#222] placeholder:text-gray-400 focus:border-[#083F19] focus:outline-none focus:ring-1 focus:ring-[#083F19] transition-colors"
               />
             </div>
 
             {/* Expected Salary */}
             <div>
               <label className="mb-1.5 flex items-center gap-2 text-sm font-medium text-[#222]">
-                <DollarSign className="h-4 w-4 text-[#00802B]" />
+                <DollarSign className="h-4 w-4 text-[#083F19]" />
                 {t.expectedSalary}
                 <span className="text-xs text-[#666]">({t.optional})</span>
               </label>
@@ -351,28 +351,28 @@ const ApplicationForm = ({ job, locale }: ApplicationFormProps) => {
                 type="text"
                 name="expectedSalary"
                 placeholder={t.expectedSalaryPlaceholder}
-                className="w-full rounded-xl border border-gray-200 bg-[#FAFAFA] px-4 py-3 text-sm text-[#222] placeholder:text-gray-400 focus:border-[#00802B] focus:outline-none focus:ring-1 focus:ring-[#00802B] transition-colors"
+                className="w-full rounded-xl border border-gray-200 bg-[#FAFAFA] px-4 py-3 text-sm text-[#222] placeholder:text-gray-400 focus:border-[#083F19] focus:outline-none focus:ring-1 focus:ring-[#083F19] transition-colors"
               />
             </div>
 
             {/* Available Start Date */}
             <div>
               <label className="mb-1.5 flex items-center gap-2 text-sm font-medium text-[#222]">
-                <Calendar className="h-4 w-4 text-[#00802B]" />
+                <Calendar className="h-4 w-4 text-[#083F19]" />
                 {t.availableDate}
                 <span className="text-xs text-[#666]">({t.optional})</span>
               </label>
               <input
                 type="date"
                 name="availableStartDate"
-                className="w-full rounded-xl border border-gray-200 bg-[#FAFAFA] px-4 py-3 text-sm text-[#222] focus:border-[#00802B] focus:outline-none focus:ring-1 focus:ring-[#00802B] transition-colors"
+                className="w-full rounded-xl border border-gray-200 bg-[#FAFAFA] px-4 py-3 text-sm text-[#222] focus:border-[#083F19] focus:outline-none focus:ring-1 focus:ring-[#083F19] transition-colors"
               />
             </div>
 
             {/* LinkedIn */}
             <div>
               <label className="mb-1.5 flex items-center gap-2 text-sm font-medium text-[#222]">
-                <Linkedin className="h-4 w-4 text-[#00802B]" />
+                <Linkedin className="h-4 w-4 text-[#083F19]" />
                 {t.linkedin}
                 <span className="text-xs text-[#666]">({t.optional})</span>
               </label>
@@ -380,14 +380,14 @@ const ApplicationForm = ({ job, locale }: ApplicationFormProps) => {
                 type="url"
                 name="linkedinUrl"
                 placeholder={t.linkedinPlaceholder}
-                className="w-full rounded-xl border border-gray-200 bg-[#FAFAFA] px-4 py-3 text-sm text-[#222] placeholder:text-gray-400 focus:border-[#00802B] focus:outline-none focus:ring-1 focus:ring-[#00802B] transition-colors"
+                className="w-full rounded-xl border border-gray-200 bg-[#FAFAFA] px-4 py-3 text-sm text-[#222] placeholder:text-gray-400 focus:border-[#083F19] focus:outline-none focus:ring-1 focus:ring-[#083F19] transition-colors"
               />
             </div>
 
             {/* Portfolio */}
             <div>
               <label className="mb-1.5 flex items-center gap-2 text-sm font-medium text-[#222]">
-                <Link2 className="h-4 w-4 text-[#00802B]" />
+                <Link2 className="h-4 w-4 text-[#083F19]" />
                 {t.portfolio}
                 <span className="text-xs text-[#666]">({t.optional})</span>
               </label>
@@ -395,7 +395,7 @@ const ApplicationForm = ({ job, locale }: ApplicationFormProps) => {
                 type="url"
                 name="portfolioUrl"
                 placeholder={t.portfolioPlaceholder}
-                className="w-full rounded-xl border border-gray-200 bg-[#FAFAFA] px-4 py-3 text-sm text-[#222] placeholder:text-gray-400 focus:border-[#00802B] focus:outline-none focus:ring-1 focus:ring-[#00802B] transition-colors"
+                className="w-full rounded-xl border border-gray-200 bg-[#FAFAFA] px-4 py-3 text-sm text-[#222] placeholder:text-gray-400 focus:border-[#083F19] focus:outline-none focus:ring-1 focus:ring-[#083F19] transition-colors"
               />
             </div>
 
@@ -408,7 +408,7 @@ const ApplicationForm = ({ job, locale }: ApplicationFormProps) => {
               <select
                 name="source"
                 defaultValue="Website"
-                className="w-full rounded-xl border border-gray-200 bg-[#FAFAFA] px-4 py-3 text-sm text-[#222] focus:border-[#00802B] focus:outline-none focus:ring-1 focus:ring-[#00802B] transition-colors"
+                className="w-full rounded-xl border border-gray-200 bg-[#FAFAFA] px-4 py-3 text-sm text-[#222] focus:border-[#083F19] focus:outline-none focus:ring-1 focus:ring-[#083F19] transition-colors"
               >
                 {Object.entries(t.sourceOptions).map(([value, label]) => (
                   <option key={value} value={value}>
@@ -442,7 +442,7 @@ const ApplicationForm = ({ job, locale }: ApplicationFormProps) => {
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="w-full rounded-xl bg-[#00802B] py-4 text-base font-semibold text-white transition-colors hover:bg-[#006B24] disabled:cursor-not-allowed disabled:opacity-60"
+          className="w-full rounded-xl bg-[#083F19] py-4 text-base font-semibold text-white transition-colors hover:bg-[#0E5424] disabled:cursor-not-allowed disabled:opacity-60"
         >
           {status === "submitting" ? (
             <span className="inline-flex items-center gap-2">

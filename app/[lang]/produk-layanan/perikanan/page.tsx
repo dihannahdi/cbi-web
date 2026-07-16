@@ -215,7 +215,7 @@ const Fishery = async ({
 
       <section className="bg-[#F4F4F4]">
         <ContainerSection>
-          <div className="flex flex-col gap-6 rounded-3xl bg-[#00802B] p-8 md:flex-row md:items-center lg:gap-12 lg:p-16">
+          <div className="flex flex-col gap-6 rounded-3xl bg-[#083F19] p-8 md:flex-row md:items-center lg:gap-12 lg:p-16">
             <h2 className="max-w-[10rem] text-3xl text-white lg:max-w-none lg:text-[40px]/[48px] xl:w-[46rem] xl:text-5xl/[60px]">
               {data.aboutSection.title}
             </h2>

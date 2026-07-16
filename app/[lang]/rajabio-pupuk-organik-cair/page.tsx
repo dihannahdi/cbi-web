@@ -429,7 +429,7 @@ export default async function RajabioProductPage({
               
               <h1 className="text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl mb-4">
                 {data.name}
-                <span className="block text-[#90EE90] text-2xl md:text-3xl lg:text-4xl font-semibold mt-2">
+                <span className="block text-[#BDDE7E] text-2xl md:text-3xl lg:text-4xl font-semibold mt-2">
                   {data.subtitle}
                 </span>
               </h1>
@@ -446,7 +446,7 @@ export default async function RajabioProductPage({
               <div className="grid grid-cols-4 gap-4 mb-8">
                 {data.stats.map((stat, idx) => (
                   <div key={idx} className="text-center">
-                    <div className="text-2xl md:text-3xl font-bold text-[#90EE90]">{stat.value}</div>
+                    <div className="text-2xl md:text-3xl font-bold text-[#BDDE7E]">{stat.value}</div>
                     <div className="text-xs md:text-sm text-white/70">{stat.label}</div>
                   </div>
                 ))}
@@ -676,7 +676,7 @@ export default async function RajabioProductPage({
                 key={idx}
                 className="group relative bg-white rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-[#006622]/20"
               >
-                <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-[#006622] to-[#009933] text-white mb-4 group-hover:scale-110 transition-transform">
+                <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-[#006622] to-[#166B30] text-white mb-4 group-hover:scale-110 transition-transform">
                   <BenefitIcon type={benefit.icon} />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">
@@ -710,7 +710,7 @@ export default async function RajabioProductPage({
 
           {/* Dosage Cards */}
           <div className="flex flex-wrap justify-center gap-6 mb-12">
-            <div className="bg-gradient-to-br from-[#006622] to-[#009933] text-white rounded-2xl p-8 text-center min-w-[200px]">
+            <div className="bg-gradient-to-br from-[#006622] to-[#166B30] text-white rounded-2xl p-8 text-center min-w-[200px]">
               <Droplets className="h-12 w-12 mx-auto mb-4" />
               <div className="text-3xl font-bold mb-2">{data.dosage.standard}</div>
               <div className="text-sm text-white/80">{data.dosage.standardNote}</div>

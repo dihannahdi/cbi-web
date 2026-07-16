@@ -59,7 +59,7 @@ const LivestockProductsSection = ({
                 className={cn(
                   "rounded-[1.5rem] px-3 py-2 text-xs lg:text-sm",
                   activeCategoryId === category.id
-                    ? "bg-[#009933] text-white"
+                    ? "bg-[#166B30] text-white"
                     : "border border-gray-200 text-[#666]",
                 )}
                 onClick={() => setActiveCategoryId(category.id)}
@@ -129,7 +129,7 @@ const LivestockProductsSection = ({
               </span>
               <button
                 onClick={() => swiper?.slidePrev()}
-                className="flex h-12 w-fit items-center gap-2 rounded-[0.5rem] bg-[#009933] px-4 text-sm text-white transition-colors duration-300 hover:bg-green-700 lg:text-base xl:text-xl"
+                className="flex h-12 w-fit items-center gap-2 rounded-[0.5rem] bg-[#166B30] px-4 text-sm text-white transition-colors duration-300 hover:bg-green-700 lg:text-base xl:text-xl"
               >
                 <span className="text-white">
                   <ArrowLeft size={16} />
@@ -137,7 +137,7 @@ const LivestockProductsSection = ({
               </button>
               <button
                 onClick={() => swiper?.slideNext()}
-                className="flex h-12 w-fit items-center gap-2 rounded-[0.5rem] bg-[#009933] px-4 text-sm text-white transition-colors duration-300 hover:bg-green-700 lg:text-base xl:text-xl"
+                className="flex h-12 w-fit items-center gap-2 rounded-[0.5rem] bg-[#166B30] px-4 text-sm text-white transition-colors duration-300 hover:bg-green-700 lg:text-base xl:text-xl"
               >
                 <span className="text-white">
                   <ArrowRight size={16} />

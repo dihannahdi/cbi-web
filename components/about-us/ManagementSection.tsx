@@ -122,12 +122,12 @@ const ManagementSection = ({ managements, lang = "id" }: ManagementSectionProps)
         .swiper-pagination-bullet {
           width: 8px;
           height: 8px;
-          background: #d1d5db;
+          background: #c4c8ba;
           opacity: 1;
           margin: 0 4px !important;
         }
         .swiper-pagination-bullet-active {
-          background: #059669 !important;
+          background: #083f19 !important;
         }
         .swiper-button-disabled {
           opacity: 0.5;

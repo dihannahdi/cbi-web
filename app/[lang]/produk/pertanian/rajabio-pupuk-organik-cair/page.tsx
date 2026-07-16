@@ -422,7 +422,7 @@ export default async function RajabioProductPage({
             <span className="text-4xl font-extrabold md:text-5xl lg:text-6xl">
               {data.name}
             </span>
-            <span className="block text-2xl md:text-3xl lg:text-4xl font-semibold mt-2 text-[#90EE90]">
+            <span className="block text-2xl md:text-3xl lg:text-4xl font-semibold mt-2 text-[#BDDE7E]">
               {data.subtitle}
             </span>
           </h1>
@@ -828,7 +828,7 @@ export default async function RajabioProductPage({
                 key={idx}
                 className="group relative bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-[#006622]/20"
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-[#006622] to-[#009933] text-white mb-4 group-hover:scale-110 transition-transform">
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-[#006622] to-[#166B30] text-white mb-4 group-hover:scale-110 transition-transform">
                   <BenefitIcon type={benefit.icon} />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">
@@ -862,7 +862,7 @@ export default async function RajabioProductPage({
 
           {/* Dosage Cards */}
           <div className="flex flex-wrap justify-center gap-6 mb-12">
-            <div className="bg-gradient-to-br from-[#006622] to-[#009933] text-white rounded-2xl p-8 text-center min-w-[200px]">
+            <div className="bg-gradient-to-br from-[#006622] to-[#166B30] text-white rounded-2xl p-8 text-center min-w-[200px]">
               <Droplets className="h-12 w-12 mx-auto mb-4" />
               <div className="text-3xl font-bold mb-2">{data.dosage.standard}</div>
               <div className="text-sm text-white/80">{data.dosage.standardNote}</div>

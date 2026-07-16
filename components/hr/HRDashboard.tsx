@@ -213,8 +213,8 @@ const StatsCards = ({ applications }: { applications: Application[] }) => {
     {
       label: "Total Lamaran",
       value: stats.total,
-      icon: <FileText className="h-5 w-5 text-[#00802B]" />,
-      accent: "border-l-[#00802B]",
+      icon: <FileText className="h-5 w-5 text-[#083F19]" />,
+      accent: "border-l-[#083F19]",
     },
     {
       label: "Baru",
@@ -289,8 +289,8 @@ const AIAnalysisModal = ({
       <div className="max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-white">
         <div className="sticky top-0 z-10 flex items-center justify-between border-b border-gray-200 bg-white px-6 py-4 rounded-t-2xl">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#00802B]/10">
-              <Brain className="h-5 w-5 text-[#00802B]" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#083F19]/10">
+              <Brain className="h-5 w-5 text-[#083F19]" />
             </div>
             <div>
               <h3 className="text-lg font-bold text-[#222]">AI Analysis</h3>
@@ -308,7 +308,7 @@ const AIAnalysisModal = ({
         <div className="p-6">
           {loading ? (
             <div className="flex flex-col items-center justify-center py-16">
-              <Loader2 className="h-10 w-10 animate-spin text-[#00802B]" />
+              <Loader2 className="h-10 w-10 animate-spin text-[#083F19]" />
               <p className="mt-4 text-sm text-[#666]">
                 Menganalisis profil kandidat...
               </p>
@@ -328,7 +328,7 @@ const AIAnalysisModal = ({
                 </div>
                 <div className="mt-2 h-2 w-full rounded-full bg-gray-200">
                   <div
-                    className="h-2 rounded-full bg-[#00802B] transition-all"
+                    className="h-2 rounded-full bg-[#083F19] transition-all"
                     style={{ width: `${analysis.fitScore}%` }}
                   />
                 </div>
@@ -405,7 +405,7 @@ const AIAnalysisModal = ({
               {/* Interview Questions */}
               <div className="rounded-xl border border-gray-200 p-4">
                 <h4 className="mb-3 flex items-center gap-2 text-sm font-semibold text-[#222]">
-                  <FileText className="h-4 w-4 text-[#00802B]" />
+                  <FileText className="h-4 w-4 text-[#083F19]" />
                   Pertanyaan Interview yang Disarankan
                 </h4>
                 <ol className="list-decimal space-y-2 pl-5">
@@ -528,7 +528,7 @@ const ApplicantDetail = ({
           onClick={(e) => e.stopPropagation()}
         >
           <button
-            className="rounded-lg p-2 text-[#666] transition-colors hover:bg-[#00802B]/10 hover:text-[#00802B]"
+            className="rounded-lg p-2 text-[#666] transition-colors hover:bg-[#083F19]/10 hover:text-[#083F19]"
             title="AI Analysis"
             onClick={() => onAnalyze(app)}
           >
@@ -539,7 +539,7 @@ const ApplicantDetail = ({
               href={resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-lg p-2 text-[#666] transition-colors hover:bg-[#00802B]/10 hover:text-[#00802B]"
+              className="rounded-lg p-2 text-[#666] transition-colors hover:bg-[#083F19]/10 hover:text-[#083F19]"
               title="Download CV"
             >
               <Download className="h-4 w-4" />
@@ -563,7 +563,7 @@ const ApplicantDetail = ({
                   <p className="text-xs text-[#666]">Email</p>
                   <a
                     href={`mailto:${app.email}`}
-                    className="text-sm text-[#00802B] hover:underline"
+                    className="text-sm text-[#083F19] hover:underline"
                   >
                     {app.email}
                   </a>
@@ -572,7 +572,7 @@ const ApplicantDetail = ({
                   <p className="text-xs text-[#666]">Telepon</p>
                   <a
                     href={`tel:${app.phone}`}
-                    className="text-sm text-[#00802B] hover:underline"
+                    className="text-sm text-[#083F19] hover:underline"
                   >
                     {app.phone}
                   </a>
@@ -612,7 +612,7 @@ const ApplicantDetail = ({
                     href={resumeUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-[#222] transition-colors hover:border-[#00802B] hover:text-[#00802B]"
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-[#222] transition-colors hover:border-[#083F19] hover:text-[#083F19]"
                   >
                     <Download className="h-3.5 w-3.5" />
                     Download CV
@@ -623,7 +623,7 @@ const ApplicantDetail = ({
                     href={app.portfolioUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-[#222] transition-colors hover:border-[#00802B] hover:text-[#00802B]"
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-[#222] transition-colors hover:border-[#083F19] hover:text-[#083F19]"
                   >
                     <ExternalLink className="h-3.5 w-3.5" />
                     Portfolio
@@ -634,7 +634,7 @@ const ApplicantDetail = ({
                     href={app.linkedinUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-[#222] transition-colors hover:border-[#00802B] hover:text-[#00802B]"
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-[#222] transition-colors hover:border-[#083F19] hover:text-[#083F19]"
                   >
                     <ExternalLink className="h-3.5 w-3.5" />
                     LinkedIn
@@ -672,7 +672,7 @@ const ApplicantDetail = ({
                       </div>
                       <div className="mt-1 h-1.5 w-full rounded-full bg-gray-200">
                         <div
-                          className="h-1.5 rounded-full bg-[#00802B] transition-all"
+                          className="h-1.5 rounded-full bg-[#083F19] transition-all"
                           style={{
                             width: `${item.score}%`,
                           }}
@@ -683,7 +683,7 @@ const ApplicantDetail = ({
                           {item.matches.map((m, mi) => (
                             <span
                               key={mi}
-                              className="rounded-full bg-[#00802B]/10 px-2 py-0.5 text-[10px] text-[#00802B]"
+                              className="rounded-full bg-[#083F19]/10 px-2 py-0.5 text-[10px] text-[#083F19]"
                             >
                               {m}
                             </span>
@@ -712,7 +712,7 @@ const ApplicantDetail = ({
                     value={app.status}
                     onChange={(e) => handleStatusChange(e.target.value)}
                     disabled={updatingStatus}
-                    className="w-full appearance-none rounded-xl border border-gray-200 bg-white px-4 py-3 pr-10 text-sm text-[#222] focus:border-[#00802B] focus:outline-none focus:ring-1 focus:ring-[#00802B] transition-colors disabled:opacity-60"
+                    className="w-full appearance-none rounded-xl border border-gray-200 bg-white px-4 py-3 pr-10 text-sm text-[#222] focus:border-[#083F19] focus:outline-none focus:ring-1 focus:ring-[#083F19] transition-colors disabled:opacity-60"
                   >
                     {STATUS_OPTIONS.map((s) => (
                       <option key={s} value={s}>
@@ -722,7 +722,7 @@ const ApplicantDetail = ({
                   </select>
                   <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#666]" />
                   {updatingStatus && (
-                    <Loader2 className="absolute right-10 top-1/2 h-4 w-4 -translate-y-1/2 animate-spin text-[#00802B]" />
+                    <Loader2 className="absolute right-10 top-1/2 h-4 w-4 -translate-y-1/2 animate-spin text-[#083F19]" />
                   )}
                 </div>
               </div>
@@ -737,12 +737,12 @@ const ApplicantDetail = ({
                   onChange={(e) => setNotes(e.target.value)}
                   rows={4}
                   placeholder="Tambahkan catatan tentang kandidat ini..."
-                  className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-[#222] placeholder:text-gray-400 focus:border-[#00802B] focus:outline-none focus:ring-1 focus:ring-[#00802B] transition-colors resize-none"
+                  className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-[#222] placeholder:text-gray-400 focus:border-[#083F19] focus:outline-none focus:ring-1 focus:ring-[#083F19] transition-colors resize-none"
                 />
                 <button
                   onClick={handleSaveNotes}
                   disabled={savingNotes || notes === (app.hrNotes || "")}
-                  className="mt-2 inline-flex items-center gap-1.5 rounded-lg bg-[#00802B] px-4 py-2 text-xs font-medium text-white transition-colors hover:bg-[#006B24] disabled:cursor-not-allowed disabled:opacity-60"
+                  className="mt-2 inline-flex items-center gap-1.5 rounded-lg bg-[#083F19] px-4 py-2 text-xs font-medium text-white transition-colors hover:bg-[#0E5424] disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {savingNotes ? (
                     <Loader2 className="h-3.5 w-3.5 animate-spin" />
@@ -754,10 +754,10 @@ const ApplicantDetail = ({
               </div>
 
               {/* AI Analysis Button */}
-              <div className="rounded-xl border border-dashed border-[#00802B]/30 bg-[#00802B]/5 p-4">
+              <div className="rounded-xl border border-dashed border-[#083F19]/30 bg-[#083F19]/5 p-4">
                 <div className="flex items-start gap-3">
-                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[#00802B]/10">
-                    <Brain className="h-5 w-5 text-[#00802B]" />
+                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[#083F19]/10">
+                    <Brain className="h-5 w-5 text-[#083F19]" />
                   </div>
                   <div className="flex-1">
                     <p className="text-sm font-medium text-[#222]">
@@ -769,7 +769,7 @@ const ApplicantDetail = ({
                     </p>
                     <button
                       onClick={() => onAnalyze(app)}
-                      className="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-[#00802B] px-4 py-2 text-xs font-medium text-white transition-colors hover:bg-[#006B24]"
+                      className="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-[#083F19] px-4 py-2 text-xs font-medium text-white transition-colors hover:bg-[#0E5424]"
                     >
                       <Brain className="h-3.5 w-3.5" />
                       Jalankan Analisis AI
@@ -1056,7 +1056,7 @@ const HRDashboard = ({ jwt }: { jwt: string }) => {
   if (loading) {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center">
-        <Loader2 className="h-10 w-10 animate-spin text-[#00802B]" />
+        <Loader2 className="h-10 w-10 animate-spin text-[#083F19]" />
         <p className="mt-4 text-sm text-[#666]">Memuat data lamaran...</p>
       </div>
     );
@@ -1069,7 +1069,7 @@ const HRDashboard = ({ jwt }: { jwt: string }) => {
         <p className="mt-4 text-sm text-red-600">{error}</p>
         <button
           onClick={fetchApplications}
-          className="mt-4 inline-flex items-center gap-2 rounded-xl bg-[#00802B] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#006B24]"
+          className="mt-4 inline-flex items-center gap-2 rounded-xl bg-[#083F19] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#0E5424]"
         >
           <RefreshCw className="h-4 w-4" />
           Coba Lagi
@@ -1093,7 +1093,7 @@ const HRDashboard = ({ jwt }: { jwt: string }) => {
         <div className="flex items-center gap-3">
           <button
             onClick={fetchApplications}
-            className="rounded-xl border border-gray-200 p-2.5 text-[#666] transition-colors hover:border-[#00802B] hover:text-[#00802B]"
+            className="rounded-xl border border-gray-200 p-2.5 text-[#666] transition-colors hover:border-[#083F19] hover:text-[#083F19]"
             title="Refresh"
           >
             <RefreshCw className="h-4 w-4" />
@@ -1122,7 +1122,7 @@ const HRDashboard = ({ jwt }: { jwt: string }) => {
               placeholder="Cari nama, email, posisi..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded-xl border border-gray-200 bg-[#FAFAFA] py-2.5 pl-10 pr-4 text-sm text-[#222] placeholder:text-gray-400 focus:border-[#00802B] focus:outline-none focus:ring-1 focus:ring-[#00802B] transition-colors"
+              className="w-full rounded-xl border border-gray-200 bg-[#FAFAFA] py-2.5 pl-10 pr-4 text-sm text-[#222] placeholder:text-gray-400 focus:border-[#083F19] focus:outline-none focus:ring-1 focus:ring-[#083F19] transition-colors"
             />
           </div>
 
@@ -1132,7 +1132,7 @@ const HRDashboard = ({ jwt }: { jwt: string }) => {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="appearance-none rounded-xl border border-gray-200 bg-[#FAFAFA] py-2.5 pl-9 pr-10 text-sm text-[#222] focus:border-[#00802B] focus:outline-none focus:ring-1 focus:ring-[#00802B] transition-colors"
+              className="appearance-none rounded-xl border border-gray-200 bg-[#FAFAFA] py-2.5 pl-9 pr-10 text-sm text-[#222] focus:border-[#083F19] focus:outline-none focus:ring-1 focus:ring-[#083F19] transition-colors"
             >
               <option value="all">Semua Status</option>
               {STATUS_OPTIONS.map((s) => (
@@ -1151,7 +1151,7 @@ const HRDashboard = ({ jwt }: { jwt: string }) => {
               <select
                 value={jobFilter}
                 onChange={(e) => setJobFilter(e.target.value)}
-                className="appearance-none rounded-xl border border-gray-200 bg-[#FAFAFA] py-2.5 pl-9 pr-10 text-sm text-[#222] focus:border-[#00802B] focus:outline-none focus:ring-1 focus:ring-[#00802B] transition-colors"
+                className="appearance-none rounded-xl border border-gray-200 bg-[#FAFAFA] py-2.5 pl-9 pr-10 text-sm text-[#222] focus:border-[#083F19] focus:outline-none focus:ring-1 focus:ring-[#083F19] transition-colors"
               >
                 <option value="all">Semua Posisi</option>
                 {jobOptions.map(([id, title]) => (
@@ -1169,7 +1169,7 @@ const HRDashboard = ({ jwt }: { jwt: string }) => {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="appearance-none rounded-xl border border-gray-200 bg-[#FAFAFA] py-2.5 pl-4 pr-10 text-sm text-[#222] focus:border-[#00802B] focus:outline-none focus:ring-1 focus:ring-[#00802B] transition-colors"
+              className="appearance-none rounded-xl border border-gray-200 bg-[#FAFAFA] py-2.5 pl-4 pr-10 text-sm text-[#222] focus:border-[#083F19] focus:outline-none focus:ring-1 focus:ring-[#083F19] transition-colors"
             >
               <option value="createdAt:desc">Terbaru</option>
               <option value="createdAt:asc">Terlama</option>
@@ -1263,7 +1263,7 @@ const HRDashboard = ({ jwt }: { jwt: string }) => {
           <button
             onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
             disabled={currentPage === 1}
-            className="rounded-lg border border-gray-200 p-2 text-[#666] transition-colors hover:border-[#00802B] hover:text-[#00802B] disabled:cursor-not-allowed disabled:opacity-40"
+            className="rounded-lg border border-gray-200 p-2 text-[#666] transition-colors hover:border-[#083F19] hover:text-[#083F19] disabled:cursor-not-allowed disabled:opacity-40"
           >
             <ChevronLeft className="h-4 w-4" />
           </button>
@@ -1273,8 +1273,8 @@ const HRDashboard = ({ jwt }: { jwt: string }) => {
               onClick={() => setCurrentPage(page)}
               className={`min-w-[36px] rounded-lg border px-3 py-2 text-sm font-medium transition-colors ${
                 currentPage === page
-                  ? "border-[#00802B] bg-[#00802B] text-white"
-                  : "border-gray-200 text-[#666] hover:border-[#00802B] hover:text-[#00802B]"
+                  ? "border-[#083F19] bg-[#083F19] text-white"
+                  : "border-gray-200 text-[#666] hover:border-[#083F19] hover:text-[#083F19]"
               }`}
             >
               {page}
@@ -1283,7 +1283,7 @@ const HRDashboard = ({ jwt }: { jwt: string }) => {
           <button
             onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
             disabled={currentPage === totalPages}
-            className="rounded-lg border border-gray-200 p-2 text-[#666] transition-colors hover:border-[#00802B] hover:text-[#00802B] disabled:cursor-not-allowed disabled:opacity-40"
+            className="rounded-lg border border-gray-200 p-2 text-[#666] transition-colors hover:border-[#083F19] hover:text-[#083F19] disabled:cursor-not-allowed disabled:opacity-40"
           >
             <ChevronRight className="h-4 w-4" />
           </button>

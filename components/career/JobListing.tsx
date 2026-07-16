@@ -170,7 +170,7 @@ const JobListing = ({ jobs, locale }: JobListingProps) => {
                       {/* Primary: Apply via our form */}
                       <a
                         href={`/${locale}/career/apply/${job.slug}`}
-                        className="inline-flex items-center gap-2 rounded-xl bg-[#00802B] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#006B24]"
+                        className="inline-flex items-center gap-2 rounded-xl bg-[#083F19] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0E5424]"
                       >
                         {applyLabel}
                         <ExternalLink className="h-4 w-4" />
@@ -179,7 +179,7 @@ const JobListing = ({ jobs, locale }: JobListingProps) => {
                       {job.applicationEmail && (
                         <a
                           href={`mailto:${job.applicationEmail}?subject=Lamaran: ${job.title}`}
-                          className="inline-flex items-center gap-2 rounded-xl border-2 border-[#00802B] px-6 py-3 text-sm font-semibold text-[#00802B] transition-colors hover:bg-[#00802B] hover:text-white"
+                          className="inline-flex items-center gap-2 rounded-xl border-2 border-[#083F19] px-6 py-3 text-sm font-semibold text-[#083F19] transition-colors hover:bg-[#083F19] hover:text-white"
                         >
                           <Mail className="h-4 w-4" />
                           {job.applicationEmail}

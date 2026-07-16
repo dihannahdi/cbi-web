@@ -126,7 +126,7 @@ export default function WhatsAppFloat({ lang = 'id' }: { lang?: Locale }) {
                   repeat: Infinity,
                   ease: 'easeOut',
                 }}
-                className="absolute inset-0 rounded-full bg-green-500"
+                className="absolute inset-0 rounded-full bg-[#25D366]"
               />
               <motion.div
                 animate={{
@@ -139,13 +139,13 @@ export default function WhatsAppFloat({ lang = 'id' }: { lang?: Locale }) {
                   ease: 'easeOut',
                   delay: 0.5,
                 }}
-                className="absolute inset-0 rounded-full bg-green-500"
+                className="absolute inset-0 rounded-full bg-[#25D366]"
               />
 
               {/* Main button */}
               <motion.div
                 whileTap={{ scale: 0.9 }}
-                className="relative w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-full shadow-lg flex items-center justify-center cursor-pointer overflow-hidden"
+                className="relative w-16 h-16 bg-gradient-to-br from-[#25D366] to-[#128C7E] rounded-full shadow-lg flex items-center justify-center cursor-pointer overflow-hidden"
               >
                 {/* Shine effect */}
                 <motion.div

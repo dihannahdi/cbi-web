@@ -7,7 +7,7 @@ const JoinUs = ({ lang }: { lang?: Locale }) => {
   return (
     <section className="h-full w-full bg-[#EEE]">
       <ContainerSection>
-        <div className="relative flex w-full flex-col gap-6 overflow-hidden rounded-2xl bg-[#00802B] p-8">
+        <div className="relative flex w-full flex-col gap-6 overflow-hidden rounded-2xl bg-[#083F19] p-8">
           <h2 className="text-white">
             {isEn ? "Be Part of Our Team!" : "Jadilah Bagian dari Kami!"}
           </h2>

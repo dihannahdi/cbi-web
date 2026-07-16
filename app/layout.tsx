@@ -1,10 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Plus_Jakarta_Sans, IBM_Plex_Mono } from "next/font/google";
 
 import { Toaster } from "@/components/ui/sonner";
 import GoogleAnalytics from "@/components/common/GoogleAnalytics";
+import MetaPixel from "@/components/common/MetaPixel";
 import WebVitals from "@/components/common/WebVitals";
 import { SITE_CONFIG } from "@/utils/seo";
 
@@ -16,6 +17,17 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta",
   preload: true,
   adjustFontFallback: true,
+});
+
+// IBM Plex Mono — technical/lab data (dosages, C-Organik %, certificate codes).
+// Not a variable font on Google Fonts, so explicit weights are required.
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
+  fallback: ["ui-monospace", "SFMono-Regular", "Menlo", "Consolas", "monospace"],
+  variable: "--font-ibm-plex-mono",
+  preload: false,
 });
 
 export const viewport: Viewport = {
@@ -243,6 +255,7 @@ const globalWebsiteSchema = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   const GA_MEASUREMENT_ID = "G-16L2MWL33B";
+  const META_PIXEL_ID = "2243691269777677";
 
   return (
     <html dir="ltr" suppressHydrationWarning>
@@ -274,6 +287,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <link rel="dns-prefetch" href="https://backend.centrabiotechindonesia.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://region1.google-analytics.com" />
+        <link rel="dns-prefetch" href="https://connect.facebook.net" />
+        <link rel="dns-prefetch" href="https://www.facebook.com" />
         
         {/* Preload Critical Resources for LCP Optimization */}
         <link 
@@ -307,8 +322,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
           content="accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()" 
         />
       </head>
-      <body className={`${plusJakartaSans.variable} antialiased`}>
+      <body className={`${plusJakartaSans.variable} ${ibmPlexMono.variable} antialiased`}>
         <GoogleAnalytics GA_MEASUREMENT_ID={GA_MEASUREMENT_ID} />
+        <MetaPixel pixelId={META_PIXEL_ID} />
         <WebVitals />
         {children}
         <Toaster position="top-center" expand={true} richColors />

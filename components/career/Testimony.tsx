@@ -105,13 +105,13 @@ const Testimony = ({ lang }: { lang?: Locale }) => {
           <div className="flex items-center gap-x-4">
             <button
               onClick={() => swiper?.slidePrev()}
-              className="flex h-8 w-8 items-center justify-center rounded-sm bg-[#009933] shadow-lg backdrop-blur-sm transition-colors hover:bg-[#009933]/80 disabled:cursor-not-allowed disabled:opacity-50 xl:h-10 xl:w-10"
+              className="flex h-8 w-8 items-center justify-center rounded-sm bg-[#166B30] shadow-lg backdrop-blur-sm transition-colors hover:bg-[#166B30]/80 disabled:cursor-not-allowed disabled:opacity-50 xl:h-10 xl:w-10"
             >
               <ArrowLeft size={16} className="text-white" />
             </button>
             <button
               onClick={() => swiper?.slideNext()}
-              className="flex h-8 w-8 items-center justify-center rounded-sm bg-[#009933] shadow-lg backdrop-blur-sm transition-colors hover:bg-[#009933]/80 disabled:cursor-not-allowed disabled:opacity-50 xl:h-10 xl:w-10"
+              className="flex h-8 w-8 items-center justify-center rounded-sm bg-[#166B30] shadow-lg backdrop-blur-sm transition-colors hover:bg-[#166B30]/80 disabled:cursor-not-allowed disabled:opacity-50 xl:h-10 xl:w-10"
             >
               <ArrowRight size={16} className="text-white" />
             </button>
@@ -125,12 +125,12 @@ const Testimony = ({ lang }: { lang?: Locale }) => {
         .swiper-pagination-bullet {
           width: 8px;
           height: 8px;
-          background: #d1d5db;
+          background: #c4c8ba;
           opacity: 1;
           margin: 0 4px !important;
         }
         .swiper-pagination-bullet-active {
-          background: #059669 !important;
+          background: #083f19 !important;
         }
         .swiper-button-disabled {
           opacity: 0.5;

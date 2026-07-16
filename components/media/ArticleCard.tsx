@@ -34,19 +34,21 @@ const ArticleCard = ({ articleItemData, lang, dict }: ArticleCardProps) => {
   const readMoreText = dict?.blog?.readMore ?? (lang === 'en' ? 'Read More' : 'Selengkapnya');
 
   return (
-    <div className="w-[280px] flex-none snap-center lg:w-[306px] xl:w-[421px]">
-      <Image
-        src={imageUrl}
-        alt={imageAlt}
-        width={imageWidth}
-        height={imageHeight}
-        className="rounded-lg object-cover object-center lg:rounded-3xl"
-      />
+    <div className="group w-[280px] flex-none snap-center lg:w-[306px] xl:w-[421px]">
+      <div className="overflow-hidden rounded-lg lg:rounded-3xl">
+        <Image
+          src={imageUrl}
+          alt={imageAlt}
+          width={imageWidth}
+          height={imageHeight}
+          className="w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.04]"
+        />
+      </div>
 
       {/* News Content */}
       <div className="mt-4 space-y-2">
         <div className="flex items-center justify-between">
-          <h4 className="text-lg font-bold text-[#222222]">
+          <h4 className="text-lg font-bold text-stone-950 transition-colors group-hover:text-brand">
             {articleItemData.title}
           </h4>
           <p>{formatDate(articleItemData.publishedAt)}</p>

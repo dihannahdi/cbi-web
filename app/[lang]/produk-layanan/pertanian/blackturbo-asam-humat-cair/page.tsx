@@ -279,7 +279,7 @@ export default async function BlackTurboPage({
       <MultipleStructuredData dataArray={[productSchema, breadcrumbSchema, faqSchema, imageSchema, ...videoSchemas]} />
       
       <HeroSectionGeneral
-        imgUrl="/Cover Black Turbo.webp"
+        imgUrl="/Black Turbo-Hero.webp"
         category="Pembenah Tanah"
         title={
           <h1 className="p-4 text-center text-3xl font-bold !leading-tight text-white lg:text-5xl xl:text-[56px]">
@@ -296,7 +296,7 @@ export default async function BlackTurboPage({
             <div className="lg:w-1/2">
               <div className="relative aspect-square max-w-lg mx-auto lg:mx-0">
                 <Image
-                  src="/Cover Black Turbo.webp"
+                  src="/Black Turbo-Hero.webp"
                   alt={`${data.name} - ${data.subtitle}`}
                   width={600}
                   height={600}
@@ -525,7 +525,7 @@ export default async function BlackTurboPage({
                 </AccordionItem>
               ))}
             </Accordion>
-            <div className="mt-12 text-center bg-gradient-to-br from-[#006622]/5 to-[#009933]/5 rounded-2xl p-8 border border-[#006622]/10">
+            <div className="mt-12 text-center bg-gradient-to-br from-[#006622]/5 to-[#166B30]/5 rounded-2xl p-8 border border-[#006622]/10">
               <div className="flex flex-col md:flex-row items-center justify-center gap-4">
                 <MessageCircle className="h-8 w-8 text-[#006622]" />
                 <div className="text-center md:text-left">

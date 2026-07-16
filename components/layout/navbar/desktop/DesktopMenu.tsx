@@ -1,4 +1,5 @@
 import { FC, useState } from "react";
+import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import { usePathname } from "next/navigation";
 
@@ -29,11 +30,19 @@ const NavigationMenu: FC<NavigationMenuProps> = ({ lang, dict }) => {
   const PRODUCT_LINKS = lang === 'id' ? [
     { title: dict.nav.agriculture, href: `/${lang}/produk-layanan/pertanian` },
     { title: dict.nav.livestock, href: `/${lang}/produk-layanan/peternakan` },
+    { title: dict.nav.peternakanUnggas, href: `/${lang}/produk-layanan/peternakan/unggas`, indent: true },
+    { title: dict.nav.peternakanRuminant, href: `/${lang}/produk-layanan/peternakan/ruminant`, indent: true },
     { title: dict.nav.fishery, href: `/${lang}/produk-layanan/perikanan` },
+    { title: dict.nav.perikananBiofloc, href: `/${lang}/produk-layanan/perikanan/biofloc`, indent: true },
+    { title: dict.nav.perikananUdang, href: `/${lang}/produk-layanan/perikanan/udang`, indent: true },
   ] : [
-    { title: dict.nav.agriculture, href: `/${lang}/produk-layanan/pertanian` },
-    { title: dict.nav.livestock, href: `/${lang}/produk-layanan/peternakan` },
-    { title: dict.nav.fishery, href: `/${lang}/produk-layanan/perikanan` },
+    { title: dict.nav.agriculture, href: `/${lang}/product/agriculture` },
+    { title: dict.nav.livestock, href: `/${lang}/product/livestock` },
+    { title: dict.nav.peternakanUnggas, href: `/${lang}/produk-layanan/peternakan/unggas`, indent: true },
+    { title: dict.nav.peternakanRuminant, href: `/${lang}/produk-layanan/peternakan/ruminant`, indent: true },
+    { title: dict.nav.fishery, href: `/${lang}/product/fishery` },
+    { title: dict.nav.perikananBiofloc, href: `/${lang}/produk-layanan/perikanan/biofloc`, indent: true },
+    { title: dict.nav.perikananUdang, href: `/${lang}/produk-layanan/perikanan/udang`, indent: true },
   ];
 
   const MEDIA_LINKS = [
@@ -65,11 +74,11 @@ const NavigationMenu: FC<NavigationMenuProps> = ({ lang, dict }) => {
             variant="link"
             onClick={() => toggleDropdown("products")}
             className={cn(
-              "transform p-0 transition-transform duration-500 ease-in-out",
+              "transform p-0 text-current transition-transform duration-500 ease-in-out hover:bg-transparent hover:no-underline",
               activeDropdown === "products" && "rotate-180",
             )}
           >
-            <ChevronDown className="h-5 w-5 text-white" />
+            <ChevronDown className="h-5 w-5 text-current" />
           </Button>
           <DropdownMenu
             isOpen={activeDropdown === "products"}
@@ -82,14 +91,14 @@ const NavigationMenu: FC<NavigationMenuProps> = ({ lang, dict }) => {
             variant="link"
             onClick={() => toggleDropdown("media")}
             className={cn(
-              "p-0 text-base font-normal text-[#FDFDFD] underline-offset-4 hover:underline",
+              "p-0 text-base font-normal text-current underline-offset-4 hover:bg-transparent hover:underline",
               (pathname?.startsWith(`/${lang}/news`) || pathname?.startsWith(`/${lang}/blog`)) && "font-bold underline underline-offset-4",
             )}
           >
             {dict.nav.media}
             <ChevronDown
               className={cn(
-                "h-5 w-5 text-white transition-transform duration-500",
+                "h-5 w-5 text-current transition-transform duration-500",
                 activeDropdown === "media" && "rotate-180",
               )}
             />
@@ -113,16 +122,23 @@ const NavigationMenu: FC<NavigationMenuProps> = ({ lang, dict }) => {
 interface DesktopMenuProps {
   lang: Locale;
   dict: Dictionary;
+  scrolled: boolean;
 }
 
-const DesktopMenu: FC<DesktopMenuProps> = ({ lang, dict }) => {
+const DesktopMenu: FC<DesktopMenuProps> = ({ lang, dict, scrolled }) => {
   return (
-    <div className="hidden w-full items-center justify-between transition-all lg:flex">
+    <div className="hidden w-full items-center justify-between pl-10 transition-all lg:flex">
       <NavigationMenu lang={lang} dict={dict} />
 
-      <div className="flex items-center gap-x-11">
-        <LanguageSelector currentLang={lang} />
+      <div className="flex items-center gap-x-5">
+        <LanguageSelector currentLang={lang} scrolled={scrolled} />
         <SearchButton />
+        <Link
+          href={`/${lang}/contact`}
+          className="inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-hover hover:shadow-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500/50"
+        >
+          {lang === "id" ? "Hubungi Kami" : "Contact Us"}
+        </Link>
       </div>
     </div>
   );

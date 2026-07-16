@@ -87,7 +87,7 @@ const ArticleContent: React.FC<ArticleContentProps> = ({
 
       <Link
         href={linkPath}
-        className="mt-6 flex items-center gap-4 transition-colors duration-300 hover:text-[#009933]"
+        className="mt-6 flex items-center gap-4 transition-colors duration-300 hover:text-[#166B30]"
       >
         {dict.home.readMore} <ArrowRight className="h-4 w-4" />
       </Link>

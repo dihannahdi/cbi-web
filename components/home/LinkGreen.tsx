@@ -9,7 +9,18 @@ interface LinkGreenProps {
   withArrow?: boolean;
   className?: string;
   target?: "_blank" | "_parent" | "_self" | "_top";
+  /**
+   * Visual weight of the CTA:
+   * - `primary` (default) — forest-green pill, the site-wide primary action.
+   * - `accent` — leaf-lime pill for high-energy / conversion moments (hero).
+   */
+  variant?: "primary" | "accent";
 }
+
+const variantStyles: Record<NonNullable<LinkGreenProps["variant"]>, string> = {
+  primary: "bg-brand text-white hover:bg-brand-hover",
+  accent: "bg-lime-500 font-semibold text-green-900 hover:bg-lime-600",
+};
 
 const LinkGreen = ({
   children,
@@ -17,13 +28,15 @@ const LinkGreen = ({
   withArrow = true,
   className,
   target,
+  variant = "primary",
 }: LinkGreenProps) => {
   return (
     <Link
       href={href}
       target={target}
       className={cn(
-        "inline-flex w-fit items-center gap-2 rounded-lg bg-green-600 px-5 py-2.5 text-sm font-medium text-white transition-all duration-200 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500/50 lg:text-base",
+        "inline-flex w-fit items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-all duration-200 hover:-translate-y-0.5 hover:shadow-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500/50 lg:text-base",
+        variantStyles[variant],
         className,
       )}
     >

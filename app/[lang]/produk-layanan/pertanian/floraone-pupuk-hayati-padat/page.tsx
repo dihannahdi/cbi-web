@@ -734,7 +734,7 @@ export default async function FloraOneProductPage({
             </Accordion>
 
             {/* Still have questions CTA */}
-            <div className="mt-12 text-center bg-gradient-to-br from-[#006622]/5 to-[#009933]/5 rounded-2xl p-8 border border-[#006622]/10">
+            <div className="mt-12 text-center bg-gradient-to-br from-[#006622]/5 to-[#166B30]/5 rounded-2xl p-8 border border-[#006622]/10">
               <div className="flex flex-col md:flex-row items-center justify-center gap-4">
                 <MessageCircle className="h-8 w-8 text-[#006622]" />
                 <div className="text-center md:text-left">

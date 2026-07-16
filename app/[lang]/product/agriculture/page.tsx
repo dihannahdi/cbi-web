@@ -229,7 +229,7 @@ const Agriculture = async ({
                 
                 <h3 className="text-3xl font-extrabold mb-2 lg:text-4xl">
                   RAJABIO
-                  <span className="block text-[#90EE90] text-lg font-semibold mt-1 lg:text-xl">
+                  <span className="block text-[#BDDE7E] text-lg font-semibold mt-1 lg:text-xl">
                     {lang === 'id' ? 'Pupuk Organik Cair' : 'Liquid Organic Fertilizer'}
                   </span>
                 </h3>
@@ -249,7 +249,7 @@ const Agriculture = async ({
                     lang === 'id' ? '100% Organik' : '100% Organic',
                   ].map((benefit, idx) => (
                     <div key={idx} className="flex items-center gap-2 text-sm">
-                      <CheckCircle className="h-4 w-4 text-[#90EE90] flex-shrink-0" />
+                      <CheckCircle className="h-4 w-4 text-[#BDDE7E] flex-shrink-0" />
                       <span className="text-white/80">{benefit}</span>
                     </div>
                   ))}
@@ -259,7 +259,7 @@ const Agriculture = async ({
                 <div className="flex flex-wrap gap-3">
                   <Link
                     href={`/${lang}/rajabio-pupuk-organik-cair`}
-                    className="flex items-center gap-2 rounded-full bg-white text-[#006622] px-5 py-2.5 font-semibold text-sm hover:bg-[#90EE90] transition-all"
+                    className="flex items-center gap-2 rounded-full bg-white text-[#006622] px-5 py-2.5 font-semibold text-sm hover:bg-[#BDDE7E] transition-all"
                   >
                     {lang === 'id' ? 'Lihat Detail Produk' : 'View Product Details'}
                     <ArrowRight className="h-4 w-4" />
@@ -302,7 +302,7 @@ const Agriculture = async ({
       {/* About Section */}
       <section className="bg-[#F4F4F4]">
         <ContainerSection>
-          <div className="flex flex-col gap-6 rounded-3xl bg-[#00802B] p-8 md:flex-row md:items-center lg:gap-12 lg:p-16">
+          <div className="flex flex-col gap-6 rounded-3xl bg-[#083F19] p-8 md:flex-row md:items-center lg:gap-12 lg:p-16">
             <h2 className="max-w-[10rem] text-3xl text-white lg:max-w-none lg:text-[40px]/[48px] xl:w-[46rem] xl:text-5xl/[60px]">
               {data.aboutSection.title}
             </h2>

@@ -69,7 +69,7 @@ const HeroSectionProduct = ({
 
             <h1 className="text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl mb-4">
               {productName}
-              <span className="block text-[#90EE90] text-2xl md:text-3xl lg:text-4xl font-semibold mt-2">
+              <span className="block text-[#BDDE7E] text-2xl md:text-3xl lg:text-4xl font-semibold mt-2">
                 {subtitle}
               </span>
             </h1>
@@ -86,7 +86,7 @@ const HeroSectionProduct = ({
             <div className="grid grid-cols-4 gap-4 mb-8">
               {stats.map((stat, idx) => (
                 <div key={idx} className="text-center">
-                  <div className="text-2xl md:text-3xl font-bold text-[#90EE90]">
+                  <div className="text-2xl md:text-3xl font-bold text-[#BDDE7E]">
                     {stat.value}
                   </div>
                   <div className="text-xs md:text-sm text-white/70">
