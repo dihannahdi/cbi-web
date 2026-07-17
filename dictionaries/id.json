@@ -21,7 +21,10 @@
     "allProducts": "Semua Produk",
     "search": "Cari",
     "searchPlaceholder": "Cari produk, artikel...",
-    "dokterTani": "Dokter Tani"
+    "peternakanUnggas": "Unggas",
+    "peternakanRuminant": "Ruminansia",
+    "perikananBiofloc": "Bioflok",
+    "perikananUdang": "Udang"
   },
   "footer": {
     "address": "Alamat",
@@ -36,6 +39,7 @@
     "allProducts": "Semua Produk"
   },
   "home": {
+    "heroKicker": "Ahlinya Bioteknologi",
     "heroTitle": "Solusi Bioteknologi Terintegrasi",
     "heroSubtitle": "Untuk Pertanian, Peternakan, dan Perikanan Indonesia",
     "heroDescription": "Kami menyediakan produk probiotik, pupuk hayati, dan solusi bioteknologi inovatif untuk meningkatkan produktivitas pertanian Indonesia.",
@@ -99,10 +103,38 @@
       "subtitle": "Probiotik dan suplemen untuk ternak sehat",
       "description": "Optimalkan kesehatan dan produktivitas ternak Anda"
     },
+    "livestockUnggas": {
+      "title": "Bioteknologi untuk Unggas",
+      "subtitle": "Probiotik & Bioaktivator untuk Ayam, Bebek, Puyuh",
+      "description": "Solusi bioteknologi khusus unggas untuk peningkatan bobot, produksi telur, kesehatan saluran cerna, dan efisiensi pakan tanpa antibiotik sintetik.",
+      "metaTitle": "Probiotik Unggas — Bioteknologi untuk Ayam Broiler, Petelur & Bebek | CBI",
+      "metaDescription": "Probiotik dan bioaktivator unggas dari CBI. Tingkatkan bobot ayam broiler, produksi telur petelur, dan efisiensi pakan tanpa antibiotik. Aman & terbukti di lapangan."
+    },
+    "livestockRuminant": {
+      "title": "Bioteknologi solusi peternakan masa depan ramah lingkungan",
+      "subtitle": "Probiotik & Pakan Fungsional untuk Sapi, Kambing, Domba",
+      "description": "Bioteknologi peternakan ruminansia: meningkatkan ADG sapi potong, produksi susu, kualitas reproduksi, dan kesehatan rumen secara organik dan berkelanjutan.",
+      "metaTitle": "Probiotik Ruminansia — Sapi, Kambing, Domba | Centra Biotech Indonesia",
+      "metaDescription": "Probiotik dan suplemen pakan untuk sapi potong, sapi perah, kambing, dan domba. Tingkatkan ADG, produksi susu, dan kesehatan rumen secara organik dengan teknologi CBI."
+    },
     "fishery": {
       "title": "Produk Perikanan",
       "subtitle": "Solusi bioteknologi untuk akuakultur",
       "description": "Tingkatkan kualitas air dan kesehatan ikan budidaya"
+    },
+    "fisheryBiofloc": {
+      "title": "Revolusi Biologis untuk Akuakultur Indonesia",
+      "subtitle": "Sistem Bioflok untuk Lele, Nila, Gurame",
+      "description": "Teknologi bioflok dengan probiotik CBI untuk budidaya intensif lele, nila, dan gurame. Mengurangi pergantian air, mempercepat panen, dan meningkatkan kualitas daging.",
+      "metaTitle": "Probiotik Bioflok — Sistem Akuakultur Lele, Nila, Gurame | CBI",
+      "metaDescription": "Bioteknologi sistem bioflok untuk budidaya lele, nila, dan gurame. Probiotik CBI mengurangi pergantian air hingga 80% dan mempercepat panen. Lengkap dengan panduan SOP."
+    },
+    "fisheryUdang": {
+      "title": "Bioteknologi untuk Udang Vannamei & Windu",
+      "subtitle": "Probiotik Tambak Intensif & Semi-Intensif",
+      "description": "Probiotik akuakultur khusus udang vannamei dan windu untuk meningkatkan SR, FCR, dan kualitas air tambak. Pencegahan WSSV dan EHP secara biologis.",
+      "metaTitle": "Probiotik Udang Vannamei & Windu — Tambak Intensif | Centra Biotech",
+      "metaDescription": "Bioteknologi probiotik untuk udang vannamei dan windu. Tingkatkan SR, FCR, dan kualitas air tambak. Pencegahan penyakit WSSV dan EHP secara biologis."
     },
     "viewDetails": "Lihat Detail",
     "addToCart": "Tambah ke Keranjang",
@@ -111,19 +143,7 @@
     "benefits": "Manfaat",
     "howToUse": "Cara Penggunaan",
     "relatedProducts": "Produk Terkait",
-    "backToProducts": "Kembali ke Produk",
-    "page": {
-      "heroCategory": "Produk & Layanan",
-      "heroTitle": "Tingkatkan Produktivitas Anda dengan Produk Bioteknologi Berkualitas Tinggi",
-      "introTitle": "Solusi Bioteknologi Terdepan untuk Agribisnis Indonesia",
-      "introDescription": "Centra Biotech Indonesia menghadirkan rangkaian produk bioteknologi berkualitas tinggi untuk sektor pertanian, peternakan, dan perikanan. Produk kami dikembangkan melalui riset mendalam dan teknologi fermentasi modern untuk menghasilkan pupuk hayati, probiotik, dan bioaktivator yang ramah lingkungan.",
-      "whyTitle": "Mengapa Kami?",
-      "whyDescription": "PT Centra Biotech Indonesia merupakan salah satu perusahaan bioteknologi terkemuka di Indonesia. Banyak inovasi produk bioteknologi yang kami hasilkan dari riset kami yang menjadi pionir dan terbukti dapat membantu industri pertanian, peternakan, dan perikanan untuk meningkatkan hasil produktivitasnya. Kami berkomitmen untuk terus memberdayakan masa depan Indonesia melalui inovasi produk-produk bioteknologi berkualitas tinggi. Dibekali dengan pengalaman selama kurang lebih 14 tahun, produk bersertifikat, dan didukung oleh sumber daya profesional, kami terus berusaha menyediakan produk-produk bioteknologi yang terbaik.",
-      "servicesTitle": "Layanan Kami",
-      "servicesDescription": "Dokter Tani adalah Klinik yang menyediakan layanan konsultasi, diagnosis, dan resep obat untuk meningkatkan produktivitas pertanian, peternakan, dan perikanan. Konsultasikan berbagai kebutuhan solusi pertanian, peternakan dan perikanan dengan tim ahli kami.",
-      "ctaTitle": "Siap Tingkatkan Produktivitas Anda dengan Produk Bioteknologi kami?",
-      "ctaButton": "Hubungi Kami"
-    }
+    "backToProducts": "Kembali ke Produk"
   },
   "maklon": {
     "title": "Jasa Maklon Pupuk",
@@ -206,13 +226,13 @@
     "ctaDesc": "Konsultasikan kebutuhan maklon pupuk Anda dengan tim ahli kami. Dapatkan penawaran terbaik dan mulai produksi pupuk dengan merek Anda sendiri!",
     "ctaButton": "Konsultasi Gratis",
     "ctaWhatsapp": "WhatsApp Kami",
-    "ctaContact": "📞 +62 851-9621-4187 | ✉️ centrabiotech.id@gmail.com"
+    "ctaContact": "📞 0851-9621-4187 | ✉️ centrabioindo@gmail.com"
   },
   "contact": {
     "title": "Hubungi Kami",
     "subtitle": "Kami siap membantu Anda",
     "teamTitle": "Hubungi Tim Centra Biotech Indonesia",
-    "description": "Kami siap membantu menjawab pertanyaan Anda seputar produk bioteknologi, layanan konsultasi pertanian, peternakan, dan perikanan. Tim customer service kami berpengalaman dalam memberikan solusi terbaik untuk kebutuhan agribisnis Anda. Silakan isi formulir di bawah ini atau hubungi kami langsung melalui telepon dan email. Kantor pusat kami berlokasi di Klaten, Jawa Tengah, dengan jaringan distribusi yang tersebar di seluruh Indonesia. PT Centra Biotech Indonesia menyediakan layanan konsultasi gratis untuk petani, peternak, dan pembudidaya ikan yang ingin meningkatkan produktivitas usaha mereka menggunakan produk hayati ramah lingkungan.",
+    "description": "Kami siap membantu menjawab pertanyaan Anda seputar produk bioteknologi, layanan konsultasi pertanian, peternakan, dan perikanan. Tim customer service kami berpengalaman dalam memberikan solusi terbaik untuk kebutuhan agribisnis Anda. Silakan isi formulir di bawah ini atau hubungi kami langsung melalui telepon dan email. Kantor pusat kami berlokasi di Boyolali, Jawa Tengah, dengan jaringan distribusi yang tersebar di seluruh Indonesia. PT Centra Biotech Indonesia menyediakan layanan konsultasi gratis untuk petani, peternak, dan pembudidaya ikan yang ingin meningkatkan produktivitas usaha mereka menggunakan produk hayati ramah lingkungan.",
     "formTitle": "Kirim Pesan",
     "name": "Nama Lengkap",
     "firstName": "Nama Depan",
@@ -282,25 +302,14 @@
     "apply": "Lamar Sekarang",
     "requirements": "Persyaratan",
     "responsibilities": "Tanggung Jawab",
-    "benefits": "Benefit",
-    "heroCategory": "Karir",
-    "heroTitle": "Gabung Bersama Tim Kami, Wujudkan Masa Depan Baru yang Lebih Baik",
-    "joinUsTitle": "Jadilah Bagian dari Kami!",
-    "joinUsDescription": "Kami percaya bahwa inovasi dan kolaborasi adalah kunci untuk menciptakan solusi bioteknologi ramah lingkungan yang berdampak besar bagi sektor pertanian, perikanan, dan peternakan. Jika Anda memiliki semangat untuk berkontribusi dalam menciptakan masa depan yang berkelanjutan, bergabunglah dengan tim kami. Temukan peluang karir yang sesuai dengan keahlian Anda dan jadilah bagian dari perjalanan kami dalam memberikan manfaat nyata bagi masyarakat dan lingkungan.",
-    "lifeAtTitle": "Kehidupan di Centra Biotech Indonesia",
-    "testimonyName": "Bayu Subeni",
-    "testimonyJobTitle": "Staff Digital Marketing",
-    "testimonyText": "Bekerja sebagai Marketing di PT Centra Biotech Indonesia adalah pengalaman yang luar biasa. Saya merasa dihargai karena ide-ide kreatif saya didukung penuh untuk memperluas jangkauan produk ramah lingkungan kami. Selain itu, budaya perusahaan yang kolaboratif dan fokus pada inovasi membuat saya terus termotivasi untuk memberikan yang terbaik. Setiap hari adalah kesempatan untuk belajar hal baru dan memberikan dampak positif bagi sektor pertanian, perikanan, dan peternakan di Indonesia."
+    "benefits": "Benefit"
   },
   "documents": {
     "title": "Dokumen & Brosur",
     "subtitle": "Download materi informasi produk kami",
-    "download": "Unduh",
-    "downloading": "Mengunduh...",
+    "download": "Download",
     "fileSize": "Ukuran File",
-    "lastUpdated": "Terakhir Diperbarui",
-    "brochures": "Brosur",
-    "certificates": "Sertifikat Pupuk"
+    "lastUpdated": "Terakhir Diperbarui"
   },
   "common": {
     "loading": "Memuat...",
@@ -331,16 +340,15 @@
     },
     "500": {
       "title": "Terjadi Kesalahan",
-      "description": "Maaf, terjadi kesalahan yang tidak terduga. Tim kami telah diberi tahu dan sedang bekerja untuk memperbaikinya.",
-      "retry": "Coba Lagi",
-      "backHome": "Kembali ke Beranda"
+      "description": "Maaf, terjadi kesalahan pada server. Silakan coba lagi nanti.",
+      "retry": "Coba Lagi"
     }
   },
   "seo": {
-    "homeTitle": "Centra Biotech Indonesia - Solusi Bioteknologi Pertanian Terdepan #1",
-    "homeDescription": "✅ Produsen pupuk hayati & organik bersertifikat Kementan RI. Bioteknologi terbaik untuk pertanian, peternakan & perikanan. Tingkatkan panen hingga 86%. Pesan sekarang!",
-    "aboutTitle": "Tentang PT CBI - Perusahaan Bioteknologi di Indonesia",
-    "aboutDescription": "PT Centra Biotech Indonesia (PT CBI) adalah perusahaan bioteknologi di Indonesia sejak 2011. Apa itu biotech? Pelajari bagaimana bioteknologi menghasilkan pupuk hayati & produk pertanian organik berkualitas. Bersertifikat Kementan RI.",
+    "homeTitle": "PT CBI Centra Biotech Indonesia - Bioteknologi Indonesia untuk Pertanian",
+    "homeDescription": "PT Centra Biotech Indonesia adalah perusahaan bioteknologi industri terkemuka. Bioteknologi untuk negara-negara berkembang dengan bahan baku berkualitas. Solusi bioteknologi terintegrasi untuk pertanian, peternakan, dan perikanan Indonesia.",
+    "aboutTitle": "Tentang PT CBI - Perusahaan Bioteknologi Indonesia Terdepan",
+    "aboutDescription": "PT Centra Biotech Indonesia (PT CBI) adalah perusahaan bioteknologi di Indonesia. Apa itu biotech? Bioteknologi memanfaatkan organisme hidup untuk menghasilkan produk pertanian. Pelajari bioteknologi untuk pertanian berkelanjutan.",
     "productsTitle": "Produk & Layanan - Centra Biotech Indonesia",
     "productsDescription": "Jelajahi produk bioteknologi kami: pupuk hayati, probiotik peternakan, dan solusi akuakultur untuk hasil maksimal.",
     "contactTitle": "Hubungi Kami - Centra Biotech Indonesia",

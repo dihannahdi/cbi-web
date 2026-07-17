@@ -49,22 +49,20 @@ const NavigationLinks: FC<NavigationLinksProps> = ({ lang, dict }) => {
     { label: dict.nav.products, href: `/${lang}/produk-layanan` },
     { label: dict.nav.agriculture, href: `/${lang}/produk-layanan/pertanian` },
     { label: dict.nav.livestock, href: `/${lang}/produk-layanan/peternakan` },
+    { label: `  ${dict.nav.peternakanUnggas}`, href: `/${lang}/produk-layanan/peternakan/unggas` },
+    { label: `  ${dict.nav.peternakanRuminant}`, href: `/${lang}/produk-layanan/peternakan/ruminant` },
     { label: dict.nav.fishery, href: `/${lang}/produk-layanan/perikanan` },
-    {
-      label: dict.nav.dokterTani,
-      href: "https://www.doktertani.co.id/",
-      target: "_blank",
-    },
+    { label: `  ${dict.nav.perikananBiofloc}`, href: `/${lang}/produk-layanan/perikanan/biofloc` },
+    { label: `  ${dict.nav.perikananUdang}`, href: `/${lang}/produk-layanan/perikanan/udang` },
   ] : [
-    { label: dict.nav.products, href: `/${lang}/produk-layanan` },
-    { label: dict.nav.agriculture, href: `/${lang}/produk-layanan/pertanian` },
-    { label: dict.nav.livestock, href: `/${lang}/produk-layanan/peternakan` },
-    { label: dict.nav.fishery, href: `/${lang}/produk-layanan/perikanan` },
-    {
-      label: dict.nav.dokterTani,
-      href: "https://www.doktertani.co.id/",
-      target: "_blank",
-    },
+    { label: dict.nav.products, href: `/${lang}/product` },
+    { label: dict.nav.agriculture, href: `/${lang}/product/agriculture` },
+    { label: dict.nav.livestock, href: `/${lang}/product/livestock` },
+    { label: `  ${dict.nav.peternakanUnggas}`, href: `/${lang}/produk-layanan/peternakan/unggas` },
+    { label: `  ${dict.nav.peternakanRuminant}`, href: `/${lang}/produk-layanan/peternakan/ruminant` },
+    { label: dict.nav.fishery, href: `/${lang}/product/fishery` },
+    { label: `  ${dict.nav.perikananBiofloc}`, href: `/${lang}/produk-layanan/perikanan/biofloc` },
+    { label: `  ${dict.nav.perikananUdang}`, href: `/${lang}/produk-layanan/perikanan/udang` },
   ];
 
   return (

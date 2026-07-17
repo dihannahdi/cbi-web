@@ -90,9 +90,13 @@ export function middleware(request: NextRequest) {
 
   // Redirect to localized path with 301 (permanent) for SEO
   // 301 tells Google to update the index with the new canonical URL
-  const newUrl = new URL(request.url);
-  newUrl.pathname = `/${locale}${pathname}`;
-  
+  // Build the redirect from forwarded host so the upstream bind (e.g. 127.0.0.1:3034 behind nginx) doesn't leak into Location
+  const forwardedHost = request.headers.get('x-forwarded-host') || request.headers.get('host');
+  const forwardedProto = request.headers.get('x-forwarded-proto') || request.nextUrl.protocol.replace(':', '');
+  const newUrl = forwardedHost
+    ? new URL(`${forwardedProto}://${forwardedHost}/${locale}${pathname}${request.nextUrl.search}`)
+    : (() => { const u = new URL(request.url); u.pathname = `/${locale}${pathname}`; return u; })();
+
   const response = NextResponse.redirect(newUrl, 301);
   response.cookies.set('NEXT_LOCALE', locale, {
     maxAge: 60 * 60 * 24 * 365, // 1 year

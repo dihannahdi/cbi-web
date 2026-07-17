@@ -22,17 +22,9 @@ interface OurServiceSectionProps {
   data: ServicesSection;
   lang?: Locale;
   readMoreText?: string;
-  title?: string;
-  description?: string;
 }
 
-const OurServiceSection = ({
-  data,
-  lang = "id",
-  readMoreText,
-  title,
-  description,
-}: OurServiceSectionProps) => {
+const OurServiceSection = ({ data, lang = "id", readMoreText = "Read More" }: OurServiceSectionProps) => {
   const [swiper, setSwiper] = useState<SwiperType>();
 
   return (
@@ -40,17 +32,16 @@ const OurServiceSection = ({
       <ContainerSection>
         <div className="flex flex-col justify-between gap-5 lg:flex-row lg:gap-24">
           <div className="flex-shrink">
-            <h2 className="text-3xl font-bold lg:text-4xl">{title ?? data.title}</h2>
+            <h2 className="text-3xl font-bold lg:text-4xl">{data.title}</h2>
           </div>
           <div className="flex flex-1 flex-col gap-5">
-            <p className="text-[#666]">{description ?? data.description}</p>
+            <p className="text-[#666]">{data.description}</p>
             <LinkGreen
               className="mt-2"
-              target="_blank"
-              href="http://doktertani.co.id"
+              href={`/${lang}/contact`}
               withArrow={false}
             >
-              {readMoreText || (lang === 'en' ? 'Read More' : 'Selengkapnya')}
+              {readMoreText}
             </LinkGreen>
           </div>
         </div>
