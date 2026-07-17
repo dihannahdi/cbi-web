@@ -7,6 +7,7 @@ import ContainerSection from "@/components/layout/container";
 import Breadcrumb from "@/components/common/BreadScrumb";
 import HeroSectionGeneral from "@/components/common/HeroSectionGeneral";
 import VideoGallerySlider from "@/components/product/VideoGallerySlider";
+import ProductComposition from "@/components/product/ProductComposition";
 import { SITE_CONFIG } from "@/utils/seo";
 import { 
   generateProductSchema,
@@ -816,6 +817,24 @@ export default async function FloraOnePage({
           </div>
         </ContainerSection>
       </section>
+
+      {/* Microbial composition — real data (also in Product JSON-LD) */}
+      <ProductComposition
+        lang={lang}
+        title={lang === "id" ? "Komposisi 5 Mikroba" : "5-Microbe Composition"}
+        subtitle={
+          lang === "id"
+            ? "Konsorsium 5 mikroba hidup menguntungkan dalam FLORA ONE."
+            : "A consortium of 5 beneficial living microbes in FLORA ONE."
+        }
+        items={[
+          { organism: "Pseudomonas fluorescens", role: lang === "id" ? "PGPR & fungisida hayati" : "PGPR & biological fungicide" },
+          { organism: "Azospirillum sp.", role: lang === "id" ? "Pengikat nitrogen" : "Nitrogen fixer" },
+          { organism: "Rhizobium sp.", role: lang === "id" ? "Pengikat N untuk legum" : "N fixer for legumes" },
+          { organism: "Trichoderma harzianum", role: lang === "id" ? "Fungisida hayati" : "Biological fungicide" },
+          { organism: "Aspergillus niger", role: lang === "id" ? "Pelarut P & K" : "P & K solubilizer" },
+        ]}
+      />
 
       {/* Documents & Certifications Section - Matching RajaBio Layout */}
       <section className="bg-[#EEE] py-20">

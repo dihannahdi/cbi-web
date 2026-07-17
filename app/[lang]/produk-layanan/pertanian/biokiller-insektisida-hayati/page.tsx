@@ -7,6 +7,7 @@ import ContainerSection from "@/components/layout/container";
 import Breadcrumb from "@/components/common/BreadScrumb";
 import HeroSectionGeneral from "@/components/common/HeroSectionGeneral";
 import VideoGallerySlider from "@/components/product/VideoGallerySlider";
+import ProductComposition from "@/components/product/ProductComposition";
 import { SITE_CONFIG } from "@/utils/seo";
 import { 
   generateProductSchema,
@@ -809,6 +810,21 @@ export default async function BioKillerPage({
           </div>
         </ContainerSection>
       </section>
+
+      {/* Active-ingredient composition — real data (also in Product JSON-LD) */}
+      <ProductComposition
+        lang={lang}
+        title={lang === "id" ? "Bahan Aktif" : "Active Ingredients"}
+        subtitle={
+          lang === "id"
+            ? "Jamur entomopatogen yang menginfeksi & mematikan hama sasaran."
+            : "Entomopathogenic fungi that infect and kill target pests."
+        }
+        items={[
+          { organism: "Beauveria bassiana", spec: "1.0 × 10⁶ cfu/ml", role: lang === "id" ? "Jamur entomopatogen" : "Entomopathogenic fungus" },
+          { organism: "Metarhizium anisopliae", spec: "1.0 × 10⁶ cfu/ml", role: lang === "id" ? "Jamur entomopatogen" : "Entomopathogenic fungus" },
+        ]}
+      />
 
       {/* Documents & Certifications Section - Matching RajaBio Layout */}
       <section className="bg-[#EEE] py-20">
