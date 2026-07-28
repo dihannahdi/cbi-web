@@ -486,11 +486,11 @@ export default async function ProductDetailPage({
       brand: "Centra Biotech Indonesia",
       category: "Pupuk",
       url: `/${lang}/produk-layanan/pertanian/${slug}`,
-      offers: {
-        price: 0,
-        priceCurrency: "IDR",
-        availability: "InStock",
-      },
+      // NOTE: no `offers` block here on purpose. This is a B2B site with no
+      // published retail price for these CMS-driven products, so emitting a
+      // placeholder price (previously hardcoded to 0) would misrepresent the
+      // product to Google Merchant/Product rich results. See GSC structured
+      // data remediation notes (2026-07-28) for details.
     },
     imageGallery.length > 0 ? imageGallery : undefined
   );

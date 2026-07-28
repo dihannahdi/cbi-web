@@ -589,69 +589,16 @@ export default async function RajabioProductPage({
         ? ['Pertanian Padi', 'Pertanian Sayuran', 'Pertanian Jagung', 'Pertanian Organik']
         : ['Rice Farming', 'Vegetable Farming', 'Corn Farming', 'Organic Agriculture'],
       
-      // Product Offers
-      offers: {
-        '@type': 'Offer',
-        url: `${SITE_CONFIG.url}/${lang}/produk-layanan/pertanian/rajabio-pupuk-organik`,
-        availability: 'https://schema.org/InStock',
-        price: '62000',
-        priceCurrency: 'IDR',
-        priceValidUntil: '2026-12-31',
-        itemCondition: 'https://schema.org/NewCondition',
-        seller: {
-          '@type': 'Organization',
-          '@id': `${SITE_CONFIG.url}#organization`,
-          name: 'PT Centra Biotech Indonesia',
-        },
-        hasMerchantReturnPolicy: {
-          '@type': 'MerchantReturnPolicy',
-          applicableCountry: 'ID',
-          returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
-          merchantReturnDays: 30,
-          returnMethod: 'https://schema.org/ReturnByMail',
-          returnFees: 'https://schema.org/ReturnFeesCustomerResponsibility'
-        },
-        shippingDetails: {
-          '@type': 'OfferShippingDetails',
-          shippingRate: {
-            '@type': 'MonetaryAmount',
-            value: '0',
-            currency: 'IDR'
-          },
-          shippingDestination: {
-            '@type': 'DefinedRegion',
-            addressCountry: 'ID'
-          },
-          deliveryTime: {
-            '@type': 'ShippingDeliveryTime',
-            handlingTime: {
-              '@type': 'QuantitativeValue',
-              minValue: 1,
-              maxValue: 3,
-              unitCode: 'DAY'
-            },
-            transitTime: {
-              '@type': 'QuantitativeValue',
-              minValue: 2,
-              maxValue: 7,
-              unitCode: 'DAY'
-            }
-          }
-        },
-        availableAtOrFrom: [
-          {
-            '@type': 'OnlineStore',
-            name: 'Shopee Indonesia',
-            url: EXTERNAL_LINKS.shopee,
-          },
-          {
-            '@type': 'GovernmentService',
-            name: lang === 'id' ? 'E-Katalog Pemerintah (INAPROC)' : 'Government E-Catalog (INAPROC)',
-            url: EXTERNAL_LINKS.inaproc,
-          },
-        ],
-      },
-      
+      // NOTE: no `offers` block here on purpose (previously a fake price of
+      // 60000 that was never displayed anywhere on the rendered page). This is
+      // a B2B product with no publicly published retail price, so we don't
+      // claim Merchant/Product rich-result eligibility. If RAJABIO's INAPROC
+      // government e-catalog price should be surfaced here, it needs to be a
+      // real, editor-maintained value (see utils/strapiProductData.ts's
+      // `priceIdr`/`priceValidUntil` fields, which already exist in the CMS
+      // schema but are not yet wired into this page). See GSC structured data
+      // remediation notes (2026-07-28).
+
       // Related Products (semantic connections)
       isRelatedTo: [
         {
@@ -676,66 +623,16 @@ export default async function RajabioProductPage({
         ? 'pupuk organik cair, ramah lingkungan, pertanian berkelanjutan, bersertifikat kementan'
         : 'liquid organic fertilizer, eco-friendly, sustainable agriculture, ministry certified',
       
-      // Aggregate Rating
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '4.8',
-        reviewCount: '127',
-        bestRating: '5',
-        worstRating: '1',
-      },
-      
-      // Reviews (Proof Points for AI)
-      review: [
-        {
-          '@type': 'Review',
-          author: {
-            '@type': 'Person',
-            name: 'Pak Budi - Petani Padi Indramayu',
-          },
-          datePublished: '2025-11-15',
-          reviewBody: lang === 'id' 
-            ? 'RAJABIO benar-benar mengubah hasil panen saya. Padi lebih subur dan panen naik 35%. Sangat direkomendasikan untuk petani organik!'
-            : 'RAJABIO truly transformed my harvest. Rice is more fertile and harvest increased by 35%. Highly recommended for organic farmers!',
-          reviewRating: {
-            '@type': 'Rating',
-            ratingValue: '5',
-            bestRating: '5',
-          },
-        },
-        {
-          '@type': 'Review',
-          author: {
-            '@type': 'Person',
-            name: 'Ibu Sri - Petani Sayur Bandung',
-          },
-          datePublished: '2025-10-22',
-          reviewBody: lang === 'id'
-            ? 'Sayuran jadi lebih segar dan tahan lama. Hama berkurang drastis setelah rutin pakai RAJABIO. Harga juga sangat terjangkau.'
-            : 'Vegetables became fresher and last longer. Pests decreased drastically after regular use of RAJABIO. Price is also very affordable.',
-          reviewRating: {
-            '@type': 'Rating',
-            ratingValue: '5',
-            bestRating: '5',
-          },
-        },
-        {
-          '@type': 'Review',
-          author: {
-            '@type': 'Person',
-            name: 'Pak Ahmad - Petani Cabai Jawa Tengah',
-          },
-          datePublished: '2025-09-10',
-          reviewBody: lang === 'id'
-            ? 'Cabai saya tumbuh lebih besar dan produktif. RAJABIO mudah diaplikasikan dan hasilnya memuaskan. Akan terus pakai produk ini.'
-            : 'My chili plants grew bigger and more productive. RAJABIO is easy to apply with satisfying results. Will continue using this product.',
-          reviewRating: {
-            '@type': 'Rating',
-            ratingValue: '5',
-            bestRating: '5',
-          },
-        },
-      ],
+      // NOTE: no `aggregateRating` / `review` here on purpose. The previous
+      // values (4.8 stars, 127 reviews, plus 3 named "Pak Budi" / "Ibu Sri" /
+      // "Pak Ahmad" reviews) were fabricated and not backed by any real review
+      // platform or verifiable source — fake reviews in structured data are a
+      // Google manual-action risk. Real farmer testimonials do exist as videos
+      // (see the VideoObject schemas below, e.g. Pak Parjan / Pak Parman), but
+      // those are a different, legitimate schema type and are left as-is. If
+      // genuine customer reviews are collected in the future (e.g. via a
+      // review platform integration), they can be added back here. See GSC
+      // structured data remediation notes (2026-07-28).
     },
     
     // 2. Breadcrumb Schema
@@ -755,7 +652,8 @@ export default async function RajabioProductPage({
       name: lang === 'id' ? "Bekas Produksi Batu Bata Kini Berproduksi Lagi Berkat RAJABIO" : "Former Brick Production Now Producing Again Thanks to RAJABIO",
       description: lang === 'id' ? "Testimoni petani dari Indramayu yang berhasil menghidupkan kembali lahan bekas produksi batu bata menggunakan pupuk organik cair RAJABIO." : "Farmer testimonial from Indramayu successfully reviving former brick production land using RAJABIO liquid organic fertilizer.",
       thumbnailUrl: `${SITE_CONFIG.url}/products/rajabio/rajabio-cover.webp`,
-      uploadDate: "2024-11-01",
+      // Real YouTube publish timestamp (verified via itemprop="uploadDate", 2026-07-28)
+      uploadDate: "2025-09-22T22:00:03-07:00",
       contentUrl: "https://www.youtube.com/watch?v=rRbK3D_gvS4",
       embedUrl: "https://www.youtube.com/embed/rRbK3D_gvS4",
       duration: "PT3M45S",
@@ -766,7 +664,8 @@ export default async function RajabioProductPage({
       name: lang === 'id' ? "Testimoni Pak Parjan Indramayu - RAJABIO POC" : "Pak Parjan Indramayu Testimonial - RAJABIO LOF",
       description: lang === 'id' ? "Pak Parjan dari Indramayu membagikan pengalamannya menggunakan pupuk organik cair RAJABIO untuk meningkatkan hasil panen padi." : "Pak Parjan from Indramayu shares his experience using RAJABIO liquid organic fertilizer to increase rice harvest.",
       thumbnailUrl: `${SITE_CONFIG.url}/products/rajabio/rajabio-cover.webp`,
-      uploadDate: "2024-10-15",
+      // Real YouTube publish timestamp (verified via itemprop="uploadDate", 2026-07-28)
+      uploadDate: "2025-09-03T20:30:42-07:00",
       contentUrl: "https://www.youtube.com/watch?v=_B3pONNfGEI",
       embedUrl: "https://www.youtube.com/embed/_B3pONNfGEI",
       duration: "PT2M30S",
@@ -777,7 +676,8 @@ export default async function RajabioProductPage({
       name: lang === 'id' ? "Cara Efektif Menekan Biaya Produksi Padi 60% dengan RAJABIO" : "Effective Way to Reduce Rice Production Costs 60% with RAJABIO",
       description: lang === 'id' ? "Tutorial lengkap cara menggunakan pupuk organik cair RAJABIO untuk menekan biaya produksi padi hingga 60% tanpa mengurangi hasil panen." : "Complete tutorial on using RAJABIO liquid organic fertilizer to reduce rice production costs up to 60% without reducing harvest.",
       thumbnailUrl: `${SITE_CONFIG.url}/products/rajabio/rajabio-cover.webp`,
-      uploadDate: "2024-09-20",
+      // Real YouTube publish timestamp (verified via itemprop="uploadDate", 2026-07-28)
+      uploadDate: "2025-08-25T20:03:51-07:00",
       contentUrl: "https://www.youtube.com/watch?v=IkHUqxjLuIE",
       embedUrl: "https://www.youtube.com/embed/IkHUqxjLuIE",
       duration: "PT4M15S",
@@ -788,7 +688,8 @@ export default async function RajabioProductPage({
       name: lang === 'id' ? "Testimoni Pak Parman Batang - RAJABIO Pupuk Organik" : "Pak Parman Batang Testimonial - RAJABIO Organic Fertilizer",
       description: lang === 'id' ? "Petani dari Batang, Pak Parman, berbagi kesuksesannya menggunakan POC RAJABIO untuk pertanian organik yang menguntungkan." : "Farmer from Batang, Pak Parman, shares his success using RAJABIO LOF for profitable organic farming.",
       thumbnailUrl: `${SITE_CONFIG.url}/products/rajabio/rajabio-cover.webp`,
-      uploadDate: "2024-08-10",
+      // Real YouTube publish timestamp (verified via itemprop="uploadDate", 2026-07-28)
+      uploadDate: "2025-08-19T03:16:44-07:00",
       contentUrl: "https://www.youtube.com/watch?v=zGF2bYyClhk",
       embedUrl: "https://www.youtube.com/embed/zGF2bYyClhk",
       duration: "PT3M20S",

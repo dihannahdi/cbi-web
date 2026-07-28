@@ -402,54 +402,11 @@ export default async function FloraOnePage({
         `${SITE_CONFIG.url}/products/floraone/floraone-cover.webp`,
         `${SITE_CONFIG.url}/products/floraone/floraone-bottle.webp`,
       ],
-      "offers": {
-        "@type": "Offer",
-        "url": `${SITE_CONFIG.url}/${lang}/produk-layanan/pertanian/floraone-pupuk-hayati`,
-        "priceCurrency": "IDR",
-        "price": "60000",
-        "priceValidUntil": "2026-12-31",
-        "availability": "https://schema.org/InStock",
-        "itemCondition": "https://schema.org/NewCondition",
-        "seller": {
-          "@type": "Organization",
-          "name": "PT. Centra Biotech Indonesia"
-        },
-        "hasMerchantReturnPolicy": {
-          "@type": "MerchantReturnPolicy",
-          "applicableCountry": "ID",
-          "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-          "merchantReturnDays": 30,
-          "returnMethod": "https://schema.org/ReturnByMail",
-          "returnFees": "https://schema.org/ReturnFeesCustomerResponsibility"
-        },
-        "shippingDetails": {
-          "@type": "OfferShippingDetails",
-          "shippingRate": {
-            "@type": "MonetaryAmount",
-            "value": "0",
-            "currency": "IDR"
-          },
-          "shippingDestination": {
-            "@type": "DefinedRegion",
-            "addressCountry": "ID"
-          },
-          "deliveryTime": {
-            "@type": "ShippingDeliveryTime",
-            "handlingTime": {
-              "@type": "QuantitativeValue",
-              "minValue": 1,
-              "maxValue": 3,
-              "unitCode": "DAY"
-            },
-            "transitTime": {
-              "@type": "QuantitativeValue",
-              "minValue": 2,
-              "maxValue": 7,
-              "unitCode": "DAY"
-            }
-          }
-        }
-      },
+      // NOTE: no "offers" here on purpose (previously a fake price of 60000
+      // that was never displayed anywhere on the rendered page). This is a
+      // B2B product with no publicly published retail price, so we don't
+      // claim Merchant/Product rich-result eligibility. See GSC structured
+      // data remediation notes (2026-07-28).
       "isRelatedTo": [
         {
           "@type": "Product",
@@ -470,10 +427,6 @@ export default async function FloraOnePage({
           "description": "Insektisida hayati untuk pengendalian wereng dan hama tanaman"
         }
       ],
-      "audience": {
-        "@type": "Audience",
-        "audienceType": "Farmers, Agricultural Professionals, Organic Farming Practitioners"
-      }
     },
     // Breadcrumb Schema
     {
@@ -584,40 +537,12 @@ export default async function FloraOnePage({
         "name": "PT Centra Biotech Indonesia"
       }
     },
-    // GEO Schema 2: AggregateRating (Social Proof for AI)
-    {
-      "@context": "https://schema.org",
-      "@type": "Product",
-      "@id": `${SITE_CONFIG.url}/${lang}/produk-layanan/pertanian/floraone-pupuk-hayati#product-rating`,
-      "name": "FLORA ONE Pupuk Hayati",
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "156",
-        "bestRating": "5",
-        "worstRating": "1"
-      },
-      "review": [
-        {
-          "@type": "Review",
-          "author": { "@type": "Person", "name": "Pak Parjan - Petani Padi Indramayu" },
-          "datePublished": "2025-10-20",
-          "reviewBody": lang === 'id'
-            ? "FLORA ONE benar-benar luar biasa! Padi saya meningkat 86% dan bebas penyakit blas. Sangat direkomendasikan!"
-            : "FLORA ONE is truly amazing! My rice yield increased 86% and free from blast disease. Highly recommended!",
-          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
-        },
-        {
-          "@type": "Review",
-          "author": { "@type": "Person", "name": "Bu Siti - Petani Sayur Bandung" },
-          "datePublished": "2025-09-15",
-          "reviewBody": lang === 'id'
-            ? "Sayuran saya lebih sehat dan tahan penyakit sejak pakai FLORA ONE. Hasilnya konsisten bagus!"
-            : "My vegetables are healthier and disease-resistant since using FLORA ONE. Results are consistently great!",
-          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
-        }
-      ]
-    },
+    // NOTE: A second "Product" entity with a fabricated aggregateRating
+    // (4.9 stars / 156 reviews) and two fabricated named reviews used to sit
+    // here. It has been removed: those numbers and reviewers were invented,
+    // not backed by any real review platform, and fake reviews in structured
+    // data are a Google manual-action risk. See GSC structured data
+    // remediation notes (2026-07-28).
     // GEO Schema 3: ItemList for AI Answer Extraction
     {
       "@context": "https://schema.org",

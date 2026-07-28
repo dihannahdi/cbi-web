@@ -481,52 +481,14 @@ export default async function SimbiosProductPage({
         { '@type': 'PropertyValue', name: 'Microbe Optimization', value: '70', unitText: 'percent' },
         { '@type': 'PropertyValue', name: 'Microbe Types', value: '5', unitText: 'types' },
       ],
-      offers: {
-        '@type': 'Offer',
-        url: `${SITE_CONFIG.url}/${lang}/produk-layanan/pertanian/simbios-pupuk-hayati`,
-        availability: 'https://schema.org/InStock',
-        price: '60000',
-        priceCurrency: 'IDR',
-        priceValidUntil: '2026-12-31',
-        itemCondition: 'https://schema.org/NewCondition',
-        seller: { '@type': 'Organization', name: 'PT Centra Biotech Indonesia' },
-        hasMerchantReturnPolicy: {
-          '@type': 'MerchantReturnPolicy',
-          applicableCountry: 'ID',
-          returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
-          merchantReturnDays: 30,
-          returnMethod: 'https://schema.org/ReturnByMail',
-          returnFees: 'https://schema.org/ReturnFeesCustomerResponsibility'
-        },
-        shippingDetails: {
-          '@type': 'OfferShippingDetails',
-          shippingRate: {
-            '@type': 'MonetaryAmount',
-            value: '0',
-            currency: 'IDR'
-          },
-          shippingDestination: {
-            '@type': 'DefinedRegion',
-            addressCountry: 'ID'
-          },
-          deliveryTime: {
-            '@type': 'ShippingDeliveryTime',
-            handlingTime: {
-              '@type': 'QuantitativeValue',
-              minValue: 1,
-              maxValue: 3,
-              unitCode: 'DAY'
-            },
-            transitTime: {
-              '@type': 'QuantitativeValue',
-              minValue: 2,
-              maxValue: 7,
-              unitCode: 'DAY'
-            }
-          }
-        }
-      },
-      aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '156', bestRating: '5' },
+      // NOTE: no "offers" here on purpose (previously a fake price of 60000
+      // that was never displayed anywhere on the rendered page). This is a
+      // B2B product with no publicly published retail price, so we don't
+      // claim Merchant/Product rich-result eligibility.
+      // NOTE: "aggregateRating" (previously a fabricated 4.9 stars / 156
+      // reviews with no backing source) has also been removed — fake ratings
+      // in structured data are a Google manual-action risk. See GSC
+      // structured data remediation notes (2026-07-28).
       isRelatedTo: [
         { '@type': 'Product', name: 'RAJABIO Pupuk Organik Cair', url: `${SITE_CONFIG.url}/${lang}/produk-layanan/pertanian/rajabio-pupuk-organik` },
         { '@type': 'Product', name: 'FLORAONE Pupuk Hayati', url: `${SITE_CONFIG.url}/${lang}/produk-layanan/pertanian/floraone-pupuk-hayati` },
@@ -595,40 +557,12 @@ export default async function SimbiosProductPage({
         "name": "PT Centra Biotech Indonesia"
       }
     },
-    // GEO Schema 6: AggregateRating with Reviews (Social Proof for AI)
-    {
-      "@context": "https://schema.org",
-      "@type": "Product",
-      "@id": `${SITE_CONFIG.url}/${lang}/produk-layanan/pertanian/simbios-pupuk-hayati#product-rating`,
-      "name": "SIMBIOS Pupuk Hayati Premium",
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "reviewCount": "156",
-        "bestRating": "5",
-        "worstRating": "1"
-      },
-      "review": [
-        {
-          "@type": "Review",
-          "author": { "@type": "Person", "name": "Pak Darmawan - Petani Hortikultura Batu" },
-          "datePublished": "2025-11-18",
-          "reviewBody": lang === 'id'
-            ? "SIMBIOS dengan bio-aktivasinya membuat tanaman tomat saya lebih kuat dan berbuah lebat! Teknologi yang luar biasa."
-            : "SIMBIOS with its bio-activation makes my tomato plants stronger and fruitful! Amazing technology.",
-          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
-        },
-        {
-          "@type": "Review",
-          "author": { "@type": "Person", "name": "Bu Endah - Petani Buah Malang" },
-          "datePublished": "2025-10-30",
-          "reviewBody": lang === 'id'
-            ? "Mikroba aktif dalam SIMBIOS benar-benar membantu tanaman stroberi saya tahan penyakit. Sangat recommended!"
-            : "Active microbes in SIMBIOS really help my strawberry plants resist diseases. Highly recommended!",
-          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
-        }
-      ]
-    },
+    // NOTE: A second "Product" entity with a fabricated aggregateRating
+    // (4.9 stars / 156 reviews) and two fabricated named reviews used to sit
+    // here. It has been removed: those numbers and reviewers were invented,
+    // not backed by any real review platform, and fake reviews in structured
+    // data are a Google manual-action risk. See GSC structured data
+    // remediation notes (2026-07-28).
     // GEO Schema 7: ItemList for AI Answer Extraction
     {
       "@context": "https://schema.org",

@@ -1,10 +1,28 @@
 /**
  * ENTERPRISE PRODUCT SEO DATA
- * 
+ *
  * Comprehensive product information for Schema.org structured data
  * optimized for Google Rich Results and AI product recommendations.
- * 
- * Following Google Merchant Listing requirements:
+ *
+ * IMPORTANT (2026-07-28 GSC structured-data remediation):
+ * This catalog is currently DEAD CODE. `getProductSEOData()` is only called
+ * from app/[lang]/produk-layanan/pertanian/[slug]/page.tsx, but every key
+ * below either matches a product that has its own static route (which Next.js
+ * always resolves before the [slug] catch-all) or a slug that doesn't exist
+ * on any live page. No live URL currently renders this data.
+ *
+ * The `offers` (price/shippingDetails/hasMerchantReturnPolicy), `gtin14`,
+ * `hasCertification` (certificationIdentification), and `review`/
+ * `aggregateRating` values below were fabricated — invented prices, a
+ * sequentially-numbered fake GTIN range, fake certification registration
+ * numbers, and fake named reviewers — not sourced from real business data.
+ * They have been removed so this file can't accidentally ship fabricated
+ * Merchant/Review structured data if the slug keys are ever "fixed" to match
+ * live routes. If real prices/certifications/reviews become available, add
+ * them back sourced from the CMS (see utils/strapiProductData.ts's `priceIdr`
+ * /`gtin`/`priceValidUntil` fields) — do not re-invent placeholder values.
+ *
+ * Following Google Merchant Listing requirements (for when real data exists):
  * - Required: name, image, offers.price, offers.priceCurrency, offers.availability
  * - Strongly Recommended: sku, mpn, brand, aggregateRating, review, hasCertification
  * - Recommended: shippingDetails, hasMerchantReturnPolicy
@@ -143,51 +161,10 @@ export const FLORAONE_PADAT_SEO: EnterpriseProductData = {
   url: '/id/produk-layanan/pertanian/floraone-pupuk-hayati-padat',
   sku: 'CBI-FLO-PADAT-001',
   mpn: 'FLORAONE-SOLID-5KG',
-  gtin14: '08997011234567',
   brand: 'FLORAONE',
   category: 'Pupuk Hayati Organik > Pertanian > Agrikultur',
-  offers: {
-    price: 150000, // Price per 5kg pack in IDR
-    priceCurrency: 'IDR',
-    availability: 'InStock',
-    priceValidUntil: '2026-12-31',
-    shippingDetails: STANDARD_SHIPPING,
-    hasMerchantReturnPolicy: STANDARD_RETURN_POLICY,
-  },
-  aggregateRating: {
-    ratingValue: 4.8,
-    reviewCount: 247,
-    bestRating: 5,
-    worstRating: 1,
-  },
-  review: [
-    {
-      author: 'Pak Budi - Petani Tebu Kediri',
-      datePublished: '2024-08-15',
-      reviewBody: 'Hasil tebu meningkat 25% setelah menggunakan FloraOne. Tanah jadi lebih gembur dan pertumbuhan tanaman lebih seragam.',
-      reviewRating: { ratingValue: 5, bestRating: 5 },
-    },
-    {
-      author: 'Ibu Siti - Petani Padi Jember',
-      datePublished: '2024-07-22',
-      reviewBody: 'Penggunaan pupuk kimia berkurang hingga 40%. Biaya produksi lebih hemat dan hasil panen tetap bagus.',
-      reviewRating: { ratingValue: 5, bestRating: 5 },
-    },
-    {
-      author: 'Kelompok Tani Maju Bersama',
-      datePublished: '2024-06-10',
-      reviewBody: 'Sudah 3 musim tanam menggunakan FloraOne. Kualitas tanah semakin membaik dan hasil panen konsisten.',
-      reviewRating: { ratingValue: 4, bestRating: 5 },
-    },
-  ],
-  hasCertification: [
-    {
-      ...KEMENTAN_CERTIFICATION,
-      certificationIdentification: '442-LeSOS-LSPr-092-IDN-08-25',
-      validThrough: '2026-03-03',
-    },
-    SNI_ORGANIC_CERTIFICATION,
-  ],
+  // offers / aggregateRating / review / hasCertification / gtin14 removed —
+  // see file header note (2026-07-28 GSC structured-data remediation).
   additionalProperty: [
     { name: 'Kandungan Mikroba', value: 'Rhizobium, Azotobacter, Trichoderma, Aspergillus, Pseudomonas' },
     { name: 'Konsentrasi', value: '>1×10⁷ CFU/gram' },
@@ -207,44 +184,10 @@ export const FLORAONE_CAIR_SEO: EnterpriseProductData = {
   url: '/id/produk-layanan/pertanian/floraone-pupuk-hayati',
   sku: 'CBI-FLO-CAIR-001',
   mpn: 'FLORAONE-LIQUID-1L',
-  gtin14: '08997011234568',
   brand: 'FLORAONE',
   category: 'Pupuk Hayati Organik > Pertanian > Agrikultur',
-  offers: {
-    price: 85000, // Price per 1L in IDR
-    priceCurrency: 'IDR',
-    availability: 'InStock',
-    priceValidUntil: '2026-12-31',
-    shippingDetails: STANDARD_SHIPPING,
-    hasMerchantReturnPolicy: STANDARD_RETURN_POLICY,
-  },
-  aggregateRating: {
-    ratingValue: 4.7,
-    reviewCount: 189,
-    bestRating: 5,
-    worstRating: 1,
-  },
-  review: [
-    {
-      author: 'Pak Wawan - Petani Cabai Malang',
-      datePublished: '2024-09-05',
-      reviewBody: 'Semprot rutin 2 minggu sekali, tanaman cabai lebih tahan penyakit dan buah lebih lebat.',
-      reviewRating: { ratingValue: 5, bestRating: 5 },
-    },
-    {
-      author: 'CV Tani Sejahtera',
-      datePublished: '2024-08-01',
-      reviewBody: 'Mudah diaplikasikan, bisa dicampur dengan air irigasi. Hasil nyata dalam 2 minggu.',
-      reviewRating: { ratingValue: 4, bestRating: 5 },
-    },
-  ],
-  hasCertification: [
-    {
-      ...KEMENTAN_CERTIFICATION,
-      certificationIdentification: '443-LeSOS-LSPr-093-IDN-08-25',
-      validThrough: '2026-03-03',
-    },
-  ],
+  // offers / aggregateRating / review / hasCertification / gtin14 removed —
+  // see file header note (2026-07-28 GSC structured-data remediation).
   additionalProperty: [
     { name: 'Kandungan Mikroba', value: 'Trichoderma sp., Pseudomonas fluorescens' },
     { name: 'Konsentrasi', value: '>1×10⁸ CFU/ml' },
@@ -264,38 +207,10 @@ export const BIOJAGAT_SEO: EnterpriseProductData = {
   url: '/id/produk-layanan/pertanian/biojagat-pupuk-hayati-cair',
   sku: 'CBI-BJG-001',
   mpn: 'BIOJAGAT-1L',
-  gtin14: '08997011234569',
   brand: 'BIOJAGAT',
   category: 'Pupuk Hayati Organik > Pertanian > Agrikultur',
-  offers: {
-    price: 75000,
-    priceCurrency: 'IDR',
-    availability: 'InStock',
-    priceValidUntil: '2026-12-31',
-    shippingDetails: STANDARD_SHIPPING,
-    hasMerchantReturnPolicy: STANDARD_RETURN_POLICY,
-  },
-  aggregateRating: {
-    ratingValue: 4.6,
-    reviewCount: 134,
-    bestRating: 5,
-    worstRating: 1,
-  },
-  review: [
-    {
-      author: 'Koperasi Tani Makmur',
-      datePublished: '2024-07-15',
-      reviewBody: 'Efisien untuk lahan luas. Penggunaan urea bisa dikurangi karena fiksasi nitrogen alami.',
-      reviewRating: { ratingValue: 5, bestRating: 5 },
-    },
-  ],
-  hasCertification: [
-    {
-      ...KEMENTAN_CERTIFICATION,
-      certificationIdentification: '444-LeSOS-LSPr-094-IDN-08-25',
-      validThrough: '2026-03-03',
-    },
-  ],
+  // offers / aggregateRating / review / hasCertification / gtin14 removed —
+  // see file header note (2026-07-28 GSC structured-data remediation).
   additionalProperty: [
     { name: 'Kandungan Mikroba', value: 'Azotobacter chroococcum, Bacillus megaterium' },
     { name: 'Fungsi Utama', value: 'Fiksasi N, Pelarut P' },
@@ -313,38 +228,10 @@ export const SIMBIOS_SEO: EnterpriseProductData = {
   url: '/id/produk-layanan/pertanian/simbios-pupuk-hayati',
   sku: 'CBI-SIM-001',
   mpn: 'SIMBIOS-5KG',
-  gtin14: '08997011234570',
   brand: 'SIMBIOS',
   category: 'Pupuk Hayati Organik > Pertanian > Agrikultur',
-  offers: {
-    price: 175000,
-    priceCurrency: 'IDR',
-    availability: 'InStock',
-    priceValidUntil: '2026-12-31',
-    shippingDetails: STANDARD_SHIPPING,
-    hasMerchantReturnPolicy: STANDARD_RETURN_POLICY,
-  },
-  aggregateRating: {
-    ratingValue: 4.7,
-    reviewCount: 98,
-    bestRating: 5,
-    worstRating: 1,
-  },
-  review: [
-    {
-      author: 'Pak Hendra - Petani Jagung',
-      datePublished: '2024-06-20',
-      reviewBody: 'Tanaman jagung lebih tahan kekeringan, akar lebih kuat. Sangat cocok untuk musim kemarau.',
-      reviewRating: { ratingValue: 5, bestRating: 5 },
-    },
-  ],
-  hasCertification: [
-    {
-      ...KEMENTAN_CERTIFICATION,
-      certificationIdentification: '445-LeSOS-LSPr-095-IDN-08-25',
-      validThrough: '2026-03-03',
-    },
-  ],
+  // offers / aggregateRating / review / hasCertification / gtin14 removed —
+  // see file header note (2026-07-28 GSC structured-data remediation).
   additionalProperty: [
     { name: 'Teknologi', value: 'Vesicular Arbuscular Mycorrhiza (VAM)' },
     { name: 'Kandungan', value: 'Mikoriza, Trichoderma' },
@@ -362,45 +249,13 @@ export const RAJABIO_SEO: EnterpriseProductData = {
   url: '/id/produk-layanan/pertanian/rajabio-pupuk-organik',
   sku: 'CBI-RJB-001',
   mpn: 'RAJABIO-25KG',
-  gtin14: '08997011234571',
   brand: 'RAJABIO',
   category: 'Pupuk Organik > Pertanian > Agrikultur',
-  offers: {
-    price: 85000, // Price per 25kg sack
-    priceCurrency: 'IDR',
-    availability: 'InStock',
-    priceValidUntil: '2026-12-31',
-    shippingDetails: STANDARD_SHIPPING,
-    hasMerchantReturnPolicy: STANDARD_RETURN_POLICY,
-  },
-  aggregateRating: {
-    ratingValue: 4.9,
-    reviewCount: 312,
-    bestRating: 5,
-    worstRating: 1,
-  },
-  review: [
-    {
-      author: 'Dinas Pertanian Kab. Lumajang',
-      datePublished: '2024-05-10',
-      reviewBody: 'Sudah digunakan di program pemerintah selama 3 tahun. Kualitas konsisten dan hasil petani meningkat.',
-      reviewRating: { ratingValue: 5, bestRating: 5 },
-    },
-    {
-      author: 'Pak Surya - Petani Hortikultura',
-      datePublished: '2024-08-25',
-      reviewBody: 'Tanah yang tadinya keras jadi gembur dalam 2 musim. Sayuran tumbuh lebih baik.',
-      reviewRating: { ratingValue: 5, bestRating: 5 },
-    },
-  ],
-  hasCertification: [
-    {
-      ...KEMENTAN_CERTIFICATION,
-      certificationIdentification: '446-LeSOS-LSPr-096-IDN-08-25',
-      validThrough: '2026-03-03',
-    },
-    SNI_ORGANIC_CERTIFICATION,
-  ],
+  // offers / aggregateRating / review / hasCertification / gtin14 removed —
+  // see file header note (2026-07-28 GSC structured-data remediation). Note:
+  // the removed "review" from "Dinas Pertanian Kab. Lumajang" falsely
+  // attributed a government agency endorsement — never reintroduce an
+  // institutional review like that without a verifiable, citable source.
   additionalProperty: [
     { name: 'Bahan Dasar', value: 'Kotoran sapi, ayam terfermentasi' },
     { name: 'Kandungan C-Organik', value: '>15%' },
@@ -419,44 +274,10 @@ export const BIOKILLER_SEO: EnterpriseProductData = {
   url: '/id/produk-layanan/pertanian/biokiller-insektisida-hayati',
   sku: 'CBI-BKL-001',
   mpn: 'BIOKILLER-1L',
-  gtin14: '08997011234572',
   brand: 'BIO KILLER',
   category: 'Pestisida Hayati > Perlindungan Tanaman > Agrikultur',
-  offers: {
-    price: 95000,
-    priceCurrency: 'IDR',
-    availability: 'InStock',
-    priceValidUntil: '2026-12-31',
-    shippingDetails: STANDARD_SHIPPING,
-    hasMerchantReturnPolicy: STANDARD_RETURN_POLICY,
-  },
-  aggregateRating: {
-    ratingValue: 4.6,
-    reviewCount: 156,
-    bestRating: 5,
-    worstRating: 1,
-  },
-  review: [
-    {
-      author: 'Pak Joko - Petani Padi Organik',
-      datePublished: '2024-07-30',
-      reviewBody: 'Efektif mengendalikan wereng tanpa merusak ekosistem sawah. Laba-laba pemburu hama tetap hidup.',
-      reviewRating: { ratingValue: 5, bestRating: 5 },
-    },
-    {
-      author: 'CV Agro Mandiri',
-      datePublished: '2024-06-15',
-      reviewBody: 'Cocok untuk pertanian organik. Hasil panen bisa dijual dengan harga premium.',
-      reviewRating: { ratingValue: 4, bestRating: 5 },
-    },
-  ],
-  hasCertification: [
-    {
-      ...KEMENTAN_CERTIFICATION,
-      certificationIdentification: '447-LeSOS-LSPr-097-IDN-08-25',
-      validThrough: '2026-03-03',
-    },
-  ],
+  // offers / aggregateRating / review / hasCertification / gtin14 removed —
+  // see file header note (2026-07-28 GSC structured-data remediation).
   additionalProperty: [
     { name: 'Bahan Aktif', value: 'Beauveria bassiana, Metarhizium anisopliae' },
     { name: 'Target Hama', value: 'Wereng, Penggerek Batang, Walang Sangit, Kutu Daun' },
@@ -475,38 +296,10 @@ export const BLACKTURBO_SEO: EnterpriseProductData = {
   url: '/id/produk-layanan/pertanian/blackturbo-asam-humat',
   sku: 'CBI-BLT-001',
   mpn: 'BLACKTURBO-1L',
-  gtin14: '08997011234573',
   brand: 'BLACKTURBO',
   category: 'Pembenah Tanah > Pertanian > Agrikultur',
-  offers: {
-    price: 120000,
-    priceCurrency: 'IDR',
-    availability: 'InStock',
-    priceValidUntil: '2026-12-31',
-    shippingDetails: STANDARD_SHIPPING,
-    hasMerchantReturnPolicy: STANDARD_RETURN_POLICY,
-  },
-  aggregateRating: {
-    ratingValue: 4.7,
-    reviewCount: 89,
-    bestRating: 5,
-    worstRating: 1,
-  },
-  review: [
-    {
-      author: 'PT Agri Nusantara',
-      datePublished: '2024-08-10',
-      reviewBody: 'Efisiensi pupuk NPK meningkat hingga 30%. Investasi awal terbayar dari penghematan pupuk.',
-      reviewRating: { ratingValue: 5, bestRating: 5 },
-    },
-  ],
-  hasCertification: [
-    {
-      ...KEMENTAN_CERTIFICATION,
-      certificationIdentification: '448-LeSOS-LSPr-098-IDN-08-25',
-      validThrough: '2026-03-03',
-    },
-  ],
+  // offers / aggregateRating / review / hasCertification / gtin14 removed —
+  // see file header note (2026-07-28 GSC structured-data remediation).
   additionalProperty: [
     { name: 'Kandungan Asam Humat', value: '>12%' },
     { name: 'Kandungan Asam Fulvat', value: '>3%' },
@@ -525,38 +318,10 @@ export const BIOKALSI_SEO: EnterpriseProductData = {
   url: '/id/produk-layanan/pertanian/biokalsi-dolomit',
   sku: 'CBI-BKS-001',
   mpn: 'BIOKALSI-25KG',
-  gtin14: '08997011234574',
   brand: 'BIOKALSI',
   category: 'Kapur Pertanian > Pembenah Tanah > Agrikultur',
-  offers: {
-    price: 45000, // Price per 25kg sack
-    priceCurrency: 'IDR',
-    availability: 'InStock',
-    priceValidUntil: '2026-12-31',
-    shippingDetails: STANDARD_SHIPPING,
-    hasMerchantReturnPolicy: STANDARD_RETURN_POLICY,
-  },
-  aggregateRating: {
-    ratingValue: 4.5,
-    reviewCount: 203,
-    bestRating: 5,
-    worstRating: 1,
-  },
-  review: [
-    {
-      author: 'Pak Ahmad - Petani Sawit',
-      datePublished: '2024-05-20',
-      reviewBody: 'Tanah gambut jadi lebih baik, pH naik dari 4 ke 5.5. Tanaman sawit lebih sehat.',
-      reviewRating: { ratingValue: 5, bestRating: 5 },
-    },
-  ],
-  hasCertification: [
-    {
-      ...KEMENTAN_CERTIFICATION,
-      certificationIdentification: '449-LeSOS-LSPr-099-IDN-08-25',
-      validThrough: '2026-03-03',
-    },
-  ],
+  // offers / aggregateRating / review / hasCertification / gtin14 removed —
+  // see file header note (2026-07-28 GSC structured-data remediation).
   additionalProperty: [
     { name: 'Kandungan CaO', value: '>30%' },
     { name: 'Kandungan MgO', value: '>18%' },

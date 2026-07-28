@@ -335,16 +335,12 @@ export default async function BiojagatlProductPage({
       category: lang === 'id' 
         ? ['Produk Pertanian', 'Pupuk', 'Pupuk Hayati Cair', 'Pupuk Mikroba']
         : ['Agricultural Products', 'Fertilizers', 'Liquid Biological Fertilizers', 'Microbial Fertilizers'],
-      offers: {
-        '@type': 'Offer',
-        url: `${SITE_CONFIG.url}/${lang}/produk-layanan/pertanian/biojagat-pupuk-hayati-cair`,
-        availability: 'https://schema.org/InStock',
-        priceCurrency: 'IDR',
-        seller: {
-          '@type': 'Organization',
-          name: 'PT Centra Biotech Indonesia',
-        },
-      },
+      // NOTE: no "offers" here on purpose. The previous offer had no `price`
+      // at all (only availability/currency/seller), which is exactly the
+      // "Missing field 'price'" GSC error — and there is no real, published
+      // retail price for this B2B product to add instead. Rather than emit an
+      // incomplete Offer, we omit it entirely. See GSC structured data
+      // remediation notes (2026-07-28).
     },
     // FAQ Schema
     {

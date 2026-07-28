@@ -57,35 +57,45 @@ const EXTERNAL_LINKS = {
 };
 
 // BLACK TURBO Videos Data
+// uploadDate values are the real YouTube publish timestamps for each video ID
+// (verified via youtube.com/watch?v=<id> itemprop="uploadDate", 2026-07-28).
+// Previously this was hardcoded to a placeholder '2024-01-01' with no time
+// zone for every video, which is both inaccurate and caused GSC's "Invalid
+// datetime value for uploadDate" / "missing time zone" structured data errors.
 const blackturboVideos: Array<{
   id: string;
   title: string;
   embedUrl: string;
   type: 'youtube' | 'tiktok';
+  uploadDate: string;
 }> = [
   {
     id: "rRbK3D_gvS4",
     title: "LAHAN TANDUS JADI PRODUKTIF DENGAN BLACK TURBO ASAM HUMAT",
     embedUrl: "https://www.youtube.com/embed/rRbK3D_gvS4",
-    type: "youtube"
+    type: "youtube",
+    uploadDate: "2025-09-22T22:00:03-07:00",
   },
   {
     id: "_B3pONNfGEI",
     title: "TESTIMONI PETANI TENTANG PEMBENAH TANAH BLACK TURBO CENTRA BIOTECH",
     embedUrl: "https://www.youtube.com/embed/_B3pONNfGEI",
-    type: "youtube"
+    type: "youtube",
+    uploadDate: "2025-09-03T20:30:42-07:00",
   },
   {
     id: "IkHUqxjLuIE",
     title: "CARA EFEKTIF TINGKATKAN KESUBURAN TANAH PERTANIAN",
     embedUrl: "https://www.youtube.com/embed/IkHUqxjLuIE",
-    type: "youtube"
+    type: "youtube",
+    uploadDate: "2025-08-25T20:03:51-07:00",
   },
   {
     id: "zGF2bYyClhk",
     title: "TESTIMONI PENGGUNA BLACK TURBO DARI BERBAGAI DAERAH",
     embedUrl: "https://www.youtube.com/embed/zGF2bYyClhk",
-    type: "youtube"
+    type: "youtube",
+    uploadDate: "2025-08-19T03:16:44-07:00",
   },
 ];
 
@@ -238,7 +248,9 @@ export default async function BlackTurboPage({
     image: '/Cover Black Turbo.webp',
     url: `${SITE_CONFIG.url}/${lang}/produk-layanan/pertanian/blackturbo-asam-humat`,
     brand: 'Centra Biotech Indonesia',
-    offers: { price: 0, priceCurrency: 'IDR', availability: 'InStock' as const },
+    // NOTE: no `offers` here on purpose (was a fake `price: 0`). No real,
+    // published price exists for this B2B product, so we don't claim Merchant
+    // listing eligibility. See GSC structured data remediation notes (2026-07-28).
   });
 
   const breadcrumbSchema = generateBreadcrumbSchema([
@@ -253,7 +265,7 @@ export default async function BlackTurboPage({
     name: video.title,
     description: video.title,
     thumbnailUrl: `https://img.youtube.com/vi/${video.id}/maxresdefault.jpg`,
-    uploadDate: '2024-01-01',
+    uploadDate: video.uploadDate,
     contentUrl: video.embedUrl,
   }));
 

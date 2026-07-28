@@ -382,11 +382,10 @@ export default async function FisheryProductDetailPage({
     brand: "Centra Biotech Indonesia",
     category: "Probiotik Perikanan",
     url: `${SITE_CONFIG.url}/${lang}/produk-layanan/perikanan/${slug}`,
-    offers: {
-      price: 0,
-      priceCurrency: "IDR",
-      availability: "InStock",
-    },
+    // NOTE: no `offers` block on purpose. This is a B2B site with no published
+    // retail price for these CMS-driven products; a placeholder price (was
+    // hardcoded to 0) would misrepresent the product to Google Merchant/Product
+    // rich results. See GSC structured data remediation notes (2026-07-28).
   });
   
   const breadcrumbSchema = generateBreadcrumbSchema(

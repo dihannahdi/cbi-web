@@ -399,54 +399,11 @@ export default async function BioKillerPage({
         `${SITE_CONFIG.url}/products/biokiller/biokiller-cover.webp`,
         `${SITE_CONFIG.url}/products/biokiller/biokiller-cover.webp`,
       ],
-      "offers": {
-        "@type": "Offer",
-        "url": `${SITE_CONFIG.url}/${lang}/produk-layanan/pertanian/biokiller-insektisida-hayati`,
-        "priceCurrency": "IDR",
-        "price": "75000",
-        "priceValidUntil": "2026-12-31",
-        "availability": "https://schema.org/InStock",
-        "itemCondition": "https://schema.org/NewCondition",
-        "seller": {
-          "@type": "Organization",
-          "name": "PT. Centra Biotech Indonesia"
-        },
-        "hasMerchantReturnPolicy": {
-          "@type": "MerchantReturnPolicy",
-          "applicableCountry": "ID",
-          "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-          "merchantReturnDays": 30,
-          "returnMethod": "https://schema.org/ReturnByMail",
-          "returnFees": "https://schema.org/ReturnFeesCustomerResponsibility"
-        },
-        "shippingDetails": {
-          "@type": "OfferShippingDetails",
-          "shippingRate": {
-            "@type": "MonetaryAmount",
-            "value": "0",
-            "currency": "IDR"
-          },
-          "shippingDestination": {
-            "@type": "DefinedRegion",
-            "addressCountry": "ID"
-          },
-          "deliveryTime": {
-            "@type": "ShippingDeliveryTime",
-            "handlingTime": {
-              "@type": "QuantitativeValue",
-              "minValue": 1,
-              "maxValue": 3,
-              "unitCode": "DAY"
-            },
-            "transitTime": {
-              "@type": "QuantitativeValue",
-              "minValue": 2,
-              "maxValue": 7,
-              "unitCode": "DAY"
-            }
-          }
-        }
-      },
+      // NOTE: no "offers" here on purpose (previously a fake price of 75000
+      // that was never displayed anywhere on the rendered page). This is a
+      // B2B product with no publicly published retail price, so we don't
+      // claim Merchant/Product rich-result eligibility. See GSC structured
+      // data remediation notes (2026-07-28).
       "isRelatedTo": [
         {
           "@type": "Product",
@@ -467,10 +424,6 @@ export default async function BioKillerPage({
           "description": "Pupuk hayati cair untuk meningkatkan penyerapan nutrisi tanaman"
         }
       ],
-      "audience": {
-        "@type": "Audience",
-        "audienceType": "Farmers, Agricultural Professionals, Organic Farming Practitioners"
-      }
     },
     // Breadcrumb Schema
     {
@@ -581,40 +534,12 @@ export default async function BioKillerPage({
         "name": "PT Centra Biotech Indonesia"
       }
     },
-    // GEO Schema 2: AggregateRating (Social Proof for AI)
-    {
-      "@context": "https://schema.org",
-      "@type": "Product",
-      "@id": `${SITE_CONFIG.url}/${lang}/produk-layanan/pertanian/biokiller-insektisida-hayati#product-rating`,
-      "name": "BIOKILLER Insektisida Hayati",
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.8",
-        "reviewCount": "89",
-        "bestRating": "5",
-        "worstRating": "1"
-      },
-      "review": [
-        {
-          "@type": "Review",
-          "author": { "@type": "Person", "name": "Pak Hadi - Petani Padi Demak" },
-          "datePublished": "2025-11-10",
-          "reviewBody": lang === 'id'
-            ? "BIOKILLER sangat efektif mengendalikan wereng coklat di sawah saya. Tidak ada resistensi seperti pestisida kimia!"
-            : "BIOKILLER is very effective in controlling brown planthoppers in my rice field. No resistance like chemical pesticides!",
-          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
-        },
-        {
-          "@type": "Review",
-          "author": { "@type": "Person", "name": "Bu Rina - Petani Bawang Brebes" },
-          "datePublished": "2025-10-25",
-          "reviewBody": lang === 'id'
-            ? "Lalat pengorok daun di bawang saya berhasil dikendalikan dengan BIOKILLER. Produk organik yang benar-benar works!"
-            : "Leafminer flies in my onions were successfully controlled with BIOKILLER. Organic product that really works!",
-          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
-        }
-      ]
-    },
+    // NOTE: A second "Product" entity with a fabricated aggregateRating
+    // (4.8 stars / 89 reviews) and two fabricated named reviews used to sit
+    // here. It has been removed: those numbers and reviewers were invented,
+    // not backed by any real review platform, and fake reviews in structured
+    // data are a Google manual-action risk. See GSC structured data
+    // remediation notes (2026-07-28).
     // GEO Schema 3: ItemList for AI Answer Extraction
     {
       "@context": "https://schema.org",

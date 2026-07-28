@@ -6,8 +6,8 @@
  * 
  * Priority levels (Google recommendation):
  * - 1.0: Homepage (most important)
- * - 0.9: Main category pages (Agriculture, Livestock, Fishery)
- * - 0.8: Key pages (About, News listing, Blog listing, Maklon listing, Product main)
+ * - 0.9: Main category pages (/produk-layanan/{pertanian,peternakan,perikanan})
+ * - 0.8: Key pages (About, News listing, Blog listing, /produk-layanan root)
  * - 0.7: Contact page
  * - 0.6: Career page
  * - 0.5: Documents, Legal pages (Privacy, Terms, Cookies)
@@ -75,17 +75,16 @@ export async function GET() {
   ${createMultilingualEntry('', currentDate, 'daily', '1.0')}
   ${createMultilingualEntry('/about-us', currentDate, 'monthly', '0.8')}
   ${createMultilingualEntry('/contact', currentDate, 'monthly', '0.7')}
-  ${createMultilingualEntry('/product', currentDate, 'weekly', '0.8')}
-  ${createMultilingualEntry('/product/agriculture', currentDate, 'weekly', '0.9')}
-  ${createMultilingualEntry('/product/livestock', currentDate, 'weekly', '0.9')}
-  ${createMultilingualEntry('/product/fishery', currentDate, 'weekly', '0.9')}
+  ${createMultilingualEntry('/produk-layanan', currentDate, 'weekly', '0.8')}
+  ${createMultilingualEntry('/produk-layanan/pertanian', currentDate, 'weekly', '0.9')}
+  ${createMultilingualEntry('/produk-layanan/peternakan', currentDate, 'weekly', '0.9')}
+  ${createMultilingualEntry('/produk-layanan/perikanan', currentDate, 'weekly', '0.9')}
   ${createMultilingualEntry('/produk-layanan/peternakan/unggas', currentDate, 'weekly', '0.85')}
   ${createMultilingualEntry('/produk-layanan/peternakan/ruminant', currentDate, 'weekly', '0.85')}
   ${createMultilingualEntry('/produk-layanan/perikanan/biofloc', currentDate, 'weekly', '0.85')}
   ${createMultilingualEntry('/produk-layanan/perikanan/udang', currentDate, 'weekly', '0.85')}
   ${createMultilingualEntry('/news', currentDate, 'daily', '0.8')}
   ${createMultilingualEntry('/blog', currentDate, 'daily', '0.8')}
-  ${createMultilingualEntry('/maklon-pupuk', currentDate, 'weekly', '0.8')}
   ${createMultilingualEntry('/career', currentDate, 'weekly', '0.6')}
   ${createMultilingualEntry('/documents', currentDate, 'monthly', '0.5')}
   ${createMultilingualEntry('/privacy-policy', currentDate, 'yearly', '0.5')}
