@@ -1,0 +1,28 @@
+[package]
+name = "seo-crawl"
+version = "0.1.0"
+edition = "2021"
+description = "Fast sitemap crawler: HTTP status, canonical and meta-robots in one pass"
+
+[dependencies]
+# Async runtime. `rt-multi-thread` so we actually use every core.
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "fs", "time"] }
+
+# HTTP client. default-features is OFF on purpose: the default pulls native-tls,
+# which needs OpenSSL present at build time on Windows. rustls is pure Rust.
+reqwest = { version = "0.12", default-features = false, features = [
+    "rustls-tls",
+    "gzip",
+    "brotli",
+] }
+
+futures = "0.3"          # stream combinators -> buffer_unordered for bounded concurrency
+clap = { version = "4", features = ["derive"] }
+regex = "1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1

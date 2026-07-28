@@ -1,0 +1,3 @@
+# Downloaded mail content never belongs in git.
+*
+!.gitignore
