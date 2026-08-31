@@ -32,6 +32,8 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+# bare 'env' at repo root — '.env*' above does NOT match it
+/env
 
 # vercel
 .vercel
