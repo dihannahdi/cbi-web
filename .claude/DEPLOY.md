@@ -61,7 +61,21 @@ ssh cbi-vps 'set -e; cd /var/www/centrabiotechindonesia
 
 **Verify:** `curl` `http://127.0.0.1:3034/<routes>` on the VPS (origin) first, then the live domain. Grep the served HTML/CSS for a marker unique to the new build. **Rollback:** `rm -rf .next && mv .next.bak-<ts> .next && cp server.js.bak-<ts> server.js && pm2 restart centrabio-frontend`.
 
-**Cloudflare edge cache:** dynamic pages pass through (`Cf-Cache-Status: DYNAMIC`), but **`sitemap-*.xml` (Cache-Control max-age=3600) and some listing pages are edge-cached** — new content shows at origin immediately but lags at the edge until TTL (~1h). Purge Cloudflare for those paths if you need them fresh immediately.
+**Post-deploy cache lag is nginx, NOT Cloudflare** (corrected 2026-09-06). Cloudflare returns `cf-cache-status: DYNAMIC` on page routes, i.e. it passes through and caches nothing. The stale HTML comes from an **nginx proxy cache on the VPS**:
+
+- Zone `resilience`, declared in `/etc/nginx/conf.d/zz-stale-cache.conf` (`/var/cache/nginx/resilience`, max 2g). Observed 2026-09-06: 2.1G, ~52k entries.
+- Enabled on this vhost, key `$scheme$host$request_uri`, and it exposes `X-Cache-Status`.
+- The vhost sets `proxy_cache_valid 200 301 302 5m`, but that is only a fallback: nginx honours the **upstream** `Cache-Control` first, and `next.config` sends `s-maxage=3600` on `/:lang/blog/:slug*`. So the real TTL after a deploy is **1 hour, not 5 minutes**.
+
+**Do not purge by deleting `/var/cache/nginx/resilience`** — the zone is declared globally in `conf.d`, so it is shared with other vhosts on this box; a blanket delete dumps their cache too and spikes every origin at once.
+
+To confirm a deploy landed without waiting or purging, append a unique query string. The cache key includes `$request_uri`, so a new query string is a cache miss and goes straight through the full public path:
+
+```bash
+curl -s "https://www.centrabiotechindonesia.com/id/blog/<slug>?cb=$(date +%s)" | grep -oE '<title>[^<]*</title>'
+```
+
+Verify at origin too (`curl http://127.0.0.1:3034/...` on the VPS). Origin correct plus cache-busted public request correct means the deploy is good; the remaining stale hits expire on their own within the hour.
 
 **Backups:** each deploy leaves a `.next.bak-<ts>` (a full `.next` grows to ~0.5–1.4G at runtime from `.next/cache`). Git holds every commit, so keep only the **most recent** backup as the one-step rollback and prune the rest: `rm -rf .next.bak-<old-ts> server.js.bak-<old-ts>`.
 
