@@ -99,6 +99,26 @@ Backup file penuh yang dibuat 6 September pagi (`data.db.bak-pillar-20260906_071
 
 Yang benar: `sqlite3 data.db ".backup <tujuan>"`. Salinan sehat tersedia di `data.db.walsafe-20260906_121755` (`integrity_check: ok`, yatim 1053 sesuai produksi).
 
+## Turunkan harapan Anda: pillar itu pengecualian, bukan contoh
+
+Ini yang paling penting dibaca sebelum melepas, dan baru ketahuan setelah mesinnya jadi.
+
+```
+yatim dengan impresi nol   : 2 dari 1.053
+posisi median yatim        : 5,9
+posisi p90 yatim           : 8,5
+```
+
+Artinya **situs ini tidak terkubur secara luas.** Mayoritas artikel yatim sudah peringkat wajar di halaman satu meski nol tautan masuk. Pillar yang terdampar di posisi 39,8 adalah anomali, bukan potret populasi.
+
+Konsekuensinya jujur: kalaupun gerbang Oktober lolos, jangan berharap 429 halaman bergerak sebesar pillar. Pillar punya ruang jatuh 39,8 ke lima besar. Halaman di posisi 5,9 ruangnya jauh lebih sempit, dan sebagian kenaikan yang muncul bisa saja bukan karena tautan.
+
+Ini juga berarti gerbang Oktober adalah **satu titik data, bukan bukti yang berlaku merata.** Perlakukan begitu.
+
 ## Yang belum terjawab
 
-Mesin ini menautkan berdasarkan kecocokan anchor dan otoritas sumber. Dia **tidak** menilai apakah target memang layak diselamatkan dari sisi isi. Sebagian dari 1.053 yatim itu kemungkinan permutasi tipis dari run Maret, dan menautkan halaman tipis tidak membuatnya bernilai. Kalau gerbang Oktober lolos, sisir 50 target teratas dengan mata manusia sebelum melepas seluruhnya.
+Mesin ini menautkan berdasarkan kecocokan anchor dan otoritas sumber. Dia **tidak** menilai apakah kalimatnya terbaca wajar setelah tautan disisipkan, dan tidak menilai apakah target memang layak diselamatkan dari sisi isi. Sebagian dari 1.053 yatim itu kemungkinan permutasi tipis dari run Maret, dan menautkan halaman tipis tidak membuatnya bernilai.
+
+**Wajib sebelum melepas, walau gerbang Oktober lolos:** ambil sampel acak dari 429 usulan, baca kalimat sebelum dan sesudahnya sebagai kalimat, bukan sebagai JSON. Struktur sudah dijamin mesin, kewajaran bahasa belum ada yang menjamin.
+
+184 target yang dibuang karena tidak ada anchor cocok itu pengaman yang bekerja, bukan cacat. Jangan melonggarkan aturan anchor apa adanya untuk mengejar angka.
