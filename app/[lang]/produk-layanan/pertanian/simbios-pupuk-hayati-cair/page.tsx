@@ -7,7 +7,7 @@ import ContainerSection from "@/components/layout/container";
 import Breadcrumb from "@/components/common/BreadScrumb";
 import HeroSectionGeneral from "@/components/common/HeroSectionGeneral";
 import VideoGallerySlider from "@/components/product/VideoGallerySlider";
-import { SITE_CONFIG } from "@/utils/seo";
+import { SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
 import { 
   generateProductSchema,
   generateBreadcrumbSchema,
@@ -315,10 +315,13 @@ export async function generateMetadata({
   const strapiData = await fetchStrapiProduct("simbios-pupuk-hayati-cair", lang);
   const data = strapiData || productData[lang]; // Fallback to static if Strapi unavailable
 
-  // Use Strapi data if available, fallback to hardcoded optimized titles
-  const title = strapiData?.metaTitle || strapiData?.heroTitle || (lang === 'id' 
+  // Use Strapi data if available, fallback to hardcoded optimized titles.
+  // Always normalized: Strapi metaTitle often already ends with a
+  // (sometimes truncated) brand suffix, which would otherwise double up
+  // with the layout's own brand template.
+  const title = normalizeSeoTitle(strapiData?.metaTitle || strapiData?.heroTitle || (lang === 'id'
     ? "Pupuk Hayati Premium SIMBIOS: Efektivitas 122% RAE"
-    : "SIMBIOS Premium Biofertilizer - 122% RAE Bio-Activation | Ministry Certified");
+    : "SIMBIOS Premium Biofertilizer - 122% RAE Bio-Activation | Ministry Certified"));
   
   const description = strapiData?.metaDescription || strapiData?.heroSubtitle || (lang === 'id'
     ? "Pupuk hayati premium SIMBIOS dengan teknologi mikroorganisme simbiotik. Optimalkan penyerapan nutrisi tanaman untuk hasil panen maksimal."
@@ -332,7 +335,8 @@ export async function generateMetadata({
       : "liquid biological fertilizer for sale, premium biological fertilizer, simbios, buy simbios, biofertilizer, best biofertilizer, best premium biofertilizer, microbial fertilizer, bio activation, rae 122, trichoderma, pseudomonas, rhizobium, azospirillum, aspergillus niger, centra biotech, certified organic fertilizer, ministry certified, sni 6729, rice fertilizer, liquid biofertilizer, biofertilizer distributor");
 
   return {
-    title,
+    // absolute: brand already included by normalizeSeoTitle, exactly once.
+    title: { absolute: title },
     description,
     keywords,
     authors: [{ name: "PT. Centra Biotech Indonesia" }],

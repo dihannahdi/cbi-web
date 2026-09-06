@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import { Locale, i18n } from "@/i18n-config";
 import { getDictionary } from "@/dictionaries";
-import { SITE_CONFIG } from "@/utils/seo";
+import { SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
 
 import Breadcrumb from "@/components/common/BreadScrumb";
 import ContainerSection from "@/components/layout/container";
@@ -29,7 +29,11 @@ export async function generateMetadata({
   const url = `${SITE_CONFIG.url}/${lang}/produk-layanan/peternakan/ruminant`;
 
   return {
-    title: seg.metaTitle,
+    // absolute: seg.metaTitle is a static dictionary string that already
+    // ends with "| Centra Biotech Indonesia"; normalizeSeoTitle strips
+    // that and re-appends the brand once, avoiding a literal double-up
+    // with the layout template.
+    title: { absolute: normalizeSeoTitle(seg.metaTitle) },
     description: seg.metaDescription,
     alternates: {
       canonical: url,

@@ -7,7 +7,7 @@ import ContainerSection from "@/components/layout/container";
 import Breadcrumb from "@/components/common/BreadScrumb";
 import HeroSectionGeneral from "@/components/common/HeroSectionGeneral";
 import VideoGallerySlider from "@/components/product/VideoGallerySlider";
-import { SITE_CONFIG } from "@/utils/seo";
+import { SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
 import { MultipleStructuredData, generateImageObjectSchema } from "@/utils/structuredData";
 import {
   fetchStrapiProduct,
@@ -207,10 +207,13 @@ export async function generateMetadata({
   const strapiData = await fetchStrapiProduct("biojagat-pupuk-hayati-cair", lang);
   const data = strapiData || productData[lang]; // Fallback to static if Strapi unavailable
 
-  // Use Strapi data if available, fallback to hardcoded optimized titles
-  const title = strapiData?.metaTitle || strapiData?.heroTitle || (lang === 'id' 
+  // Use Strapi data if available, fallback to hardcoded optimized titles.
+  // Always normalized: Strapi metaTitle often already ends with a
+  // (sometimes truncated) brand suffix, which would otherwise double up
+  // with the layout's own brand template.
+  const title = normalizeSeoTitle(strapiData?.metaTitle || strapiData?.heroTitle || (lang === 'id'
     ? "Pupuk Hayati Cair Terbaik - BIOJAGAT Tingkatkan Panen Hingga 60%"
-    : "BIOJAGAT Liquid Biological Fertilizer - Best LOF Increase Harvest 40% | Certified");
+    : "BIOJAGAT Liquid Biological Fertilizer - Best LOF Increase Harvest 40% | Certified"));
   
   const description = strapiData?.metaDescription || strapiData?.heroSubtitle || (lang === 'id'
     ? "Pupuk hayati cair BIOJAGAT dengan konsorsium mikroorganisme unggulan. Solusi bioteknologi untuk pertanian modern Indonesia."
@@ -224,7 +227,8 @@ export async function generateMetadata({
       : "liquid biological fertilizer, buy biological fertilizer, lof, best biological fertilizer, biojagat, buy biojagat, biological fertilizer distributor, certified biological fertilizer, microbial fertilizer, centra biotech, sustainable agriculture");
 
   return {
-    title,
+    // absolute: brand already included by normalizeSeoTitle, exactly once.
+    title: { absolute: title },
     description,
     keywords,
     authors: [{ name: "PT. Centra Biotech Indonesia" }],

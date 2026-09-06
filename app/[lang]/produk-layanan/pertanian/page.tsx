@@ -41,7 +41,7 @@ const AgricultureProductsSection = dynamic(
   }
 );
 
-import { PAGE_METADATA, SITE_CONFIG } from "@/utils/seo";
+import { PAGE_METADATA, SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
 import { 
   generateProductCategorySchemas,
   MultipleStructuredData 
@@ -83,7 +83,7 @@ export async function generateMetadata({
 
   if (!data || !data.metadata) {
     return {
-      title: defaultTitle,
+      title: { absolute: normalizeSeoTitle(defaultTitle) },
       description: defaultDescription,
       alternates: {
         canonical: `${SITE_CONFIG.url}/${lang}/produk-layanan/pertanian`,
@@ -95,15 +95,21 @@ export async function generateMetadata({
     };
   }
 
-  const imageUrl = data.headline?.image?.url 
-    ? getImageUrl(data.headline.image.url) 
+  const imageUrl = data.headline?.image?.url
+    ? getImageUrl(data.headline.image.url)
     : `${SITE_CONFIG.url}/images/og-agriculture.jpg`;
 
+  // Always normalized: the CMS titleTag often already ends with a
+  // (sometimes truncated) brand suffix, which would otherwise double up
+  // with the layout's own brand template.
+  const pageTitle = normalizeSeoTitle(data.metadata.titleTag || defaultTitle);
+
   return {
-    title: data.metadata.titleTag || defaultTitle,
+    // absolute: brand already included by normalizeSeoTitle, exactly once.
+    title: { absolute: pageTitle },
     description: data.metadata.metaDesc || defaultDescription,
     openGraph: {
-      title: data.metadata.titleTag || defaultTitle,
+      title: pageTitle,
       description: data.metadata.metaDesc || defaultDescription,
       images: [
         {
@@ -118,7 +124,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: data.metadata.titleTag || defaultTitle,
+      title: pageTitle,
       description: data.metadata.metaDesc || defaultDescription,
       images: [imageUrl],
     },

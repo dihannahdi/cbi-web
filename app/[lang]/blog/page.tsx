@@ -3,7 +3,7 @@ import { BlogSectionResponse, ArticlesCollectionResponse } from "@/types/respons
 
 import { ApiPath, apiRequest } from "@/utils/apiClient";
 import { getBlogSectionQuery } from "@/utils/queries/blogSectionQuery";
-import { SITE_CONFIG } from "@/utils/seo";
+import { SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
 import { 
   generateWebPageSchema,
   generateBreadcrumbSchema,
@@ -39,7 +39,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const baseUrl = SITE_CONFIG.url;
 
   return {
-    title: dict.seo.blogTitle,
+    // absolute: dict.seo.blogTitle already ends with "- Centra Biotech
+    // Indonesia"; normalizeSeoTitle strips that dash-delimited brand suffix
+    // and re-appends the brand once, avoiding a double-up with the layout
+    // template.
+    title: { absolute: normalizeSeoTitle(dict.seo.blogTitle) },
     description: dict.seo.blogDescription,
     keywords: lang === 'id' ? [
       'blog bioteknologi',

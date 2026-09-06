@@ -7,7 +7,7 @@ import ContainerSection from "@/components/layout/container";
 import Breadcrumb from "@/components/common/BreadScrumb";
 import HeroSectionGeneral from "@/components/common/HeroSectionGeneral";
 import VideoGallerySlider from "@/components/product/VideoGallerySlider";
-import { SITE_CONFIG, truncateTitle, cleanMetaDescription } from "@/utils/seo";
+import { SITE_CONFIG, normalizeSeoTitle, cleanMetaDescription } from "@/utils/seo";
 import {
   generateProductSchema,
   generateBreadcrumbSchema,
@@ -355,17 +355,19 @@ export async function generateMetadata({
   const baseUrl = SITE_CONFIG.url;
   const pageUrl = `${baseUrl}/${lang}/produk-layanan/pertanian/${slug}`;
   
-  // Use SEO fields from Strapi if available, fallback to generated values
-  // Truncate title for mobile SEO (max 60 chars)
-  const rawTitle = product.meta_title || `${product.name} - ${product.subtitle}`;
-  const metaTitle = truncateTitle(rawTitle, 60);
+  // Use SEO fields from Strapi if available, fallback to generated values.
+  // Always normalized: Strapi meta_title often already ends with a
+  // (sometimes truncated) brand suffix, which would otherwise double up
+  // with the layout's own brand template.
+  const metaTitle = normalizeSeoTitle(product.meta_title || `${product.name} - ${product.subtitle}`);
   
   // Clean and optimize description for mobile (max 155 chars for mobile display)
   const rawDescription = product.meta_description || product.description;
   const metaDescription = cleanMetaDescription(rawDescription, 155);
   
   return {
-    title: metaTitle,
+    // absolute: brand already included by normalizeSeoTitle, exactly once.
+    title: { absolute: metaTitle },
     description: metaDescription,
     keywords: product.focus_keyphrase ? [product.focus_keyphrase, product.name, "pupuk organik", "pertanian Indonesia"].join(", ") : undefined,
     alternates: {
@@ -377,7 +379,7 @@ export async function generateMetadata({
       },
     },
     openGraph: {
-      title: product.meta_title || product.heroTitle,
+      title: metaTitle, // reuse the same normalized, single-brand title
       description: product.meta_description || product.heroSubtitle,
       url: pageUrl,
       siteName: SITE_CONFIG.name,

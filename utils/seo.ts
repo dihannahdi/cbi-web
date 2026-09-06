@@ -223,20 +223,23 @@ export function generateMetadataFromProps({
   nofollow = false,
   canonical,
 }: SEOProps): Metadata {
-  // Check if title already contains the site name to avoid duplication
-  const hasSiteName = title?.toLowerCase().includes('centra biotech');
-  // Don't add site name suffix here - the layout template '%s | Centra Biotech Indonesia' handles it
-  // Only use raw title for <title> tag, let layout template append brand name
-  const pageTitle = title || SITE_CONFIG.name;
-  // Full title with brand name for OG (OG doesn't use layout template)
-  const ogTitle = title 
-    ? (hasSiteName ? title : `${title} | ${SITE_CONFIG.name}`)
-    : SITE_CONFIG.name;
+  // Normalize so the FINAL rendered <title> (topic + brand) fits Google's
+  // ~60-char display budget with the brand appearing exactly once, even if
+  // `title` already carries a (possibly truncated) brand suffix from
+  // upstream CMS/static data. Composed here, once, rather than left to the
+  // layout's `%s | Centra Biotech Indonesia` template (app/[lang]/layout.tsx),
+  // since that template has no way to know an incoming title is already dirty.
+  const pageTitle = normalizeSeoTitle(title);
+  // OG/Twitter don't go through the layout's title template, so reuse the
+  // same normalized, single-brand title for consistency.
+  const ogTitle = pageTitle;
   const fullUrl = url ? `${SITE_CONFIG.url}${url}` : SITE_CONFIG.url;
   const fullImage = image.startsWith('http') ? image : `${SITE_CONFIG.url}${image}`;
   
   const metadata: Metadata = {
-    title: pageTitle,
+    // `absolute` bypasses the parent layout's title template so the brand
+    // (already included by normalizeSeoTitle above) is never appended twice.
+    title: { absolute: pageTitle },
     description,
     keywords: SITE_CONFIG.keywords,
     authors: author ? [{ name: author }] : [{ name: SITE_CONFIG.name }],
@@ -563,19 +566,141 @@ export function truncateTitle(title: string, maxLength: number = 60): string {
   return lastSpace > 20 ? truncated.substring(0, lastSpace) : truncated.substring(0, maxLength - 3) + '...';
 }
 
+// Brand aliases that may already appear as a trailing "site name" suffix on
+// a CMS-supplied or hard-coded title. Upstream data (Strapi `meta_title`, and
+// a handful of hard-coded page titles) violates the contract documented
+// above -- sometimes with the full name, sometimes with a naive 60-char cut
+// that leaves a partial fragment ("| Centra Biotech", "| Ce"), sometimes
+// with the short name ("| CBI"), and sometimes with " - " instead of "|".
+const BRAND_SUFFIX_ALIASES = [SITE_CONFIG.name, SITE_CONFIG.shortName];
+
+// A trailing fragment counts as "the brand" only if it is an exact match or
+// a left-anchored prefix of a known brand alias (so real topic text that
+// happens to end in "| Something else" is never touched). Fragments under 2
+// chars are ignored -- too short to tell apart from coincidence.
+function isBrandFragment(tail: string): boolean {
+  if (tail.length < 2) return false;
+  const tailLower = tail.toLowerCase();
+  return BRAND_SUFFIX_ALIASES.some((alias) => alias.toLowerCase().startsWith(tailLower));
+}
+
+// Strips ONE trailing brand suffix, whether pipe-delimited ("Foo | Centra
+// Biotech") or dash-delimited ("Foo - Centra Biotech Indonesia"). Pipe is
+// checked first since it is the layout's own separator; dash is a distinct,
+// separately-observed defect flavor (see dictionaries' `seo.*Title` entries).
+function stripTrailingBrandFragment(title: string): string {
+  const pipeIdx = title.lastIndexOf('|');
+  if (pipeIdx !== -1 && isBrandFragment(title.slice(pipeIdx + 1).trim())) {
+    return title.slice(0, pipeIdx).trim();
+  }
+  const dashIdx = title.lastIndexOf(' - ');
+  if (dashIdx !== -1 && isBrandFragment(title.slice(dashIdx + 3).trim())) {
+    return title.slice(0, dashIdx).trim();
+  }
+  return title;
+}
+
+/**
+ * Normalize a page title so it composes safely into a <title> tag that is
+ * at most `maxLength` characters INCLUDING the " | <brand>" suffix, with the
+ * brand appearing exactly once.
+ *
+ * This is the single upstream fix for the site-wide double-brand / overlong
+ * <title> defect: Strapi `meta_title` (and several hard-coded titles) already
+ * end with a brand suffix -- sometimes truncated mid-word -- and the layout
+ * template `%s | Centra Biotech Indonesia` (app/[lang]/layout.tsx) then
+ * appends the brand again unconditionally.
+ *
+ * Callers MUST assign the result via `title: { absolute: normalizeSeoTitle(...) } }`
+ * (never a bare string) so the layout's template does not append the brand
+ * a second time.
+ *
+ * Idempotent: normalizeSeoTitle(normalizeSeoTitle(x)) === normalizeSeoTitle(x).
+ */
+export function normalizeSeoTitle(
+  rawTitle: string | null | undefined,
+  options: { maxLength?: number; brand?: string } = {}
+): string {
+  const brand = options.brand ?? SITE_CONFIG.name;
+  const maxLength = options.maxLength ?? 60;
+
+  let topic = (rawTitle ?? '').replace(/\s+/g, ' ').trim();
+
+  // Repeatedly strip trailing brand fragments -- handles data that already
+  // got the suffix appended more than once, e.g.
+  // "Foo | Centra Biotech | Centra Biotech Indonesia" (bound to 5 passes,
+  // far more than any real doubling could produce, to guarantee termination).
+  for (let i = 0; i < 5; i++) {
+    const next = stripTrailingBrandFragment(topic);
+    if (next === topic) break;
+    topic = next;
+  }
+
+  // A topic that IS the bare brand name, with no "|"/"-" delimiter for the
+  // loop above to strip (this is what the empty/null fallback below itself
+  // returns), counts as "nothing left" too. Without this, normalizeSeoTitle
+  // would not be idempotent: normalizeSeoTitle('') -> "Centra Biotech
+  // Indonesia" -> fed back in -> "Centra Biotech Indonesia | Centra Biotech
+  // Indonesia".
+  if (topic.toLowerCase() === brand.toLowerCase()) {
+    topic = '';
+  }
+
+  if (!topic) {
+    // Nothing left after stripping (input was only the brand, or empty) --
+    // fall back to the brand name so callers never render an empty <title>.
+    return brand.length <= maxLength ? brand : truncateTitle(brand, maxLength);
+  }
+
+  // The topic earns the click, the brand does not. A full-brand suffix costs
+  // 26 of the 60-char budget, which was cutting focus keyphrases off real
+  // titles ("Cara Tepat Asam Humat Dicampur Pupuk NPK" lost "Pupuk NPK").
+  // So the brand gives way, not the keyword: try the longest brand form that
+  // still leaves the whole topic intact, and drop the brand entirely rather
+  // than truncate a topic that needs the full width.
+  //
+  // An explicitly supplied options.brand is honoured as-is, no ladder, since
+  // the caller has stated which brand string it wants.
+  const brandLadder = options.brand
+    ? [options.brand]
+    : [SITE_CONFIG.name, 'Centra Biotech', SITE_CONFIG.shortName];
+
+  for (const candidate of brandLadder) {
+    const suffix = ` | ${candidate}`;
+    if (topic.length + suffix.length <= maxLength) {
+      return `${topic}${suffix}`;
+    }
+  }
+
+  // Topic is too long for even the shortest brand. Trim it against that
+  // shortest suffix rather than against maxLength, then keep the brand.
+  //
+  // Trimming against maxLength instead would break idempotency: the word
+  // boundary cut usually lands well short of the limit, which frees enough
+  // room for a brand on the next pass, so f(f(x)) !== f(x).
+  const shortestBrand = brandLadder[brandLadder.length - 1];
+  const shortestSuffix = ` | ${shortestBrand}`;
+  const budget = Math.max(maxLength - shortestSuffix.length, 10);
+
+  return `${truncateTitle(topic, budget)}${shortestSuffix}`;
+}
+
 export function generateArticleMetadata(props: ArticleMetadataProps): Metadata {
   const fullUrl = `${SITE_CONFIG.url}/news/${props.slug}`;
-  const fullImage = props.image?.startsWith('http') 
-    ? props.image 
-    : props.image 
-      ? `${SITE_CONFIG.apiUrl}${props.image}` 
+  const fullImage = props.image?.startsWith('http')
+    ? props.image
+    : props.image
+      ? `${SITE_CONFIG.apiUrl}${props.image}`
       : `${SITE_CONFIG.url}${SITE_CONFIG.ogImage}`;
-  
-  // Truncate title for SEO compliance (max 60 characters)
-  const seoTitle = truncateTitle(props.title);
-  
+
+  // Normalize title for SEO compliance (max 60 chars, single brand mention).
+  // Defensive even though the `title` field isn't fetched from meta_title,
+  // in case an editor types the brand straight into the headline.
+  const seoTitle = normalizeSeoTitle(props.title);
+
   return {
-    title: seoTitle,
+    // absolute: brand is already included by normalizeSeoTitle above.
+    title: { absolute: seoTitle },
     description: props.description,
     keywords: [...(props.tags || []), ...SITE_CONFIG.keywords.slice(0, 5)],
     authors: [{ name: props.author || SITE_CONFIG.name }],

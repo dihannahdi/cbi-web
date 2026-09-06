@@ -3,7 +3,7 @@ import Link from "next/link";
 import HeroSectionGeneral from "@/components/common/HeroSectionGeneral";
 import ContainerSection from "@/components/layout/container";
 import Breadcrumb from "@/components/common/BreadScrumb";
-import { SITE_CONFIG } from "@/utils/seo";
+import { SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
 import { 
   generateWebPageSchema,
   generateBreadcrumbSchema,
@@ -33,7 +33,9 @@ export async function generateMetadata({
     : 'Kebijakan privasi PT Centra Biotech Indonesia menjelaskan bagaimana kami mengumpulkan, menggunakan, dan melindungi informasi pribadi Anda.';
 
   return {
-    title,
+    // absolute: `title` already ends with "| Centra Biotech Indonesia";
+    // normalizeSeoTitle strips that and re-appends the brand once.
+    title: { absolute: normalizeSeoTitle(title) },
     description,
     alternates: {
       canonical: `${SITE_CONFIG.url}/${lang}/privacy-policy`,

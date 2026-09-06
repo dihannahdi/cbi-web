@@ -3,7 +3,7 @@ import { notFound, permanentRedirect } from "next/navigation";
 import HeroSection from "@/components/media/article-detail/HeroSection";
 import ArticleDetail from "@/components/media/article-detail/ArticleDetail";
 import Breadcrumb from "@/components/common/BreadScrumb";
-import { SITE_CONFIG, cleanMetaDescription, truncateTitle } from "@/utils/seo";
+import { SITE_CONFIG, cleanMetaDescription, normalizeSeoTitle } from "@/utils/seo";
 import { getImageUrl } from "@/utils/getImageUrl";
 import { 
   generateArticleWithSpeakableSchema,
@@ -90,14 +90,17 @@ export async function generateMetadata({
       permanentRedirect(`/${lang}/news/${slug}`);
     }
     return {
-      title: lang === 'id' ? 'Blog Tidak Ditemukan | Centra Biotech Indonesia' : 'Blog Not Found | Centra Biotech Indonesia',
+      title: { absolute: normalizeSeoTitle(lang === 'id' ? 'Blog Tidak Ditemukan' : 'Blog Not Found') },
       description: lang === 'id' ? 'Artikel yang Anda cari tidak ditemukan.' : 'The article you are looking for was not found.',
     };
   }
 
   const title = blog.title || 'Blog Centra Biotech Indonesia';
-  // Use SEO title from Strapi if available, otherwise truncate default
-  const seoTitle = blog.meta_title || truncateTitle(title, 60);
+  // Use SEO title from Strapi if available, otherwise the article title.
+  // Always normalized: Strapi meta_title routinely already ends with a
+  // (sometimes truncated) "| Centra Biotech" suffix, which would otherwise
+  // double up with the layout's own brand template.
+  const seoTitle = normalizeSeoTitle(blog.meta_title || title);
   // Use SEO description from Strapi if available
   const strapiMetaDesc = blog.meta_description;
   // Extract first 160 chars from content if it's a string, otherwise use default
@@ -117,7 +120,8 @@ export async function generateMetadata({
     : SITE_CONFIG.name;
 
   return {
-    title: seoTitle,  // Use truncated title for SEO
+    // absolute: brand already included by normalizeSeoTitle, exactly once.
+    title: { absolute: seoTitle },
     description,
     keywords: focusKeyphrase 
       ? [focusKeyphrase, 'blog', 'bioteknologi', 'centra biotech', blog.type].filter(Boolean) 

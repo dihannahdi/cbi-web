@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import { Locale, i18n } from "@/i18n-config";
 import { getDictionary } from "@/dictionaries";
-import { SITE_CONFIG } from "@/utils/seo";
+import { SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
 
 import Breadcrumb from "@/components/common/BreadScrumb";
 import ContainerSection from "@/components/layout/container";
@@ -29,7 +29,10 @@ export async function generateMetadata({
   const url = `${SITE_CONFIG.url}/${lang}/produk-layanan/perikanan/biofloc`;
 
   return {
-    title: seg.metaTitle,
+    // absolute: seg.metaTitle is a static dictionary string that already
+    // ends with "| CBI"; normalizeSeoTitle strips that and re-appends the
+    // full brand once, so it does not double up with the layout template.
+    title: { absolute: normalizeSeoTitle(seg.metaTitle) },
     description: seg.metaDescription,
     alternates: {
       canonical: url,

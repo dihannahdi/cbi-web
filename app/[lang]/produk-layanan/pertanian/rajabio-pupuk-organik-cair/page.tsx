@@ -7,7 +7,7 @@ import ContainerSection from "@/components/layout/container";
 import Breadcrumb from "@/components/common/BreadScrumb";
 import HeroSectionGeneral from "@/components/common/HeroSectionGeneral";
 import VideoGallerySlider from "@/components/product/VideoGallerySlider";
-import { SITE_CONFIG } from "@/utils/seo";
+import { SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
 import { 
   generateProductSchema,
   generateBreadcrumbSchema,
@@ -360,10 +360,13 @@ export async function generateMetadata({
   const strapiData = await fetchStrapiProduct("rajabio-pupuk-organik-cair", lang);
   const data = strapiData || productData[lang]; // Fallback to static if Strapi unavailable
 
-  // Use Strapi data if available, fallback to hardcoded optimized titles
-  const title = strapiData?.metaTitle || strapiData?.heroTitle || (lang === 'id' 
+  // Use Strapi data if available, fallback to hardcoded optimized titles.
+  // Always normalized: Strapi metaTitle often already ends with a
+  // (sometimes truncated) brand suffix, which would otherwise double up
+  // with the layout's own brand template.
+  const title = normalizeSeoTitle(strapiData?.metaTitle || strapiData?.heroTitle || (lang === 'id'
     ? "Pupuk Organik Cair Terbaik - RAJABIO Tingkatkan Panen Hingga 40%"
-    : "RAJABIO Liquid Organic Fertilizer - Best LOF Increase Harvest 40% | Certified");
+    : "RAJABIO Liquid Organic Fertilizer - Best LOF Increase Harvest 40% | Certified"));
   
   const description = strapiData?.metaDescription || strapiData?.heroSubtitle || (lang === 'id'
     ? "Pupuk organik cair RAJABIO bersertifikat Kementan RI. POC premium untuk padi, sayuran, buah. Tingkatkan hasil panen hingga 40%. Tersedia di Shopee & E-Katalog Pemerintah."
@@ -377,7 +380,8 @@ export async function generateMetadata({
       : "liquid organic fertilizer for sale, buy liquid organic fertilizer, lof, best liquid organic fertilizer, rajabio, buy rajabio, liquid organic fertilizer distributor, organic fertilizer supplier, wholesale organic fertilizer, organic liquid fertilizer, certified organic fertilizer, biological liquid fertilizer, organic rice fertilizer, high c-organic, eco-friendly liquid fertilizer, centra biotech, sustainable agriculture, organic fertilizer dealer");
 
   return {
-    title,
+    // absolute: brand already included by normalizeSeoTitle, exactly once.
+    title: { absolute: title },
     description,
     keywords,
     authors: [{ name: "PT. Centra Biotech Indonesia" }],

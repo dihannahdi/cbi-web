@@ -8,7 +8,7 @@ import Breadcrumb from "@/components/common/BreadScrumb";
 import HeroSectionGeneral from "@/components/common/HeroSectionGeneral";
 import VideoGallerySlider from "@/components/product/VideoGallerySlider";
 import ProductComposition from "@/components/product/ProductComposition";
-import { SITE_CONFIG } from "@/utils/seo";
+import { SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
 import { 
   generateProductSchema,
   generateBreadcrumbSchema,
@@ -242,10 +242,13 @@ export async function generateMetadata({
   // Access both snake_case (actual API) and camelCase (interface) for safety
   const strapiAny = strapiData as Record<string, any> | null;
   
-  // OPTIMIZED FOR CTR: Short title (mobile-friendly), keyword-first, numbers
-  const title = strapiAny?.meta_title || strapiData?.metaTitle || (lang === 'id' 
+  // OPTIMIZED FOR CTR: Short title (mobile-friendly), keyword-first, numbers.
+  // Always normalized: Strapi meta_title often already ends with a
+  // (sometimes truncated) brand suffix, which would otherwise double up
+  // with the layout's own brand template.
+  const title = normalizeSeoTitle(strapiAny?.meta_title || strapiData?.metaTitle || (lang === 'id'
     ? "FLORA ONE Pupuk Hayati Cair Terbaik | Panen +86%"
-    : "FLORA ONE Biofertilizer - +86% Yield | Ministry Certified");
+    : "FLORA ONE Biofertilizer - +86% Yield | Ministry Certified"));
   
   // OPTIMIZED DESCRIPTION: Benefits, CTA, 150-160 chars for mobile
   const description = strapiAny?.meta_description || strapiData?.metaDescription || (lang === 'id'
@@ -261,7 +264,8 @@ export async function generateMetadata({
       : "biological fertilizer for sale, liquid biological fertilizer, solid biological fertilizer, best biological fertilizer, best biofertilizer indonesia, flora one, floraone, buy floraone, organic fertilizer, microbial fertilizer, trichoderma, pseudomonas, plant disease control, certified biological fertilizer, eco-friendly fertilizer, centra biotech, organic farming, liquid fertilizer, solid fertilizer, biofertilizer distributor");
 
   return {
-    title,
+    // absolute: brand already included by normalizeSeoTitle, exactly once.
+    title: { absolute: title },
     description,
     keywords,
     authors: [{ name: "PT. Centra Biotech Indonesia" }],

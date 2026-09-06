@@ -6,7 +6,7 @@ import { getDocumentsQuery } from "@/utils/queries/documentsQuery";
 import { ApiPath, apiRequest } from "@/utils/apiClient";
 import { MediaInformationResponse } from "@/types/responseTypes";
 import Breadcrumb from "@/components/common/BreadScrumb";
-import { PAGE_METADATA, SITE_CONFIG } from "@/utils/seo";
+import { PAGE_METADATA, SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
 import { 
   generateWebPageSchema,
   generateBreadcrumbSchema,
@@ -38,7 +38,9 @@ export async function generateMetadata({
     : PAGE_METADATA.documents.description;
 
   return {
-    title,
+    // absolute: `title` (EN branch) already ends with "| Centra Biotech
+    // Indonesia"; normalizeSeoTitle strips that and re-appends the brand once.
+    title: { absolute: normalizeSeoTitle(title) },
     description,
     keywords: lang === 'en'
       ? 'documents, certificates, brochures, product catalog, ISO certification, company documents, Centra Biotech Indonesia'

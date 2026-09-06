@@ -5,7 +5,7 @@ import JoinUs from "@/components/career/JoinUs";
 import JobVacancySection from "@/components/career/JobVacancySection";
 import Breadcrumb from "@/components/common/BreadScrumb";
 import ContainerSection from "@/components/layout/container";
-import { PAGE_METADATA, SITE_CONFIG } from "@/utils/seo";
+import { PAGE_METADATA, SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
 import { getJobVacancies, mapContractTypeToEmploymentType } from "@/utils/strapiCareerData";
 
 import { Locale, i18n } from "@/i18n-config";
@@ -56,7 +56,10 @@ export async function generateMetadata({
     : PAGE_METADATA.career.description;
 
   return {
-    title,
+    // absolute: `title` (EN branch) already ends with "| Centra Biotech
+    // Indonesia"; normalizeSeoTitle strips that and re-appends the brand
+    // once, so it does not double up with the layout template.
+    title: { absolute: normalizeSeoTitle(title) },
     description,
     keywords: lang === 'en'
       ? 'career, jobs, employment, biotechnology jobs, agriculture jobs, Indonesia career, Centra Biotech Indonesia careers'

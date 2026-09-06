@@ -8,7 +8,7 @@ import Breadcrumb from "@/components/common/BreadScrumb";
 import HeroSectionGeneral from "@/components/common/HeroSectionGeneral";
 import VideoGallerySlider from "@/components/product/VideoGallerySlider";
 import ProductComposition from "@/components/product/ProductComposition";
-import { SITE_CONFIG } from "@/utils/seo";
+import { SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
 import { 
   generateProductSchema,
   generateBreadcrumbSchema,
@@ -232,10 +232,13 @@ export async function generateMetadata({
   const strapiData = await fetchStrapiProduct("biokiller-insektisida-hayati", lang);
   const data = strapiData || productData[lang]; // Fallback to static if Strapi unavailable
 
-  // Use Strapi data if available, fallback to hardcoded optimized titles
-  const title = strapiData?.metaTitle || strapiData?.heroTitle || (lang === 'id' 
+  // Use Strapi data if available, fallback to hardcoded optimized titles.
+  // Always normalized: Strapi metaTitle often already ends with a
+  // (sometimes truncated) brand suffix, which would otherwise double up
+  // with the layout's own brand template.
+  const title = normalizeSeoTitle(strapiData?.metaTitle || strapiData?.heroTitle || (lang === 'id'
     ? "Bio Pestisida & Insektisida Hayati BIOKILLER - Basmi Wereng & Hama Tanpa Residu Kimia"
-    : "BIOKILLER Biological Insecticide - Eliminate Planthoppers & Pests Without Resistance | Certified");
+    : "BIOKILLER Biological Insecticide - Eliminate Planthoppers & Pests Without Resistance | Certified"));
   
   const description = strapiData?.metaDescription || strapiData?.heroSubtitle || (lang === 'id'
     ? "BIOKILLER adalah bio pestisida dan insektisida hayati alami berbahan jamur entomopatogen. Efektif basmi wereng, ulat grayak, dan hama tanpa residu kimia. Bersertifikat Kementan RI."
@@ -249,7 +252,8 @@ export async function generateMetadata({
       : "biological insecticide for sale, best biological insecticide, biokiller, buy biological insecticide, bio pesticide, biological pesticide, organic pesticide, organic insecticide, beauveria bassiana, metarhizium anisopliae, brown planthopper control, rice pest control, certified biological insecticide, natural pest control, eco-friendly insecticide, centra biotech, organic farming, buy bio pesticide");
 
   return {
-    title,
+    // absolute: brand already included by normalizeSeoTitle, exactly once.
+    title: { absolute: title },
     description,
     keywords,
     authors: [{ name: "PT. Centra Biotech Indonesia" }],

@@ -6,7 +6,7 @@ import { ProductAndServiceResponse } from "@/types/responseTypes";
 
 import { ApiPath, apiRequest } from "@/utils/apiClient";
 import { getProductServiceQuery } from "@/utils/queries/product/productService";
-import { SITE_CONFIG } from "@/utils/seo";
+import { SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
 import { 
   generateWebPageSchema,
   generateBreadcrumbSchema,
@@ -62,7 +62,11 @@ export async function generateMetadata({
   const description = dict.seo.productsDescription;
 
   return {
-    title,
+    // absolute: `title` already ends with "- Centra Biotech Indonesia";
+    // normalizeSeoTitle strips that dash-delimited brand suffix too and
+    // re-appends the brand once via " | ", avoiding a double-up with the
+    // layout template.
+    title: { absolute: normalizeSeoTitle(title) },
     description,
     alternates: {
       canonical: `${SITE_CONFIG.url}/${lang}/product`,

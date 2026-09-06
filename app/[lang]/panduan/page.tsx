@@ -5,7 +5,7 @@ import { getDictionary } from "@/dictionaries";
 import ContainerSection from "@/components/layout/container";
 import Breadcrumb from "@/components/common/BreadScrumb";
 import HeroSectionGeneral from "@/components/common/HeroSectionGeneral";
-import { SITE_CONFIG } from "@/utils/seo";
+import { SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
 import {
   generateBreadcrumbSchema,
   MultipleStructuredData,
@@ -137,7 +137,9 @@ export async function generateMetadata({
       : "Complete guides on liquid biofertilizer, organic fertilizer, soil conditioner, humic acid, biopesticides, and tips to become a fertilizer distributor.";
 
   return {
-    title,
+    // absolute: `title` already ends with "| Centra Biotech Indonesia";
+    // normalizeSeoTitle strips that and re-appends the brand once.
+    title: { absolute: normalizeSeoTitle(title) },
     description,
     keywords: [
       "panduan pertanian",

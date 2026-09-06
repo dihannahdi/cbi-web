@@ -7,7 +7,7 @@ import ContainerSection from "@/components/layout/container";
 import Breadcrumb from "@/components/common/BreadScrumb";
 import HeroSectionGeneral from "@/components/common/HeroSectionGeneral";
 import VideoGallerySlider from "@/components/product/VideoGallerySlider";
-import { SITE_CONFIG } from "@/utils/seo";
+import { SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
 import { 
   generateProductSchema,
   generateBreadcrumbSchema,
@@ -184,15 +184,19 @@ export async function generateMetadata({
       ? ['dolomit', 'biokalsi', 'pupuk dolomit', 'tanah asam', 'kapur pertanian']
       : ['dolomite', 'biokalsi', 'dolomite fertilizer', 'acidic soil', 'agricultural lime']);
   
-  const title = strapiData?.metaTitle || strapiData?.heroTitle || data.heroTitle;
+  // Always normalized: Strapi metaTitle often already ends with a
+  // (sometimes truncated) brand suffix, which would otherwise double up
+  // with the layout's own brand template.
+  const title = normalizeSeoTitle(strapiData?.metaTitle || strapiData?.heroTitle || data.heroTitle);
   const description = strapiData?.metaDescription || strapiData?.heroSubtitle || data.description;
-  
+
   return {
-    title: title,
+    // absolute: brand already included by normalizeSeoTitle, exactly once.
+    title: { absolute: title },
     description: description,
     keywords: keywords,
     openGraph: {
-      title: `${title} | Centra Biotech Indonesia`,
+      title, // already carries a single brand suffix, do not re-append
       description: description,
       images: strapiData?.heroImage?.url 
         ? [`${process.env.NEXT_PUBLIC_URL_API}${strapiData.heroImage.url}`]

@@ -7,7 +7,7 @@ import { getDictionary } from "@/dictionaries";
 import ContainerSection from "@/components/layout/container";
 import Breadcrumb from "@/components/common/BreadScrumb";
 import HeroSectionGeneral from "@/components/common/HeroSectionGeneral";
-import { SITE_CONFIG, cleanMetaDescription, truncateTitle } from "@/utils/seo";
+import { SITE_CONFIG, cleanMetaDescription, normalizeSeoTitle } from "@/utils/seo";
 import {
   generateLearningResourceSchema,
   generateBreadcrumbSchema,
@@ -327,7 +327,11 @@ export async function generateMetadata({
   }
 
   return {
-    title: content.metaTitle,
+    // absolute: content.metaTitle is a hard-coded static string that
+    // already ends with "| Centra Biotech Indonesia"; normalizeSeoTitle
+    // strips that and re-appends it once, so it does not double up with
+    // the layout's own brand template.
+    title: { absolute: normalizeSeoTitle(content.metaTitle) },
     description: content.metaDescription,
     keywords: content.keywords,
     authors: [{ name: "Centra Biotech Indonesia" }],
