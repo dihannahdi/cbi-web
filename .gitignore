@@ -101,13 +101,22 @@ refferences/
 # snapshots) — transient debug output, not source.
 .playwright-mcp/
 
-# one-off debug/scratch scripts and their output dumps (superseded by a
-# clean same-named script, or self-declared disposable via a tmp_ prefix)
+# one-off debug/scratch output dumps: browser accessibility-tree snapshots
+# and a captured shell error, not source. tmp_*.py is self-declared
+# disposable via its own naming prefix.
 scripts/tmp_*.py
 scripts/snapshot.json
 scripts/snapshot2.json
 scripts/tabs-output.txt
-scripts/check-strapi2.sh
-scripts/check-strapi3.sh
-scripts/check-strapi4.sh
-scripts/test_redirects2.py
+
+# Operational scripts that carry live credentials inline. These belong on the
+# VPS, not in a public repo. GitHub push protection blocked the first attempt
+# to track them (2026-09-07); the DeepSeek key in them needs rotating anyway.
+scripts/article-automation/deepseek-article-generator.js
+scripts/article-automation/deepseek-turbo-generator.js
+scripts/article-automation/floraone-article-generator.js
+scripts/deepseek-turbo-generator-vps.js
+scripts/gsc-sheets-monitor/gsc_sheets_monitor.py
+scripts/strapi-gsc-setup/api/gsc-sync/controllers/gsc-sync.ts
+scripts/strapi-gsc-setup/fix-ts.sh
+scripts/strapi-gsc-setup/test-sync.sh

@@ -1,0 +1,35 @@
+{
+  "name": "cbi-article-automation",
+  "version": "1.0.0",
+  "description": "Automated article uploader for CBI Strapi CMS with Enterprise SEO optimization",
+  "main": "article-uploader.js",
+  "scripts": {
+    "start": "node article-uploader.js",
+    "upload": "node article-uploader.js",
+    "upload:5": "node article-uploader.js --count 5",
+    "upload:all": "node article-uploader.js --count 100",
+    "stats": "node article-uploader.js --stats",
+    "dry-run": "node article-uploader.js --dry-run",
+    "test": "node test-converter.js"
+  },
+  "keywords": [
+    "strapi",
+    "automation",
+    "article",
+    "docx",
+    "seo",
+    "centra-biotech"
+  ],
+  "author": "PT Centra Biotech Indonesia",
+  "license": "MIT",
+  "dependencies": {
+    "better-sqlite3": "^11.0.0",
+    "cheerio": "^1.0.0",
+    "mammoth": "^1.8.0",
+    "slugify": "^1.6.6",
+    "uuid": "^10.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
