@@ -1,11 +1,12 @@
 import { ProductFisheryResponse } from "@/types/responseTypes";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 
 import { getImageUrl } from "@/utils/getImageUrl";
 import { ApiPath, apiRequest } from "@/utils/apiClient";
 import { getServicesQuery } from "@/utils/queries/product/servicesQuery";
-import { PAGE_METADATA, SITE_CONFIG } from "@/utils/seo";
+import { PAGE_METADATA, SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
 import { 
   generateProductCategorySchemas,
   MultipleStructuredData 
@@ -73,18 +74,18 @@ export async function generateMetadata({
   const dict = await getDictionary(lang);
   const data = await getFisheryData(lang);
 
-  const defaultTitle = dict.products.fishery.title + " | Centra Biotech Indonesia";
+  const defaultTitle = dict.products.fishery.title;
   const defaultDescription = dict.products.fishery.description;
 
   if (!data || !data.metadata) {
     return {
-      title: defaultTitle,
+      title: { absolute: normalizeSeoTitle(defaultTitle) },
       description: defaultDescription,
       alternates: {
-        canonical: `${SITE_CONFIG.url}/${lang}/product/fishery`,
+        canonical: `${SITE_CONFIG.url}/${lang}/produk-layanan/perikanan`,
         languages: {
-          'id': `${SITE_CONFIG.url}/id/product/fishery`,
-          'en': `${SITE_CONFIG.url}/en/product/fishery`,
+          'id': `${SITE_CONFIG.url}/id/produk-layanan/perikanan`,
+          'en': `${SITE_CONFIG.url}/en/produk-layanan/perikanan`,
         },
       },
     };
@@ -94,11 +95,17 @@ export async function generateMetadata({
     ? new URL(getImageUrl(data.headline.image.url), SITE_CONFIG.url).toString()
     : `${SITE_CONFIG.url}/images/fishery-default.jpg`;
 
+  // Always normalized: the CMS titleTag often already ends with a
+  // (sometimes truncated) brand suffix, which would otherwise double up
+  // with the layout's own brand template.
+  const pageTitle = normalizeSeoTitle(data.metadata.titleTag || defaultTitle);
+
   return {
-    title: data.metadata.titleTag || defaultTitle,
+    // absolute: brand already included by normalizeSeoTitle, exactly once.
+    title: { absolute: pageTitle },
     description: data.metadata.metaDesc || defaultDescription,
     openGraph: {
-      title: data.metadata.titleTag || defaultTitle,
+      title: pageTitle,
       description: data.metadata.metaDesc || defaultDescription,
       images: [
         {
@@ -113,15 +120,15 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: data.metadata.titleTag || defaultTitle,
+      title: pageTitle,
       description: data.metadata.metaDesc || defaultDescription,
       images: [imageUrl],
     },
     alternates: {
-      canonical: `${SITE_CONFIG.url}/${lang}/product/fishery`,
+      canonical: `${SITE_CONFIG.url}/${lang}/produk-layanan/perikanan`,
       languages: {
-        'id': `${SITE_CONFIG.url}/id/product/fishery`,
-        'en': `${SITE_CONFIG.url}/en/product/fishery`,
+        'id': `${SITE_CONFIG.url}/id/produk-layanan/perikanan`,
+        'en': `${SITE_CONFIG.url}/en/produk-layanan/perikanan`,
       },
     },
     keywords: lang === 'id'
@@ -167,7 +174,7 @@ const Fishery = async ({
   const products = data.productCategoriesSection?.flatMap((category: any) => 
     category.products?.map((product: any) => ({
       name: product.name || product.title,
-      url: `/${lang}/product/fishery/${product.slug || product.documentId || product.id}`,
+      url: `/${lang}/produk-layanan/perikanan/${product.slug || product.documentId || product.id}`,
       image: product.image?.url,
       description: product.description,
     })) || []
@@ -177,7 +184,7 @@ const Fishery = async ({
   const schemas = generateProductCategorySchemas({
     name: dict.products.fishery.title,
     description: PAGE_METADATA.fishery.description,
-    url: `/${lang}/product/fishery`,
+    url: `/${lang}/produk-layanan/perikanan`,
     products,
   });
 
@@ -214,7 +221,7 @@ const Fishery = async ({
 
       <section className="bg-[#F4F4F4]">
         <ContainerSection>
-          <div className="flex flex-col gap-6 rounded-3xl bg-[#00802B] p-8 md:flex-row md:items-center lg:gap-12 lg:p-16">
+          <div className="flex flex-col gap-6 rounded-3xl bg-[#083F19] p-8 md:flex-row md:items-center lg:gap-12 lg:p-16">
             <h2 className="max-w-[10rem] text-3xl text-white lg:max-w-none lg:text-[40px]/[48px] xl:w-[46rem] xl:text-5xl/[60px]">
               {data.aboutSection.title}
             </h2>
@@ -223,8 +230,19 @@ const Fishery = async ({
         </ContainerSection>
       </section>
 
-      <section>
-        <ContainerSection>
+      <section className="relative overflow-hidden">
+        {/* CBI Logo Watermark Background */}
+        <div className="absolute right-0 top-0 h-[64rem] w-[64rem] translate-x-[17rem] -translate-y-[20rem]">
+          <Image
+            draggable={false}
+            src="/logo-only.png"
+            alt=""
+            width={600}
+            height={600}
+            className="h-full w-full object-cover opacity-[0.04] brightness-0"
+          />
+        </div>
+        <ContainerSection className="relative z-20">
           <div>
             <h2 className="leading-[50px] lg:leading-[80px]">
               {whyTitle.split(' ').slice(0, 2).join(' ')} <br />
@@ -266,7 +284,7 @@ const Fishery = async ({
         productCategories={data.productCategoriesSection}
       />
 
-      <BannerContactSection data={data.bannerCTA} />
+      <BannerContactSection data={data.bannerCTA} lang={lang} />
     </>
   );
 };

@@ -1,0 +1,218 @@
+﻿
+> cbi@0.1.0 build
+> next build
+
+▲ Next.js 16.1.1 (Turbopack)
+- Environments: .env.production.local, .env.local
+- Experiments (use with caution):
+  · optimizePackageImports
+  · webVitalsAttribution
+
+node.exe : ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: 
+https://nextjs.org/docs/messages/middleware-to-proxy
+At line:1 char:1
++ & "C:\nvm4w\nodejs/node.exe" "C:\nvm4w\nodejs/node_modules/npm/bin/np ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (⚠ The "middlewa...leware-to-proxy:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  Creating an optimized production build ...
+✓ Compiled successfully in 27.4s
+  Running TypeScript ...
+  Collecting page data using 15 workers ...
+  Generating static pages using 15 workers (0/120) ...
+[Strapi] Fishery product bioaqua not found in id, trying English fallback
+[Strapi] Fishery product bioaqua not found in id, trying English fallback
+  Generating static pages using 15 workers (30/120) 
+[Strapi] Product terrachamp not found in id, trying English fallback
+[Strapi] Product terrachamp not found in id, trying English fallback
+  Generating static pages using 15 workers (60/120) 
+[Strapi] Livestock product biomaxi not found in id, trying English fallback
+[Strapi] Livestock product biomaxi not found in id, trying English fallback
+[Strapi] Product lumbricompost not found in id, trying English fallback
+[Strapi] Product lumbricompost not found in id, trying English fallback
+  Generating static pages using 15 workers (90/120) 
+✓ Generating static pages using 15 workers (120/120) in 7.9s
+  Finalizing page optimization ...
+
+Route (app)                                                           Revalidate  Expire
+┌ ○ /_not-found
+├ ● /[lang]                                                                   1m      1y
+│ ├ /id                                                                       1m      1y
+│ └ /en                                                                       1m      1y
+├ ● /[lang]/about-us                                                          1m      1y
+│ ├ /id/about-us                                                              1m      1y
+│ └ /en/about-us                                                              1m      1y
+├ ● /[lang]/analytics/whatsapp
+│ ├ /id/analytics/whatsapp
+│ └ /en/analytics/whatsapp
+├ ● /[lang]/blog                                                              1m      1y
+│ ├ /id/blog                                                                  1m      1y
+│ └ /en/blog                                                                  1m      1y
+├ ● /[lang]/blog/[slug]
+├ ● /[lang]/career                                                            1m      1y
+│ ├ /id/career                                                                1m      1y
+│ └ /en/career                                                                1m      1y
+├ ƒ /[lang]/career/apply/[slug]
+├ ● /[lang]/contact                                                           1m      1y
+│ ├ /id/contact                                                               1m      1y
+│ └ /en/contact                                                               1m      1y
+├ ● /[lang]/cookies
+│ ├ /id/cookies
+│ └ /en/cookies
+├ ● /[lang]/copyright
+│ ├ /id/copyright
+│ └ /en/copyright
+├ ● /[lang]/documents                                                         1m      1y
+│ ├ /id/documents                                                             1m      1y
+│ └ /en/documents                                                             1m      1y
+├ ● /[lang]/hr
+│ ├ /id/hr
+│ └ /en/hr
+├ ● /[lang]/news                                                              1m      1y
+│ ├ /id/news                                                                  1m      1y
+│ └ /en/news                                                                  1m      1y
+├ ● /[lang]/news/[slug]
+├ ● /[lang]/panduan
+│ ├ /id/panduan
+│ └ /en/panduan
+├ ● /[lang]/panduan/[slug]
+│ └ /id/panduan/pupuk-hayati-cair
+├ ● /[lang]/privacy-policy
+│ ├ /id/privacy-policy
+│ └ /en/privacy-policy
+├ ● /[lang]/product                                                           1m      1y
+│ ├ /id/product                                                               1m      1y
+│ └ /en/product                                                               1m      1y
+├ ● /[lang]/product/agriculture                                               1m      1y
+│ ├ /id/product/agriculture                                                   1m      1y
+│ └ /en/product/agriculture                                                   1m      1y
+├ ● /[lang]/product/agriculture/biojagat-biofertilizer
+│ ├ /id/product/agriculture/biojagat-biofertilizer
+│ └ /en/product/agriculture/biojagat-biofertilizer
+├ ● /[lang]/product/agriculture/biokalsi-dolomite
+│ ├ /id/product/agriculture/biokalsi-dolomite
+│ └ /en/product/agriculture/biokalsi-dolomite
+├ ● /[lang]/product/agriculture/biokiller-biopesticide
+│ ├ /id/product/agriculture/biokiller-biopesticide
+│ └ /en/product/agriculture/biokiller-biopesticide
+├ ● /[lang]/product/agriculture/blackturbo-humic-acid
+│ ├ /id/product/agriculture/blackturbo-humic-acid
+│ └ /en/product/agriculture/blackturbo-humic-acid
+├ ● /[lang]/product/agriculture/floraone-liquid-biofertilizer
+│ ├ /id/product/agriculture/floraone-liquid-biofertilizer
+│ └ /en/product/agriculture/floraone-liquid-biofertilizer
+├ ● /[lang]/product/agriculture/floraone-solid-biofertilizer
+│ ├ /id/product/agriculture/floraone-solid-biofertilizer
+│ └ /en/product/agriculture/floraone-solid-biofertilizer
+├ ● /[lang]/product/agriculture/rajabio-organic-fertilizer
+│ ├ /id/product/agriculture/rajabio-organic-fertilizer
+│ └ /en/product/agriculture/rajabio-organic-fertilizer
+├ ● /[lang]/product/agriculture/simbios-biofertilizer
+│ ├ /id/product/agriculture/simbios-biofertilizer
+│ └ /en/product/agriculture/simbios-biofertilizer
+├ ● /[lang]/product/fishery                                                   1m      1y
+│ ├ /id/product/fishery                                                       1m      1y
+│ └ /en/product/fishery                                                       1m      1y
+├ ● /[lang]/product/livestock                                                 1m      1y
+│ ├ /id/product/livestock                                                     1m      1y
+│ └ /en/product/livestock                                                     1m      1y
+├ ● /[lang]/produk
+│ ├ /id/produk
+│ └ /en/produk
+├ ● /[lang]/produk-layanan                                                    1m      1y
+│ ├ /id/produk-layanan                                                        1m      1y
+│ └ /en/produk-layanan                                                        1m      1y
+├ ● /[lang]/produk-layanan/perikanan                                          1m      1y
+│ ├ /id/produk-layanan/perikanan                                              1m      1y
+│ └ /en/produk-layanan/perikanan                                              1m      1y
+├ ● /[lang]/produk-layanan/perikanan/[slug]                                   1m      1y
+│ ├ /id/produk-layanan/perikanan/bioaqua                                      1m      1y
+│ └ /en/produk-layanan/perikanan/bioaqua                                      1m      1y
+├ ● /[lang]/produk-layanan/perikanan/biofloc                                  1h      1y
+│ ├ /id/produk-layanan/perikanan/biofloc                                      1h      1y
+│ └ /en/produk-layanan/perikanan/biofloc                                      1h      1y
+├ ● /[lang]/produk-layanan/perikanan/udang                                    1h      1y
+│ ├ /id/produk-layanan/perikanan/udang                                        1h      1y
+│ └ /en/produk-layanan/perikanan/udang                                        1h      1y
+├ ● /[lang]/produk-layanan/pertanian                                          1m      1y
+│ ├ /id/produk-layanan/pertanian                                              1m      1y
+│ └ /en/produk-layanan/pertanian                                              1m      1y
+├ ● /[lang]/produk-layanan/pertanian/[slug]                                   1m      1y
+│ ├ /id/produk-layanan/pertanian/rajabio-pupuk-organik-cair                   1m      1y
+│ ├ /id/produk-layanan/pertanian/biokiller-insektisida-hayati                 1m      1y
+│ ├ /id/produk-layanan/pertanian/simbios-pupuk-hayati-cair                    1m      1y
+│ └ [+17 more paths]
+├ ● /[lang]/produk-layanan/pertanian/biojagat-pupuk-hayati-cair               1m      1y
+│ ├ /id/produk-layanan/pertanian/biojagat-pupuk-hayati-cair                   1m      1y
+│ └ /en/produk-layanan/pertanian/biojagat-pupuk-hayati-cair                   1m      1y
+├ ● /[lang]/produk-layanan/pertanian/biokalsi-dolomit-pembenah-tanah          1m      1y
+│ ├ /id/produk-layanan/pertanian/biokalsi-dolomit-pembenah-tanah              1m      1y
+│ └ /en/produk-layanan/pertanian/biokalsi-dolomit-pembenah-tanah              1m      1y
+├ ● /[lang]/produk-layanan/pertanian/biokiller-insektisida-hayati             1m      1y
+│ ├ /id/produk-layanan/pertanian/biokiller-insektisida-hayati                 1m      1y
+│ └ /en/produk-layanan/pertanian/biokiller-insektisida-hayati                 1m      1y
+├ ● /[lang]/produk-layanan/pertanian/blackturbo-asam-humat-cair               1m      1y
+│ ├ /id/produk-layanan/pertanian/blackturbo-asam-humat-cair                   1m      1y
+│ └ /en/produk-layanan/pertanian/blackturbo-asam-humat-cair                   1m      1y
+├ ● /[lang]/produk-layanan/pertanian/floraone-pupuk-hayati                    1m      1y
+│ ├ /id/produk-layanan/pertanian/floraone-pupuk-hayati                        1m      1y
+│ └ /en/produk-layanan/pertanian/floraone-pupuk-hayati                        1m      1y
+├ ● /[lang]/produk-layanan/pertanian/floraone-pupuk-hayati-padat              1m      1y
+│ ├ /id/produk-layanan/pertanian/floraone-pupuk-hayati-padat                  1m      1y
+│ └ /en/produk-layanan/pertanian/floraone-pupuk-hayati-padat                  1m      1y
+├ ● /[lang]/produk-layanan/pertanian/rajabio-pupuk-organik-cair               1m      1y
+│ ├ /id/produk-layanan/pertanian/rajabio-pupuk-organik-cair                   1m      1y
+│ └ /en/produk-layanan/pertanian/rajabio-pupuk-organik-cair                   1m      1y
+├ ● /[lang]/produk-layanan/pertanian/simbios-pupuk-hayati-cair                1m      1y
+│ ├ /id/produk-layanan/pertanian/simbios-pupuk-hayati-cair                    1m      1y
+│ └ /en/produk-layanan/pertanian/simbios-pupuk-hayati-cair                    1m      1y
+├ ● /[lang]/produk-layanan/peternakan                                         1m      1y
+│ ├ /id/produk-layanan/peternakan                                             1m      1y
+│ └ /en/produk-layanan/peternakan                                             1m      1y
+├ ● /[lang]/produk-layanan/peternakan/[slug]                                  1m      1y
+│ ├ /id/produk-layanan/peternakan/biomaxi                                     1m      1y
+│ └ /en/produk-layanan/peternakan/biomaxi                                     1m      1y
+├ ● /[lang]/produk-layanan/peternakan/ruminant                                1h      1y
+│ ├ /id/produk-layanan/peternakan/ruminant                                    1h      1y
+│ └ /en/produk-layanan/peternakan/ruminant                                    1h      1y
+├ ● /[lang]/produk-layanan/peternakan/unggas                                  1h      1y
+│ ├ /id/produk-layanan/peternakan/unggas                                      1h      1y
+│ └ /en/produk-layanan/peternakan/unggas                                      1h      1y
+├ ● /[lang]/produk/pertanian
+│ ├ /id/produk/pertanian
+│ └ /en/produk/pertanian
+├ ● /[lang]/produk/pertanian/rajabio-pupuk-organik-cair
+│ ├ /id/produk/pertanian/rajabio-pupuk-organik-cair
+│ └ /en/produk/pertanian/rajabio-pupuk-organik-cair
+├ ● /[lang]/rajabio-pupuk-organik-cair
+│ ├ /id/rajabio-pupuk-organik-cair
+│ └ /en/rajabio-pupuk-organik-cair
+├ ● /[lang]/terms-of-service
+│ ├ /id/terms-of-service
+│ └ /en/terms-of-service
+├ ● /[lang]/top-articles                                                     10m      1y
+│ ├ /id/top-articles                                                         10m      1y
+│ └ /en/top-articles                                                         10m      1y
+├ ƒ /api/analytics/whatsapp-click
+├ ƒ /api/apply
+├ ƒ /api/hr/analyze
+├ ƒ /api/hr/applications
+├ ƒ /api/hr/auth
+├ ƒ /api/indexnow
+├ ƒ /api/revalidate
+├ ƒ /api/svg
+├ ○ /robots.txt
+├ ƒ /sitemap-blog.xml
+├ ƒ /sitemap-news.xml
+├ ƒ /sitemap-products.xml
+├ ƒ /sitemap-static.xml
+└ ○ /sitemap.xml
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+

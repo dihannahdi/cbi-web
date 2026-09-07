@@ -40,7 +40,7 @@ const AgricultureProductsSection = dynamic(
   }
 );
 
-import { PAGE_METADATA, SITE_CONFIG } from "@/utils/seo";
+import { PAGE_METADATA, SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
 import { 
   generateProductCategorySchemas,
   MultipleStructuredData 
@@ -77,18 +77,19 @@ export async function generateMetadata({
   const dict = await getDictionary(lang);
   const data = await getAgricultureData(lang);
 
-  const defaultTitle = dict.products.agriculture.title + " | Centra Biotech Indonesia";
+  // Brand suffix is appended once by normalizeSeoTitle below, not here.
+  const defaultTitle = dict.products.agriculture.title;
   const defaultDescription = dict.products.agriculture.description;
 
   if (!data || !data.metadata) {
     return {
-      title: defaultTitle,
+      title: { absolute: normalizeSeoTitle(defaultTitle) },
       description: defaultDescription,
       alternates: {
-        canonical: `${SITE_CONFIG.url}/${lang}/product/agriculture`,
+        canonical: `${SITE_CONFIG.url}/${lang}/produk-layanan/pertanian`,
         languages: {
-          'id': `${SITE_CONFIG.url}/id/product/agriculture`,
-          'en': `${SITE_CONFIG.url}/en/product/agriculture`,
+          'id': `${SITE_CONFIG.url}/id/produk-layanan/pertanian`,
+          'en': `${SITE_CONFIG.url}/en/produk-layanan/pertanian`,
         },
       },
     };
@@ -98,11 +99,17 @@ export async function generateMetadata({
     ? getImageUrl(data.headline.image.url) 
     : `${SITE_CONFIG.url}/images/og-agriculture.jpg`;
 
+  // Always normalized: the CMS titleTag often already ends with a
+  // (sometimes truncated) brand suffix, which would otherwise double up
+  // with the layout's own brand template.
+  const pageTitle = normalizeSeoTitle(data.metadata.titleTag || defaultTitle);
+
   return {
-    title: data.metadata.titleTag || defaultTitle,
+    // absolute: brand already included by normalizeSeoTitle, exactly once.
+    title: { absolute: pageTitle },
     description: data.metadata.metaDesc || defaultDescription,
     openGraph: {
-      title: data.metadata.titleTag || defaultTitle,
+      title: pageTitle,
       description: data.metadata.metaDesc || defaultDescription,
       images: [
         {
@@ -117,15 +124,15 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: data.metadata.titleTag || defaultTitle,
+      title: pageTitle,
       description: data.metadata.metaDesc || defaultDescription,
       images: [imageUrl],
     },
     alternates: {
-      canonical: `${SITE_CONFIG.url}/${lang}/product/agriculture`,
+      canonical: `${SITE_CONFIG.url}/${lang}/produk-layanan/pertanian`,
       languages: {
-        'id': `${SITE_CONFIG.url}/id/product/agriculture`,
-        'en': `${SITE_CONFIG.url}/en/product/agriculture`,
+        'id': `${SITE_CONFIG.url}/id/produk-layanan/pertanian`,
+        'en': `${SITE_CONFIG.url}/en/produk-layanan/pertanian`,
       },
     },
     keywords: lang === 'id' 
@@ -171,7 +178,7 @@ const Agriculture = async ({
   const products = data.productCategoriesSection?.flatMap((category: any) => 
     category.products?.map((product: any) => ({
       name: product.name || product.title,
-      url: `/${lang}/product/agriculture/${product.slug || product.documentId || product.id}`,
+      url: `/${lang}/produk-layanan/pertanian/${product.slug || product.documentId || product.id}`,
       image: product.image?.url,
       description: product.description,
     })) || []
@@ -181,7 +188,7 @@ const Agriculture = async ({
   const schemas = generateProductCategorySchemas({
     name: dict.products.agriculture.title,
     description: PAGE_METADATA.agriculture.description,
-    url: `/${lang}/product/agriculture`,
+    url: `/${lang}/produk-layanan/pertanian`,
     products,
   });
 
@@ -229,7 +236,7 @@ const Agriculture = async ({
                 
                 <h3 className="text-3xl font-extrabold mb-2 lg:text-4xl">
                   RAJABIO
-                  <span className="block text-[#90EE90] text-lg font-semibold mt-1 lg:text-xl">
+                  <span className="block text-[#BDDE7E] text-lg font-semibold mt-1 lg:text-xl">
                     {lang === 'id' ? 'Pupuk Organik Cair' : 'Liquid Organic Fertilizer'}
                   </span>
                 </h3>
@@ -249,7 +256,7 @@ const Agriculture = async ({
                     lang === 'id' ? '100% Organik' : '100% Organic',
                   ].map((benefit, idx) => (
                     <div key={idx} className="flex items-center gap-2 text-sm">
-                      <CheckCircle className="h-4 w-4 text-[#90EE90] flex-shrink-0" />
+                      <CheckCircle className="h-4 w-4 text-[#BDDE7E] flex-shrink-0" />
                       <span className="text-white/80">{benefit}</span>
                     </div>
                   ))}
@@ -259,7 +266,7 @@ const Agriculture = async ({
                 <div className="flex flex-wrap gap-3">
                   <Link
                     href={`/${lang}/rajabio-pupuk-organik-cair`}
-                    className="flex items-center gap-2 rounded-full bg-white text-[#006622] px-5 py-2.5 font-semibold text-sm hover:bg-[#90EE90] transition-all"
+                    className="flex items-center gap-2 rounded-full bg-white text-[#006622] px-5 py-2.5 font-semibold text-sm hover:bg-[#BDDE7E] transition-all"
                   >
                     {lang === 'id' ? 'Lihat Detail Produk' : 'View Product Details'}
                     <ArrowRight className="h-4 w-4" />
@@ -302,7 +309,7 @@ const Agriculture = async ({
       {/* About Section */}
       <section className="bg-[#F4F4F4]">
         <ContainerSection>
-          <div className="flex flex-col gap-6 rounded-3xl bg-[#00802B] p-8 md:flex-row md:items-center lg:gap-12 lg:p-16">
+          <div className="flex flex-col gap-6 rounded-3xl bg-[#083F19] p-8 md:flex-row md:items-center lg:gap-12 lg:p-16">
             <h2 className="max-w-[10rem] text-3xl text-white lg:max-w-none lg:text-[40px]/[48px] xl:w-[46rem] xl:text-5xl/[60px]">
               {data.aboutSection.title}
             </h2>
@@ -311,8 +318,19 @@ const Agriculture = async ({
         </ContainerSection>
       </section>
 
-      <section>
-        <ContainerSection>
+      <section className="relative overflow-hidden">
+        {/* CBI Logo Watermark Background */}
+        <div className="absolute right-0 top-0 h-[64rem] w-[64rem] translate-x-[17rem] -translate-y-[20rem]">
+          <Image
+            draggable={false}
+            src="/logo-only.png"
+            alt=""
+            width={600}
+            height={600}
+            className="h-full w-full object-cover opacity-[0.04] brightness-0"
+          />
+        </div>
+        <ContainerSection className="relative z-20">
           <div>
             <h2 className="leading-[50px] lg:leading-[80px]">
               {whyTitle.split(' ').slice(0, 2).join(' ')} <br />
@@ -361,7 +379,7 @@ const Agriculture = async ({
         lang={lang}
       />
 
-      <BannerContactSection data={data.bannerCTA} />
+      <BannerContactSection data={data.bannerCTA} lang={lang} />
     </>
   );
 };

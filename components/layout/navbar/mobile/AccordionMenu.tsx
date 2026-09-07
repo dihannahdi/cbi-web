@@ -38,7 +38,7 @@ export const AccordionMenu: FC<AccordionMenuProps> = ({
           onClick={onToggle}
           variant="link"
           className={cn(
-            "p-0 text-base font-normal text-[#FDFDFD] [&_svg]:size-5",
+            "p-0 text-base font-normal text-current hover:bg-transparent hover:no-underline [&_svg]:size-5",
           )}
         >
           {title}
@@ -48,11 +48,11 @@ export const AccordionMenu: FC<AccordionMenuProps> = ({
         variant="link"
         onClick={onToggle}
         className={cn(
-          "transform p-0 transition-transform duration-500 ease-in-out",
+          "transform p-0 text-current transition-transform duration-500 ease-in-out hover:bg-transparent hover:no-underline",
           isOpen && "rotate-180",
         )}
       >
-        <ChevronDown className="h-5 w-5 text-white" />
+        <ChevronDown className="h-5 w-5 text-current" />
       </Button>
     </div>
     <div

@@ -1,4 +1,5 @@
 import { FC, useState } from "react";
+import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import { usePathname } from "next/navigation";
 
@@ -9,6 +10,7 @@ import type { Dictionary } from "@/dictionaries";
 import { Button } from "@/components/ui/button";
 import { SearchButton } from "@/components/layout/navbar/desktop/SearchButton";
 import { DropdownMenu } from "@/components/layout/navbar/desktop/DropdownMenu";
+import { MegaMenu } from "@/components/layout/navbar/desktop/MegaMenu";
 import { NavigationLink } from "@/components/layout/navbar/NavigationLink";
 import { LanguageSelector } from "@/components/layout/navbar/desktop/LanguageSelector";
 
@@ -25,17 +27,7 @@ const NavigationMenu: FC<NavigationMenuProps> = ({ lang, dict }) => {
     setActiveDropdown(activeDropdown === menu ? null : menu);
   };
 
-  // Generate localized links with proper paths for each language
-  const PRODUCT_LINKS = lang === 'id' ? [
-    { title: dict.nav.agriculture, href: `/${lang}/produk-layanan/pertanian` },
-    { title: dict.nav.livestock, href: `/${lang}/produk-layanan/peternakan` },
-    { title: dict.nav.fishery, href: `/${lang}/produk-layanan/perikanan` },
-  ] : [
-    { title: dict.nav.agriculture, href: `/${lang}/product/agriculture` },
-    { title: dict.nav.livestock, href: `/${lang}/product/livestock` },
-    { title: dict.nav.fishery, href: `/${lang}/product/fishery` },
-  ];
-
+  // Media dropdown links (Products uses the MegaMenu below)
   const MEDIA_LINKS = [
     { title: dict.nav.news, href: `/${lang}/news` },
     { title: dict.nav.blog, href: `/${lang}/blog` },
@@ -57,23 +49,30 @@ const NavigationMenu: FC<NavigationMenuProps> = ({ lang, dict }) => {
           </NavigationLink>
         </li>
 
-        <li className="relative flex items-center gap-x-1">
+        <li
+          className="relative flex items-center gap-x-1"
+          onMouseLeave={() => setActiveDropdown((cur) => (cur === "products" ? null : cur))}
+        >
           <NavigationLink href={lang === 'id' ? `/${lang}/produk-layanan` : `/${lang}/product`} isActive={pathname?.startsWith(`/${lang}/produk-layanan`) || pathname?.startsWith(`/${lang}/product`)}>
             {dict.nav.products}
           </NavigationLink>
           <Button
             variant="link"
             onClick={() => toggleDropdown("products")}
+            onMouseEnter={() => setActiveDropdown("products")}
+            aria-expanded={activeDropdown === "products"}
             className={cn(
-              "transform p-0 transition-transform duration-500 ease-in-out",
+              "transform p-0 text-current transition-transform duration-500 ease-in-out hover:bg-transparent hover:no-underline",
               activeDropdown === "products" && "rotate-180",
             )}
           >
-            <ChevronDown className="h-5 w-5 text-white" />
+            <ChevronDown className="h-5 w-5 text-current" />
           </Button>
-          <DropdownMenu
+          <MegaMenu
             isOpen={activeDropdown === "products"}
-            links={PRODUCT_LINKS}
+            lang={lang}
+            dict={dict}
+            onNavigate={() => setActiveDropdown(null)}
           />
         </li>
 
@@ -82,14 +81,14 @@ const NavigationMenu: FC<NavigationMenuProps> = ({ lang, dict }) => {
             variant="link"
             onClick={() => toggleDropdown("media")}
             className={cn(
-              "p-0 text-base font-normal text-[#FDFDFD] underline-offset-4 hover:underline",
+              "p-0 text-base font-normal text-current underline-offset-4 hover:bg-transparent hover:underline",
               (pathname?.startsWith(`/${lang}/news`) || pathname?.startsWith(`/${lang}/blog`)) && "font-bold underline underline-offset-4",
             )}
           >
             {dict.nav.media}
             <ChevronDown
               className={cn(
-                "h-5 w-5 text-white transition-transform duration-500",
+                "h-5 w-5 text-current transition-transform duration-500",
                 activeDropdown === "media" && "rotate-180",
               )}
             />
@@ -113,16 +112,23 @@ const NavigationMenu: FC<NavigationMenuProps> = ({ lang, dict }) => {
 interface DesktopMenuProps {
   lang: Locale;
   dict: Dictionary;
+  scrolled: boolean;
 }
 
-const DesktopMenu: FC<DesktopMenuProps> = ({ lang, dict }) => {
+const DesktopMenu: FC<DesktopMenuProps> = ({ lang, dict, scrolled }) => {
   return (
-    <div className="hidden w-full items-center justify-between transition-all lg:flex">
+    <div className="hidden w-full items-center justify-between pl-10 transition-all lg:flex">
       <NavigationMenu lang={lang} dict={dict} />
 
-      <div className="flex items-center gap-x-11">
-        <LanguageSelector currentLang={lang} />
+      <div className="flex items-center gap-x-5">
+        <LanguageSelector currentLang={lang} scrolled={scrolled} />
         <SearchButton />
+        <Link
+          href={`/${lang}/contact`}
+          className="inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-hover hover:shadow-brand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500/50"
+        >
+          {lang === "id" ? "Hubungi Kami" : "Contact Us"}
+        </Link>
       </div>
     </div>
   );

@@ -14,6 +14,7 @@ import { getDictionary, Dictionary } from "@/dictionaries";
 
 import Breadcrumb from "@/components/common/BreadScrumb";
 import ContainerSection from "@/components/layout/container";
+import SectorSolutionsBand from "@/components/catalog/SectorSolutionsBand";
 import CustomSvgIcon from "@/components/common/CustomSvgIcon";
 import HeroSectionGeneral from "@/components/common/HeroSectionGeneral";
 import BannerContactSection from "@/components/product/agriculture/BannerContactSection";
@@ -40,7 +41,7 @@ const AgricultureProductsSection = dynamic(
   }
 );
 
-import { PAGE_METADATA, SITE_CONFIG } from "@/utils/seo";
+import { PAGE_METADATA, SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
 import { 
   generateProductCategorySchemas,
   MultipleStructuredData 
@@ -77,12 +78,12 @@ export async function generateMetadata({
   const dict = await getDictionary(lang);
   const data = await getAgricultureData(lang);
 
-  const defaultTitle = dict.products.agriculture.title + " | Centra Biotech Indonesia";
+  const defaultTitle = dict.products.agriculture.title;
   const defaultDescription = dict.products.agriculture.description;
 
   if (!data || !data.metadata) {
     return {
-      title: defaultTitle,
+      title: { absolute: normalizeSeoTitle(defaultTitle) },
       description: defaultDescription,
       alternates: {
         canonical: `${SITE_CONFIG.url}/${lang}/produk-layanan/pertanian`,
@@ -94,15 +95,21 @@ export async function generateMetadata({
     };
   }
 
-  const imageUrl = data.headline?.image?.url 
-    ? getImageUrl(data.headline.image.url) 
+  const imageUrl = data.headline?.image?.url
+    ? getImageUrl(data.headline.image.url)
     : `${SITE_CONFIG.url}/images/og-agriculture.jpg`;
 
+  // Always normalized: the CMS titleTag often already ends with a
+  // (sometimes truncated) brand suffix, which would otherwise double up
+  // with the layout's own brand template.
+  const pageTitle = normalizeSeoTitle(data.metadata.titleTag || defaultTitle);
+
   return {
-    title: data.metadata.titleTag || defaultTitle,
+    // absolute: brand already included by normalizeSeoTitle, exactly once.
+    title: { absolute: pageTitle },
     description: data.metadata.metaDesc || defaultDescription,
     openGraph: {
-      title: data.metadata.titleTag || defaultTitle,
+      title: pageTitle,
       description: data.metadata.metaDesc || defaultDescription,
       images: [
         {
@@ -117,7 +124,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: data.metadata.titleTag || defaultTitle,
+      title: pageTitle,
       description: data.metadata.metaDesc || defaultDescription,
       images: [imageUrl],
     },
@@ -204,7 +211,7 @@ const Agriculture = async ({
       {/* About Section */}
       <section className="bg-[#F4F4F4]">
         <ContainerSection>
-          <div className="flex flex-col gap-6 rounded-3xl bg-[#00802B] p-8 md:flex-row md:items-center lg:gap-12 lg:p-16">
+          <div className="flex flex-col gap-6 rounded-3xl bg-[#083F19] p-8 md:flex-row md:items-center lg:gap-12 lg:p-16">
             <h2 className="max-w-[10rem] text-3xl text-white lg:max-w-none lg:text-[40px]/[48px] xl:w-[46rem] xl:text-5xl/[60px]">
               {data.aboutSection.title}
             </h2>
@@ -213,8 +220,19 @@ const Agriculture = async ({
         </ContainerSection>
       </section>
 
-      <section>
-        <ContainerSection>
+      <section className="relative overflow-hidden">
+        {/* CBI Logo Watermark Background */}
+        <div className="absolute right-0 top-0 h-[64rem] w-[64rem] translate-x-[17rem] -translate-y-[20rem]">
+          <Image
+            draggable={false}
+            src="/logo-only.png"
+            alt=""
+            width={600}
+            height={600}
+            className="h-full w-full object-cover opacity-[0.04] brightness-0"
+          />
+        </div>
+        <ContainerSection className="relative z-20">
           <div>
             <h2 className="leading-[50px] lg:leading-[80px]">
               {whyTitle.split(' ').slice(0, 2).join(' ')} <br />
@@ -263,7 +281,13 @@ const Agriculture = async ({
         lang={lang}
       />
 
-      <BannerContactSection data={data.bannerCTA} />
+      <SectorSolutionsBand
+        lang={lang}
+        siteSector="pertanian"
+        accent="#166B30"
+        label={{ id: "Pertanian", en: "Agriculture" }}
+      />
+      <BannerContactSection data={data.bannerCTA} lang={lang} />
     </>
   );
 };

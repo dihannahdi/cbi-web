@@ -8,6 +8,10 @@ import Navbar from "@/components/layout/navbar/index";
 import Footer from "@/components/layout/footer/footer";
 import WhatsAppFloat from "@/components/common/WhatsAppFloat";
 import { SITE_CONFIG } from "@/utils/seo";
+import { 
+  generateSiteNavigationSchema, 
+  StructuredData 
+} from "@/utils/structuredData";
 
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
@@ -131,12 +135,29 @@ export default async function LangLayout({
   const locale = lang as Locale;
   const dict = await getDictionary(locale);
 
+  // Generate SiteNavigationElement schema for main navigation
+  const navigationSchema = generateSiteNavigationSchema([
+    { name: dict.nav.home, url: `/${locale}` },
+    { name: dict.nav.about, url: `/${locale}/about-us` },
+    { name: dict.nav.products, url: `/${locale}/produk-layanan` },
+    { name: dict.nav.agriculture, url: `/${locale}/produk-layanan/pertanian` },
+    { name: dict.nav.livestock, url: `/${locale}/produk-layanan/peternakan` },
+    { name: dict.nav.fishery, url: `/${locale}/produk-layanan/perikanan` },
+    { name: dict.nav.news, url: `/${locale}/news` },
+    { name: dict.nav.blog, url: `/${locale}/blog` },
+    { name: dict.nav.documents, url: `/${locale}/documents` },
+    { name: dict.nav.career, url: `/${locale}/career` },
+    { name: dict.nav.contact, url: `/${locale}/contact` },
+  ]);
+
   return (
     <>
+      {/* SiteNavigationElement for better site structure understanding */}
+      <StructuredData data={navigationSchema} />
       <Navbar lang={locale} dict={dict} />
       {children}
       <Footer lang={locale} dict={dict} />
-      <WhatsAppFloat />
+      <WhatsAppFloat lang={locale} />
     </>
   );
 }

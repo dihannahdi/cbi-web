@@ -9,6 +9,20 @@ import { Dictionary } from "@/dictionaries";
 import ProductCard from "../home/ProductCard";
 import ContainerSection from "../layout/container";
 
+// Translation map for product titles/descriptions from Strapi that may not respect locale
+const productTranslations: Record<string, { id: string; en: string }> = {
+  "Agriculture": { id: "Pertanian", en: "Agriculture" },
+  "Livestock": { id: "Peternakan", en: "Livestock" },
+  "Fishery": { id: "Perikanan", en: "Fishery" },
+  "Pertanian": { id: "Pertanian", en: "Agriculture" },
+  "Peternakan": { id: "Peternakan", en: "Livestock" },
+  "Perikanan": { id: "Perikanan", en: "Fishery" },
+};
+
+const translateProductText = (text: string, lang: Locale): string => {
+  return productTranslations[text]?.[lang] ?? text;
+};
+
 interface OurProductSectionProps {
   data: ProductsSection;
   lang: Locale;
@@ -32,8 +46,8 @@ const OurProductSection = ({ data, lang, dict }: OurProductSectionProps) => {
               key={product.id}
               imgUrl={getImageUrl(product?.image?.url)}
               imgAlt={product.image?.alternativeText ?? "Product image"}
-              title1={product.title}
-              title2={product.description}
+              title1={translateProductText(product.title, lang)}
+              title2={translateProductText(product.description, lang)}
               color1={`#${product.color1}`}
               color2={`#${product.color2}`}
               url={`/${lang}/produk-layanan/${product.url}`}

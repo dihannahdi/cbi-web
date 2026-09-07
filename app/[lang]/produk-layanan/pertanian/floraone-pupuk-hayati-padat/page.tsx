@@ -7,13 +7,14 @@ import ContainerSection from "@/components/layout/container";
 import Breadcrumb from "@/components/common/BreadScrumb";
 import HeroSectionGeneral from "@/components/common/HeroSectionGeneral";
 import VideoGallerySlider from "@/components/product/VideoGallerySlider";
-import { SITE_CONFIG } from "@/utils/seo";
+import { SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
 import { 
   generateProductSchema,
   generateBreadcrumbSchema,
   generateVideoSchema,
   generateFAQSchema,
   generateHowToSchema,
+  generateImageObjectSchema,
   MultipleStructuredData 
 } from "@/utils/structuredData";
 import {
@@ -239,10 +240,14 @@ export async function generateMetadata({
   const { lang } = await params;
   const data = productData[lang];
 
-  const title = lang === 'id' 
+  const rawTitle = lang === 'id'
     ? "Pupuk Hayati FloraOne - Pupuk Organik Bersertifikat dengan Konsorsium Mikroba Unggul"
     : "FloraOne Biological Fertilizer - Certified Organic with Superior Microbial Consortium";
-  
+  // Normalized: raw title is 86-87 chars, well past 60 once the layout's
+  // brand template is appended. This static page was never routed through
+  // normalizeSeoTitle even though its floraone-pupuk-hayati (cair) sibling was.
+  const title = normalizeSeoTitle(rawTitle);
+
   const description = lang === 'id'
     ? "Pupuk hayati organik FloraOne mengandung konsorsium mikroba unggul (Rhizobium, Azotobacter, Trichoderma, Aspergillus, Pseudomonas) untuk meningkatkan kesuburan tanah dan produktivitas tanaman. Bersertifikat Kementan & SNI 6729:2016."
     : "FloraOne organic biological fertilizer contains superior microbial consortium (Rhizobium, Azotobacter, Trichoderma, Aspergillus, Pseudomonas) to improve soil fertility and plant productivity. Certified by Ministry of Agriculture & SNI 6729:2016.";
@@ -252,7 +257,8 @@ export async function generateMetadata({
     : "biological fertilizer, floraone, organic fertilizer, microbial fertilizer, rhizobium, azotobacter, trichoderma, certified fertilizer, organic solid fertilizer, biological organic fertilizer, microbial consortium, nitrogen fixation, sustainable agriculture, eco-friendly fertilizer, centra biotech";
 
   return {
-    title,
+    // absolute: brand already included by normalizeSeoTitle, exactly once.
+    title: { absolute: title },
     description,
     keywords,
     authors: [{ name: "PT. Centra Biotech Indonesia" }],
@@ -379,6 +385,24 @@ export default async function FloraOneProductPage({
     
     // FAQ Schema
     generateFAQSchema(data.faq.map(item => ({ question: item.q, answer: item.a }))),
+    
+    // ImageObject Schema for Product Images - Google Image License Metadata
+    // Fixes GSC issue: "Missing field 'acquireLicensePage'" and "Missing field 'creator'"
+    generateImageObjectSchema({
+      url: '/mockup-flora-one-padat.png',
+      name: `FLORAONE - ${lang === 'id' ? 'Pupuk Hayati Padat' : 'Solid Biofertilizer'}`,
+      caption: lang === 'id' 
+        ? 'FLORAONE Pupuk Hayati Padat - 5 Mikroba Benefisial Aktif'
+        : 'FLORAONE Solid Biofertilizer - 5 Active Beneficial Microbes',
+      description: lang === 'id'
+        ? 'Gambar produk FLORAONE pupuk hayati padat bersertifikat organik dengan 5 jenis mikroba unggul'
+        : 'FLORAONE solid biofertilizer product image, organically certified with 5 superior microbes',
+      width: 600,
+      height: 600,
+      encodingFormat: 'image/png',
+      representativeOfPage: true,
+      keywords: ['floraone', 'pupuk hayati padat', 'solid biofertilizer', 'organic fertilizer', 'centra biotech'],
+    })
   ];
 
   return (
@@ -715,7 +739,7 @@ export default async function FloraOneProductPage({
             </Accordion>
 
             {/* Still have questions CTA */}
-            <div className="mt-12 text-center bg-gradient-to-br from-[#006622]/5 to-[#009933]/5 rounded-2xl p-8 border border-[#006622]/10">
+            <div className="mt-12 text-center bg-gradient-to-br from-[#006622]/5 to-[#166B30]/5 rounded-2xl p-8 border border-[#006622]/10">
               <div className="flex flex-col md:flex-row items-center justify-center gap-4">
                 <MessageCircle className="h-8 w-8 text-[#006622]" />
                 <div className="text-center md:text-left">

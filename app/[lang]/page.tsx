@@ -1,7 +1,10 @@
 import { ApiPath, apiRequest } from "@/utils/apiClient";
 import { getDashboardQuery } from "@/utils/queries/dashboardQuery";
+import { generateQuery } from "@/utils/generateQuery";
 
 import { DashboardResponse } from "@/types/responseTypes";
+import { ArticleItem } from "@/types/responseTypes/article/articleItem";
+import { LatestNews } from "@/types/responseTypes/dashboard/latestNews";
 
 import WhySection from "@/components/home/WhySection";
 import HeroSection from "@/components/home/HeroSection";
@@ -14,15 +17,64 @@ import {
   generateOrganizationSchema, 
   generateWebsiteSchema, 
   generateBreadcrumbSchema,
-  StructuredData 
+  StructuredData,
+  MultipleStructuredData 
 } from "@/utils/structuredData";
 import { generateMetadataFromProps, SITE_CONFIG } from "@/utils/seo";
+import { 
+  generateItemListSchema, 
+  generateComprehensiveOrganizationSchema,
+  generateWebsiteWithSearchSchema 
+} from "@/utils/advancedSEO";
 import { getDictionary } from "@/dictionaries";
 import { Locale, i18n, localeMetadata } from "@/i18n-config";
 import { Metadata } from "next";
 
 interface PageProps {
   params: Promise<{ lang: Locale }>;
+}
+
+// Query for fetching latest articles directly (sorted by publishedAt desc)
+const LATEST_ARTICLES_LIMIT = 7;
+
+// Slugs to exclude from the homepage latest news section
+const EXCLUDED_BLOG_SLUGS = ['pupuk-hayati-bersertifikat-kementan'];
+
+function getLatestArticlesQuery() {
+  return generateQuery({
+    sort: 'publishedAt:desc',
+    pagination: { limit: LATEST_ARTICLES_LIMIT },
+    fields: ['title', 'shortDescription', 'slug', 'createdAt', 'publishedAt', 'type'],
+    populate: {
+      image: {
+        fields: ['url', 'alternativeText', 'width', 'height'],
+      },
+    },
+  });
+}
+
+// Fetch latest blogs and news directly from their collection endpoints
+async function getLatestArticles(locale: string = 'id'): Promise<LatestNews> {
+  const query = getLatestArticlesQuery();
+
+  const [blogsRes, newsRes] = await Promise.all([
+    apiRequest<{ data: ArticleItem[] }>({
+      path: ApiPath.BLOGS,
+      queryParams: query,
+      locale,
+    }).catch(() => ({ data: [] as ArticleItem[] })),
+    apiRequest<{ data: ArticleItem[] }>({
+      path: ApiPath.NEWS,
+      queryParams: query,
+      locale,
+    }).catch(() => ({ data: [] as ArticleItem[] })),
+  ]);
+
+  return {
+    id: 0,
+    blogs: (blogsRes.data ?? []).filter(b => !EXCLUDED_BLOG_SLUGS.includes(b.slug)).slice(0, 6),
+    news: newsRes.data ?? [],
+  };
 }
 
 // Fungsi untuk mengambil data dari API
@@ -101,7 +153,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 const Home = async ({ params }: PageProps) => {
   const { lang } = await params;
   const dict = await getDictionary(lang);
-  const data = await getDashboardData(lang);
+  const [data, latestNews] = await Promise.all([
+    getDashboardData(lang),
+    getLatestArticles(lang),
+  ]);
 
   if (!data) {
     return <div>{dict.common.error}</div>;
@@ -150,7 +205,7 @@ const Home = async ({ params }: PageProps) => {
         <WhySection data={data.whySection} lang={lang} dict={dict} />
         <ProductServiceSection data={data.productService} lang={lang} dict={dict} />
         <OurImpactSection data={data.ourImpact} lang={lang} dict={dict} />
-        <LatestNewsSection data={data.latestNews} lang={lang} dict={dict} />
+        <LatestNewsSection data={latestNews} lang={lang} dict={dict} />
         <BannerContactSection data={data.bannerCTA} lang={lang} dict={dict} />
       </main>
     </>

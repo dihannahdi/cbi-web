@@ -189,7 +189,7 @@ const FormSection = ({ dict, lang = 'id' }: FormSectionProps) => {
           </label>
         </div>
 
-        <SubmitButton isSubmitting={isSubmitting} label={dict.send} />
+        <SubmitButton isSubmitting={isSubmitting} label={dict.send} loadingLabel={dict.sending} />
       </form>
     </div>
   );

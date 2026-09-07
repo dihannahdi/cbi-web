@@ -24,4 +24,9 @@ export interface ArticleDetail {
   content: any;
   image: Image;
   author: Author;
+  
+  // SEO fields
+  meta_title?: string;
+  meta_description?: string;
+  focus_keyphrase?: string;
 }

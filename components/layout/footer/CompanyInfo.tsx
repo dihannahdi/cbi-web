@@ -2,6 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { SOCIAL_LINKS } from "@/constants/footer";
+import { buildWhatsAppUrl } from "@/constants/contact";
+import TrackedWhatsAppButton from "@/components/common/TrackedWhatsAppButton";
 import { Locale } from "@/i18n-config";
 import { Dictionary } from "@/dictionaries";
 
@@ -30,12 +32,23 @@ const CompanyInfo = ({ lang, dict }: CompanyInfoProps) => {
   return (
     <>
       <div className="flex flex-1 flex-col gap-8">
-        <Image
-          src={"/logo-footer.png"}
-          alt="logo white"
-          width={166}
-          height={36}
-        />
+        <Link href={`/${lang}`} className="flex items-center gap-2.5">
+          <Image
+            src="/logo-mark.png"
+            alt="Centra Biotech Indonesia"
+            width={48}
+            height={48}
+            className="h-11 w-11"
+          />
+          <span className="flex flex-col leading-none">
+            <span className="text-lg font-extrabold tracking-tight text-white">
+              CENTRA BIOTECH
+            </span>
+            <span className="text-[0.65rem] font-semibold tracking-[0.2em] text-lime-300">
+              INDONESIA
+            </span>
+          </span>
+        </Link>
         <div>
           <h4 className="font-semibold text-white">{dict.footer.address}</h4>
           <p className="max-w-xs text-sm text-white/90">
@@ -45,11 +58,15 @@ const CompanyInfo = ({ lang, dict }: CompanyInfoProps) => {
         </div>
         <div className="flex flex-col">
           <h4 className="font-semibold text-white">{dict.footer.contact}</h4>
-          <Link href="https://wa.me/6285196214187" className="underline">
-            0851-9621-4187
-          </Link>
-          <Link href="mailto:centrabioindo@gmail.com" className="underline">
-            centrabioindo@gmail.com
+          <TrackedWhatsAppButton
+            href={buildWhatsAppUrl()}
+            source="footer"
+            className="underline"
+          >
+            +62 851-9621-4187
+          </TrackedWhatsAppButton>
+          <Link href="mailto:centrabiotech.id@gmail.com" className="underline">
+            centrabiotech.id@gmail.com
           </Link>
         </div>
 

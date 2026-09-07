@@ -7,8 +7,8 @@ import ContainerSection from "@/components/layout/container";
 import Breadcrumb from "@/components/common/BreadScrumb";
 import HeroSectionGeneral from "@/components/common/HeroSectionGeneral";
 import VideoGallerySlider from "@/components/product/VideoGallerySlider";
-import { SITE_CONFIG } from "@/utils/seo";
-import { MultipleStructuredData } from "@/utils/structuredData";
+import { SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
+import { MultipleStructuredData, generateImageObjectSchema } from "@/utils/structuredData";
 import {
   fetchStrapiProduct,
   transformFAQ,
@@ -202,22 +202,33 @@ export async function generateMetadata({
   params: Promise<{ lang: Locale }>;
 }): Promise<Metadata> {
   const { lang } = await params;
-  const data = productData[lang];
-
-  const title = lang === 'id' 
-    ? "Pupuk Hayati Cair BIOJAGAT - POC Terbaik Tingkatkan Panen 40% | Bersertifikat Kementan"
-    : "BIOJAGAT Liquid Biological Fertilizer - Best LOF Increase Harvest 40% | Certified";
   
-  const description = lang === 'id'
-    ? "Pupuk hayati cair (POC) BIOJAGAT dengan konsorsium mikroorganisme menguntungkan. Pupuk hayati cair terbaik untuk meningkatkan panen hingga 40%. Pesan BIOJAGAT sekarang!"
-    : "BIOJAGAT liquid biological fertilizer with beneficial microorganism consortium. Best biological liquid fertilizer proven to increase harvest up to 40%. Order now!";
+  // Fetch from Strapi CMS for SEO metadata
+  const strapiData = await fetchStrapiProduct("biojagat-pupuk-hayati-cair", lang);
+  const data = strapiData || productData[lang]; // Fallback to static if Strapi unavailable
 
-  const keywords = lang === 'id'
-    ? "jual pupuk hayati cair, pupuk hayati cair, poc, pupuk hayati cair terbaik, biojagat, jual biojagat, distributor pupuk hayati cair, pupuk hayati bersertifikat, pupuk mikroba, centra biotech, pertanian berkelanjutan"
-    : "liquid biological fertilizer, buy biological fertilizer, lof, best biological fertilizer, biojagat, buy biojagat, biological fertilizer distributor, certified biological fertilizer, microbial fertilizer, centra biotech, sustainable agriculture";
+  // Use Strapi data if available, fallback to hardcoded optimized titles.
+  // Always normalized: Strapi metaTitle often already ends with a
+  // (sometimes truncated) brand suffix, which would otherwise double up
+  // with the layout's own brand template.
+  const title = normalizeSeoTitle(strapiData?.metaTitle || strapiData?.heroTitle || (lang === 'id'
+    ? "Pupuk Hayati Cair Terbaik - BIOJAGAT Tingkatkan Panen Hingga 60%"
+    : "BIOJAGAT Liquid Biological Fertilizer - Best LOF Increase Harvest 40% | Certified"));
+  
+  const description = strapiData?.metaDescription || strapiData?.heroSubtitle || (lang === 'id'
+    ? "Pupuk hayati cair BIOJAGAT dengan konsorsium mikroorganisme unggulan. Solusi bioteknologi untuk pertanian modern Indonesia."
+    : "BIOJAGAT liquid biological fertilizer with beneficial microorganism consortium. Best biological liquid fertilizer proven to increase harvest up to 40%. Order now!");
+
+  // Extract keywords from Strapi focus_keyphrase if available
+  const keywords = strapiData?.focusKeyphrase 
+    ? strapiData.focusKeyphrase.split(',').map(k => k.trim()).join(', ')
+    : (lang === 'id'
+      ? "jual pupuk hayati cair, pupuk hayati cair, poc, pupuk hayati cair terbaik, biojagat, jual biojagat, distributor pupuk hayati cair, pupuk hayati bersertifikat, pupuk mikroba, centra biotech, pertanian berkelanjutan"
+      : "liquid biological fertilizer, buy biological fertilizer, lof, best biological fertilizer, biojagat, buy biojagat, biological fertilizer distributor, certified biological fertilizer, microbial fertilizer, centra biotech, sustainable agriculture");
 
   return {
-    title,
+    // absolute: brand already included by normalizeSeoTitle, exactly once.
+    title: { absolute: title },
     description,
     keywords,
     authors: [{ name: "PT. Centra Biotech Indonesia" }],
@@ -231,7 +242,7 @@ export async function generateMetadata({
       locale: lang === 'en' ? 'en_US' : 'id_ID',
       type: 'website',
       images: [{
-        url: `https://cbi-backend.my.id/uploads/mockup-label-biojagat-1000.png`,
+        url: `https://backend.centrabiotechindonesia.com/uploads/mockup-label-biojagat-1000.png`,
         width: 1200,
         height: 630,
         alt: data.name + " - " + data.subtitle,
@@ -241,7 +252,7 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title,
       description,
-      images: [`https://cbi-backend.my.id/uploads/mockup-label-biojagat-1000.png`],
+      images: [`https://backend.centrabiotechindonesia.com/uploads/mockup-label-biojagat-1000.png`],
     },
     alternates: {
       canonical: `${SITE_CONFIG.url}/${lang}/produk-layanan/pertanian/biojagat-pupuk-hayati-cair`,
@@ -311,7 +322,7 @@ export default async function BiojagatlProductPage({
         ? ['BIOJAGAT LOF', 'BIOJAGAT Pupuk Hayati', 'Pupuk Hayati Cair BIOJAGAT', 'POC BIOJAGAT']
         : ['BIOJAGAT LOF', 'BIOJAGAT Biological Fertilizer', 'BIOJAGAT Liquid Biological Fertilizer'],
       description: data.description,
-      image: `https://cbi-backend.my.id/uploads/mockup-label-biojagat-1000.png`,
+      image: `https://backend.centrabiotechindonesia.com/uploads/mockup-label-biojagat-1000.png`,
       url: `${SITE_CONFIG.url}/${lang}/produk-layanan/pertanian/biojagat-pupuk-hayati-cair`,
       sku: 'BIOJAGAT-1L',
       mpn: 'BIOJAGAT-LOF-2024',
@@ -328,16 +339,12 @@ export default async function BiojagatlProductPage({
       category: lang === 'id' 
         ? ['Produk Pertanian', 'Pupuk', 'Pupuk Hayati Cair', 'Pupuk Mikroba']
         : ['Agricultural Products', 'Fertilizers', 'Liquid Biological Fertilizers', 'Microbial Fertilizers'],
-      offers: {
-        '@type': 'Offer',
-        url: `${SITE_CONFIG.url}/${lang}/produk-layanan/pertanian/biojagat-pupuk-hayati-cair`,
-        availability: 'https://schema.org/InStock',
-        priceCurrency: 'IDR',
-        seller: {
-          '@type': 'Organization',
-          name: 'PT Centra Biotech Indonesia',
-        },
-      },
+      // NOTE: no "offers" here on purpose. The previous offer had no `price`
+      // at all (only availability/currency/seller), which is exactly the
+      // "Missing field 'price'" GSC error — and there is no real, published
+      // retail price for this B2B product to add instead. Rather than emit an
+      // incomplete Offer, we omit it entirely. See GSC structured data
+      // remediation notes (2026-07-28).
     },
     // FAQ Schema
     {
@@ -352,6 +359,23 @@ export default async function BiojagatlProductPage({
         },
       })),
     },
+    // ImageObject Schema for Product Images - Google Image License Metadata
+    // Fixes GSC issue: "Missing field 'acquireLicensePage'" and "Missing field 'creator'"
+    generateImageObjectSchema({
+      url: 'https://backend.centrabiotechindonesia.com/uploads/mockup-label-biojagat-1000.png',
+      name: `BIOJAGAT - ${lang === 'id' ? 'Pupuk Hayati Cair Premium' : 'Premium Liquid Biofertilizer'}`,
+      caption: lang === 'id' 
+        ? 'BIOJAGAT Pupuk Hayati Cair - Konsorsium Mikroorganisme Unggulan'
+        : 'BIOJAGAT Liquid Biofertilizer - Premium Microorganism Consortium',
+      description: lang === 'id'
+        ? 'Gambar produk BIOJAGAT pupuk hayati cair premium dengan konsorsium mikroorganisme menguntungkan'
+        : 'BIOJAGAT premium liquid biofertilizer product image with beneficial microorganism consortium',
+      width: 1000,
+      height: 1000,
+      encodingFormat: 'image/png',
+      representativeOfPage: true,
+      keywords: ['biojagat', 'pupuk hayati cair', 'liquid biofertilizer', 'centra biotech'],
+    })
   ];
 
   return (
@@ -361,7 +385,7 @@ export default async function BiojagatlProductPage({
 
       {/* Hero Section */}
       <HeroSectionGeneral
-        imgUrl="https://cbi-backend.my.id/uploads/mockup-label-biojagat-1000.png"
+        imgUrl="https://backend.centrabiotechindonesia.com/uploads/mockup-label-biojagat-1000.png"
         category="Pupuk Hayati"
         title={
           <h1 className="p-4 text-center text-3xl font-bold !leading-tight text-white lg:text-5xl xl:text-[56px]">
@@ -732,7 +756,7 @@ export default async function BiojagatlProductPage({
             </Accordion>
 
             {/* Still have questions CTA */}
-            <div className="mt-12 text-center bg-gradient-to-br from-[#006622]/5 to-[#009933]/5 rounded-2xl p-8 border border-[#006622]/10">
+            <div className="mt-12 text-center bg-gradient-to-br from-[#006622]/5 to-[#166B30]/5 rounded-2xl p-8 border border-[#006622]/10">
               <div className="flex flex-col md:flex-row items-center justify-center gap-4">
                 <MessageCircle className="h-8 w-8 text-[#006622]" />
                 <div className="text-center md:text-left">

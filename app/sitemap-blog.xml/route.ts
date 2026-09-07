@@ -9,7 +9,7 @@ import { NextResponse } from 'next/server';
 import { i18n } from '@/i18n-config';
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.centrabiotechindonesia.com';
-const API_URL = process.env.NEXT_PUBLIC_URL_API || 'https://cbi-backend.my.id';
+const API_URL = process.env.NEXT_PUBLIC_URL_API || 'https://backend.centrabiotechindonesia.com';
 const locales = i18n.locales;
 const defaultLocale = i18n.defaultLocale;
 
@@ -29,32 +29,47 @@ interface BlogItem {
 }
 
 /**
- * Fetch blogs from Strapi CMS
+ * Fetch blogs from Strapi CMS - both Indonesian and English locales with pagination
  */
 async function fetchBlogs(): Promise<BlogItem[]> {
-  try {
-    // Fetch with Indonesian locale (45 blogs)
-    const response = await fetch(
-      `${API_URL}/api/blogs?locale=id&pagination[pageSize]=100`,
-      {
-        cache: 'no-store',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+  const allBlogs: BlogItem[] = [];
+  
+  for (const locale of locales) {
+    let page = 1;
+    let hasMore = true;
+    
+    while (hasMore) {
+      try {
+        const response = await fetch(
+          `${API_URL}/api/blogs?locale=${locale}&pagination[page]=${page}&pagination[pageSize]=100`,
+          {
+            cache: 'no-store',
+            headers: { 'Content-Type': 'application/json' },
+          }
+        );
+
+        if (!response.ok) {
+          console.warn(`Blog sitemap: Failed to fetch ${locale} blogs page ${page}, status: ${response.status}`);
+          break;
+        }
+
+        const json = await response.json();
+        if (json.data && json.data.length > 0) {
+          allBlogs.push(...json.data.map((b: BlogItem) => ({ ...b, locale })));
+          const pagination = json.meta?.pagination;
+          hasMore = pagination ? page < pagination.pageCount : false;
+          page++;
+        } else {
+          hasMore = false;
+        }
+      } catch (error) {
+        console.warn(`Blog sitemap: Error fetching ${locale} blogs page ${page}:`, error);
+        hasMore = false;
       }
-    );
-
-    if (!response.ok) {
-      console.warn(`Blog sitemap: Failed to fetch blogs, status: ${response.status}`);
-      return [];
     }
-
-    const json: StrapiResponse<BlogItem> = await response.json();
-    return json.data || [];
-  } catch (error) {
-    console.warn('Blog sitemap: Error fetching blogs:', error);
-    return [];
   }
+  
+  return allBlogs;
 }
 
 /**
@@ -119,7 +134,7 @@ export async function GET() {
     status: 200,
     headers: {
       'Content-Type': 'application/xml',
-      'Cache-Control': 'public, max-age=3600, s-maxage=3600', // Cache for 1 hour
+      'Cache-Control': 'public, max-age=600, s-maxage=600', // Cache for 10 minutes
     },
   });
 }

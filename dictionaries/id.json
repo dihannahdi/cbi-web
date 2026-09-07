@@ -21,7 +21,10 @@
     "allProducts": "Semua Produk",
     "search": "Cari",
     "searchPlaceholder": "Cari produk, artikel...",
-    "dokterTani": "Dokter Tani"
+    "peternakanUnggas": "Unggas",
+    "peternakanRuminant": "Ruminansia",
+    "perikananBiofloc": "Bioflok",
+    "perikananUdang": "Udang"
   },
   "footer": {
     "address": "Alamat",
@@ -36,6 +39,7 @@
     "allProducts": "Semua Produk"
   },
   "home": {
+    "heroKicker": "Ahlinya Bioteknologi",
     "heroTitle": "Solusi Bioteknologi Terintegrasi",
     "heroSubtitle": "Untuk Pertanian, Peternakan, dan Perikanan Indonesia",
     "heroDescription": "Kami menyediakan produk probiotik, pupuk hayati, dan solusi bioteknologi inovatif untuk meningkatkan produktivitas pertanian Indonesia.",
@@ -99,10 +103,38 @@
       "subtitle": "Probiotik dan suplemen untuk ternak sehat",
       "description": "Optimalkan kesehatan dan produktivitas ternak Anda"
     },
+    "livestockUnggas": {
+      "title": "Bioteknologi untuk Unggas",
+      "subtitle": "Probiotik & Bioaktivator untuk Ayam, Bebek, Puyuh",
+      "description": "Solusi bioteknologi khusus unggas untuk peningkatan bobot, produksi telur, kesehatan saluran cerna, dan efisiensi pakan tanpa antibiotik sintetik.",
+      "metaTitle": "Probiotik Unggas — Bioteknologi untuk Ayam Broiler, Petelur & Bebek | CBI",
+      "metaDescription": "Probiotik dan bioaktivator unggas dari CBI. Tingkatkan bobot ayam broiler, produksi telur petelur, dan efisiensi pakan tanpa antibiotik. Aman & terbukti di lapangan."
+    },
+    "livestockRuminant": {
+      "title": "Bioteknologi solusi peternakan masa depan ramah lingkungan",
+      "subtitle": "Probiotik & Pakan Fungsional untuk Sapi, Kambing, Domba",
+      "description": "Bioteknologi peternakan ruminansia: meningkatkan ADG sapi potong, produksi susu, kualitas reproduksi, dan kesehatan rumen secara organik dan berkelanjutan.",
+      "metaTitle": "Probiotik Ruminansia — Sapi, Kambing, Domba | Centra Biotech Indonesia",
+      "metaDescription": "Probiotik dan suplemen pakan untuk sapi potong, sapi perah, kambing, dan domba. Tingkatkan ADG, produksi susu, dan kesehatan rumen secara organik dengan teknologi CBI."
+    },
     "fishery": {
       "title": "Produk Perikanan",
       "subtitle": "Solusi bioteknologi untuk akuakultur",
       "description": "Tingkatkan kualitas air dan kesehatan ikan budidaya"
+    },
+    "fisheryBiofloc": {
+      "title": "Revolusi Biologis untuk Akuakultur Indonesia",
+      "subtitle": "Sistem Bioflok untuk Lele, Nila, Gurame",
+      "description": "Teknologi bioflok dengan probiotik CBI untuk budidaya intensif lele, nila, dan gurame. Mengurangi pergantian air, mempercepat panen, dan meningkatkan kualitas daging.",
+      "metaTitle": "Probiotik Bioflok — Sistem Akuakultur Lele, Nila, Gurame | CBI",
+      "metaDescription": "Bioteknologi sistem bioflok untuk budidaya lele, nila, dan gurame. Probiotik CBI mengurangi pergantian air hingga 80% dan mempercepat panen. Lengkap dengan panduan SOP."
+    },
+    "fisheryUdang": {
+      "title": "Bioteknologi untuk Udang Vannamei & Windu",
+      "subtitle": "Probiotik Tambak Intensif & Semi-Intensif",
+      "description": "Probiotik akuakultur khusus udang vannamei dan windu untuk meningkatkan SR, FCR, dan kualitas air tambak. Pencegahan WSSV dan EHP secara biologis.",
+      "metaTitle": "Probiotik Udang Vannamei & Windu — Tambak Intensif | Centra Biotech",
+      "metaDescription": "Bioteknologi probiotik untuk udang vannamei dan windu. Tingkatkan SR, FCR, dan kualitas air tambak. Pencegahan penyakit WSSV dan EHP secara biologis."
     },
     "viewDetails": "Lihat Detail",
     "addToCart": "Tambah ke Keranjang",
@@ -246,7 +278,12 @@
     "backToBlog": "Kembali ke Blog",
     "categories": "Kategori",
     "tags": "Tag",
-    "searchPlaceholder": "Cari artikel..."
+    "searchPlaceholder": "Cari artikel...",
+    "ctaTitle": "Butuh Solusi Bioteknologi?",
+    "ctaDescription": "Konsultasikan kebutuhan pertanian, peternakan, atau perikanan Anda dengan tim ahli kami.",
+    "ctaWhatsapp": "Hubungi via WhatsApp",
+    "ctaPhone": "+62 851-9621-4187",
+    "ctaEmail": "centrabiotech.id@gmail.com"
   },
   "news": {
     "title": "Berita",

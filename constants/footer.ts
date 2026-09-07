@@ -49,9 +49,4 @@ export const PRODUCT_LINKS: NavigationLink[] = [
   { label: "Peternakan", href: "/product/livestock" },
   { label: "Perikanan", href: "/product/fishery" },
   { label: "Maklon Pupuk", href: "/maklon-pupuk" }, // SEO landing page
-  {
-    label: "Dokter Tani",
-    href: "https://www.doktertani.co.id/",
-    target: "_blank",
-  },
 ];

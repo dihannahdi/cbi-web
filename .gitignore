@@ -2,6 +2,10 @@
 
 # dependencies
 /node_modules
+# nested node_modules — the root /node_modules rule above is anchored and
+# does not match this one. 652 of these were tracked-then-deleted-on-disk
+# until 2026-09-07 (untracked here, nothing removed from disk).
+cbi-backend/node_modules/
 /.pnp
 .pnp.*
 .yarn/*
@@ -32,7 +36,7 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
-# bare 'env' at repo root - '.env*' above does NOT match it
+# bare 'env' at repo root — '.env*' above does NOT match it
 /env
 
 # vercel
@@ -42,7 +46,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .env*.local
-*.mp4
 # backups and archives
 *.tar.gz
 *.zip
@@ -60,3 +63,60 @@ temp-*/
 # large media files
 *.mov
 *.avi
+
+# editor / scratch
+.vscode/
+cbi-pages-full-60/
+
+# claude git worktrees (transient, not source)
+.claude/worktrees/
+
+# strapi runtime uploads (backend user content, not source)
+cbi-backend/public/uploads/
+
+# credentials — never commit (2026-09-07 git-hygiene audit). client_secret.json
+# is a Google OAuth client secret, token.json holds a live access+refresh
+# token; logs/ is the monitor's runtime output.
+scripts/gsc-sheets-monitor/client_secret.json
+scripts/gsc-sheets-monitor/token.json
+scripts/gsc-sheets-monitor/logs/
+
+# real production secrets are pasted verbatim in this analysis doc
+# (APP_KEYS/ADMIN_JWT_SECRET/API_TOKEN_SALT/TRANSFER_TOKEN_SALT from
+# /opt/cbi-strapi/.env, captured 2026-09-07) — do not track until redacted.
+docs/VPS_INFRASTRUCTURE_ANALYSIS.md
+
+# private WhatsApp exports (real staff names, internal conversations) and
+# the two backlog documents derived directly from them — not source, and
+# the same privacy reasoning as the exports themselves.
+wa-chat/
+docs/CBI_JOBDESC_BACKLOG_2026-08-19.docx
+docs/AGENT_BRIEF_JOBDESC_BACKLOG_2026-08-19.md
+
+# design-system reference export (~128MB, tool-generated, duplicated as its
+# own .zip) — not source, too large to carry in git history.
+refferences/
+
+# Playwright MCP tool session artifacts (browser console logs / page
+# snapshots) — transient debug output, not source.
+.playwright-mcp/
+
+# one-off debug/scratch output dumps: browser accessibility-tree snapshots
+# and a captured shell error, not source. tmp_*.py is self-declared
+# disposable via its own naming prefix.
+scripts/tmp_*.py
+scripts/snapshot.json
+scripts/snapshot2.json
+scripts/tabs-output.txt
+
+# Operational scripts that carry live credentials inline. These belong on the
+# VPS, not in a public repo. GitHub push protection blocked the first attempt
+# to track them (2026-09-07); the DeepSeek key in them needs rotating anyway.
+scripts/article-automation/deepseek-article-generator.js
+scripts/article-automation/deepseek-turbo-generator.js
+scripts/article-automation/floraone-article-generator.js
+scripts/deepseek-turbo-generator-vps.js
+scripts/gsc-sheets-monitor/gsc_sheets_monitor.py
+scripts/strapi-gsc-setup/api/gsc-sync/controllers/gsc-sync.ts
+scripts/strapi-gsc-setup/fix-ts.sh
+scripts/strapi-gsc-setup/test-sync.sh

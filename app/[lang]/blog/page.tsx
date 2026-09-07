@@ -3,7 +3,7 @@ import { BlogSectionResponse, ArticlesCollectionResponse } from "@/types/respons
 
 import { ApiPath, apiRequest } from "@/utils/apiClient";
 import { getBlogSectionQuery } from "@/utils/queries/blogSectionQuery";
-import { SITE_CONFIG } from "@/utils/seo";
+import { SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
 import { 
   generateWebPageSchema,
   generateBreadcrumbSchema,
@@ -19,6 +19,9 @@ import ContainerSection from "@/components/layout/container";
 
 import { getDictionary } from "@/dictionaries";
 import { Locale, i18n, localeMetadata } from "@/i18n-config";
+
+// ISR: Revalidate blog listing every 10 minutes for faster content discovery
+export const revalidate = 600;
 
 interface PageProps {
   params: Promise<{ lang: Locale }>;
@@ -36,7 +39,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const baseUrl = SITE_CONFIG.url;
 
   return {
-    title: dict.seo.blogTitle,
+    // absolute: dict.seo.blogTitle already ends with "- Centra Biotech
+    // Indonesia"; normalizeSeoTitle strips that dash-delimited brand suffix
+    // and re-appends the brand once, avoiding a double-up with the layout
+    // template.
+    title: { absolute: normalizeSeoTitle(dict.seo.blogTitle) },
     description: dict.seo.blogDescription,
     keywords: lang === 'id' ? [
       'blog bioteknologi',
@@ -100,13 +107,33 @@ const Blog = async ({ params }: PageProps) => {
       locale: lang,
     });
 
-    // Fetch ALL blog articles with locale
-    const allBlogsQuery = `fields[0]=title&fields[1]=shortDescription&fields[2]=slug&fields[3]=createdAt&fields[4]=publishedAt&fields[5]=type&populate[image][fields][0]=url&populate[image][fields][1]=alternativeText&populate[image][fields][2]=width&populate[image][fields][3]=height&pagination[pageSize]=100&sort[0]=publishedAt:desc`;
-    const { data: allBlogs } = await apiRequest<ArticlesCollectionResponse>({
+    // Fetch ALL blog articles with locale (paginated)
+    const baseBlogsQuery = `fields[0]=title&fields[1]=shortDescription&fields[2]=slug&fields[3]=createdAt&fields[4]=publishedAt&fields[5]=type&populate[image][fields][0]=url&populate[image][fields][1]=alternativeText&populate[image][fields][2]=width&populate[image][fields][3]=height&pagination[pageSize]=100&sort[0]=publishedAt:desc`;
+    
+    // Fetch first page to get pagination info
+    const firstPage = await apiRequest<ArticlesCollectionResponse & { meta: { pagination: { pageCount: number } } }>({
       path: ApiPath.BLOGS,
-      queryParams: allBlogsQuery,
+      queryParams: baseBlogsQuery,
       locale: lang,
     });
+    const allBlogs = [...firstPage.data];
+    const pageCount = firstPage.meta?.pagination?.pageCount || 1;
+    
+    // Fetch remaining pages in parallel
+    if (pageCount > 1) {
+      const remainingPages = await Promise.all(
+        Array.from({ length: pageCount - 1 }, (_, i) =>
+          apiRequest<ArticlesCollectionResponse>({
+            path: ApiPath.BLOGS,
+            queryParams: `${baseBlogsQuery}&pagination[page]=${i + 2}`,
+            locale: lang,
+          })
+        )
+      );
+      for (const page of remainingPages) {
+        allBlogs.push(...page.data);
+      }
+    }
 
     return (
       <section>
@@ -128,16 +155,31 @@ const Blog = async ({ params }: PageProps) => {
           <BlogGrid articles={allBlogs} lang={lang} dict={dict} itemsPerPage={9} />
         </ContainerSection>
 
+        {/* Server-rendered crawlable blog links for SEO - all 48+ blog URLs visible to Googlebot */}
+        <nav aria-label="All blog articles" className="sr-only">
+          <h4>All Blog Articles</h4>
+          <ul>
+            {allBlogs.map((blog) => (
+              <li key={blog.id}>
+                <a href={`/${lang}/blog/${blog.slug}`}>{blog.title}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
         <CTASection data={sectionData.bannerCTA} lang={lang} dict={dict} />
       </section>
     );
   } catch (e) {
-    console.error(e);
+    console.error('Blog listing error:', e);
+    const errorMessage = e instanceof Error ? e.message : 'Unknown error';
     return (
       <section>
         <MultipleStructuredData dataArray={structuredDataArray} />
         <div className="min-h-[50vh] flex items-center justify-center">
           <p className="text-gray-600">{dict.common.error}</p>
+          {/* Hidden error for debugging */}
+          <span className="hidden" data-error={errorMessage} />
         </div>
       </section>
     );

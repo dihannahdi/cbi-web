@@ -32,7 +32,7 @@ export const SITE_CONFIG = {
   
   // URLs and domains
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://www.centrabiotechindonesia.com',
-  apiUrl: process.env.NEXT_PUBLIC_URL_API || 'https://cbi-backend.my.id',
+  apiUrl: process.env.NEXT_PUBLIC_URL_API || 'https://backend.centrabiotechindonesia.com',
   
   // Images
   ogImage: '/og-image.jpg',
@@ -54,10 +54,11 @@ export const SITE_CONFIG = {
   youtube: 'https://youtube.com/@centrabiotech',
   
   // Contact information - UPDATED
-  email: 'centrabioindo@gmail.com',
+  email: 'centrabiotech.id@gmail.com',
   phone: '+62-851-9621-4187',
   whatsapp: '+62-851-9621-4187',
-  phoneDisplay: '0851 9621 4187',
+  phoneDisplay: '+62 851-9621-4187',
+  mapsUrl: 'https://maps.app.goo.gl/jrzvpmv3gxQXVSST7',
   
   // Address - UPDATED WITH FULL ADDRESS
   address: {
@@ -86,52 +87,63 @@ export const SITE_CONFIG = {
   // Company Credentials
   credentials: {
     yearsExperience: '14+',
-    certifications: ['Izin Edar Kementerian Pertanian RI', 'Uji Mutu dan Efektivitas', 'GMP Standards'],
+    certifications: ['Izin Edar Kementerian Pertanian RI', 'Uji Mutu dan Efektivitas', 'GMP Standards', 'TKDN', 'SNI', 'LeSOS'],
     capabilities: ['Large Production Capacity', 'Small to Industrial Volumes', 'Private Label', 'Export Ready'],
   },
   
-  // Comprehensive keywords organized by category - OPTIMIZED FOR MAKLON + PRODUCTS
+  // Comprehensive keywords organized by category - MASTER KEYWORD STRATEGY
   keywords: [
-    // PRIMARY MAKLON KEYWORDS (B2B - highest priority)
-    'maklon pupuk hayati',
-    'maklon pupuk organik',
-    'jasa maklon pupuk',
-    'pabrik pupuk hayati',
-    'contract manufacturing fertilizer indonesia',
-    'oem pupuk',
-    'private label pupuk',
-    'maklon pupuk klaten',
-    // PRIMARY PRODUCT KEYWORDS (Retail)
-    'pupuk hayati cair',
-    'pupuk organik cair',
-    'insektisida hayati',
-    'floraone',
-    'rajabio',
-    'bio killer',
-    'simbios',
-    // Brand keywords
-    'centra biotech indonesia',
-    'bioteknologi indonesia',
-    // Industry keywords
-    'pupuk bersertifikat kementan',
-    'pupuk hayati terbaik',
-    'pupuk organik terbaik',
-    'produsen pupuk hayati',
-    'supplier pupuk organik',
-    'distributor pupuk hayati',
+    // PRIMARY TRANSACTIONAL KEYWORDS (Buying Intent)
+    'jual pupuk hayati', 'harga pupuk organik', 'beli pupuk hayati online',
+    'distributor pupuk organik', 'agen pupuk hayati', 'supplier pupuk organik',
+    // PRIMARY PRODUCT KEYWORDS (Brand + Generic)
+    'jual Flora One asli', 'harga pupuk Flora One', 'Flora One trichoderma',
+    'harga pupuk Simbios', 'Simbios mikoriza', 'pupuk mikoriza terbaik',
+    'jual insektisida Biokiller', 'harga obat wereng Biokiller', 'Bio Killer pestisida organik',
+    'jual asam humat Black Turbo', 'harga pembenah tanah', 'Black Turbo asam humat',
+    'jual dolomit Biokalsi', 'harga kapur pertanian', 'Biokalsi dolomit mesh 100',
+    'jual pupuk cair Biojagat', 'Biojagat azotobacter', 'pupuk penambat nitrogen',
+    'jual POC Rajabio', 'harga pupuk organik Rajabio', 'Rajabio C-Organik 15%',
+    // B2B KEYWORDS
+    'maklon pupuk hayati', 'maklon pupuk organik', 'jasa maklon pupuk',
+    'pabrik pupuk hayati', 'produsen pupuk organik', 'OEM pupuk',
+    'private label pupuk', 'toll manufacturing pupuk',
+    'supplier pupuk bersertifikat TKDN', 'distributor pupuk E-Katalog INAPROC',
+    'produsen pupuk berizin Kementan', 'pabrik pupuk bersertifikat LeSOS',
+    'vendor pertanian sertifikat SNI',
+    // PROBLEM-SOLUTION KEYWORDS
+    'pupuk untuk layu fusarium', 'obat busuk akar tanaman', 'fungisida hayati',
+    'obat wereng padi organik', 'pestisida penggerek batang', 'insektisida hama padi aman',
+    'pupuk tanah asam', 'pembenah tanah keras', 'pupuk untuk tanah tidak subur',
+    'meningkatkan hasil panen', 'solusi produktivitas rendah', 'mencegah gagal panen',
+    // BRAND KEYWORDS
+    'centra biotech indonesia', 'PT Centra Biotech Indonesia',
+    'bioteknologi indonesia', 'pupuk bersertifikat kementan',
+    // GENERIC KEYWORDS
+    'pupuk hayati cair', 'pupuk organik cair', 'insektisida hayati',
+    'pupuk hayati terbaik', 'pupuk organik terbaik', 'biofertilizer Indonesia',
+    'pertanian organik', 'sustainable agriculture Indonesia',
   ],
   
-  // Category-specific keywords with TARGET SERP keywords
+  // Category-specific keywords with TARGET SERP keywords - ENHANCED
   categoryKeywords: {
     agriculture: [
-      // Primary target keywords for SERP #1
+      // TRANSACTIONAL (Buying Intent)
+      'jual pupuk hayati', 'harga pupuk organik', 'beli pupuk online',
+      'distributor pupuk hayati', 'agen pupuk organik', 'supplier biofertilizer',
+      // PRODUCT SPECIFIC
+      'Flora One', 'Simbios', 'Biokiller', 'Black Turbo', 'Biokalsi', 'Biojagat', 'Rajabio',
+      'floraone pupuk hayati', 'rajabio pupuk organik', 'biokiller insektisida',
+      // B2B
+      'maklon pupuk', 'jasa maklon pupuk hayati', 'maklon pupuk hayati',
+      'contract manufacturing fertilizer', 'OEM pupuk Indonesia',
+      // PROBLEM-SOLUTION
       'pupuk organik cair', 'insektisida hayati', 'fungisida hayati',
-      'pupuk hayati', 'pupuk hayati cair', 'maklon pupuk', 
-      'jasa maklon pupuk hayati', 'maklon pupuk hayati',
-      // Secondary keywords
-      'biofertilizer', 'pupuk organik', 'pestisida organik',
-      'pertanian berkelanjutan', 'teknologi pertanian', 'hasil panen optimal',
-      'floraone', 'biokiller', 'trico z', 'rajabio', 'megabio',
+      'pupuk hayati', 'pupuk hayati cair', 'pestisida organik',
+      'obat wereng', 'pupuk layu fusarium', 'pupuk tanah asam',
+      // GENERIC
+      'biofertilizer', 'pupuk organik', 'pertanian berkelanjutan',
+      'teknologi pertanian', 'hasil panen optimal', 'pertanian organik',
     ],
     livestock: [
       'probiotik ternak', 'pakan ternak', 'suplemen hewan', 'kesehatan ternak',
@@ -143,6 +155,22 @@ export const SITE_CONFIG = {
       'kesehatan ikan', 'kualitas air kolam', 'perikanan berkelanjutan',
       'probiotik udang', 'budidaya udang', 'tambak ikan',
     ],
+    b2b: [
+      'maklon pupuk hayati', 'maklon pupuk organik', 'jasa maklon pupuk',
+      'pabrik pupuk hayati', 'contract manufacturing fertilizer indonesia',
+      'OEM pupuk', 'private label pupuk', 'toll manufacturing pupuk',
+      'supplier TKDN', 'E-Katalog INAPROC', 'produsen Kementan',
+      'vendor pertanian SNI', 'pabrik pupuk LeSOS',
+    ],
+    products: {
+      floraOne: ['jual Flora One', 'harga Flora One', 'Flora One trichoderma', 'Flora One fungisida', 'agen Flora One'],
+      simbios: ['harga Simbios', 'Simbios mikoriza', 'pupuk mikoriza terbaik', 'Simbios untuk sawit'],
+      biokiller: ['jual Biokiller', 'harga obat wereng', 'Biokiller beauveria', 'pestisida organik'],
+      blackTurbo: ['jual Black Turbo', 'asam humat 52%', 'pembenah tanah terbaik', 'humic acid'],
+      biokalsi: ['jual Biokalsi', 'dolomit mesh 100', 'kapur pertanian', 'dolomit super halus'],
+      biojagat: ['Biojagat azotobacter', 'pupuk penambat nitrogen', 'pelarut fosfat'],
+      rajabio: ['jual Rajabio', 'POC Rajabio', 'C-Organik 15%', 'pupuk organik premium'],
+    },
   },
   
   // Verification IDs
@@ -195,16 +223,23 @@ export function generateMetadataFromProps({
   nofollow = false,
   canonical,
 }: SEOProps): Metadata {
-  // Check if title already contains the site name to avoid duplication
-  const hasSiteName = title?.toLowerCase().includes('centra biotech');
-  const fullTitle = title 
-    ? (hasSiteName ? title : `${title} | ${SITE_CONFIG.name}`)
-    : SITE_CONFIG.name;
+  // Normalize so the FINAL rendered <title> (topic + brand) fits Google's
+  // ~60-char display budget with the brand appearing exactly once, even if
+  // `title` already carries a (possibly truncated) brand suffix from
+  // upstream CMS/static data. Composed here, once, rather than left to the
+  // layout's `%s | Centra Biotech Indonesia` template (app/[lang]/layout.tsx),
+  // since that template has no way to know an incoming title is already dirty.
+  const pageTitle = normalizeSeoTitle(title);
+  // OG/Twitter don't go through the layout's title template, so reuse the
+  // same normalized, single-brand title for consistency.
+  const ogTitle = pageTitle;
   const fullUrl = url ? `${SITE_CONFIG.url}${url}` : SITE_CONFIG.url;
   const fullImage = image.startsWith('http') ? image : `${SITE_CONFIG.url}${image}`;
   
   const metadata: Metadata = {
-    title: fullTitle,
+    // `absolute` bypasses the parent layout's title template so the brand
+    // (already included by normalizeSeoTitle above) is never appended twice.
+    title: { absolute: pageTitle },
     description,
     keywords: SITE_CONFIG.keywords,
     authors: author ? [{ name: author }] : [{ name: SITE_CONFIG.name }],
@@ -226,7 +261,7 @@ export function generateMetadataFromProps({
     
     // Open Graph
     openGraph: {
-      title: fullTitle,
+      title: ogTitle,
       description,
       url: fullUrl,
       siteName: SITE_CONFIG.name,
@@ -252,19 +287,20 @@ export function generateMetadataFromProps({
     // Twitter
     twitter: {
       card: 'summary_large_image',
-      title: fullTitle,
+      title: ogTitle,
       description,
       images: [fullImage],
       creator: SITE_CONFIG.twitter,
       site: SITE_CONFIG.twitter,
     },
     
-    // Alternate URLs
+    // Alternate URLs with hreflang for multi-language SEO
     alternates: {
       canonical: canonical || fullUrl,
       languages: {
-        'id-ID': fullUrl,
-        // Only Indonesian version available - no other language alternates
+        'id': url ? `${SITE_CONFIG.url}/id${url}` : `${SITE_CONFIG.url}/id`,
+        'en': url ? `${SITE_CONFIG.url}/en${url}` : `${SITE_CONFIG.url}/en`,
+        'x-default': url ? `${SITE_CONFIG.url}/id${url}` : `${SITE_CONFIG.url}/id`,
       },
     },
     
@@ -361,9 +397,25 @@ export function generateAltText(filename: string, context?: string): string {
  */
 export function generatePageKeywords(pageKeywords: string[], category?: keyof typeof SITE_CONFIG.categoryKeywords): string[] {
   const baseKeywords = [...SITE_CONFIG.keywords.slice(0, 5)];
-  const categoryKeywords = category ? SITE_CONFIG.categoryKeywords[category] : [];
+  
+  // Handle category keywords - check if it's an array or object
+  let categoryKeywords: string[] = [];
+  if (category) {
+    const catData = SITE_CONFIG.categoryKeywords[category];
+    if (Array.isArray(catData)) {
+      categoryKeywords = catData;
+    }
+    // If it's an object (like products), skip it - use getProductKeywords() instead
+  }
   
   return [...new Set([...pageKeywords, ...categoryKeywords, ...baseKeywords])];
+}
+
+/**
+ * Get product-specific keywords from categoryKeywords.products
+ */
+export function getProductCategoryKeywords(productKey: keyof typeof SITE_CONFIG.categoryKeywords.products): string[] {
+  return SITE_CONFIG.categoryKeywords.products[productKey] || [];
 }
 
 /**
@@ -422,7 +474,7 @@ export const PAGE_METADATA: Record<string, PageMetadata> = {
   products: {
     title: 'Produk Pupuk Hayati & Insektisida',
     description: 'Produk pupuk organik cair, pupuk hayati cair, insektisida hayati, dan fungisida hayati untuk pertanian berkelanjutan Indonesia.',
-    path: '/product',
+    path: '/produk-layanan',
     keywords: ['pupuk hayati', 'insektisida hayati', 'fungisida hayati', 'pupuk organik cair'],
   },
   news: {
@@ -434,21 +486,21 @@ export const PAGE_METADATA: Record<string, PageMetadata> = {
   agriculture: {
     title: 'Pupuk Organik Cair & Fungisida Hayati',
     description: 'Produk pertanian unggulan: pupuk organik cair Floraone, insektisida hayati Biokiller, fungisida hayati Trico-Z. Jasa maklon pupuk hayati tersedia.',
-    path: '/product/agriculture',
+    path: '/produk-layanan/pertanian',
     keywords: SITE_CONFIG.categoryKeywords.agriculture,
     type: 'product',
   },
   livestock: {
     title: 'Produk Peternakan - Probiotik Ternak',
     description: 'Produk probiotik dan suplemen berkualitas untuk peternakan. Tingkatkan kesehatan dan produktivitas ternak Anda dengan bioteknologi modern.',
-    path: '/product/livestock',
+    path: '/produk-layanan/peternakan',
     keywords: SITE_CONFIG.categoryKeywords.livestock,
     type: 'product',
   },
   fishery: {
     title: 'Produk Perikanan - Probiotik Ikan',
     description: 'Solusi akuakultur terbaik untuk budidaya ikan dan udang. Probiotik dan pakan berkualitas untuk pertumbuhan optimal.',
-    path: '/product/fishery',
+    path: '/produk-layanan/perikanan',
     keywords: SITE_CONFIG.categoryKeywords.fishery,
     type: 'product',
   },
@@ -514,19 +566,141 @@ export function truncateTitle(title: string, maxLength: number = 60): string {
   return lastSpace > 20 ? truncated.substring(0, lastSpace) : truncated.substring(0, maxLength - 3) + '...';
 }
 
+// Brand aliases that may already appear as a trailing "site name" suffix on
+// a CMS-supplied or hard-coded title. Upstream data (Strapi `meta_title`, and
+// a handful of hard-coded page titles) violates the contract documented
+// above -- sometimes with the full name, sometimes with a naive 60-char cut
+// that leaves a partial fragment ("| Centra Biotech", "| Ce"), sometimes
+// with the short name ("| CBI"), and sometimes with " - " instead of "|".
+const BRAND_SUFFIX_ALIASES = [SITE_CONFIG.name, SITE_CONFIG.shortName];
+
+// A trailing fragment counts as "the brand" only if it is an exact match or
+// a left-anchored prefix of a known brand alias (so real topic text that
+// happens to end in "| Something else" is never touched). Fragments under 2
+// chars are ignored -- too short to tell apart from coincidence.
+function isBrandFragment(tail: string): boolean {
+  if (tail.length < 2) return false;
+  const tailLower = tail.toLowerCase();
+  return BRAND_SUFFIX_ALIASES.some((alias) => alias.toLowerCase().startsWith(tailLower));
+}
+
+// Strips ONE trailing brand suffix, whether pipe-delimited ("Foo | Centra
+// Biotech") or dash-delimited ("Foo - Centra Biotech Indonesia"). Pipe is
+// checked first since it is the layout's own separator; dash is a distinct,
+// separately-observed defect flavor (see dictionaries' `seo.*Title` entries).
+function stripTrailingBrandFragment(title: string): string {
+  const pipeIdx = title.lastIndexOf('|');
+  if (pipeIdx !== -1 && isBrandFragment(title.slice(pipeIdx + 1).trim())) {
+    return title.slice(0, pipeIdx).trim();
+  }
+  const dashIdx = title.lastIndexOf(' - ');
+  if (dashIdx !== -1 && isBrandFragment(title.slice(dashIdx + 3).trim())) {
+    return title.slice(0, dashIdx).trim();
+  }
+  return title;
+}
+
+/**
+ * Normalize a page title so it composes safely into a <title> tag that is
+ * at most `maxLength` characters INCLUDING the " | <brand>" suffix, with the
+ * brand appearing exactly once.
+ *
+ * This is the single upstream fix for the site-wide double-brand / overlong
+ * <title> defect: Strapi `meta_title` (and several hard-coded titles) already
+ * end with a brand suffix -- sometimes truncated mid-word -- and the layout
+ * template `%s | Centra Biotech Indonesia` (app/[lang]/layout.tsx) then
+ * appends the brand again unconditionally.
+ *
+ * Callers MUST assign the result via `title: { absolute: normalizeSeoTitle(...) } }`
+ * (never a bare string) so the layout's template does not append the brand
+ * a second time.
+ *
+ * Idempotent: normalizeSeoTitle(normalizeSeoTitle(x)) === normalizeSeoTitle(x).
+ */
+export function normalizeSeoTitle(
+  rawTitle: string | null | undefined,
+  options: { maxLength?: number; brand?: string } = {}
+): string {
+  const brand = options.brand ?? SITE_CONFIG.name;
+  const maxLength = options.maxLength ?? 60;
+
+  let topic = (rawTitle ?? '').replace(/\s+/g, ' ').trim();
+
+  // Repeatedly strip trailing brand fragments -- handles data that already
+  // got the suffix appended more than once, e.g.
+  // "Foo | Centra Biotech | Centra Biotech Indonesia" (bound to 5 passes,
+  // far more than any real doubling could produce, to guarantee termination).
+  for (let i = 0; i < 5; i++) {
+    const next = stripTrailingBrandFragment(topic);
+    if (next === topic) break;
+    topic = next;
+  }
+
+  // A topic that IS the bare brand name, with no "|"/"-" delimiter for the
+  // loop above to strip (this is what the empty/null fallback below itself
+  // returns), counts as "nothing left" too. Without this, normalizeSeoTitle
+  // would not be idempotent: normalizeSeoTitle('') -> "Centra Biotech
+  // Indonesia" -> fed back in -> "Centra Biotech Indonesia | Centra Biotech
+  // Indonesia".
+  if (topic.toLowerCase() === brand.toLowerCase()) {
+    topic = '';
+  }
+
+  if (!topic) {
+    // Nothing left after stripping (input was only the brand, or empty) --
+    // fall back to the brand name so callers never render an empty <title>.
+    return brand.length <= maxLength ? brand : truncateTitle(brand, maxLength);
+  }
+
+  // The topic earns the click, the brand does not. A full-brand suffix costs
+  // 26 of the 60-char budget, which was cutting focus keyphrases off real
+  // titles ("Cara Tepat Asam Humat Dicampur Pupuk NPK" lost "Pupuk NPK").
+  // So the brand gives way, not the keyword: try the longest brand form that
+  // still leaves the whole topic intact, and drop the brand entirely rather
+  // than truncate a topic that needs the full width.
+  //
+  // An explicitly supplied options.brand is honoured as-is, no ladder, since
+  // the caller has stated which brand string it wants.
+  const brandLadder = options.brand
+    ? [options.brand]
+    : [SITE_CONFIG.name, 'Centra Biotech', SITE_CONFIG.shortName];
+
+  for (const candidate of brandLadder) {
+    const suffix = ` | ${candidate}`;
+    if (topic.length + suffix.length <= maxLength) {
+      return `${topic}${suffix}`;
+    }
+  }
+
+  // Topic is too long for even the shortest brand. Trim it against that
+  // shortest suffix rather than against maxLength, then keep the brand.
+  //
+  // Trimming against maxLength instead would break idempotency: the word
+  // boundary cut usually lands well short of the limit, which frees enough
+  // room for a brand on the next pass, so f(f(x)) !== f(x).
+  const shortestBrand = brandLadder[brandLadder.length - 1];
+  const shortestSuffix = ` | ${shortestBrand}`;
+  const budget = Math.max(maxLength - shortestSuffix.length, 10);
+
+  return `${truncateTitle(topic, budget)}${shortestSuffix}`;
+}
+
 export function generateArticleMetadata(props: ArticleMetadataProps): Metadata {
   const fullUrl = `${SITE_CONFIG.url}/news/${props.slug}`;
-  const fullImage = props.image?.startsWith('http') 
-    ? props.image 
-    : props.image 
-      ? `${SITE_CONFIG.apiUrl}${props.image}` 
+  const fullImage = props.image?.startsWith('http')
+    ? props.image
+    : props.image
+      ? `${SITE_CONFIG.apiUrl}${props.image}`
       : `${SITE_CONFIG.url}${SITE_CONFIG.ogImage}`;
-  
-  // Truncate title for SEO compliance (max 60 characters)
-  const seoTitle = truncateTitle(props.title);
-  
+
+  // Normalize title for SEO compliance (max 60 chars, single brand mention).
+  // Defensive even though the `title` field isn't fetched from meta_title,
+  // in case an editor types the brand straight into the headline.
+  const seoTitle = normalizeSeoTitle(props.title);
+
   return {
-    title: seoTitle,
+    // absolute: brand is already included by normalizeSeoTitle above.
+    title: { absolute: seoTitle },
     description: props.description,
     keywords: [...(props.tags || []), ...SITE_CONFIG.keywords.slice(0, 5)],
     authors: [{ name: props.author || SITE_CONFIG.name }],
@@ -578,7 +752,8 @@ export interface ProductMetadataProps {
 }
 
 export function generateProductMetadata(props: ProductMetadataProps): Metadata {
-  const categoryPath = `/product/${props.category}`;
+  const categoryMap = { agriculture: 'pertanian', livestock: 'peternakan', fishery: 'perikanan' };
+  const categoryPath = `/produk-layanan/${categoryMap[props.category]}`;
   const fullUrl = `${SITE_CONFIG.url}${categoryPath}/${props.slug}`;
   const fullImage = props.image?.startsWith('http') 
     ? props.image 

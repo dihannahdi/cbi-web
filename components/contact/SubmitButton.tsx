@@ -1,10 +1,10 @@
 interface SubmitButtonProps {
   isSubmitting: boolean;
-  label?: string;
-  loadingLabel?: string;
+  label: string;
+  loadingLabel: string;
 }
 
-export const SubmitButton = ({ isSubmitting, label = "Send", loadingLabel = "Sending..." }: SubmitButtonProps) => (
+export const SubmitButton = ({ isSubmitting, label, loadingLabel }: SubmitButtonProps) => (
   <button
     type="submit"
     disabled={isSubmitting}

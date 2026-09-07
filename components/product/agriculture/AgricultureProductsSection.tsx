@@ -14,6 +14,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import ContainerSection from "@/components/layout/container";
 import { cn } from "@/lib/utils";
 import { getImageUrl } from "@/utils/getImageUrl"; // Import the utility function
+import { buildWhatsAppUrl } from "@/constants/contact";
+import WhatsAppAnalytics from "@/lib/whatsapp-analytics";
 
 import type { Swiper as SwiperType } from "swiper";
 import {
@@ -34,12 +36,12 @@ const getProductSlug = (title: string | undefined, lang: 'id' | 'en'): string =>
       en: 'floraone-pupuk-hayati' 
     },
     'SIMBIOS': { 
-      id: 'simbios-pupuk-hayati', 
-      en: 'simbios-pupuk-hayati' 
+      id: 'simbios-pupuk-hayati-cair', 
+      en: 'simbios-pupuk-hayati-cair' 
     },
     'RAJABIO': { 
-      id: 'rajabio-pupuk-organik', 
-      en: 'rajabio-pupuk-organik' 
+      id: 'rajabio-pupuk-organik-cair', 
+      en: 'rajabio-pupuk-organik-cair' 
     },
     'BIO KILLER': { 
       id: 'biokiller-insektisida-hayati', 
@@ -50,40 +52,40 @@ const getProductSlug = (title: string | undefined, lang: 'id' | 'en'): string =>
       en: 'biokiller-insektisida-hayati' 
     },
     'BLACKTURBO ASAM HUMAT': {
-      id: 'blackturbo-asam-humat',
-      en: 'blackturbo-asam-humat'
+      id: 'blackturbo-asam-humat-cair',
+      en: 'blackturbo-asam-humat-cair'
     },
     'BLACKTURBO HUMIC ACID': {
-      id: 'blackturbo-asam-humat',
-      en: 'blackturbo-asam-humat'
+      id: 'blackturbo-asam-humat-cair',
+      en: 'blackturbo-asam-humat-cair'
     },
     'BLACK TURBO ASAM HUMAT': {
-      id: 'blackturbo-asam-humat',
-      en: 'blackturbo-asam-humat'
+      id: 'blackturbo-asam-humat-cair',
+      en: 'blackturbo-asam-humat-cair'
     },
     'BLACK TURBO HUMIC ACID': {
-      id: 'blackturbo-asam-humat',
-      en: 'blackturbo-asam-humat'
+      id: 'blackturbo-asam-humat-cair',
+      en: 'blackturbo-asam-humat-cair'
     },
     'BLACK TURBO': {
-      id: 'blackturbo-asam-humat',
-      en: 'blackturbo-asam-humat'
+      id: 'blackturbo-asam-humat-cair',
+      en: 'blackturbo-asam-humat-cair'
     },
     'BIOKALSI': {
-      id: 'biokalsi-dolomit',
-      en: 'biokalsi-dolomit'
+      id: 'biokalsi-dolomit-pembenah-tanah',
+      en: 'biokalsi-dolomit-pembenah-tanah'
     },
     'BIOKALSI DOLOMIT': {
-      id: 'biokalsi-dolomit',
-      en: 'biokalsi-dolomit'
+      id: 'biokalsi-dolomit-pembenah-tanah',
+      en: 'biokalsi-dolomit-pembenah-tanah'
     },
     'DOLOMIT': {
-      id: 'biokalsi-dolomit',
-      en: 'biokalsi-dolomit'
+      id: 'biokalsi-dolomit-pembenah-tanah',
+      en: 'biokalsi-dolomit-pembenah-tanah'
     },
     'DOLOMITE': {
-      id: 'biokalsi-dolomit',
-      en: 'biokalsi-dolomit'
+      id: 'biokalsi-dolomit-pembenah-tanah',
+      en: 'biokalsi-dolomit-pembenah-tanah'
     },
     'FLORAONE PADAT': {
       id: 'floraone-pupuk-hayati-padat',
@@ -119,11 +121,11 @@ const getFallbackProductImage = (title?: string): string | null => {
   const normalizedTitle = title.toUpperCase().trim();
 
   if (normalizedTitle.includes('BLACK')) {
-    return 'https://cbi-backend.my.id/uploads/mockup-black-turbo.webp';
+    return 'https://backend.centrabiotechindonesia.com/uploads/mockup-black-turbo.webp';
   }
 
   if (normalizedTitle.includes('DOLOMIT') || normalizedTitle.includes('DOLOMITE') || normalizedTitle.includes('BIOKALSI')) {
-    return 'https://cbi-backend.my.id/uploads/dolomit-biokalsi-mockup.webp';
+    return 'https://backend.centrabiotechindonesia.com/uploads/dolomit-biokalsi-mockup.webp';
   }
 
   return null;
@@ -188,20 +190,28 @@ const AgricultureProductsSection = ({
         <div className="flex flex-1 flex-col gap-4 lg:flex-row lg:gap-16">
           <Link 
             href={`${getProductBasePath(lang)}/${getProductSlug(activeProduct?.title, lang)}`}
-            className="h-[30rem] flex-1 rounded-3xl bg-[#99AC33] lg:h-[37.5rem] cursor-pointer hover:bg-[#8a9b2e] transition-colors"
+            className="aspect-square w-full max-w-[30rem] lg:max-w-[37.5rem] rounded-3xl bg-[#99AC33] cursor-pointer hover:bg-[#8a9b2e] transition-colors flex items-center justify-center overflow-visible mx-auto lg:mx-0 relative"
           >
             {(() => {
               const placeholderUrl = "/img-placeholder.png";
               const imageUrl = getImageUrl(activeProduct?.image?.url, placeholderUrl);
               const fallbackImage = getFallbackProductImage(activeProduct?.title);
               const resolvedImageUrl = imageUrl === placeholderUrl && fallbackImage ? fallbackImage : imageUrl;
+              
+              // Check if this is Flora One Padat - make it bigger and allow overlap
+              const isFloraOnePadat = activeProduct?.title?.toUpperCase().includes('FLORAONE PADAT') || 
+                                       activeProduct?.title?.toUpperCase().includes('FLORA ONE PADAT');
+              
+              const imageClasses = isFloraOnePadat 
+                ? "w-[110%] h-[110%] object-contain scale-110 -translate-y-4" 
+                : "w-[85%] h-[85%] object-contain";
 
               return (
             <Image
-              className="h-[30rem] w-full scale-[1.125] object-contain lg:h-[37.5rem]"
+              className={imageClasses}
               src={resolvedImageUrl}
-              width={420}
-              height={473}
+              width={500}
+              height={500}
               alt={activeProduct?.image?.alternativeText || "Product Image"}
               unoptimized
             />
@@ -253,11 +263,18 @@ const AgricultureProductsSection = ({
                         <ChevronRight className="h-4 w-4" />
                       </Link>
                       <Link
-                        href={lang === 'id' 
-                          ? `https://wa.me/6281511115988?text=Halo%20Centra%20Biotech%2C%20saya%20tertarik%20dengan%20produk%20${encodeURIComponent(product.title || '')}`
-                          : `https://wa.me/6281511115988?text=Hello%20Centra%20Biotech%2C%20I%20am%20interested%20in%20${encodeURIComponent(product.title || '')}%20product`
-                        }
+                        href={buildWhatsAppUrl(
+                          lang === 'id'
+                            ? `Halo Centra Biotech, saya tertarik dengan produk ${product.title || ''}`
+                            : `Hello Centra Biotech, I am interested in ${product.title || ''} product`
+                        )}
                         target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() =>
+                          WhatsAppAnalytics.trackClick('agriculture_products', {
+                            product: product.title,
+                          })
+                        }
                         className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20BD5A] text-white font-semibold px-6 py-3 rounded-xl transition-all hover:shadow-lg text-sm"
                       >
                         <MessageCircle className="h-4 w-4" />

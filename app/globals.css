@@ -4,31 +4,175 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
+    /* shadcn/ui tokens — retuned to the CBI brand (forest green + warm stone).
+       HSL triplets (space-separated, %) so shadcn primitives render on-brand.
+       NOTE: --accent is shadcn's subtle *hover background*, NOT the brand
+       accent — keep it a stone tint (lime lives in the `lime-*` scale). */
+    --background: 0 0% 100%;            /* keep page white; use bg-stone-50 for sunken */
+    --foreground: 80 13% 18%;           /* stone-800 #313529 */
     --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
+    --card-foreground: 80 13% 18%;
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 10% 3.9%;
+    --popover-foreground: 80 13% 18%;
+    --primary: 138 77% 14%;             /* forest green-800 #083F19 */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 75 27% 94%;            /* stone-100 #F2F4EC */
+    --secondary-foreground: 138 77% 14%;
+    --muted: 75 27% 94%;                /* stone-100 */
+    --muted-foreground: 79 8% 46%;      /* stone-500 #787E6B */
+    --accent: 75 27% 94%;               /* stone-100 (subtle hover bg — NOT lime) */
+    --accent-foreground: 138 77% 14%;
+    --destructive: 9 63% 48%;           /* danger-500 #C8442E */
+    --destructive-foreground: 0 0% 100%;
+    --border: 77 16% 87%;               /* stone-200 #E0E3D8 */
+    --input: 76 11% 76%;                /* stone-300 #C4C8BA */
+    --ring: 138 66% 25%;                /* green-600 #166B30 (solid focus ring) */
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
+
+    /* ════════════════════════════════════════════════════════════════
+       CENTRA BIOTECH DESIGN SYSTEM TOKENS
+       Source: refferences/Centra Biotech Design System/tokens/*.css
+       Anchored on forest green #083F19 (brand primary). Living soil +
+       healthy crop: forest green (trust) · leaf-lime (vitality) · harvest
+       gold (warmth/certification) · warm green-tinted stone neutrals.
+       ════════════════════════════════════════════════════════════════ */
+
+    /* ── Forest green (primary brand) ── */
+    --green-950: #04210C;
+    --green-900: #052B11;
+    --green-800: #083F19;   /* ★ brand primary — site theme-color */
+    --green-700: #0E5424;
+    --green-600: #166B30;
+    --green-500: #21873F;
+    --green-400: #3FA85B;
+    --green-300: #6FC585;
+    --green-200: #A7DEB4;
+    --green-100: #DBF0E0;
+    --green-50:  #F0F8F2;
+
+    /* ── Leaf lime (fresh accent — growth, vitality) ── */
+    --lime-700: #4A7E14;
+    --lime-600: #5E9E1E;
+    --lime-500: #7CB518;   /* ★ accent */
+    --lime-400: #97C93D;
+    --lime-300: #BDDE7E;
+    --lime-200: #D8EBAC;
+    --lime-100: #EDF6D6;
+
+    /* ── Harvest gold (warmth, premium, certification) ── */
+    --gold-700: #A8730C;
+    --gold-600: #C98A12;
+    --gold-500: #E2A526;
+    --gold-400: #EFC15E;
+    --gold-200: #F7DFA6;
+    --gold-100: #FBEFD2;
+
+    /* ── Earth / soil (supporting warm tone) ── */
+    --earth-700: #6B4F2E;
+    --earth-500: #8A6D3B;
+    --earth-300: #C2A87E;
+    --earth-100: #EFE6D5;
+
+    /* ── Warm green-gray neutrals (never pure gray) ── */
+    --stone-950: #14160F;
+    --stone-900: #20231B;
+    --stone-800: #313529;
+    --stone-700: #474C3D;
+    --stone-600: #5E6451;
+    --stone-500: #787E6B;
+    --stone-400: #9CA18F;
+    --stone-300: #C4C8BA;
+    --stone-200: #E0E3D8;
+    --stone-150: #EBEDE5;
+    --stone-100: #F2F4EC;
+    --stone-50:  #F9FAF5;
+
+    /* ── Brand-mark colors (official CBI circular logo — identity contexts) ── */
+    --logo-blue:   #1D67AD;
+    --logo-orange: #D2772A;
+    --logo-green:  #1E8C40;
+
+    /* ── Semantic status ── */
+    --success-600: #166B30;
+    --success-500: #21873F;
+    --success-100: #DBF0E0;
+    --warning-600: #C98A12;
+    --warning-500: #E2A526;
+    --warning-100: #FBEFD2;
+    --danger-600:  #A8341F;
+    --danger-500:  #C8442E;
+    --danger-100:  #F7E2DC;
+    --info-600:    #226A86;
+    --info-500:    #2C7DA0;
+    --info-100:    #DBEDF3;
+
+    /* ── Semantic aliases ── */
+    --brand-primary:        var(--green-800);
+    --brand-primary-hover:  var(--green-700);
+    --brand-primary-active: var(--green-900);
+    --brand-on-primary:     #FFFFFF;
+    --accent-lime:          var(--lime-500);
+    --accent-lime-hover:    var(--lime-600);
+    --accent-lime-on:       var(--green-900);
+
+    --surface-page:          var(--stone-50);
+    --surface-card:          #FFFFFF;
+    --surface-sunken:        var(--stone-100);
+    --surface-brand:         var(--green-800);
+    --surface-brand-strong:  var(--green-900);
+    --surface-brand-subtle:  var(--green-50);
+    --surface-accent-subtle: var(--lime-100);
+    --surface-inverse:       var(--green-950);
+    --surface-overlay:       rgba(20, 22, 15, 0.55);
+
+    --text-strong:    var(--stone-950);
+    --text-body:      var(--stone-800);
+    --text-muted:     var(--stone-500);
+    --text-subtle:    var(--stone-400);
+    --text-brand:     var(--green-800);
+    --text-accent:    var(--lime-700);
+    --text-on-brand:  #FFFFFF;
+    --text-link:      var(--green-700);
+    --text-link-hover:var(--green-800);
+
+    --border-subtle:  var(--stone-200);
+    --border-default: var(--stone-300);
+    --border-strong:  var(--stone-400);
+    --border-brand:   var(--green-800);
+    --border-accent:  var(--lime-500);
+    --ring-brand:     rgba(33, 135, 63, 0.32);
+    --ring-danger:    rgba(200, 68, 46, 0.30);
+
+    /* ── Radius ── */
+    --radius-xs:   4px;
+    --radius-sm:   6px;
+    --radius-md:   10px;
+    --radius-lg:   16px;   /* default card */
+    --radius-xl:   24px;
+    --radius-2xl:  32px;
+    --radius-pill: 999px;
+
+    /* ── Shadows — soft, forest-green tinted (never neutral black) ── */
+    --shadow-xs:    0 1px 2px rgba(20, 33, 12, 0.06);
+    --shadow-sm:    0 1px 3px rgba(20, 33, 12, 0.08), 0 1px 2px rgba(20, 33, 12, 0.05);
+    --shadow-md:    0 4px 12px rgba(8, 63, 25, 0.08), 0 2px 4px rgba(20, 33, 12, 0.05);
+    --shadow-lg:    0 12px 28px rgba(8, 63, 25, 0.12), 0 4px 10px rgba(20, 33, 12, 0.06);
+    --shadow-xl:    0 24px 48px rgba(8, 63, 25, 0.16), 0 8px 16px rgba(20, 33, 12, 0.06);
+    --shadow-brand: 0 10px 28px rgba(8, 63, 25, 0.28);
+    --shadow-focus: 0 0 0 3px var(--ring-brand);
+
+    /* ── Motion — quick, confident, minimal bounce ── */
+    --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+    --ease-out:      cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out:   cubic-bezier(0.65, 0, 0.35, 1);
+    --dur-fast:   120ms;
+    --dur-base:   200ms;
+    --dur-slow:   320ms;
   }
   .dark {
     --background: 240 10% 3.9%;
@@ -72,23 +216,23 @@
    Default colors for light backgrounds, can be overridden with text-white etc.
    ======================================== */
 h1 {
-  @apply text-4xl font-bold text-[#222] lg:text-5xl xl:text-[56px] xl:leading-[70px];
+  @apply text-4xl font-extrabold tracking-tight text-stone-950 lg:text-5xl xl:text-[56px] xl:leading-[70px];
 }
 
 h2 {
-  @apply text-[28px] font-bold text-[#222] lg:text-[36px] xl:text-[44px] xl:leading-[56px];
+  @apply text-[28px] font-extrabold tracking-tight text-stone-950 lg:text-[36px] xl:text-[44px] xl:leading-[56px];
 }
 
 h3 {
-  @apply text-xl font-bold text-[#222] lg:text-2xl xl:text-[28px];
+  @apply text-xl font-bold tracking-tight text-stone-950 lg:text-2xl xl:text-[28px];
 }
 
 h4 {
-  @apply text-lg font-semibold text-[#222] lg:text-xl;
+  @apply text-lg font-semibold text-stone-950 lg:text-xl;
 }
 
 p {
-  @apply text-sm font-normal text-[#666] lg:text-base xl:text-lg leading-relaxed;
+  @apply text-sm font-normal text-stone-800 lg:text-base xl:text-lg leading-relaxed;
 }
 
 /* Override text colors when inside colored sections */
@@ -116,11 +260,16 @@ p {
 }
 
 .heading1 {
-  @apply text-3xl font-bold md:text-4xl lg:text-6xl;
+  @apply text-3xl font-extrabold tracking-tight md:text-4xl lg:text-6xl;
 }
 
 .heading2 {
-  @apply text-xl font-semibold lg:text-2xl;
+  @apply text-xl font-bold tracking-tight lg:text-2xl;
+}
+
+/* Uppercase lime kicker/eyebrow that heads sections across the brand. */
+.cbi-eyebrow {
+  @apply inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.12em] text-lime-700;
 }
 
 /* ========================================
@@ -139,24 +288,35 @@ p {
 /* ========================================
    DESIGN SYSTEM - Buttons
    ======================================== */
+/* Primary CTA — forest-green pill with a confident hover lift + brand glow. */
 .btn-primary {
-  @apply inline-flex items-center justify-center gap-2 rounded-lg bg-green-600 px-5 py-2.5 
+  @apply inline-flex items-center justify-center gap-2 rounded-full bg-brand px-5 py-2.5
          text-sm font-medium text-white transition-all duration-200
-         hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500/50
-         disabled:cursor-not-allowed disabled:opacity-50;
+         hover:-translate-y-0.5 hover:bg-brand-hover hover:shadow-brand
+         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500/50
+         disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 disabled:hover:shadow-none;
+}
+
+/* Accent CTA — leaf-lime pill for high-energy actions (hero, conversion). */
+.btn-accent {
+  @apply inline-flex items-center justify-center gap-2 rounded-full bg-lime-500 px-5 py-2.5
+         text-sm font-semibold text-green-900 transition-all duration-200
+         hover:-translate-y-0.5 hover:bg-lime-600 hover:shadow-brand
+         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500/50
+         disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 disabled:hover:shadow-none;
 }
 
 .btn-secondary {
-  @apply inline-flex items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5
-         text-sm font-medium text-gray-700 transition-all duration-200
-         hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500/20
+  @apply inline-flex items-center justify-center gap-2 rounded-full border border-stone-200 bg-white px-5 py-2.5
+         text-sm font-medium text-stone-700 transition-all duration-200
+         hover:bg-stone-50 hover:border-stone-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500/40
          disabled:cursor-not-allowed disabled:opacity-50;
 }
 
 .btn-icon {
-  @apply inline-flex h-10 w-10 items-center justify-center rounded-lg bg-green-600 text-white 
-         transition-all duration-200 hover:bg-green-700 
-         focus:outline-none focus:ring-2 focus:ring-green-500/50;
+  @apply inline-flex h-10 w-10 items-center justify-center rounded-full bg-brand text-white
+         transition-all duration-200 hover:bg-brand-hover
+         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500/50;
 }
 
 /* ========================================
@@ -178,11 +338,11 @@ p {
 }
 
 .filter-pill-active {
-  @apply bg-green-600 text-white;
+  @apply bg-brand text-white shadow-sm;
 }
 
 .filter-pill-inactive {
-  @apply border border-gray-200 bg-white text-gray-600 hover:bg-gray-50;
+  @apply border border-stone-200 bg-white text-stone-600 hover:bg-stone-50 hover:text-brand;
 }
 
 /* ========================================
@@ -218,4 +378,38 @@ p {
 /* Hide scrollbar for horizontal scroll sections */
 .overflow-x-auto::-webkit-scrollbar {
   display: none;
+}
+
+/* ========================================
+   DESIGN SYSTEM - Global brand polish
+   ======================================== */
+/* Lime text selection (DS) */
+::selection {
+  background: var(--lime-200);
+  color: var(--green-900);
+}
+
+/* Brand focus ring — 3px forest-green glow for keyboard navigation */
+:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+  border-radius: var(--radius-sm);
+}
+
+/* Technical/lab data — dosages, C-Organik %, certificate codes */
+.cbi-mono {
+  font-family: var(--font-ibm-plex-mono), ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-feature-settings: "tnum" 1;
+}
+
+/* Respect reduced-motion preferences (DS) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

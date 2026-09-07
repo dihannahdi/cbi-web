@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "gsc_top_queries",
+  "info": {
+    "singularName": "gsc-top-query",
+    "pluralName": "gsc-top-queries",
+    "displayName": "GSC Top Query",
+    "description": "Top search queries from Google Search Console"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "query": {
+      "type": "string",
+      "required": true,
+      "maxLength": 500
+    },
+    "clicks": {
+      "type": "integer",
+      "default": 0
+    },
+    "impressions": {
+      "type": "integer",
+      "default": 0
+    },
+    "ctr": {
+      "type": "decimal",
+      "default": 0
+    },
+    "avg_position": {
+      "type": "decimal",
+      "default": 0
+    },
+    "period": {
+      "type": "string",
+      "maxLength": 50
+    }
+  }
+}

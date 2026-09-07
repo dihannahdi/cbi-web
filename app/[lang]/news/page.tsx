@@ -12,11 +12,9 @@ import Breadcrumb from "@/components/common/BreadScrumb";
 
 import { getDictionary } from "@/dictionaries";
 import { Locale, i18n, localeMetadata } from "@/i18n-config";
-import { SITE_CONFIG } from "@/utils/seo";
+import { SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
 import { 
-  generateWebPageSchema,
-  generateBreadcrumbSchema,
-  generateCollectionPageSchema,
+  generateEnhancedNewsListingSchemas,
   MultipleStructuredData 
 } from "@/utils/structuredData";
 
@@ -36,7 +34,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const baseUrl = SITE_CONFIG.url;
 
   return {
-    title: dict.seo.newsTitle,
+    // absolute: dict.seo.newsTitle already ends with "- Centra Biotech
+    // Indonesia"; normalizeSeoTitle strips that dash-delimited brand suffix
+    // and re-appends the brand once, avoiding a double-up with the layout
+    // template.
+    title: { absolute: normalizeSeoTitle(dict.seo.newsTitle) },
     description: dict.seo.newsDescription,
     alternates: {
       canonical: `${baseUrl}/${lang}/news`,
@@ -78,28 +80,21 @@ const Media = async ({ params }: PageProps) => {
       ...(data.news2 || []),
     ].filter(Boolean);
 
-    // Generate structured data
-    const schemas = [
-      generateWebPageSchema({
-        name: lang === 'id' ? 'Berita & Artikel - Centra Biotech Indonesia' : 'News & Articles - Centra Biotech Indonesia',
-        description: dict.seo.newsDescription,
-        url: `/${lang}/news`,
-      }),
-      generateBreadcrumbSchema([
-        { name: dict.nav.home, url: `/${lang}` },
-        { name: dict.news.title, url: `/${lang}/news` },
-      ]),
-      generateCollectionPageSchema({
-        name: dict.news.title,
-        description: dict.seo.newsDescription,
-        url: `/${lang}/news`,
-        items: allArticles.map((article: any) => ({
-          name: article.title || '',
-          url: `/${lang}/news/${article.slug || article.documentId || article.id}`,
-          description: article.description || '',
-        })),
-      }),
-    ];
+    // Generate enhanced structured data with ItemList for carousel rich results
+    const schemas = generateEnhancedNewsListingSchemas({
+      title: dict.news.title,
+      description: dict.seo.newsDescription,
+      url: `/${lang}/news`,
+      locale: lang,
+      articles: allArticles.map((article: any) => ({
+        title: article.title || '',
+        url: `/${lang}/news/${article.slug || article.documentId || article.id}`,
+        image: article.image?.url,
+        description: article.description || '',
+        datePublished: article.publishedAt,
+        author: SITE_CONFIG.name,
+      })),
+    });
 
     return (
       <>

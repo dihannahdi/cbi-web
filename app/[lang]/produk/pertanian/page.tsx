@@ -4,6 +4,7 @@ import { Locale } from '@/i18n-config';
 import Link from 'next/link';
 import ContainerSection from '@/components/layout/container';
 import { Leaf, Droplets, ArrowRight, CheckCircle, Star } from 'lucide-react';
+import { normalizeSeoTitle } from '@/utils/seo';
 
 export async function generateMetadata({
   params,
@@ -21,7 +22,9 @@ export async function generateMetadata({
     : 'Best liquid organic fertilizer (LOF) and agricultural biotechnology solutions. RAJABIO organic liquid fertilizer increases harvest up to 40%. Ministry certified, available on E-Catalog.';
 
   return {
-    title,
+    // absolute: `title` already ends with "| Centra Biotech"; normalizeSeoTitle
+    // strips that (partial brand fragment) and re-appends the full brand once.
+    title: { absolute: normalizeSeoTitle(title) },
     description,
     keywords: lang === 'id'
       ? 'pupuk organik cair, poc, pupuk organik cair pertanian, pupuk organik cair terbaik, pupuk hayati, bioteknologi pertanian, pupuk bersertifikat'

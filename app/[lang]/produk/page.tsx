@@ -4,6 +4,7 @@ import { Locale } from '@/i18n-config';
 import Link from 'next/link';
 import ContainerSection from '@/components/layout/container';
 import { Leaf, Factory, FlaskConical, ArrowRight } from 'lucide-react';
+import { normalizeSeoTitle } from '@/utils/seo';
 
 export async function generateMetadata({
   params,
@@ -21,7 +22,9 @@ export async function generateMetadata({
     : 'Complete biotechnology solutions for agriculture and livestock: liquid organic fertilizer, probiotic feed, organic nutrition. Certified products with eco-friendly technology.';
 
   return {
-    title,
+    // absolute: `title` already ends with "| Centra Biotech Indonesia";
+    // normalizeSeoTitle strips that and re-appends the brand once.
+    title: { absolute: normalizeSeoTitle(title) },
     description,
     openGraph: {
       title,

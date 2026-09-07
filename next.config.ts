@@ -1,12 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  output: "standalone",
   // Image optimization
   images: {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "cbi-backend.my.id",
+        hostname: "backend.centrabiotechindonesia.com",
       },
       {
         protocol: "http",
@@ -105,6 +106,26 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      // Blog pages: Enable CDN caching for Googlebot crawl efficiency
+      {
+        source: '/:lang(id|en)/blog/:slug*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, s-maxage=3600, stale-while-revalidate=86400',
+          },
+        ],
+      },
+      // Blog listing: Enable CDN caching
+      {
+        source: '/:lang(id|en)/blog',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, s-maxage=3600, stale-while-revalidate=86400',
+          },
+        ],
+      },
     ];
   },
   
@@ -113,8 +134,49 @@ const nextConfig: NextConfig = {
   // Do NOT add www redirect here to avoid redirect loops
   async redirects() {
     return [
+      // =====================================================
+      // LEGACY /produk/ FOLDER REDIRECTS (keep for old links)
+      // Redirect old /produk/ paths to new /produk-layanan/ paths
+      // =====================================================
+      {
+        source: '/:lang(id|en)/produk',
+        destination: '/:lang/produk-layanan',
+        permanent: true,
+      },
+      {
+        source: '/:lang(id|en)/produk/pertanian',
+        destination: '/:lang/produk-layanan/pertanian',
+        permanent: true,
+      },
+      {
+        source: '/:lang(id|en)/produk/pertanian/:slug*',
+        destination: '/:lang/produk-layanan/pertanian/:slug*',
+        permanent: true,
+      },
+      {
+        source: '/:lang(id|en)/produk/peternakan',
+        destination: '/:lang/produk-layanan/peternakan',
+        permanent: true,
+      },
+      {
+        source: '/:lang(id|en)/produk/peternakan/:slug*',
+        destination: '/:lang/produk-layanan/peternakan/:slug*',
+        permanent: true,
+      },
+      {
+        source: '/:lang(id|en)/produk/perikanan',
+        destination: '/:lang/produk-layanan/perikanan',
+        permanent: true,
+      },
+      {
+        source: '/:lang(id|en)/produk/perikanan/:slug*',
+        destination: '/:lang/produk-layanan/perikanan/:slug*',
+        permanent: true,
+      },
+      // =====================================================
       // SEO Optimization: Product section URL restructure for INDONESIAN only
       // Indonesian uses produk-layanan paths, English uses product paths
+      // =====================================================
       {
         source: '/id/product',
         destination: '/id/produk-layanan',
@@ -135,16 +197,37 @@ const nextConfig: NextConfig = {
         destination: '/id/produk-layanan/perikanan',
         permanent: true, // 301 redirect for SEO
       },
-      // SEO Optimization: RAJABIO URL restructure
+      // SEO Optimization: RAJABIO URL restructure (updated to new slug)
       {
         source: '/:lang(id|en)/rajabio-pupuk-organik-cair',
-        destination: '/:lang/produk-layanan/pertanian/rajabio-pupuk-organik',
+        destination: '/:lang/produk-layanan/pertanian/rajabio-pupuk-organik-cair',
         permanent: true, // 301 redirect for SEO
       },
       {
         source: '/:lang(id|en)/produk/pertanian/rajabio-pupuk-organik-cair',
-        destination: '/:lang/produk-layanan/pertanian/rajabio-pupuk-organik',
+        destination: '/:lang/produk-layanan/pertanian/rajabio-pupuk-organik-cair',
         permanent: true, // 301 redirect for SEO
+      },
+      // Old slug redirects to new slugs (URL rename 2026)
+      {
+        source: '/:lang(id|en)/produk-layanan/pertanian/rajabio-pupuk-organik',
+        destination: '/:lang/produk-layanan/pertanian/rajabio-pupuk-organik-cair',
+        permanent: true,
+      },
+      {
+        source: '/:lang(id|en)/produk-layanan/pertanian/blackturbo-asam-humat',
+        destination: '/:lang/produk-layanan/pertanian/blackturbo-asam-humat-cair',
+        permanent: true,
+      },
+      {
+        source: '/:lang(id|en)/produk-layanan/pertanian/biokalsi-dolomit',
+        destination: '/:lang/produk-layanan/pertanian/biokalsi-dolomit-pembenah-tanah',
+        permanent: true,
+      },
+      {
+        source: '/:lang(id|en)/produk-layanan/pertanian/simbios-pupuk-hayati',
+        destination: '/:lang/produk-layanan/pertanian/simbios-pupuk-hayati-cair',
+        permanent: true,
       },
       // Fix common URL mistakes - mixing language prefixes (Indonesian locale with English words)
       {

@@ -45,19 +45,21 @@ interface NewsFilterProps {
   activeType: NewsType;
   onTypeChange: (type: NewsType) => void;
   dict: Dictionary;
+  lang: Locale;
 }
 
 const NewsFilter: React.FC<NewsFilterProps> = ({
   activeType,
   onTypeChange,
   dict,
+  lang,
 }) => (
   <div className="flex gap-1 text-xs lg:gap-2 lg:text-sm">
     <FilterButton
       isActive={activeType === NEWS_TYPES.ALL}
       onClick={() => onTypeChange(NEWS_TYPES.ALL)}
     >
-      {dict.common.seeMore === 'Lihat Lebih Banyak' ? 'Semua' : 'All'}
+      {lang === 'id' ? 'Semua' : 'All'}
     </FilterButton>
     <FilterButton
       isActive={activeType === NEWS_TYPES.NEWS}
@@ -104,7 +106,7 @@ const LatestNewsSection: React.FC<LatestNewsSectionProps> = ({ data, lang, dict 
           <div className="flex-1">
             <h2>{dict.home.newsTitle}</h2>
           </div>
-          <NewsFilter activeType={activeType} onTypeChange={setActiveType} dict={dict} />
+          <NewsFilter activeType={activeType} onTypeChange={setActiveType} dict={dict} lang={lang} />
         </div>
 
         <ScrollArea className="w-full">

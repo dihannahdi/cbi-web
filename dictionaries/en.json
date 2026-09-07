@@ -21,7 +21,10 @@
     "allProducts": "All Products",
     "search": "Search",
     "searchPlaceholder": "Search products, articles...",
-    "dokterTani": "Dokter Tani"
+    "peternakanUnggas": "Poultry",
+    "peternakanRuminant": "Ruminants",
+    "perikananBiofloc": "Biofloc",
+    "perikananUdang": "Shrimp"
   },
   "footer": {
     "address": "Address",
@@ -36,6 +39,7 @@
     "allProducts": "All Products"
   },
   "home": {
+    "heroKicker": "The Biotechnology Experts",
     "heroTitle": "Integrated Biotechnology Solutions",
     "heroSubtitle": "For Indonesia's Agriculture, Livestock, and Fisheries",
     "heroDescription": "We provide probiotics, biological fertilizers, and innovative biotechnology solutions to enhance Indonesia's agricultural productivity.",
@@ -93,6 +97,34 @@
       "title": "Agricultural Products",
       "subtitle": "Biotechnology solutions for sustainable agriculture",
       "description": "Increase crop yields with our biological fertilizers and bio-pesticides"
+    },
+    "livestockUnggas": {
+      "title": "Biotechnology for Poultry",
+      "subtitle": "Probiotics & Bioactivators for Chicken, Duck, Quail",
+      "description": "Specialized poultry biotechnology for weight gain, egg production, gut health, and feed efficiency without synthetic antibiotics.",
+      "metaTitle": "Poultry Probiotics — Biotechnology for Broilers, Layers & Ducks | CBI",
+      "metaDescription": "Poultry probiotics and bioactivators from CBI. Increase broiler weight, layer egg production, and feed efficiency without antibiotics. Safe & field-proven."
+    },
+    "livestockRuminant": {
+      "title": "Biotechnology — Sustainable Livestock Solutions for the Future",
+      "subtitle": "Probiotics & Functional Feed for Cattle, Goat, Sheep",
+      "description": "Ruminant livestock biotechnology: increase beef cattle ADG, milk production, reproductive quality, and rumen health organically and sustainably.",
+      "metaTitle": "Ruminant Probiotics — Cattle, Goat, Sheep | Centra Biotech Indonesia",
+      "metaDescription": "Probiotics and feed supplements for beef cattle, dairy cows, goats, and sheep. Increase ADG, milk yield, and rumen health organically with CBI technology."
+    },
+    "fisheryBiofloc": {
+      "title": "Biological Revolution for Indonesian Aquaculture",
+      "subtitle": "Biofloc System for Catfish, Tilapia, Gourami",
+      "description": "Biofloc technology with CBI probiotics for intensive catfish, tilapia, and gourami farming. Reduce water exchange, accelerate harvest, and improve flesh quality.",
+      "metaTitle": "Biofloc Probiotics — Aquaculture for Catfish, Tilapia, Gourami | CBI",
+      "metaDescription": "Biofloc system biotechnology for catfish, tilapia, and gourami farming. CBI probiotics reduce water exchange by up to 80% and accelerate harvest. Complete with SOP guide."
+    },
+    "fisheryUdang": {
+      "title": "Biotechnology for Vannamei & Black Tiger Shrimp",
+      "subtitle": "Intensive & Semi-Intensive Pond Probiotics",
+      "description": "Specialized aquaculture probiotics for vannamei and black tiger shrimp to improve SR, FCR, and pond water quality. Biological prevention of WSSV and EHP.",
+      "metaTitle": "Vannamei & Black Tiger Shrimp Probiotics — Intensive Ponds | Centra Biotech",
+      "metaDescription": "Biotech probiotics for vannamei and black tiger shrimp. Improve SR, FCR, and pond water quality. Biological prevention of WSSV and EHP diseases."
     },
     "livestock": {
       "title": "Livestock Products",
@@ -246,7 +278,12 @@
     "backToBlog": "Back to Blog",
     "categories": "Categories",
     "tags": "Tags",
-    "searchPlaceholder": "Search articles..."
+    "searchPlaceholder": "Search articles...",
+    "ctaTitle": "Need Biotechnology Solutions?",
+    "ctaDescription": "Consult your agriculture, livestock, or fishery needs with our expert team.",
+    "ctaWhatsapp": "Contact via WhatsApp",
+    "ctaPhone": "+62 851-9621-4187",
+    "ctaEmail": "centrabiotech.id@gmail.com"
   },
   "news": {
     "title": "News",

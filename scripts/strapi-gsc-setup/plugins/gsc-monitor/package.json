@@ -1,0 +1,13 @@
+{
+  "name": "gsc-monitor",
+  "version": "1.0.0",
+  "description": "GSC Article Monitoring Dashboard for Strapi Admin",
+  "strapi": {
+    "displayName": "GSC Monitor",
+    "name": "gsc-monitor",
+    "description": "Google Search Console article monitoring dashboard",
+    "kind": "plugin"
+  },
+  "main": "./server/src/index.ts",
+  "types": "./server/src/index.ts"
+}

@@ -4,8 +4,22 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import WhatsAppAnalytics from '@/lib/whatsapp-analytics';
+import { Locale } from '@/i18n-config';
 
-export default function WhatsAppFloat() {
+const waTexts = {
+  id: {
+    message: 'Halo, saya ingin informasi mengenai pupuk dari PT Centra Biotech Indonesia.',
+    question: 'Ada pertanyaan?',
+    chat: 'Chat dengan kami via WhatsApp',
+  },
+  en: {
+    message: 'Hello, I would like information about fertilizers from PT Centra Biotech Indonesia.',
+    question: 'Any questions?',
+    chat: 'Chat with us via WhatsApp',
+  },
+};
+
+export default function WhatsAppFloat({ lang = 'id' }: { lang?: Locale }) {
   const [isVisible, setIsVisible] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
@@ -24,10 +38,9 @@ export default function WhatsAppFloat() {
     return () => clearTimeout(timer);
   }, []);
 
+  const t = waTexts[lang] || waTexts.id;
   const whatsappNumber = '6285196214187';
-  const defaultMessage = encodeURIComponent(
-    'Halo, saya ingin informasi mengenai pupuk dari PT Centra Biotech Indonesia.'
-  );
+  const defaultMessage = encodeURIComponent(t.message);
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${defaultMessage}`;
 
   // Handle click tracking
@@ -73,10 +86,10 @@ export default function WhatsAppFloat() {
               >
                 <div className="bg-white px-4 py-3 rounded-lg shadow-lg border border-gray-200 min-w-max max-w-xs">
                   <p className="text-sm font-semibold text-gray-800 mb-1">
-                    Ada pertanyaan?
+                    {t.question}
                   </p>
                   <p className="text-xs text-gray-600">
-                    Chat dengan kami via WhatsApp
+                    {t.chat}
                   </p>
                   {/* Arrow */}
                   <div className="absolute bottom-0 right-6 transform translate-y-1/2">
@@ -113,7 +126,7 @@ export default function WhatsAppFloat() {
                   repeat: Infinity,
                   ease: 'easeOut',
                 }}
-                className="absolute inset-0 rounded-full bg-green-500"
+                className="absolute inset-0 rounded-full bg-[#25D366]"
               />
               <motion.div
                 animate={{
@@ -126,13 +139,13 @@ export default function WhatsAppFloat() {
                   ease: 'easeOut',
                   delay: 0.5,
                 }}
-                className="absolute inset-0 rounded-full bg-green-500"
+                className="absolute inset-0 rounded-full bg-[#25D366]"
               />
 
               {/* Main button */}
               <motion.div
                 whileTap={{ scale: 0.9 }}
-                className="relative w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-full shadow-lg flex items-center justify-center cursor-pointer overflow-hidden"
+                className="relative w-16 h-16 bg-gradient-to-br from-[#25D366] to-[#128C7E] rounded-full shadow-lg flex items-center justify-center cursor-pointer overflow-hidden"
               >
                 {/* Shine effect */}
                 <motion.div

@@ -53,7 +53,7 @@ export async function generateStaticParams() {
 }
 
 // Constants
-const WHATSAPP_NUMBER = "6281235003655";
+const WHATSAPP_NUMBER = "6285196214187";
 const WHATSAPP_MESSAGE_ID = "Halo, saya tertarik dengan produk FLORA ONE Pupuk Hayati. Mohon informasi lebih lanjut.";
 const WHATSAPP_MESSAGE_EN = "Hello, I'm interested in FLORA ONE Biological Fertilizer. Please provide more information.";
 

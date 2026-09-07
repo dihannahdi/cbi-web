@@ -1,0 +1,94 @@
+'╔══════════════════════════════════════════════════════════════════╗
+║     COMPLETE STRAPI PERMISSIONS CHECKLIST FOR PUBLIC ACCESS     ║
+╚══════════════════════════════════════════════════════════════════╝
+
+📍 URL: http://72.62.122.166/admin
+📍 Go to: Settings → Users & Permissions Plugin → Roles → Public
+
+═══════════════════════════════════════════════════════════════════
+
+🔧 ENABLE THESE PERMISSIONS (Check find ✅ and findOne ✅):
+
+[ ] 1. UPLOAD (MEDIA LIBRARY) ⭐ CRITICAL!
+    ✅ find
+    ✅ findOne
+    
+[ ] 2. ARTICLE
+    ✅ find
+    ✅ findOne
+
+[ ] 3. BLOG  
+    ✅ find
+    ✅ findOne
+
+[ ] 4. DASHBOARD
+    ✅ find
+    ✅ findOne
+
+[ ] 5. ABOUT-US
+    ✅ find
+    ✅ findOne
+
+[ ] 6. CONTACT
+    ✅ find
+    ✅ findOne
+
+[ ] 7. NEWS-SECTION
+    ✅ find
+    ✅ findOne
+
+[ ] 8. BLOG-SECTION
+    ✅ find
+    ✅ findOne
+
+[ ] 9. PRODUCT-AGRICULTURE
+    ✅ find
+    ✅ findOne
+
+[ ] 10. PRODUCT-LIVESTOCK
+    ✅ find
+    ✅ findOne
+
+[ ] 11. PRODUCT-FISHERY
+    ✅ find
+    ✅ findOne
+
+[ ] 12. PRODUCT-AND-SERVICE
+    ✅ find
+    ✅ findOne
+
+[ ] 13. MEDIA-AND-INFORMATION
+    ✅ find
+    ✅ findOne
+
+═══════════════════════════════════════════════════════════════════
+
+⚠️  IMPORTANT NOTES:
+
+1. UPLOAD permission is the most critical - without it, images won't load
+2. You must enable ALL content types, not just Dashboard
+3. After enabling, click the SAVE button at the top right
+4. Clear browser cache and refresh https://cbi-web.vercel.app
+5. If still not working, redeploy: vercel --prod
+
+═══════════════════════════════════════════════════════════════════
+
+🧪 AFTER ENABLING, TEST WITH THESE COMMANDS:
+
+# Test dashboard with full population
+curl "http://72.62.122.166/api/dashboard?populate[headline][populate][image][fields][0]=url"
+
+# Test image access
+curl -I "http://72.62.122.166/uploads/your-image.jpg"
+
+# Test articles
+curl "http://72.62.122.166/api/articles"
+
+═══════════════════════════════════════════════════════════════════
+
+✅ SUCCESS CRITERIA:
+- API returns complete data with images
+- Website shows content instead of "Error loading data"
+- All images display properly
+
+═══════════════════════════════════════════════════════════════════

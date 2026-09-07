@@ -7,13 +7,15 @@ import ContainerSection from "@/components/layout/container";
 import Breadcrumb from "@/components/common/BreadScrumb";
 import HeroSectionGeneral from "@/components/common/HeroSectionGeneral";
 import VideoGallerySlider from "@/components/product/VideoGallerySlider";
-import { SITE_CONFIG } from "@/utils/seo";
+import ProductComposition from "@/components/product/ProductComposition";
+import { SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
 import { 
   generateProductSchema,
   generateBreadcrumbSchema,
   generateVideoSchema,
   generateFAQSchema,
   generateHowToSchema,
+  generateImageObjectSchema,
   MultipleStructuredData 
 } from "@/utils/structuredData";
 import {
@@ -225,22 +227,33 @@ export async function generateMetadata({
   params: Promise<{ lang: Locale }>;
 }): Promise<Metadata> {
   const { lang } = await params;
-  const data = productData[lang];
-
-  const title = lang === 'id' 
-    ? "Insektisida Hayati BIOKILLER - Basmi Wereng & Hama Tanpa Resistensi | Bersertifikat Kementan"
-    : "BIOKILLER Biological Insecticide - Eliminate Planthoppers & Pests Without Resistance | Certified";
   
-  const description = lang === 'id'
-    ? "Insektisida hayati BIOKILLER mengandung Beauveria bassiana & Metarhizium anisopliae. Insektisida hayati terbaik untuk mengendalikan wereng coklat, kutu daun, ulat grayak tanpa resistensi. Bersertifikat Kementan RI & LeSOS Organik. Pesan sekarang!"
-    : "BIOKILLER biological insecticide contains Beauveria bassiana & Metarhizium anisopliae. Best biological insecticide for controlling brown planthopper, aphids, armyworms without resistance. Certified by Ministry of Agriculture. Order now!";
+  // Fetch from Strapi CMS for SEO metadata
+  const strapiData = await fetchStrapiProduct("biokiller-insektisida-hayati", lang);
+  const data = strapiData || productData[lang]; // Fallback to static if Strapi unavailable
 
-  const keywords = lang === 'id'
-    ? "jual insektisida hayati, insektisida hayati, insektisida hayati terbaik, biokiller, jual biokiller, bio pestisida, biopestisida, pestisida hayati, pestisida organik, insektisida organik, beauveria bassiana, metarhizium anisopliae, pengendali wereng coklat, pengendali hama padi, insektisida hayati untuk padi, insektisida hayati bersertifikat, pestisida biologis, pengendalian hama alami, insektisida ramah lingkungan, centra biotech, pertanian organik, jual bio pestisida"
-    : "biological insecticide for sale, best biological insecticide, biokiller, buy biological insecticide, bio pesticide, biological pesticide, organic pesticide, organic insecticide, beauveria bassiana, metarhizium anisopliae, brown planthopper control, rice pest control, certified biological insecticide, natural pest control, eco-friendly insecticide, centra biotech, organic farming, buy bio pesticide";
+  // Use Strapi data if available, fallback to hardcoded optimized titles.
+  // Always normalized: Strapi metaTitle often already ends with a
+  // (sometimes truncated) brand suffix, which would otherwise double up
+  // with the layout's own brand template.
+  const title = normalizeSeoTitle(strapiData?.metaTitle || strapiData?.heroTitle || (lang === 'id'
+    ? "Bio Pestisida & Insektisida Hayati BIOKILLER - Basmi Wereng & Hama Tanpa Residu Kimia"
+    : "BIOKILLER Biological Insecticide - Eliminate Planthoppers & Pests Without Resistance | Certified"));
+  
+  const description = strapiData?.metaDescription || strapiData?.heroSubtitle || (lang === 'id'
+    ? "BIOKILLER adalah bio pestisida dan insektisida hayati alami berbahan jamur entomopatogen. Efektif basmi wereng, ulat grayak, dan hama tanpa residu kimia. Bersertifikat Kementan RI."
+    : "BIOKILLER biological insecticide contains Beauveria bassiana & Metarhizium anisopliae. Best biological insecticide for controlling brown planthopper, aphids, armyworms without resistance. Certified by Ministry of Agriculture. Order now!");
+
+  // Extract keywords from Strapi focus_keyphrase if available
+  const keywords = strapiData?.focusKeyphrase 
+    ? strapiData.focusKeyphrase.split(',').map(k => k.trim()).join(', ')
+    : (lang === 'id'
+      ? "jual insektisida hayati, insektisida hayati, insektisida hayati terbaik, biokiller, jual biokiller, bio pestisida, biopestisida, pestisida hayati, pestisida organik, insektisida organik, beauveria bassiana, metarhizium anisopliae, pengendali wereng coklat, pengendali hama padi, insektisida hayati untuk padi, insektisida hayati bersertifikat, pestisida biologis, pengendalian hama alami, insektisida ramah lingkungan, centra biotech, pertanian organik, jual bio pestisida"
+      : "biological insecticide for sale, best biological insecticide, biokiller, buy biological insecticide, bio pesticide, biological pesticide, organic pesticide, organic insecticide, beauveria bassiana, metarhizium anisopliae, brown planthopper control, rice pest control, certified biological insecticide, natural pest control, eco-friendly insecticide, centra biotech, organic farming, buy bio pesticide");
 
   return {
-    title,
+    // absolute: brand already included by normalizeSeoTitle, exactly once.
+    title: { absolute: title },
     description,
     keywords,
     authors: [{ name: "PT. Centra Biotech Indonesia" }],
@@ -390,54 +403,11 @@ export default async function BioKillerPage({
         `${SITE_CONFIG.url}/products/biokiller/biokiller-cover.webp`,
         `${SITE_CONFIG.url}/products/biokiller/biokiller-cover.webp`,
       ],
-      "offers": {
-        "@type": "Offer",
-        "url": `${SITE_CONFIG.url}/${lang}/produk-layanan/pertanian/biokiller-insektisida-hayati`,
-        "priceCurrency": "IDR",
-        "price": "75000",
-        "priceValidUntil": "2026-12-31",
-        "availability": "https://schema.org/InStock",
-        "itemCondition": "https://schema.org/NewCondition",
-        "seller": {
-          "@type": "Organization",
-          "name": "PT. Centra Biotech Indonesia"
-        },
-        "hasMerchantReturnPolicy": {
-          "@type": "MerchantReturnPolicy",
-          "applicableCountry": "ID",
-          "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-          "merchantReturnDays": 30,
-          "returnMethod": "https://schema.org/ReturnByMail",
-          "returnFees": "https://schema.org/ReturnFeesCustomerResponsibility"
-        },
-        "shippingDetails": {
-          "@type": "OfferShippingDetails",
-          "shippingRate": {
-            "@type": "MonetaryAmount",
-            "value": "0",
-            "currency": "IDR"
-          },
-          "shippingDestination": {
-            "@type": "DefinedRegion",
-            "addressCountry": "ID"
-          },
-          "deliveryTime": {
-            "@type": "ShippingDeliveryTime",
-            "handlingTime": {
-              "@type": "QuantitativeValue",
-              "minValue": 1,
-              "maxValue": 3,
-              "unitCode": "DAY"
-            },
-            "transitTime": {
-              "@type": "QuantitativeValue",
-              "minValue": 2,
-              "maxValue": 7,
-              "unitCode": "DAY"
-            }
-          }
-        }
-      },
+      // NOTE: no "offers" here on purpose (previously a fake price of 75000
+      // that was never displayed anywhere on the rendered page). This is a
+      // B2B product with no publicly published retail price, so we don't
+      // claim Merchant/Product rich-result eligibility. See GSC structured
+      // data remediation notes (2026-07-28).
       "isRelatedTo": [
         {
           "@type": "Product",
@@ -458,10 +428,6 @@ export default async function BioKillerPage({
           "description": "Pupuk hayati cair untuk meningkatkan penyerapan nutrisi tanaman"
         }
       ],
-      "audience": {
-        "@type": "Audience",
-        "audienceType": "Farmers, Agricultural Professionals, Organic Farming Practitioners"
-      }
     },
     // Breadcrumb Schema
     {
@@ -572,40 +538,12 @@ export default async function BioKillerPage({
         "name": "PT Centra Biotech Indonesia"
       }
     },
-    // GEO Schema 2: AggregateRating (Social Proof for AI)
-    {
-      "@context": "https://schema.org",
-      "@type": "Product",
-      "@id": `${SITE_CONFIG.url}/${lang}/produk-layanan/pertanian/biokiller-insektisida-hayati#product-rating`,
-      "name": "BIOKILLER Insektisida Hayati",
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.8",
-        "reviewCount": "89",
-        "bestRating": "5",
-        "worstRating": "1"
-      },
-      "review": [
-        {
-          "@type": "Review",
-          "author": { "@type": "Person", "name": "Pak Hadi - Petani Padi Demak" },
-          "datePublished": "2025-11-10",
-          "reviewBody": lang === 'id'
-            ? "BIOKILLER sangat efektif mengendalikan wereng coklat di sawah saya. Tidak ada resistensi seperti pestisida kimia!"
-            : "BIOKILLER is very effective in controlling brown planthoppers in my rice field. No resistance like chemical pesticides!",
-          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
-        },
-        {
-          "@type": "Review",
-          "author": { "@type": "Person", "name": "Bu Rina - Petani Bawang Brebes" },
-          "datePublished": "2025-10-25",
-          "reviewBody": lang === 'id'
-            ? "Lalat pengorok daun di bawang saya berhasil dikendalikan dengan BIOKILLER. Produk organik yang benar-benar works!"
-            : "Leafminer flies in my onions were successfully controlled with BIOKILLER. Organic product that really works!",
-          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
-        }
-      ]
-    },
+    // NOTE: A second "Product" entity with a fabricated aggregateRating
+    // (4.8 stars / 89 reviews) and two fabricated named reviews used to sit
+    // here. It has been removed: those numbers and reviewers were invented,
+    // not backed by any real review platform, and fake reviews in structured
+    // data are a Google manual-action risk. See GSC structured data
+    // remediation notes (2026-07-28).
     // GEO Schema 3: ItemList for AI Answer Extraction
     {
       "@context": "https://schema.org",
@@ -664,7 +602,24 @@ export default async function BioKillerPage({
         "Agricultural Biotechnology",
         "Organic Pest Control"
       ]
-    }
+    },
+    // ImageObject Schema for Product Images - Google Image License Metadata
+    // Fixes GSC issue: "Missing field 'acquireLicensePage'" and "Missing field 'creator'"
+    generateImageObjectSchema({
+      url: '/products/biokiller/biokiller-cover.webp',
+      name: `BIOKILLER - ${lang === 'id' ? 'Insektisida Hayati Premium' : 'Premium Biological Insecticide'}`,
+      caption: lang === 'id' 
+        ? 'BIOKILLER Insektisida Hayati - Pengendalian Hama Organik'
+        : 'BIOKILLER Biological Insecticide - Organic Pest Control',
+      description: lang === 'id'
+        ? 'Gambar produk BIOKILLER insektisida hayati bersertifikat dengan Beauveria bassiana & Metarhizium'
+        : 'BIOKILLER biological insecticide product image, certified with Beauveria bassiana & Metarhizium',
+      width: 600,
+      height: 600,
+      encodingFormat: 'image/webp',
+      representativeOfPage: true,
+      keywords: ['biokiller', 'insektisida hayati', 'biological insecticide', 'beauveria', 'centra biotech'],
+    })
   ];
 
   return (
@@ -784,6 +739,21 @@ export default async function BioKillerPage({
           </div>
         </ContainerSection>
       </section>
+
+      {/* Active-ingredient composition — real data (also in Product JSON-LD) */}
+      <ProductComposition
+        lang={lang}
+        title={lang === "id" ? "Bahan Aktif" : "Active Ingredients"}
+        subtitle={
+          lang === "id"
+            ? "Jamur entomopatogen yang menginfeksi & mematikan hama sasaran."
+            : "Entomopathogenic fungi that infect and kill target pests."
+        }
+        items={[
+          { organism: "Beauveria bassiana", spec: "1.0 × 10⁶ cfu/ml", role: lang === "id" ? "Jamur entomopatogen" : "Entomopathogenic fungus" },
+          { organism: "Metarhizium anisopliae", spec: "1.0 × 10⁶ cfu/ml", role: lang === "id" ? "Jamur entomopatogen" : "Entomopathogenic fungus" },
+        ]}
+      />
 
       {/* Documents & Certifications Section - Matching RajaBio Layout */}
       <section className="bg-[#EEE] py-20">
@@ -930,7 +900,7 @@ export default async function BioKillerPage({
             </Accordion>
 
             {/* Still have questions CTA */}
-            <div className="mt-12 text-center bg-gradient-to-br from-[#006622]/5 to-[#009933]/5 rounded-2xl p-8 border border-[#006622]/10">
+            <div className="mt-12 text-center bg-gradient-to-br from-[#006622]/5 to-[#166B30]/5 rounded-2xl p-8 border border-[#006622]/10">
               <div className="flex flex-col md:flex-row items-center justify-center gap-4">
                 <MessageCircle className="h-8 w-8 text-[#006622]" />
                 <div className="text-center md:text-left">

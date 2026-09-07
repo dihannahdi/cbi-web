@@ -24,11 +24,17 @@ const BackgroundVideo = ({ videoData }:{videoData?:Image}) => {
 
 interface HeroTitleProps {
   title: string;
+  kicker?: string;
 }
 
-const HeroTitle: FC<HeroTitleProps> = ({ title }) => {
+const HeroTitle: FC<HeroTitleProps> = ({ title, kicker }) => {
   return (
     <div className="w-fit max-w-lg">
+      {kicker && (
+        <p className="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-lime-300 backdrop-blur-sm lg:text-sm">
+          {kicker}
+        </p>
+      )}
       <h1 className="text-[#FDFDFD]">{title}</h1>
     </div>
   );
@@ -66,15 +72,18 @@ const HeroSection = async ({ data, lang, dict }: HeroSectionProps) => {
         {/* Video Background */}
         <BackgroundVideo videoData={data.image} />
 
-        {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-black bg-opacity-50" />
+        {/* Green protection gradient — layered forest tint for text legibility */}
+        <div className="absolute inset-0 bg-gradient-to-t from-green-950/85 via-green-900/45 to-green-900/25" />
 
         {/* Multi-step Blur Gradient */}
         <div className="absolute bottom-0 left-0 right-0 h-96 backdrop-blur-lg [mask:linear-gradient(transparent,white,white)]" />
 
         {/* Main Content*/}
         <div className="absolute bottom-0 left-1/2 z-10 mx-auto flex w-full max-w-7xl -translate-x-1/2 flex-col gap-4 px-6 pb-24 md:flex-row md:items-end md:justify-between lg:px-8 xl:px-0">
-          <HeroTitle title={lang === 'id' ? data.title : dict.home.heroTitle} />
+          <HeroTitle
+            title={lang === 'id' ? data.title : dict.home.heroTitle}
+            kicker={dict.home.heroKicker}
+          />
           <HeroDescription
             description={lang === 'id' ? data.description : dict.home.heroDescription}
             ctaText={lang === 'id' ? data.ctaText : dict.home.heroCta}

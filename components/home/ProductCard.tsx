@@ -13,7 +13,7 @@ interface ProductCardProps {
   color1: string;
   color2: string;
   url: string;
-  readMoreText?: string;
+  readMoreText: string;
 }
 
 const ProductCard = ({
@@ -24,13 +24,13 @@ const ProductCard = ({
   color1,
   color2,
   url,
-  readMoreText = "Read More",
+  readMoreText,
 }: ProductCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <div
-      className="group relative h-[20rem] w-full overflow-hidden rounded-3xl shadow-lg transition-all duration-300 xl:h-[27.625rem]"
+      className="group relative h-[20rem] w-full overflow-hidden rounded-3xl shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl xl:h-[27.625rem]"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -39,7 +39,7 @@ const ProductCard = ({
         src={imgUrl}
         alt={imgAlt ?? "Product Image"}
         fill
-        className="object-cover transition-all duration-300"
+        className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         loading="lazy"
       />

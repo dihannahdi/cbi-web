@@ -38,8 +38,7 @@ const OurServiceSection = ({ data, lang = "id", readMoreText = "Read More" }: Ou
             <p className="text-[#666]">{data.description}</p>
             <LinkGreen
               className="mt-2"
-              target="_blank"
-              href="http://doktertani.co.id"
+              href={`/${lang}/contact`}
               withArrow={false}
             >
               {readMoreText}

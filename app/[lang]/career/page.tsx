@@ -1,11 +1,12 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import HeroSectionCareer from "@/components/career/HeroSection";
-import JobVacany from "@/components/career/JobVacany";
 import JoinUs from "@/components/career/JoinUs";
+import JobVacancySection from "@/components/career/JobVacancySection";
 import Breadcrumb from "@/components/common/BreadScrumb";
 import ContainerSection from "@/components/layout/container";
-import { PAGE_METADATA, SITE_CONFIG } from "@/utils/seo";
+import { PAGE_METADATA, SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
+import { getJobVacancies, mapContractTypeToEmploymentType } from "@/utils/strapiCareerData";
 
 import { Locale, i18n } from "@/i18n-config";
 import { getDictionary } from "@/dictionaries";
@@ -29,8 +30,7 @@ const Testimony = dynamic(
 );
 
 import { 
-  generateWebPageSchema,
-  generateBreadcrumbSchema,
+  generateEnhancedCareerPageSchemas,
   MultipleStructuredData 
 } from "@/utils/structuredData";
 
@@ -56,7 +56,10 @@ export async function generateMetadata({
     : PAGE_METADATA.career.description;
 
   return {
-    title,
+    // absolute: `title` (EN branch) already ends with "| Centra Biotech
+    // Indonesia"; normalizeSeoTitle strips that and re-appends the brand
+    // once, so it does not double up with the layout template.
+    title: { absolute: normalizeSeoTitle(title) },
     description,
     keywords: lang === 'en'
       ? 'career, jobs, employment, biotechnology jobs, agriculture jobs, Indonesia career, Centra Biotech Indonesia careers'
@@ -94,26 +97,21 @@ const Career = async ({ params }: { params: Promise<{ lang: Locale }> }) => {
   const { lang } = await params;
   const dict = await getDictionary(lang);
 
-  // Localized content
-  const homeLabel = lang === 'en' ? 'Home' : 'Beranda';
-  const careerLabel = dict.nav.career;
-  const pageTitle = PAGE_METADATA.career.title;
-  const pageDescription = PAGE_METADATA.career.description;
+  // Fetch job vacancies from Strapi CMS
+  const jobVacancies = await getJobVacancies(lang);
 
-  // Generate structured data
-  const structuredDataArray = [
-    generateWebPageSchema({
-      name: lang === 'en' ? 'Career at Centra Biotech Indonesia' : pageTitle,
-      description: lang === 'en' 
-        ? 'Discover exciting career opportunities at PT Centra Biotech Indonesia' 
-        : pageDescription,
-      url: `/${lang}/career`,
-    }),
-    generateBreadcrumbSchema([
-      { name: homeLabel, url: `/${lang}` },
-      { name: careerLabel, url: `/${lang}/career` },
-    ]),
-  ];
+  // Generate enhanced structured data with JobPosting schemas from CMS
+  const structuredDataArray = generateEnhancedCareerPageSchemas({
+    locale: lang,
+    jobs: jobVacancies.map((job) => ({
+      title: job.title,
+      description: job.shortDescription || job.title,
+      datePosted: job.publishedAt || job.createdAt,
+      validThrough: job.applicationDeadline || undefined,
+      employmentType: mapContractTypeToEmploymentType(job.contractType) as any,
+      salary: undefined,
+    })),
+  });
 
   // Localized intro content
   const introTitle = lang === 'en'
@@ -136,7 +134,7 @@ const Career = async ({ params }: { params: Promise<{ lang: Locale }> }) => {
       {/* Structured Data for SEO */}
       <MultipleStructuredData dataArray={structuredDataArray} />
       
-      <HeroSectionCareer />
+      <HeroSectionCareer lang={lang} />
       <Breadcrumb className="bg-[#EEE]" lang={lang} dict={dict} />
       
       {/* Integrated SEO Intro */}
@@ -153,9 +151,11 @@ const Career = async ({ params }: { params: Promise<{ lang: Locale }> }) => {
         </ContainerSection>
       </section>
       
-      <JoinUs />
-      <Testimony />
-      <JobVacany />
+      <JoinUs lang={lang} />
+      <Testimony lang={lang} />
+
+      {/* Job Vacancies - Dynamic from Strapi CMS (below testimony, above footer per Figma) */}
+      <JobVacancySection jobs={jobVacancies} locale={lang} />
     </section>
   );
 };

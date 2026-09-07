@@ -1,0 +1,17 @@
+[package]
+name = "gsc-mail"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+async-imap = { version = "0.11.3", default-features = false, features = ["runtime-tokio"] }
+chrono = { version = "0.4.45", default-features = false, features = ["clock", "std"] }
+clap = { version = "4.6.4", features = ["derive"] }
+futures = "0.3.33"
+mailparse = "0.16.1"
+regex = "1.13.1"
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.151"
+tokio = { version = "1.53.1", features = ["rt-multi-thread", "macros", "net", "fs", "io-util"] }
+tokio-rustls = "0.26.4"
+webpki-roots = "1.0.9"

@@ -22,8 +22,8 @@ const ArticleContent = ({ content, lang, dict }: ArticleContentProps) => {
   const linkPath =
     content.type === "news" ? `${basePath}/news/${content.slug}` : `${basePath}/blog/${content.slug}`;
   
-  const readMoreText = dict?.blog?.readMore ?? "Selengkapnya";
-  const shareViaText = dict?.blog?.shareArticle ?? "Bagikan Melalui";
+  const readMoreText = dict?.blog?.readMore ?? (lang === 'en' ? 'Read More' : 'Selengkapnya');
+  const shareViaText = dict?.blog?.shareArticle ?? (lang === 'en' ? 'Share via' : 'Bagikan Melalui');
   
   return (
     <div className="md:w-1/2">

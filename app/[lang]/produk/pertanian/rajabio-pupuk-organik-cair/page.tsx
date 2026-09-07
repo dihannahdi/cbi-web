@@ -6,7 +6,7 @@ import { getDictionary } from "@/dictionaries";
 import ContainerSection from "@/components/layout/container";
 import Breadcrumb from "@/components/common/BreadScrumb";
 import HeroSectionGeneral from "@/components/common/HeroSectionGeneral";
-import { SITE_CONFIG } from "@/utils/seo";
+import { SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
 import { 
   generateProductSchema,
   generateBreadcrumbSchema,
@@ -60,8 +60,8 @@ const WHATSAPP_MESSAGE_ID = "Halo, saya tertarik dengan produk RAJABIO Pupuk Org
 const WHATSAPP_MESSAGE_EN = "Hello, I'm interested in RAJABIO Liquid Organic Fertilizer. Please provide more information.";
 
 const EXTERNAL_LINKS = {
-  brochure: "https://cbi-backend.my.id/uploads/e_brochure_Rajabio_0a91d17adf.pdf",
-  certificate: "https://cbi-backend.my.id/uploads/SK_RAJABIO_9ec75a4ec2.pdf",
+  brochure: "https://backend.centrabiotechindonesia.com/uploads/e_brochure_Rajabio_0a91d17adf.pdf",
+  certificate: "https://backend.centrabiotechindonesia.com/uploads/SK_RAJABIO_9ec75a4ec2.pdf",
   inaproc: "https://katalog.inaproc.id/search?keyword=rajabio&page=1",
   shopee: "https://shopee.co.id/Rajabio-Pupuk-Cair-Organik-Nutrisi-Lengkap-i.1083634538.23485056818",
   newsArticle: "/news/rajabio-revolusi-organik-untuk-padi-sawah-indonesia-janjikan-panen-berlimpah-dan-lahan-lestari",
@@ -279,10 +279,13 @@ export async function generateMetadata({
   const { lang } = await params;
   const data = productData[lang];
 
-  const title = lang === 'id' 
+  const rawTitle = lang === 'id'
     ? "Pupuk Organik Cair RAJABIO - POC Terbaik Tingkatkan Panen 40% | Bersertifikat Kementan"
     : "RAJABIO Liquid Organic Fertilizer - Best LOF Increase Harvest 40% | Certified";
-  
+  // Normalized: raw title is 86-113 chars once the layout's brand template
+  // is appended, well past the 60-char budget.
+  const title = normalizeSeoTitle(rawTitle);
+
   const description = lang === 'id'
     ? "Pupuk organik cair (POC) RAJABIO bersertifikat Kementan RI dengan C-Organik >10%. Pupuk organik cair terbaik untuk meningkatkan panen hingga 40%. Tersedia di E-Katalog Pemerintah & Shopee. Pesan POC RAJABIO sekarang!"
     : "RAJABIO certified liquid organic fertilizer (LOF) from Ministry of Agriculture RI with C-Organic >10%. Best organic liquid fertilizer proven to increase harvest up to 40%. Available on Government E-Catalog & Shopee. Order now!";
@@ -292,7 +295,8 @@ export async function generateMetadata({
     : "liquid organic fertilizer for sale, buy liquid organic fertilizer, lof, best liquid organic fertilizer, rajabio, buy rajabio, organic liquid fertilizer, certified organic fertilizer, biological liquid fertilizer, organic rice fertilizer, high c-organic, eco-friendly liquid fertilizer, centra biotech, sustainable agriculture";
 
   return {
-    title,
+    // absolute: brand already included by normalizeSeoTitle, exactly once.
+    title: { absolute: title },
     description,
     keywords,
     authors: [{ name: "PT. Centra Biotech Indonesia" }],
@@ -422,7 +426,7 @@ export default async function RajabioProductPage({
             <span className="text-4xl font-extrabold md:text-5xl lg:text-6xl">
               {data.name}
             </span>
-            <span className="block text-2xl md:text-3xl lg:text-4xl font-semibold mt-2 text-[#90EE90]">
+            <span className="block text-2xl md:text-3xl lg:text-4xl font-semibold mt-2 text-[#BDDE7E]">
               {data.subtitle}
             </span>
           </h1>
@@ -828,7 +832,7 @@ export default async function RajabioProductPage({
                 key={idx}
                 className="group relative bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-[#006622]/20"
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-[#006622] to-[#009933] text-white mb-4 group-hover:scale-110 transition-transform">
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br from-[#006622] to-[#166B30] text-white mb-4 group-hover:scale-110 transition-transform">
                   <BenefitIcon type={benefit.icon} />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">
@@ -862,7 +866,7 @@ export default async function RajabioProductPage({
 
           {/* Dosage Cards */}
           <div className="flex flex-wrap justify-center gap-6 mb-12">
-            <div className="bg-gradient-to-br from-[#006622] to-[#009933] text-white rounded-2xl p-8 text-center min-w-[200px]">
+            <div className="bg-gradient-to-br from-[#006622] to-[#166B30] text-white rounded-2xl p-8 text-center min-w-[200px]">
               <Droplets className="h-12 w-12 mx-auto mb-4" />
               <div className="text-3xl font-bold mb-2">{data.dosage.standard}</div>
               <div className="text-sm text-white/80">{data.dosage.standardNote}</div>

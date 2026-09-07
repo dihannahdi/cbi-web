@@ -3,7 +3,7 @@ import Link from "next/link";
 import HeroSectionGeneral from "@/components/common/HeroSectionGeneral";
 import ContainerSection from "@/components/layout/container";
 import Breadcrumb from "@/components/common/BreadScrumb";
-import { SITE_CONFIG } from "@/utils/seo";
+import { SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
 import { 
   generateWebPageSchema,
   generateBreadcrumbSchema,
@@ -33,7 +33,9 @@ export async function generateMetadata({
     : 'Syarat dan ketentuan penggunaan situs web PT Centra Biotech Indonesia. Harap baca dengan seksama sebelum menggunakan layanan kami.';
 
   return {
-    title,
+    // absolute: `title` already ends with "| Centra Biotech Indonesia";
+    // normalizeSeoTitle strips that and re-appends the brand once.
+    title: { absolute: normalizeSeoTitle(title) },
     description,
     alternates: {
       canonical: `${SITE_CONFIG.url}/${lang}/terms-of-service`,
@@ -372,8 +374,8 @@ const TermsOfService = async ({ params }: { params: Promise<{ lang: Locale }> })
               </p>
               <div className="space-y-2">
                 <p><strong>PT Centra Biotech Indonesia</strong></p>
-                <p>Email: centrabioindo@gmail.com</p>
-                <p>{lang === 'en' ? 'Phone: ' : 'Telepon: '}0851-9621-4187</p>
+                <p>Email: centrabiotech.id@gmail.com</p>
+                <p>{lang === 'en' ? 'Phone: ' : 'Telepon: '}+62 851-9621-4187</p>
                 <p>{lang === 'en' ? 'Address: ' : 'Alamat: '}Sawahan RT 02 RW 07 Pasungan, Ceper, Klaten, Jawa Tengah 57465</p>
               </div>
               <Link 

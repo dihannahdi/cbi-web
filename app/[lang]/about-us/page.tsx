@@ -15,7 +15,7 @@ import { getDictionary } from "@/dictionaries";
 import { Locale, i18n, localeMetadata } from "@/i18n-config";
 import { generateMetadataFromProps, SITE_CONFIG } from "@/utils/seo";
 import { 
-  generateAboutPageSchemas, 
+  generateEnhancedAboutPageSchemas, 
   MultipleStructuredData 
 } from "@/utils/structuredData";
 
@@ -90,12 +90,27 @@ const AboutUs = async ({ params }: PageProps) => {
       locale: lang,
     });
 
-    // Generate structured data for SEO
-    const schemas = generateAboutPageSchemas();
+    // Generate enhanced structured data with ProfilePage for SEO
+    const schemas = generateEnhancedAboutPageSchemas({
+      locale: lang,
+      companyDescription: dict.seo.aboutDescription,
+      foundingDate: '2011',
+      founders: ['Tim Centra Biotech Indonesia'],
+      achievements: [
+        'Izin Edar Kementerian Pertanian RI',
+        '14+ Tahun Pengalaman',
+        'Produsen Pupuk Hayati Terkemuka',
+      ],
+      certifications: [
+        'Izin Edar Kementan RI',
+        'GMP Standards',
+        'Uji Mutu dan Efektivitas',
+      ],
+    });
 
     return (
       <>
-        {/* Structured Data */}
+        {/* Enhanced Structured Data with ProfilePage + GEO Organization */}
         <MultipleStructuredData dataArray={schemas} />
         
         <section>

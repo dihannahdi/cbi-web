@@ -9,7 +9,7 @@ import { NextResponse } from 'next/server';
 import { i18n } from '@/i18n-config';
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.centrabiotechindonesia.com';
-const API_URL = process.env.NEXT_PUBLIC_URL_API || 'https://cbi-backend.my.id';
+const API_URL = process.env.NEXT_PUBLIC_URL_API || 'https://backend.centrabiotechindonesia.com';
 const locales = i18n.locales;
 const defaultLocale = i18n.defaultLocale;
 

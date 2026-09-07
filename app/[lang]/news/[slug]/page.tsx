@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { Metadata } from "next";
 
 import { ApiPath, apiRequest } from "@/utils/apiClient";
@@ -11,13 +11,31 @@ import Breadcrumb from "@/components/common/BreadScrumb";
 
 import { generateArticleMetadata, SITE_CONFIG, cleanMetaDescription } from "@/utils/seo";
 import { 
-  generateNewsArticleSchema, 
+  generateNewsArticleWithSpeakableSchema,
   generateBreadcrumbSchema,
-  StructuredData 
+  generateAuthorSchema,
+  MultipleStructuredData
 } from "@/utils/structuredData";
 
 import { Locale, i18n } from "@/i18n-config";
 import { getDictionary } from "@/dictionaries";
+
+const NEWS_API_URL = (process.env.NEXT_PUBLIC_URL_API || 'https://backend.centrabiotechindonesia.com').trim();
+
+// Check if slug exists in blogs table — used for redirect fallback
+async function slugExistsInBlogs(slug: string, locale: string = 'id'): Promise<boolean> {
+  try {
+    const response = await fetch(
+      `${NEWS_API_URL}/api/blogs?filters[slug][$eq]=${slug}&fields[0]=slug&locale=${locale}`,
+      { next: { revalidate: 600 }, headers: { 'Content-Type': 'application/json' } }
+    );
+    if (!response.ok) return false;
+    const data = await response.json();
+    return (data?.data?.length ?? 0) > 0;
+  } catch {
+    return false;
+  }
+}
 
 // Type for page props
 type Props = {
@@ -43,6 +61,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     });
 
     if (!data.length) {
+      // Check if slug belongs to blogs table and redirect
+      const existsInBlogs = await slugExistsInBlogs(slug, lang);
+      if (existsInBlogs) {
+        permanentRedirect(`/${lang}/blog/${slug}`);
+      }
       return {
         title: lang === 'en' ? 'Article Not Found' : 'Artikel Tidak Ditemukan',
         description: lang === 'en' ? 'The article you are looking for was not found.' : 'Artikel yang Anda cari tidak ditemukan.',
@@ -109,6 +132,11 @@ const NewsDetail = async ({ params }: Props) => {
   });
 
   if (!data.length) {
+    // Redirect to /blog/ if slug exists in blogs table
+    const existsInBlogs = await slugExistsInBlogs(slug, lang);
+    if (existsInBlogs) {
+      permanentRedirect(`/${lang}/blog/${slug}`);
+    }
     notFound();
   }
 
@@ -130,8 +158,8 @@ const NewsDetail = async ({ params }: Props) => {
   const homeLabel = lang === 'en' ? 'Home' : 'Beranda';
   const newsLabel = dict.nav.news;
 
-  // Generate structured data for the article
-  const articleSchema = generateNewsArticleSchema({
+  // Generate enhanced structured data with Speakable for voice search
+  const articleSchema = generateNewsArticleWithSpeakableSchema({
     title: newsDetailData.title,
     description: contentPreview,
     image: newsDetailData.image?.url || '',
@@ -140,6 +168,14 @@ const NewsDetail = async ({ params }: Props) => {
     authorName: authorName,
     url: `/${lang}/news/${slug}`,
     section: newsDetailData.type || 'News',
+    // Speakable selectors for Google Assistant
+    speakableSelectors: [
+      'article h1',
+      'article h2',
+      'article > p:first-of-type',
+      '.article-content p:first-of-type',
+      '.introduction',
+    ],
   });
 
   const breadcrumbSchema = generateBreadcrumbSchema([
@@ -148,11 +184,22 @@ const NewsDetail = async ({ params }: Props) => {
     { name: newsDetailData.title, url: `/${lang}/news/${slug}` },
   ]);
 
+  // Author schema for E-E-A-T
+  const authorSchema = generateAuthorSchema({
+    name: authorName,
+    worksFor: SITE_CONFIG.name,
+    knowsAbout: [
+      'Bioteknologi Pertanian',
+      'Pupuk Hayati',
+      'Pertanian Berkelanjutan',
+      'Probiotik',
+    ],
+  });
+
   return (
     <>
-      {/* Structured Data */}
-      <StructuredData data={articleSchema} />
-      <StructuredData data={breadcrumbSchema} />
+      {/* Structured Data with Speakable for Voice Search */}
+      <MultipleStructuredData dataArray={[articleSchema, breadcrumbSchema, authorSchema]} />
       
       <section>
         <HeroSection data={newsDetailData} />
@@ -162,6 +209,8 @@ const NewsDetail = async ({ params }: Props) => {
           type={newsDetailData.type}
           locale={lang}
           dict={dict}
+          title={newsDetailData.title}
+          slug={slug}
         />
       </section>
     </>

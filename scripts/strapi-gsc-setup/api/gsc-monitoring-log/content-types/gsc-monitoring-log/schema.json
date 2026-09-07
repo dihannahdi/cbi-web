@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "gsc_monitoring_logs",
+  "info": {
+    "singularName": "gsc-monitoring-log",
+    "pluralName": "gsc-monitoring-logs",
+    "displayName": "GSC Monitoring Log",
+    "description": "Execution logs for GSC monitoring sync"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "total_articles": {
+      "type": "integer",
+      "default": 0
+    },
+    "indexed_count": {
+      "type": "integer",
+      "default": 0
+    },
+    "total_clicks": {
+      "type": "integer",
+      "default": 0
+    },
+    "total_impressions": {
+      "type": "integer",
+      "default": 0
+    },
+    "site_ctr": {
+      "type": "decimal",
+      "default": 0
+    },
+    "avg_position": {
+      "type": "decimal",
+      "default": 0
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": ["success", "failed"],
+      "default": "success"
+    },
+    "execution_time": {
+      "type": "datetime"
+    },
+    "error_message": {
+      "type": "text"
+    }
+  }
+}

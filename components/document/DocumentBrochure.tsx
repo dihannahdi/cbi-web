@@ -11,6 +11,7 @@ import {
   Brochure,
   Certificate,
 } from "@/types/responseTypes/MediaInformationData";
+import { Locale } from "@/i18n-config";
 
 enum DocumentType {
   BROCHURE = "brochure",
@@ -30,8 +31,8 @@ const TabButton: FC<TabButtonProps> = ({ isActive, onClick, children }) => (
     className={cn(
       "rounded-full px-4 py-2 transition-colors",
       isActive
-        ? "bg-[#009933] text-white hover:bg-[#009933] hover:text-white"
-        : "border border-[#EEEEEE] bg-[#FDFDFD] text-[#666666] hover:bg-[#009933] hover:text-white",
+        ? "bg-[#166B30] text-white hover:bg-[#166B30] hover:text-white"
+        : "border border-[#EEEEEE] bg-[#FDFDFD] text-[#666666] hover:bg-[#166B30] hover:text-white",
     )}
   >
     {children}
@@ -41,13 +42,16 @@ const TabButton: FC<TabButtonProps> = ({ isActive, onClick, children }) => (
 const DocumentBrochure = ({
   certificates,
   brochures,
+  lang,
 }: {
   certificates: Certificate[];
   brochures: Brochure[];
+  lang?: Locale;
 }) => {
   const [activeTab, setActiveTab] = useState<DocumentType>(
     DocumentType.BROCHURE,
   );
+  const isEn = lang === 'en';
   const filteredDocument =
     activeTab === DocumentType.BROCHURE ? brochures : certificates;
 
@@ -59,20 +63,20 @@ const DocumentBrochure = ({
             isActive={activeTab === DocumentType.BROCHURE}
             onClick={() => setActiveTab(DocumentType.BROCHURE)}
           >
-            Brosur
+            {isEn ? "Brochures" : "Brosur"}
           </TabButton>
           <TabButton
             isActive={activeTab === DocumentType.CERTIFICATE}
             onClick={() => setActiveTab(DocumentType.CERTIFICATE)}
           >
-            Sertifikat Pupuk
+            {isEn ? "Fertilizer Certificates" : "Sertifikat Pupuk"}
           </TabButton>
         </div>
 
         {/* Card Document */}
         <div className="space-y-6">
           {filteredDocument.map((document) => (
-            <DocumentCard key={document.id} document={document} />
+            <DocumentCard key={document.id} document={document} lang={lang} />
           ))}
         </div>
       </ContainerSection>

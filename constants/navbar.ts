@@ -4,9 +4,9 @@ interface NavigationLink {
 }
 
 export const PRODUCT_LINKS: NavigationLink[] = [
-  { title: "Pertanian", href: "/product/agriculture" },
-  { title: "Peternakan", href: "/product/livestock" },
-  { title: "Perikanan", href: "/product/fishery" },
+  { title: "Pertanian", href: "/produk-layanan/pertanian" },
+  { title: "Peternakan", href: "/produk-layanan/peternakan" },
+  { title: "Perikanan", href: "/produk-layanan/perikanan" },
   { title: "Maklon Pupuk", href: "/maklon-pupuk" },
 ];
 

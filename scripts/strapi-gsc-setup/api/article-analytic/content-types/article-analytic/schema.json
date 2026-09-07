@@ -1,0 +1,87 @@
+{
+  "kind": "collectionType",
+  "collectionName": "article_analytics",
+  "info": {
+    "singularName": "article-analytic",
+    "pluralName": "article-analytics",
+    "displayName": "Article Analytic",
+    "description": "GSC performance metrics per article"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "slug": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "maxLength": 500
+    },
+    "title": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "url": {
+      "type": "string",
+      "maxLength": 600
+    },
+    "content_type": {
+      "type": "enumeration",
+      "enum": ["blog", "news"],
+      "default": "blog"
+    },
+    "focus_keyphrase": {
+      "type": "string",
+      "maxLength": 200
+    },
+    "published_date": {
+      "type": "string",
+      "maxLength": 30
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": ["published", "draft", "not_found"],
+      "default": "published"
+    },
+    "clicks_28d": {
+      "type": "integer",
+      "default": 0
+    },
+    "impressions_28d": {
+      "type": "integer",
+      "default": 0
+    },
+    "ctr_28d": {
+      "type": "decimal",
+      "default": 0
+    },
+    "avg_position_28d": {
+      "type": "decimal",
+      "default": 0
+    },
+    "delta_clicks": {
+      "type": "integer",
+      "default": 0
+    },
+    "delta_impressions": {
+      "type": "integer",
+      "default": 0
+    },
+    "top_query": {
+      "type": "string",
+      "maxLength": 300
+    },
+    "top_query_impressions": {
+      "type": "integer",
+      "default": 0
+    },
+    "index_status": {
+      "type": "enumeration",
+      "enum": ["indexed", "discovered", "not_published"],
+      "default": "not_published"
+    },
+    "last_synced": {
+      "type": "datetime"
+    }
+  }
+}
