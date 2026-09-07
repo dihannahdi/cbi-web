@@ -5,14 +5,15 @@ Project instructions for Claude Code when working on the CBI Web (PT Centra Biot
 ## Project Overview
 
 - **Stack**: Next.js 16 (App Router, Turbopack), React 19, TypeScript 5, Tailwind CSS 3.
-- **Frontend**: This repository (`cbi-web`) deployed to Vercel.
+- **Frontend**: This repository (`cbi-web`) deployed to the VPS, NOT Vercel — see `.claude/DEPLOY.md` for the authoritative procedure.
 - **Backend**: Strapi CMS at `cbi-backend/` and on the VPS at `/opt/cbi-strapi/`.
 - **Domains**: `centrabiotechindonesia.com` (frontend), `cbi-backend.my.id` (Strapi).
 - **i18n**: `/[lang]/*` routes with `id` and `en` dictionaries in `dictionaries/`.
 
 ## Deployment
 
-- **Production deploy command**: `vercel --prod` (never substitute or simplify).
+- **Production is the VPS, NOT Vercel.** Verified 2026-09-06: nginx on the VPS proxies `centrabiotechindonesia.com` to pm2 process `centrabio-frontend` (`/var/www/centrabiotechindonesia/server.js`, port 3034), `next.config` builds `output: "standalone"`, and the `vercel` CLI on this machine reports "No existing credentials found." Any `vercel.json` or "Vercel edge cache" comment in the code is legacy/stale.
+- **Authority for the deploy procedure is `.claude/DEPLOY.md`** — do not duplicate or improvise the steps here; read that file before deploying. It covers the build-and-copy-to-VPS flow, the pm2 process names (and the naming trap with the unrelated `cbi-frontend` monitoring app), the tar-over-SSH transfer method, cache-busting verification, and rollback.
 - Deploy only after the user confirms, or when they explicitly ask for deployment.
 - Always deploy from the project root, not from a worktree, unless the user says otherwise.
 
@@ -96,8 +97,8 @@ Keep these values in sync across:
 # SSH to VPS
 ssh hostinger
 
-# Deploy frontend
-vercel --prod
+# Deploy frontend — see .claude/DEPLOY.md for the full procedure
+# (production is the VPS, NOT Vercel)
 
 # Local dev
 npm run dev
