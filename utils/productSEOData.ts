@@ -26,6 +26,19 @@
  * - Required: name, image, offers.price, offers.priceCurrency, offers.availability
  * - Strongly Recommended: sku, mpn, brand, aggregateRating, review, hasCertification
  * - Recommended: shippingDetails, hasMerchantReturnPolicy
+ *
+ * IMPORTANT (2026-09-07 fabricated-composition audit):
+ * Every `description` and `additionalProperty` composition/ingredient claim
+ * below was checked against the live static pages under
+ * app/[lang]/produk-layanan/pertanian/**\/page.tsx (the ones Next.js actually
+ * serves — see the dead-code note above for why the [slug] catch-all rarely
+ * reaches this file). Anything not stated on the corresponding live page was
+ * removed rather than softened; anything stated with a different number was
+ * corrected to the live figure. SIMBIOS carries no composition claim at all —
+ * its "Vesicular Arbuscular Mycorrhiza" / mikoriza claim was invented and no
+ * authoritative source for Simbios's actual composition exists, so none is
+ * asserted here. Do not reintroduce a composition/ingredient value without
+ * checking it against the live page first.
  */
 
 import { SITE_CONFIG } from './seo';
@@ -167,7 +180,9 @@ export const FLORAONE_PADAT_SEO: EnterpriseProductData = {
   // see file header note (2026-07-28 GSC structured-data remediation).
   additionalProperty: [
     { name: 'Kandungan Mikroba', value: 'Rhizobium, Azotobacter, Trichoderma, Aspergillus, Pseudomonas' },
-    { name: 'Konsentrasi', value: '>1×10⁷ CFU/gram' },
+    // 'Konsentrasi' (>1×10⁷ CFU/gram) removed 2026-09-07 — no CFU figure for
+    // the padat SKU appears on the live page (only generic "konsentrasi
+    // tinggi" wording). Unverified, so dropped rather than guessed.
     { name: 'Bentuk', value: 'Granul/Padat' },
     { name: 'Kemasan', value: '5 kg, 25 kg, Bulk' },
     { name: 'Cocok untuk', value: 'Padi, Tebu, Jagung, Kedelai, Sayuran' },
@@ -189,8 +204,13 @@ export const FLORAONE_CAIR_SEO: EnterpriseProductData = {
   // offers / aggregateRating / review / hasCertification / gtin14 removed —
   // see file header note (2026-07-28 GSC structured-data remediation).
   additionalProperty: [
-    { name: 'Kandungan Mikroba', value: 'Trichoderma sp., Pseudomonas fluorescens' },
-    { name: 'Konsentrasi', value: '>1×10⁸ CFU/ml' },
+    // Corrected 2026-09-07 to the full 5-microbe consortium shown on the
+    // live page's own composition table and Product JSON-LD
+    // (app/[lang]/produk-layanan/pertanian/floraone-pupuk-hayati/page.tsx) —
+    // the previous 2-organism list was an incomplete abridgment.
+    { name: 'Kandungan Mikroba', value: 'Pseudomonas fluorescens, Azospirillum sp., Rhizobium sp., Trichoderma harzianum, Aspergillus niger' },
+    // 'Konsentrasi' (>1×10⁸ CFU/ml) removed 2026-09-07 — no CFU figure
+    // appears anywhere on the live page for this SKU. Unverified.
     { name: 'Bentuk', value: 'Cair konsentrat' },
     { name: 'Kemasan', value: '1 L, 5 L, 20 L, Bulk' },
     { name: 'Aplikasi', value: 'Semprot daun, Fertigasi, Seed treatment' },
@@ -202,7 +222,11 @@ export const FLORAONE_CAIR_SEO: EnterpriseProductData = {
  */
 export const BIOJAGAT_SEO: EnterpriseProductData = {
   name: 'BIOJAGAT Pupuk Hayati Cair',
-  description: 'Pupuk hayati cair formulasi khusus dengan mikroba penambat nitrogen dan pelarut fosfat. Meningkatkan efisiensi pemupukan dan kesuburan tanah secara alami. Cocok untuk semua jenis tanaman.',
+  // Corrected 2026-09-07: the live page (biojagat-pupuk-hayati-cair/page.tsx)
+  // only describes a generic "konsorsium mikroorganisme bermanfaat" — it
+  // never names Azotobacter/Bacillus or a nitrogen-fixing/phosphate-solubilizing
+  // function. Description reworded to match; see additionalProperty note below.
+  description: 'Pupuk hayati cair dengan konsorsium mikroorganisme bermanfaat untuk meningkatkan efisiensi pemupukan dan kesuburan tanah secara alami. Cocok untuk semua jenis tanaman.',
   image: '/mockup-biojagat.png',
   url: '/id/produk-layanan/pertanian/biojagat-pupuk-hayati-cair',
   sku: 'CBI-BJG-001',
@@ -212,8 +236,10 @@ export const BIOJAGAT_SEO: EnterpriseProductData = {
   // offers / aggregateRating / review / hasCertification / gtin14 removed —
   // see file header note (2026-07-28 GSC structured-data remediation).
   additionalProperty: [
-    { name: 'Kandungan Mikroba', value: 'Azotobacter chroococcum, Bacillus megaterium' },
-    { name: 'Fungsi Utama', value: 'Fiksasi N, Pelarut P' },
+    // 'Kandungan Mikroba' (Azotobacter chroococcum, Bacillus megaterium) and
+    // 'Fungsi Utama' (Fiksasi N, Pelarut P) removed 2026-09-07 — the live
+    // page never names these organisms or this function; unverified, so
+    // removed rather than softened.
     { name: 'Kemasan', value: '1 L, 5 L, 20 L' },
   ],
 };
@@ -223,7 +249,14 @@ export const BIOJAGAT_SEO: EnterpriseProductData = {
  */
 export const SIMBIOS_SEO: EnterpriseProductData = {
   name: 'SIMBIOS Pupuk Hayati',
-  description: 'Pupuk hayati dengan teknologi simbiosis mikoriza untuk meningkatkan penyerapan unsur hara terutama fosfor. Memperluas jangkauan akar dan meningkatkan ketahanan tanaman terhadap kekeringan.',
+  // Corrected 2026-09-07: the mycorrhiza/VAM claim below was fabricated —
+  // the live page (simbios-pupuk-hayati-cair/page.tsx) describes SIMBIOS as
+  // a bio-activation biofertilizer with a consortium of nitrogen-fixing,
+  // phosphate-solubilizing and potassium-providing microorganisms (RAE 122%
+  // independently tested); it never mentions mikoriza/VAM anywhere. No
+  // authoritative source for a Simbios composition claim could be found, so
+  // per project rule NO composition claim about Simbios is made here at all.
+  description: 'Pupuk hayati premium dengan teknologi bio-aktivasi, mengandung konsorsium mikroorganisme penambat nitrogen, pelarut fosfat, dan penyedia kalium. Terbukti melalui uji RAE (Relative Agronomic Effectiveness) independen mencapai 122% efektivitas pada tanaman padi.',
   image: '/mockup-simbios.png',
   url: '/id/produk-layanan/pertanian/simbios-pupuk-hayati',
   sku: 'CBI-SIM-001',
@@ -232,11 +265,9 @@ export const SIMBIOS_SEO: EnterpriseProductData = {
   category: 'Pupuk Hayati Organik > Pertanian > Agrikultur',
   // offers / aggregateRating / review / hasCertification / gtin14 removed —
   // see file header note (2026-07-28 GSC structured-data remediation).
-  additionalProperty: [
-    { name: 'Teknologi', value: 'Vesicular Arbuscular Mycorrhiza (VAM)' },
-    { name: 'Kandungan', value: 'Mikoriza, Trichoderma' },
-    { name: 'Manfaat Utama', value: 'Penyerapan P, Ketahanan Kekeringan' },
-  ],
+  // additionalProperty intentionally omitted 2026-09-07 — see description
+  // note above. Do not add a composition/technology claim here without a
+  // verifiable source; the old VAM/mikoriza/Trichoderma entries were invented.
 };
 
 /**
@@ -244,7 +275,12 @@ export const SIMBIOS_SEO: EnterpriseProductData = {
  */
 export const RAJABIO_SEO: EnterpriseProductData = {
   name: 'RAJABIO Pupuk Organik',
-  description: 'Pupuk organik premium berbahan dasar kotoran ternak terfermentasi sempurna dengan tambahan mikroba dekomposer. Memperbaiki struktur tanah, meningkatkan kapasitas tukar kation (KTK), dan menyediakan unsur hara lengkap secara slow-release.',
+  // Corrected 2026-09-07: the live page (rajabio-pupuk-organik-cair/page.tsx)
+  // describes RAJABIO only as fermented from "bahan alami pilihan" (selected
+  // natural materials) — it never names manure/kotoran ternak as the base
+  // material, and never mentions KTK/CEC or slow-release for this SKU.
+  // Reworded to match what the live page actually says.
+  description: 'Pupuk organik cair (POC) premium yang diformulasikan dari bahan alami pilihan menggunakan teknologi fermentasi modern. Mengandung C-Organik tinggi (>10%) yang efektif memupuk tanah, meningkatkan ketahanan tanaman terhadap hama dan penyakit, serta terbukti meningkatkan hasil panen hingga 40%.',
   image: '/mockup-rajabio.png',
   url: '/id/produk-layanan/pertanian/rajabio-pupuk-organik',
   sku: 'CBI-RJB-001',
@@ -257,9 +293,15 @@ export const RAJABIO_SEO: EnterpriseProductData = {
   // attributed a government agency endorsement — never reintroduce an
   // institutional review like that without a verifiable, citable source.
   additionalProperty: [
-    { name: 'Bahan Dasar', value: 'Kotoran sapi, ayam terfermentasi' },
-    { name: 'Kandungan C-Organik', value: '>15%' },
-    { name: 'C/N Ratio', value: '15-25' },
+    // 'Bahan Dasar' (Kotoran sapi, ayam terfermentasi) removed 2026-09-07 —
+    // this is the exact defect pattern the project rule of 2026-06-08 exists
+    // for (see RajaBio asam humat/fulvat precedent): the live page never
+    // names a manure source, only "bahan alami pilihan". Unverified, removed.
+    // 'Kandungan C-Organik' corrected from the fabricated '>15%' to the
+    // figure the live page actually states (>10%, precisely 10.05%).
+    { name: 'Kandungan C-Organik', value: '>10%' },
+    // 'C/N Ratio' (15-25) removed 2026-09-07 — not mentioned anywhere on
+    // the live page. Unverified.
     { name: 'Kemasan', value: '5 kg, 25 kg, Curah' },
   ],
 };
@@ -281,7 +323,11 @@ export const BIOKILLER_SEO: EnterpriseProductData = {
   additionalProperty: [
     { name: 'Bahan Aktif', value: 'Beauveria bassiana, Metarhizium anisopliae' },
     { name: 'Target Hama', value: 'Wereng, Penggerek Batang, Walang Sangit, Kutu Daun' },
-    { name: 'Konsentrasi', value: '>1×10⁸ spora/ml' },
+    // 'Konsentrasi' corrected 2026-09-07: the live page's own composition
+    // table (biokiller-insektisida-hayati/page.tsx) states 1.0×10⁶ CFU/ml for
+    // each organism — two orders of magnitude below the previous, fabricated
+    // '>1×10⁸ spora/ml' figure.
+    { name: 'Konsentrasi', value: '1.0 × 10⁶ CFU/ml (masing-masing bahan aktif)' },
     { name: 'Aplikasi', value: 'Semprot, PHT (Pengendalian Hama Terpadu)' },
   ],
 };
@@ -291,7 +337,11 @@ export const BIOKILLER_SEO: EnterpriseProductData = {
  */
 export const BLACKTURBO_SEO: EnterpriseProductData = {
   name: 'BLACKTURBO Asam Humat',
-  description: 'Asam humat dan fulvat berkualitas tinggi dari leonardite untuk meningkatkan kapasitas tukar kation tanah, memperbaiki struktur tanah, dan meningkatkan efisiensi penyerapan pupuk. Ideal sebagai soil conditioner.',
+  // Corrected 2026-09-07: "dan fulvat" and "dari leonardite" removed — the
+  // live page (blackturbo-asam-humat-cair/page.tsx) states 52.37% humic acid
+  // with 81.04% solubility and never mentions fulvic acid or a leonardite
+  // source. See additionalProperty note below for the fulvic-acid removal.
+  description: 'Asam humat berkualitas tinggi (52,37%) untuk meningkatkan kapasitas tukar kation (KTK) tanah, memperbaiki struktur tanah, dan meningkatkan efisiensi penyerapan pupuk. Ideal sebagai soil conditioner.',
   image: '/mockup-blackturbo.png',
   url: '/id/produk-layanan/pertanian/blackturbo-asam-humat',
   sku: 'CBI-BLT-001',
@@ -301,9 +351,15 @@ export const BLACKTURBO_SEO: EnterpriseProductData = {
   // offers / aggregateRating / review / hasCertification / gtin14 removed —
   // see file header note (2026-07-28 GSC structured-data remediation).
   additionalProperty: [
-    { name: 'Kandungan Asam Humat', value: '>12%' },
-    { name: 'Kandungan Asam Fulvat', value: '>3%' },
-    { name: 'pH', value: '9-11 (alkali)' },
+    // Corrected 2026-09-07 from the fabricated '>12%' to the figure the live
+    // page actually states (52,37%).
+    { name: 'Kandungan Asam Humat', value: '52,37%' },
+    // 'Kandungan Asam Fulvat' (>3%) removed 2026-09-07 — this is the exact
+    // asam humat + asam fulvat fabrication pattern the project rule of
+    // 2026-06-08 exists for (RajaBio precedent). The live page never
+    // mentions fulvic acid for BLACKTURBO. Unverified, removed.
+    // 'pH' (9-11, alkali) removed 2026-09-07 — not stated anywhere on the
+    // live page. Unverified.
     { name: 'Fungsi', value: 'Soil conditioner, Chelating agent' },
   ],
 };
@@ -323,9 +379,15 @@ export const BIOKALSI_SEO: EnterpriseProductData = {
   // offers / aggregateRating / review / hasCertification / gtin14 removed —
   // see file header note (2026-07-28 GSC structured-data remediation).
   additionalProperty: [
-    { name: 'Kandungan CaO', value: '>30%' },
-    { name: 'Kandungan MgO', value: '>18%' },
-    { name: 'Kehalusan', value: '80 mesh' },
+    // CaO/MgO corrected 2026-09-07 to the precise figures the live page
+    // states (biokalsi-dolomit-pembenah-tanah/page.tsx: CaO 30,51%, MgO
+    // 18,64%) — the old '>30%'/'>18%' were directionally consistent but
+    // vaguer than the verified source.
+    { name: 'Kandungan CaO', value: '30,51%' },
+    { name: 'Kandungan MgO', value: '18,64%' },
+    // 'Kehalusan' corrected from '80 mesh' — the live page states Mesh 100,
+    // a direct contradiction, not merely an unverified figure.
+    { name: 'Kehalusan', value: 'Mesh 100' },
     { name: 'Fungsi', value: 'Penetral pH tanah asam, Sumber Ca & Mg' },
   ],
 };
