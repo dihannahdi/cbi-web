@@ -5,7 +5,7 @@ import { Locale, i18n } from "@/i18n-config";
 import { getDictionary } from "@/dictionaries";
 import ContainerSection from "@/components/layout/container";
 import Breadcrumb from "@/components/common/BreadScrumb";
-import { SITE_CONFIG } from "@/utils/seo";
+import { SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
 import { 
   generateProductSchema,
   generateBreadcrumbSchema,
@@ -276,10 +276,13 @@ export async function generateMetadata({
   const { lang } = await params;
   const data = productData[lang];
 
-  const title = lang === 'id' 
+  const rawTitle = lang === 'id'
     ? "Pupuk Organik Cair RAJABIO - POC Terbaik Tingkatkan Panen 40% | Bersertifikat Kementan"
     : "RAJABIO Liquid Organic Fertilizer - Best LOF Increase Harvest 40% | Certified";
-  
+  // Normalized: raw title is 86-113 chars once the layout's brand template
+  // is appended, well past the 60-char budget.
+  const title = normalizeSeoTitle(rawTitle);
+
   const description = lang === 'id'
     ? "Pupuk organik cair (POC) RAJABIO bersertifikat Kementan RI dengan C-Organik >10%. Pupuk organik cair terbaik untuk meningkatkan panen hingga 40%. Tersedia di E-Katalog Pemerintah & Shopee. Pesan POC RAJABIO sekarang!"
     : "RAJABIO certified liquid organic fertilizer (LOF) from Ministry of Agriculture RI with C-Organic >10%. Best organic liquid fertilizer proven to increase harvest up to 40%. Available on Government E-Catalog & Shopee. Order now!";
@@ -289,7 +292,8 @@ export async function generateMetadata({
     : "liquid organic fertilizer for sale, buy liquid organic fertilizer, lof, best liquid organic fertilizer, rajabio, buy rajabio, organic liquid fertilizer, certified organic fertilizer, biological liquid fertilizer, organic rice fertilizer, high c-organic, eco-friendly liquid fertilizer, centra biotech, sustainable agriculture";
 
   return {
-    title,
+    // absolute: brand already included by normalizeSeoTitle, exactly once.
+    title: { absolute: title },
     description,
     keywords,
     authors: [{ name: "PT. Centra Biotech Indonesia" }],

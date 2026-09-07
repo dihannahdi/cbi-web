@@ -7,7 +7,7 @@ import ContainerSection from "@/components/layout/container";
 import Breadcrumb from "@/components/common/BreadScrumb";
 import HeroSectionGeneral from "@/components/common/HeroSectionGeneral";
 import VideoGallerySlider from "@/components/product/VideoGallerySlider";
-import { SITE_CONFIG } from "@/utils/seo";
+import { SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
 import {
   generateProductSchema,
   generateBreadcrumbSchema,
@@ -306,9 +306,15 @@ export async function generateMetadata({
   
   const baseUrl = SITE_CONFIG.url;
   const pageUrl = `${baseUrl}/${lang}/produk-layanan/peternakan/${slug}`;
-  
+  // Normalized: CMS product.name/subtitle length is unbounded, and this
+  // route (unlike its pertanian sibling) was never routed through
+  // normalizeSeoTitle, so a long product name could exceed 60 chars once
+  // the layout's brand template is appended.
+  const metaTitle = normalizeSeoTitle(`${product.name} - ${product.subtitle}`);
+
   return {
-    title: `${product.name} - ${product.subtitle}`,
+    // absolute: brand already included by normalizeSeoTitle, exactly once.
+    title: { absolute: metaTitle },
     description: product.description.slice(0, 160),
     alternates: {
       canonical: pageUrl,

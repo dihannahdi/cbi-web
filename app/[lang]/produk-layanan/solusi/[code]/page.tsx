@@ -5,7 +5,7 @@ import { MessageCircle, ArrowLeft, AlertTriangle, CheckCircle2, Info } from "luc
 
 import { Locale, i18n } from "@/i18n-config";
 import { getDictionary } from "@/dictionaries";
-import { SITE_CONFIG } from "@/utils/seo";
+import { SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
 
 import ContainerSection from "@/components/layout/container";
 import SolutionCard from "@/components/catalog/SolutionCard";
@@ -41,13 +41,18 @@ export async function generateMetadata({
 
   const isId = lang === "id";
   const url = `${SITE_CONFIG.url}/${lang}/produk-layanan/solusi/${code}`;
-  const title = `${solution.solution} — CBI ${solution.brand}`;
+  const rawTitle = `${solution.solution} — CBI ${solution.brand}`;
+  // Normalized: many of the 145 catalog titles run well past 60 chars raw
+  // (up to 149), which Google rewrites anyway. normalizeSeoTitle trims the
+  // topic at a word boundary and appends the brand exactly once.
+  const title = normalizeSeoTitle(rawTitle);
   const description = isId
     ? `${solution.solution} untuk ${solution.komoditas}. Paket konsorsium mikroba CBI (${solution.brand}) — ${solution.phase}. Konsultasikan untuk data uji per produk.`
     : `${solution.solution} for ${solution.komoditas}. CBI microbial consortium package (${solution.brand}) — ${solution.phase}. Contact us for per-product test data.`;
 
   return {
-    title,
+    // absolute: brand already included by normalizeSeoTitle, exactly once.
+    title: { absolute: title },
     description,
     alternates: {
       canonical: url,
@@ -57,7 +62,7 @@ export async function generateMetadata({
       },
     },
     openGraph: {
-      title,
+      title, // reuse the same normalized, single-brand title
       description,
       url,
       siteName: "Centra Biotech Indonesia",

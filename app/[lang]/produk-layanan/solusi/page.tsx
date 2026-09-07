@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { Locale, i18n } from "@/i18n-config";
 import { getDictionary } from "@/dictionaries";
-import { SITE_CONFIG } from "@/utils/seo";
+import { SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
 
 import ContainerSection from "@/components/layout/container";
 import SolutionCatalog from "@/components/catalog/SolutionCatalog";
@@ -28,15 +28,17 @@ export async function generateMetadata({
   const { lang } = await params;
   const isId = lang === "id";
   const url = `${SITE_CONFIG.url}/${lang}/produk-layanan/solusi`;
-  const title = isId
+  const rawTitle = isId
     ? `${CATALOG_TOTAL} Paket Solusi Bioteknologi Siap Pakai`
     : `${CATALOG_TOTAL} Ready-to-Use Biotech Solution Packages`;
+  const title = normalizeSeoTitle(rawTitle);
   const description = isId
     ? "Katalog solusi konsorsium mikroba CBI per komoditas & fase budidaya — pangan, hortikultura, perkebunan, peternakan, akuakultur, dan bioproses industri."
     : "CBI's catalogue of microbial consortium solutions by commodity & cultivation phase — food crops, horticulture, plantation, livestock, aquaculture, and industrial bioprocess.";
 
   return {
-    title,
+    // absolute: brand already included by normalizeSeoTitle, exactly once.
+    title: { absolute: title },
     description,
     alternates: {
       canonical: url,

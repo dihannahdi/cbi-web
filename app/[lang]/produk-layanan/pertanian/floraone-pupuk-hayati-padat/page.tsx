@@ -7,7 +7,7 @@ import ContainerSection from "@/components/layout/container";
 import Breadcrumb from "@/components/common/BreadScrumb";
 import HeroSectionGeneral from "@/components/common/HeroSectionGeneral";
 import VideoGallerySlider from "@/components/product/VideoGallerySlider";
-import { SITE_CONFIG } from "@/utils/seo";
+import { SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
 import { 
   generateProductSchema,
   generateBreadcrumbSchema,
@@ -240,10 +240,14 @@ export async function generateMetadata({
   const { lang } = await params;
   const data = productData[lang];
 
-  const title = lang === 'id' 
+  const rawTitle = lang === 'id'
     ? "Pupuk Hayati FloraOne - Pupuk Organik Bersertifikat dengan Konsorsium Mikroba Unggul"
     : "FloraOne Biological Fertilizer - Certified Organic with Superior Microbial Consortium";
-  
+  // Normalized: raw title is 86-87 chars, well past 60 once the layout's
+  // brand template is appended. This static page was never routed through
+  // normalizeSeoTitle even though its floraone-pupuk-hayati (cair) sibling was.
+  const title = normalizeSeoTitle(rawTitle);
+
   const description = lang === 'id'
     ? "Pupuk hayati organik FloraOne mengandung konsorsium mikroba unggul (Rhizobium, Azotobacter, Trichoderma, Aspergillus, Pseudomonas) untuk meningkatkan kesuburan tanah dan produktivitas tanaman. Bersertifikat Kementan & SNI 6729:2016."
     : "FloraOne organic biological fertilizer contains superior microbial consortium (Rhizobium, Azotobacter, Trichoderma, Aspergillus, Pseudomonas) to improve soil fertility and plant productivity. Certified by Ministry of Agriculture & SNI 6729:2016.";
@@ -253,7 +257,8 @@ export async function generateMetadata({
     : "biological fertilizer, floraone, organic fertilizer, microbial fertilizer, rhizobium, azotobacter, trichoderma, certified fertilizer, organic solid fertilizer, biological organic fertilizer, microbial consortium, nitrogen fixation, sustainable agriculture, eco-friendly fertilizer, centra biotech";
 
   return {
-    title,
+    // absolute: brand already included by normalizeSeoTitle, exactly once.
+    title: { absolute: title },
     description,
     keywords,
     authors: [{ name: "PT. Centra Biotech Indonesia" }],

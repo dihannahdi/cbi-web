@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { SITE_CONFIG } from "@/utils/seo";
+import { SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
 import {
   generateWebPageSchema,
   generateBreadcrumbSchema,
@@ -27,17 +27,21 @@ export async function generateMetadata({
   const { lang } = await params;
   const baseUrl = SITE_CONFIG.url;
 
-  const title =
+  const rawTitle =
     lang === "id"
       ? "Top Artikel - Pemantauan Performa Artikel"
       : "Top Articles - Article Performance Monitor";
+  // Normalized: 68-69 chars once the layout's brand template is appended.
+  // This route is noindex, but the <title> tag is still rendered.
+  const title = normalizeSeoTitle(rawTitle);
   const description =
     lang === "id"
       ? "Dashboard pemantauan performa artikel Centra Biotech Indonesia. Lihat artikel dengan performa terbaik berdasarkan klik, tayangan, dan posisi pencarian."
       : "Article performance monitoring dashboard for Centra Biotech Indonesia. View top performing articles by clicks, impressions, and search position.";
 
   return {
-    title,
+    // absolute: brand already included by normalizeSeoTitle, exactly once.
+    title: { absolute: title },
     description,
     robots: { index: false, follow: false },
     alternates: {
