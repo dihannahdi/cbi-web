@@ -9,6 +9,7 @@ import { SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
 
 import ContainerSection from "@/components/layout/container";
 import SolutionCard from "@/components/catalog/SolutionCard";
+import TrackedWhatsAppButton from "@/components/common/TrackedWhatsAppButton";
 import {
   getSolutionByCode,
   getAllCodes,
@@ -150,15 +151,15 @@ export default async function SolutionDetailPage({
           )}
 
           <div className="mt-8 flex flex-wrap gap-3">
-            <a
+            <TrackedWhatsAppButton
               href={waUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              source="solution_page"
+              context={{ code: solution.code }}
               className="inline-flex items-center gap-2 rounded-full bg-lime-500 px-6 py-3 font-semibold text-green-900 shadow-brand transition-all hover:-translate-y-0.5 hover:bg-lime-600"
             >
               <MessageCircle className="h-5 w-5" />
               {isId ? "Konsultasi via WhatsApp" : "Consult via WhatsApp"}
-            </a>
+            </TrackedWhatsAppButton>
             <Link
               href={`/${lang}/produk-layanan/solusi`}
               className="inline-flex items-center gap-2 rounded-full border border-white/30 px-6 py-3 font-semibold text-white transition-colors hover:bg-white/10"
@@ -286,15 +287,15 @@ export default async function SolutionDetailPage({
                   <dd className="font-medium text-brand">CBI {solution.brand}</dd>
                 </div>
               </dl>
-              <a
+              <TrackedWhatsAppButton
                 href={waUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+                source="solution_page"
+                context={{ code: solution.code }}
                 className="btn-primary mt-6 w-full"
               >
                 <MessageCircle className="h-4 w-4" />
                 {isId ? "Konsultasi Gratis" : "Free Consultation"}
-              </a>
+              </TrackedWhatsAppButton>
             </div>
 
             {/* Cross-link to flagship product line (claim-safe) */}

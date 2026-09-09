@@ -8,6 +8,7 @@ import ContainerSection from "@/components/layout/container";
 import Breadcrumb from "@/components/common/BreadScrumb";
 import HeroSectionGeneral from "@/components/common/HeroSectionGeneral";
 import { SITE_CONFIG, cleanMetaDescription, normalizeSeoTitle } from "@/utils/seo";
+import TrackedWhatsAppButton from "@/components/common/TrackedWhatsAppButton";
 import {
   generateLearningResourceSchema,
   generateBreadcrumbSchema,
@@ -555,15 +556,13 @@ export default async function PillarPage({
             <p className="mb-6">
               Dapatkan rekomendasi produk yang tepat untuk kebutuhan pertanian Anda
             </p>
-            <a
+            <TrackedWhatsAppButton source="guide_cta"
               href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(content.ctaWhatsapp)}`}
-              target="_blank"
-              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-white text-green-600 px-6 py-3 rounded-full font-bold hover:bg-gray-100 transition-colors"
             >
               <MessageCircle className="h-5 w-5" />
               Chat WhatsApp Sekarang
-            </a>
+            </TrackedWhatsAppButton>
           </section>
         </div>
       </ContainerSection>

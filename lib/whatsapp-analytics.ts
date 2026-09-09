@@ -26,6 +26,9 @@ const SOURCE_LABELS: Record<string, string> = {
   agriculture_products: 'Agriculture Products Section',
   contact_address: 'Contact Address',
   footer: 'Footer',
+  product_page: 'Product Page CTA',
+  guide_cta: 'Guide CTA',
+  solution_page: 'Solution Page CTA',
 };
 
 class WhatsAppAnalytics {

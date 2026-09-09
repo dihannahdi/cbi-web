@@ -9,6 +9,7 @@ import HeroSectionGeneral from "@/components/common/HeroSectionGeneral";
 import VideoGallerySlider from "@/components/product/VideoGallerySlider";
 import { SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
 import { MultipleStructuredData, generateImageObjectSchema } from "@/utils/structuredData";
+import TrackedWhatsAppButton from "@/components/common/TrackedWhatsAppButton";
 import {
   fetchStrapiProduct,
   transformFAQ,
@@ -427,14 +428,13 @@ export default async function BiojagatlProductPage({
 
               {/* CTA Buttons */}
               <div className="flex flex-wrap gap-4">
-                <Link
+                <TrackedWhatsAppButton source="product_page"
                   href={whatsappUrl}
-                  target="_blank"
                   className="flex items-center gap-2 rounded-xl bg-[#119f40] hover:bg-[#0d7a31] px-6 py-4 font-semibold text-white transition-all shadow-sm hover:shadow-lg"
                 >
                   <MessageCircle className="h-5 w-5" />
                   {data.ctaWhatsapp}
-                </Link>
+                </TrackedWhatsAppButton>
                 <Link
                   href={EXTERNAL_LINKS.shopee}
                   target="_blank"
@@ -767,14 +767,13 @@ export default async function BiojagatlProductPage({
                     {lang === 'id' ? 'Tim kami siap membantu Anda.' : 'Our team is ready to help you.'}
                   </p>
                 </div>
-                <Link
+                <TrackedWhatsAppButton source="product_page"
                   href={whatsappUrl}
-                  target="_blank"
                   className="inline-flex items-center gap-2 bg-[#119f40] hover:bg-[#0d7a31] text-white font-semibold px-8 py-4 rounded-xl transition-all"
                 >
                   <MessageCircle className="h-5 w-5" />
                   {lang === 'id' ? 'Chat via WhatsApp' : 'Chat via WhatsApp'}
-                </Link>
+                </TrackedWhatsAppButton>
               </div>
             </div>
           </div>

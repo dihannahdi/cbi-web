@@ -20,7 +20,10 @@ export type WhatsAppSource =
   | "related_product"
   | "agriculture_products"
   | "contact_address"
-  | "footer";
+  | "footer"
+  | "product_page"
+  | "guide_cta"
+  | "solution_page";
 
 /**
  * Build a wa.me deep link, optionally prefilled with a message.

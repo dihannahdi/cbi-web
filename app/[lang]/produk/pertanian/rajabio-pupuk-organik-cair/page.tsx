@@ -7,6 +7,7 @@ import ContainerSection from "@/components/layout/container";
 import Breadcrumb from "@/components/common/BreadScrumb";
 import HeroSectionGeneral from "@/components/common/HeroSectionGeneral";
 import { SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
+import TrackedWhatsAppButton from "@/components/common/TrackedWhatsAppButton";
 import { 
   generateProductSchema,
   generateBreadcrumbSchema,
@@ -488,14 +489,13 @@ export default async function RajabioProductPage({
 
               {/* CTA Buttons */}
               <div className="flex flex-wrap gap-4">
-                <Link
+                <TrackedWhatsAppButton source="product_page"
                   href={whatsappUrl}
-                  target="_blank"
                   className="flex items-center gap-2 rounded-xl bg-[#25D366] hover:bg-[#20BD5A] px-6 py-4 font-semibold text-white transition-all shadow-sm hover:shadow-lg"
                 >
                   <MessageCircle className="h-5 w-5" />
                   {data.ctaWhatsapp}
-                </Link>
+                </TrackedWhatsAppButton>
                 <Link
                   href={EXTERNAL_LINKS.shopee}
                   target="_blank"
@@ -660,14 +660,13 @@ export default async function RajabioProductPage({
                   ? '💡 Data lengkap tersedia dalam laporan uji efektivitas resmi'
                   : '💡 Complete data available in official effectiveness test report'}
               </p>
-              <Link
+              <TrackedWhatsAppButton source="product_page"
                 href={whatsappUrl}
-                target="_blank"
                 className="inline-flex items-center gap-2 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all"
               >
                 <MessageCircle className="h-5 w-5" />
                 {lang === 'id' ? 'Dapatkan Laporan Lengkap via WhatsApp' : 'Get Full Report via WhatsApp'}
-              </Link>
+              </TrackedWhatsAppButton>
             </div>
           </div>
         </ContainerSection>
@@ -986,15 +985,14 @@ export default async function RajabioProductPage({
                   </p>
                 </div>
                 <div className="mt-6">
-                  <Link
+                  <TrackedWhatsAppButton source="product_page"
                     href={whatsappUrl}
-                    target="_blank"
                     className="inline-flex items-center gap-3 rounded-xl bg-[#25D366] px-8 py-4 font-semibold text-white transition-all hover:bg-[#20BD5A] hover:shadow-xl"
                   >
                     <MessageCircle className="h-5 w-5" />
                     {lang === 'id' ? 'Hubungi Kami' : 'Contact Us'}
                     <ArrowRight className="h-5 w-5" />
-                  </Link>
+                  </TrackedWhatsAppButton>
                 </div>
               </div>
             </div>

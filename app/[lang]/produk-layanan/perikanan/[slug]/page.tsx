@@ -47,6 +47,7 @@ import {
   ThermometerSun,
 } from "lucide-react";
 import { notFound } from "next/navigation";
+import TrackedWhatsAppButton from "@/components/common/TrackedWhatsAppButton";
 
 // Strapi API Base URL
 const STRAPI_URL = (process.env.NEXT_PUBLIC_URL_API || "https://backend.centrabiotechindonesia.com").trim();
@@ -475,15 +476,13 @@ export default async function FisheryProductDetailPage({
             
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4">
-              <Link
+              <TrackedWhatsAppButton source="product_page"
                 href={whatsappLink}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-cyan-600 text-white rounded-full font-medium hover:bg-cyan-700 transition-colors"
               >
                 <Phone className="w-5 h-5" />
                 {product.btnWhatsappLabel || product.ctaWhatsapp || labels.contactUs}
-              </Link>
+              </TrackedWhatsAppButton>
               
               {product.externalLinks?.shopee && (
                 <Link
@@ -678,15 +677,13 @@ export default async function FisheryProductDetailPage({
               {labels.contactNow}
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
-              <Link
+              <TrackedWhatsAppButton source="product_page"
                 href={whatsappLink}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-8 py-4 bg-white text-gray-900 rounded-full font-semibold hover:bg-gray-100 transition-colors"
               >
                 <Phone className="w-5 h-5" />
                 {labels.contactWhatsApp}
-              </Link>
+              </TrackedWhatsAppButton>
               {product.externalLinks?.shopee && (
                 <Link
                   href={product.externalLinks.shopee}

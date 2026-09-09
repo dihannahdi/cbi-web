@@ -8,6 +8,7 @@ import Breadcrumb from "@/components/common/BreadScrumb";
 import HeroSectionGeneral from "@/components/common/HeroSectionGeneral";
 import VideoGallerySlider from "@/components/product/VideoGallerySlider";
 import { SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
+import TrackedWhatsAppButton from "@/components/common/TrackedWhatsAppButton";
 import { 
   generateProductSchema,
   generateBreadcrumbSchema,
@@ -326,10 +327,10 @@ export default async function BlackTurboPage({
               <h2 className="text-2xl font-bold text-gray-900 mb-4 lg:text-3xl">{data.heroTitle}</h2>
               <p className="text-gray-600 mb-6 text-lg leading-relaxed">{data.description}</p>
               <div className="flex flex-wrap gap-4">
-                <Link href={whatsappUrl} target="_blank" className="flex items-center gap-2 rounded-xl bg-[#119f40] hover:bg-[#0d7a31] px-6 py-4 font-semibold text-white transition-all hover:shadow-lg">
+                <TrackedWhatsAppButton source="product_page" href={whatsappUrl} className="flex items-center gap-2 rounded-xl bg-[#119f40] hover:bg-[#0d7a31] px-6 py-4 font-semibold text-white transition-all hover:shadow-lg">
                   <MessageCircle className="h-5 w-5" />
                   {data.ctaWhatsapp}
-                </Link>
+                </TrackedWhatsAppButton>
                 <Link href={EXTERNAL_LINKS.brochure} className="flex items-center gap-2 rounded-xl border-2 border-[#006622] text-[#006622] hover:bg-[#006622] hover:text-white px-6 py-4 font-semibold transition-all">
                   <Download className="h-5 w-5" />
                   {data.ctaBrochure}
@@ -548,10 +549,10 @@ export default async function BlackTurboPage({
                   <h3 className="text-xl font-bold text-gray-900 mb-1">{lang === 'id' ? 'Masih ada pertanyaan?' : 'Still have questions?'}</h3>
                   <p className="text-gray-600">{lang === 'id' ? 'Tim kami siap membantu Anda.' : 'Our team is ready to help you.'}</p>
                 </div>
-                <Link href={whatsappUrl} target="_blank" className="inline-flex items-center gap-2 bg-[#119f40] hover:bg-[#0d7a31] text-white font-semibold px-8 py-4 rounded-xl transition-all">
+                <TrackedWhatsAppButton source="product_page" href={whatsappUrl} className="inline-flex items-center gap-2 bg-[#119f40] hover:bg-[#0d7a31] text-white font-semibold px-8 py-4 rounded-xl transition-all">
                   <MessageCircle className="h-5 w-5" />
                   {lang === 'id' ? 'Chat via WhatsApp' : 'Chat via WhatsApp'}
-                </Link>
+                </TrackedWhatsAppButton>
               </div>
             </div>
           </div>

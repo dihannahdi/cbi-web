@@ -62,6 +62,7 @@ import {
   Beaker,
 } from "lucide-react";
 import { notFound } from "next/navigation";
+import TrackedWhatsAppButton from "@/components/common/TrackedWhatsAppButton";
 
 // Strapi API Base URL
 const STRAPI_URL = (process.env.NEXT_PUBLIC_URL_API || "https://backend.centrabiotechindonesia.com").trim();
@@ -578,15 +579,13 @@ export default async function ProductDetailPage({
             
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4">
-              <Link
+              <TrackedWhatsAppButton source="product_page"
                 href={whatsappLink}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 text-white rounded-full font-medium hover:bg-green-700 transition-colors"
               >
                 <Phone className="w-5 h-5" />
                 {product.btnWhatsappLabel || product.ctaWhatsapp || "Hubungi Kami"}
-              </Link>
+              </TrackedWhatsAppButton>
               
               {product.externalLinks?.shopee && (
                 <Link
@@ -781,15 +780,13 @@ export default async function ProductDetailPage({
               Hubungi kami sekarang untuk informasi lebih lanjut dan penawaran terbaik
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
-              <Link
+              <TrackedWhatsAppButton source="product_page"
                 href={whatsappLink}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-8 py-4 bg-white text-gray-900 rounded-full font-semibold hover:bg-gray-100 transition-colors"
               >
                 <Phone className="w-5 h-5" />
                 Hubungi via WhatsApp
-              </Link>
+              </TrackedWhatsAppButton>
               {product.externalLinks?.shopee && (
                 <Link
                   href={product.externalLinks.shopee}

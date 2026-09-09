@@ -6,6 +6,7 @@ import { getDictionary } from "@/dictionaries";
 import ContainerSection from "@/components/layout/container";
 import Breadcrumb from "@/components/common/BreadScrumb";
 import { SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
+import TrackedWhatsAppButton from "@/components/common/TrackedWhatsAppButton";
 import { 
   generateProductSchema,
   generateBreadcrumbSchema,
@@ -458,14 +459,13 @@ export default async function RajabioProductPage({
 
               {/* CTA Buttons */}
               <div className="flex flex-wrap gap-4">
-                <Link
+                <TrackedWhatsAppButton source="product_page"
                   href={whatsappUrl}
-                  target="_blank"
                   className="flex items-center gap-2 rounded-full bg-[#25D366] hover:bg-[#20BD5A] px-6 py-4 font-semibold text-white transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                 >
                   <MessageCircle className="h-5 w-5" />
                   {data.ctaWhatsapp}
-                </Link>
+                </TrackedWhatsAppButton>
                 <Link
                   href={EXTERNAL_LINKS.shopee}
                   target="_blank"

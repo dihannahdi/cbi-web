@@ -41,6 +41,7 @@ const AgricultureProductsSection = dynamic(
 );
 
 import { PAGE_METADATA, SITE_CONFIG, normalizeSeoTitle } from "@/utils/seo";
+import TrackedWhatsAppButton from "@/components/common/TrackedWhatsAppButton";
 import { 
   generateProductCategorySchemas,
   MultipleStructuredData 
@@ -271,14 +272,13 @@ const Agriculture = async ({
                     {lang === 'id' ? 'Lihat Detail Produk' : 'View Product Details'}
                     <ArrowRight className="h-4 w-4" />
                   </Link>
-                  <Link
-                    href="https://wa.me/6285183284691?text=Halo,%20saya%20tertarik%20dengan%20RAJABIO"
-                    target="_blank"
+                  <TrackedWhatsAppButton source="agriculture_products"
+                    href="https://wa.me/6285196214187?text=Halo,%20saya%20tertarik%20dengan%20RAJABIO"
                     className="flex items-center gap-2 rounded-full bg-[#25D366] hover:bg-[#20BD5A] px-5 py-2.5 font-semibold text-white text-sm transition-all"
                   >
                     <MessageCircle className="h-4 w-4" />
                     WhatsApp
-                  </Link>
+                  </TrackedWhatsAppButton>
                 </div>
               </div>
               
