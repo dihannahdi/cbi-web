@@ -137,7 +137,7 @@ class SEOReportPDF:
         # Key findings
         findings = Paragraph(
             "<b>KEY FINDINGS:</b><br/>"
-            "✓ Google Analytics tracking operational (ID: G-16L2MWL33B)<br/>"
+            "✓ Google Analytics tracking operational (ID: G-QQ90XL5KS5)<br/>"
             "✓ Product indexing improved from 0% to 75%<br/>"
             "⚠ Blog CTR crisis: 3 articles at position #1 with 0% CTR<br/>"
             "✓ News content performing 3x better than blogs<br/>"
@@ -425,7 +425,7 @@ class SEOReportPDF:
         tech_findings = Paragraph(
             "<b>TECHNICAL INSIGHTS:</b><br/><br/>"
             "<b>✓ WORKING WELL:</b><br/>"
-            "• Google Analytics tracking (G-16L2MWL33B)<br/>"
+            "• Google Analytics tracking (G-QQ90XL5KS5)<br/>"
             "• Mobile-responsive design<br/>"
             "• HTTPS enabled<br/>"
             "• Sitemap submission (182 pages)<br/>"

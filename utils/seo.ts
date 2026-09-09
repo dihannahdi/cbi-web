@@ -179,7 +179,7 @@ export const SITE_CONFIG = {
   yandexVerification: process.env.NEXT_PUBLIC_YANDEX_VERIFICATION || '',
   
   // Analytics
-  googleAnalyticsId: process.env.NEXT_PUBLIC_GA_ID || 'G-16L2MWL33B',
+  googleAnalyticsId: process.env.NEXT_PUBLIC_GA_ID || 'G-QQ90XL5KS5',
   googleTagManagerId: process.env.NEXT_PUBLIC_GTM_ID || '',
   
   // Founder/Author info for articles

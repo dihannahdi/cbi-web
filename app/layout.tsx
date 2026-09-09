@@ -254,7 +254,7 @@ const globalWebsiteSchema = {
 };
 
 export default function RootLayout({ children }: RootLayoutProps) {
-  const GA_MEASUREMENT_ID = "G-16L2MWL33B";
+  const GA_MEASUREMENT_ID = "G-QQ90XL5KS5";
   const META_PIXEL_ID = "2243691269777677";
 
   return (
