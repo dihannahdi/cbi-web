@@ -28,6 +28,7 @@ from pathlib import Path
 from calendar import monthrange
 
 import gspread
+from gspread.utils import rowcol_to_a1
 from google.oauth2.credentials import Credentials
 from google.auth.transport.requests import Request
 from googleapiclient.discovery import build
@@ -136,7 +137,7 @@ def get_credentials():
 
     if TOKEN_PATH.exists() and TOKEN_PATH.stat().st_size > 0:
         try:
-            creds = Credentials.from_authorized_user_file(str(TOKEN_PATH), SCOPES)
+            creds = Credentials.from_authorized_user_file(str(TOKEN_PATH), GA4_SCOPES)
             logger.info("Loaded existing token")
         except Exception as e:
             logger.warning("Failed to load token: %s", e)
@@ -156,7 +157,7 @@ def get_credentials():
             sys.exit(1)
 
         from google_auth_oauthlib.flow import InstalledAppFlow
-        flow = InstalledAppFlow.from_client_secrets_file(str(CLIENT_SECRET_PATH), SCOPES)
+        flow = InstalledAppFlow.from_client_secrets_file(str(CLIENT_SECRET_PATH), GA4_SCOPES)
         creds = flow.run_local_server(port=0)
         logger.info("New OAuth2 authorization completed")
         _save_token(creds)
@@ -266,6 +267,39 @@ def get_gsc_monthly_pages_count(creds, year):
             monthly_pages[month] = 0
 
     return monthly_pages
+
+
+def get_gsc_distinct_pages(creds, year):
+    """Count the distinct pages that had any impression in `year` to date.
+
+    Summing the per-month counts double-counts every page that ranked in more
+    than one month, so the Total column needs its own range-wide query.
+    """
+    service = build("searchconsole", "v1", credentials=creds)
+
+    today = datetime.now(timezone.utc).date()
+    data_cutoff = today - timedelta(days=3)
+    start_date = datetime(year, 1, 1).date()
+    if start_date > data_cutoff:
+        return 0
+
+    try:
+        response = service.searchanalytics().query(
+            siteUrl=GSC_SITE_URL,
+            body={
+                "startDate": start_date.strftime("%Y-%m-%d"),
+                "endDate": data_cutoff.strftime("%Y-%m-%d"),
+                "dimensions": ["page"],
+                "rowLimit": 25000,
+                "type": "web",
+            },
+        ).execute()
+        count = len(response.get("rows", []))
+        logger.info("GSC distinct pages %s Jan-to-date: %d", year, count)
+        return count
+    except Exception as e:
+        logger.error("GSC distinct pages %s failed: %s", year, e)
+        return None
 
 
 def get_gsc_top_pages(creds, year):
@@ -696,8 +730,276 @@ def _discover_ga4_property(creds):
 # SHEETS: WEB METRICS REPORT
 # ============================================================================
 
-def write_web_report(sh, year, gsc_overview, gsc_pages, gsc_top, wa_leads, ga4_data):
-    """Write the 'Web CBI {year}' sheet — Jatis Mobile template style."""
+# ============================================================================
+# 'Web CBI {year}' — targeted update
+# ============================================================================
+# The tab carries content this script does not produce: the NOTES block, the
+# "WhatsApp button clicks (all CTAs)" row, and the GA4 rows for Jan-Jun 2026
+# (the property behind G-16L2MWL33B was deleted, so those numbers exist only
+# in the sheet). _write_web_report_full() calls ws.clear() and rebuilds every
+# row, which destroys all of it on any run where GA4 comes back empty - the
+# hazard --auth-only was added to dodge. write_web_report() writes only the
+# cells the script owns, by looking the label up in column A, so row order and
+# hand-maintained rows no longer matter.
+
+# Rows overwritten unconditionally: the script is the only source for these.
+_ROW_IMPRESSIONS = ("Impressions",)
+_ROW_CLICKS = ("Clicks",)
+_ROW_CTR = ("CTR (%)", "CTR")
+_ROW_POSITION = ("Avg Position",)
+_ROW_PAGES = ("Pages in Search Results",)
+_ROW_TOP_PRODUCT = ("Most visited product page",)
+_ROW_TOP_BLOG = ("Most read Articles on Blog pages",)
+_ROW_LEADS = ("Leads (WhatsApp)",)
+_ROW_CONVERSION = ("Conversion Rate (Leads/ Sessions)", "Conversion Rate")
+_ROW_HEADERS = (
+    ("Website (Include Blog)",),
+    ("Metrics",),
+    ("Website News & Product",),
+)
+
+# GA4 metric key -> the labels that metric goes by in the live sheet.
+_GA4_ROW_ALIASES = {
+    "pageviews": ("Pageviews",),
+    "users": ("Total Users", "Users"),
+    "new_users": ("New Users",),
+    "sessions": ("Sessions",),
+    "bounce_rate": ("Bounce Rate (%)", "Bounce Rate"),
+    "avg_session_duration": ("Avg Session Duration", "Avg Session Duration (s)"),
+    "pages_per_session": ("Pages / Session",),
+}
+
+
+def _find_row(values, aliases):
+    """1-based row whose column A equals one of `aliases`, else None."""
+    wanted = {a.strip().lower() for a in aliases}
+    for idx, row in enumerate(values, 1):
+        if row and str(row[0]).strip().lower() in wanted:
+            return idx
+    return None
+
+
+def _sheet_cell(values, row, col):
+    """Existing text at (row, col), empty string when absent. Both 1-based."""
+    if not row or row > len(values):
+        return ""
+    r = values[row - 1]
+    return str(r[col - 1]) if col <= len(r) else ""
+
+
+def _as_number(text):
+    """Parse a sheet cell into a number, or None for blank, 'n/a', '-'."""
+    t = str(text).strip().replace(",", "").replace("%", "")
+    if not t or t.lower() in ("n/a", "na", "-", "--"):
+        return None
+    try:
+        return float(t)
+    except ValueError:
+        return None
+
+
+def _format_ga4_value(key, v):
+    """Render one GA4 metric the way the sheet already shows it."""
+    if key == "bounce_rate":
+        return "%.2f%%" % v
+    if key == "pages_per_session":
+        return "%.2f" % v
+    if key == "avg_session_duration":
+        return "%dm %02ds" % (int(v) // 60, int(v) % 60)
+    return int(v)
+
+
+def write_web_report(sh, year, gsc_overview, gsc_pages, gsc_top, wa_leads,
+                     ga4_data, gsc_pages_distinct=None):
+    """Update only the cells this script owns on 'Web CBI {year}'.
+
+    Falls back to _write_web_report_full() when the tab does not exist yet.
+    Deliberately does NOT reformat: formatting is keyed to fixed row numbers
+    and the live tab has diverged from the template, so a new month column
+    arrives unformatted rather than risk restyling hand-maintained rows.
+    """
+    sheet_name = "Web CBI %d" % year
+
+    try:
+        ws = sh.worksheet(sheet_name)
+    except gspread.WorksheetNotFound:
+        logger.info("'%s' not found - building it from the template", sheet_name)
+        return _write_web_report_full(sh, year, gsc_overview, gsc_pages,
+                                      gsc_top, wa_leads, ga4_data)
+
+    values = ws.get_all_values()
+    months = sorted(gsc_overview.keys())
+    num_months = len(months)
+    if not months:
+        logger.error("No GSC months to write - leaving '%s' untouched", sheet_name)
+        return ws
+
+    if _find_row(values, _ROW_HEADERS[0]) is None:
+        logger.error("Header row '%s' not found on '%s' - refusing to write "
+                     "so a renamed label cannot silently blank the tab",
+                     _ROW_HEADERS[0][0], sheet_name)
+        return ws
+
+    # Fixed layout, as the template comment always intended:
+    # A=label, B-M=Jan-Dec, N=Total, O=Average. Anchoring Total/Average after
+    # the last month with data instead made them move every time a month
+    # closed, which is what left April's Total (over 4 months) sitting in J
+    # while the month cells had run on to August - and what would make a
+    # hand-maintained row's Total read as September data.
+    month_col = {m: 1 + m for m in months}          # Jan -> B, Dec -> M
+    total_col = 14                                  # N
+    avg_col = 15                                    # O
+
+    updates = []
+
+    def put(row, col, value):
+        if row:
+            updates.append({"range": rowcol_to_a1(row, col), "values": [[value]]})
+
+    # --- month/Total/Average labels on every header row ---
+    # All twelve go in, not just the months with data, so the header never
+    # moves under the data and a closing month needs no layout change.
+    for aliases in _ROW_HEADERS:
+        row = _find_row(values, aliases)
+        if not row:
+            continue
+        for m in range(1, 13):
+            put(row, 1 + m, MONTH_NAMES[m - 1])
+        put(row, total_col, "Total")
+        put(row, avg_col, "Average")
+
+    total_clicks = sum(gsc_overview[m].get("clicks", 0) for m in months)
+    total_impr = sum(gsc_overview[m].get("impressions", 0) for m in months)
+
+    # --- Impressions / Clicks: plain sums ---
+    for aliases, key, tot in ((_ROW_IMPRESSIONS, "impressions", total_impr),
+                              (_ROW_CLICKS, "clicks", total_clicks)):
+        row = _find_row(values, aliases)
+        if not row:
+            continue
+        for m in months:
+            put(row, month_col[m], gsc_overview[m].get(key, 0))
+        put(row, total_col, tot)
+        put(row, avg_col, round(tot / num_months))
+
+    # --- CTR: a rate, so Total is clicks/impressions over the whole period.
+    # Summing the monthly percentages is what produced the old 4.80%.
+    row = _find_row(values, _ROW_CTR)
+    if row:
+        for m in months:
+            put(row, month_col[m], "%.2f%%" % gsc_overview[m].get("ctr", 0))
+        period_ctr = (total_clicks / total_impr * 100) if total_impr else 0
+        mean_ctr = sum(gsc_overview[m].get("ctr", 0) for m in months) / num_months
+        put(row, total_col, "%.2f%%" % period_ctr)
+        put(row, avg_col, "%.2f%%" % mean_ctr)
+
+    # --- Avg Position: impression-weighted; a plain mean lets a month with
+    # 17k impressions pull as hard as one with 600k.
+    row = _find_row(values, _ROW_POSITION)
+    if row:
+        for m in months:
+            put(row, month_col[m], gsc_overview[m].get("position", 0))
+        weighted = sum(gsc_overview[m].get("position", 0)
+                       * gsc_overview[m].get("impressions", 0) for m in months)
+        put(row, total_col, "-")
+        put(row, avg_col, round(weighted / total_impr, 1) if total_impr else "")
+
+    # --- Pages in Search Results: any page that ranked in more than one month
+    # would be counted twice by a sum, so Total is the distinct count over the
+    # full range and comes from its own query.
+    row = _find_row(values, _ROW_PAGES)
+    if row:
+        per_month = [gsc_pages.get(m, 0) for m in months]
+        for m, v in zip(months, per_month):
+            put(row, month_col[m], v)
+        put(row, total_col,
+            gsc_pages_distinct if gsc_pages_distinct is not None else "-")
+        put(row, avg_col, round(sum(per_month) / num_months))
+
+    # --- Top pages ---
+    for aliases, key in ((_ROW_TOP_PRODUCT, "product"), (_ROW_TOP_BLOG, "blog")):
+        row = _find_row(values, aliases)
+        if not row:
+            continue
+        for m in months:
+            put(row, month_col[m], gsc_top.get(m, {}).get(key, ""))
+
+    # --- GA4 rows: write what GA4 returns; where it returns nothing, only
+    # fill an empty cell, and with 'n/a' rather than blank so a hole is not
+    # read as a zero. An existing number is never overwritten with nothing.
+    for key, aliases in _GA4_ROW_ALIASES.items():
+        row = _find_row(values, aliases)
+        if not row:
+            continue
+        for m in months:
+            ga_month = (ga4_data or {}).get(m)
+            if ga_month and ga_month.get(key) is not None:
+                put(row, month_col[m], _format_ga4_value(key, ga_month[key]))
+            elif not _sheet_cell(values, row, month_col[m]).strip():
+                put(row, month_col[m], "n/a")
+
+    # --- Leads (WhatsApp): same rule. Total/Average cover only the months
+    # that actually have a number, so the n/a months do not drag the mean.
+    leads_row = _find_row(values, _ROW_LEADS)
+    leads_by_month = {}
+    if leads_row:
+        for m in months:
+            v = (wa_leads or {}).get(m)
+            if v:
+                put(leads_row, month_col[m], v)
+                leads_by_month[m] = v
+            else:
+                existing = _as_number(_sheet_cell(values, leads_row, month_col[m]))
+                if existing is not None:
+                    leads_by_month[m] = existing
+                elif not _sheet_cell(values, leads_row, month_col[m]).strip():
+                    put(leads_row, month_col[m], "n/a")
+        if leads_by_month:
+            tot = sum(leads_by_month.values())
+            put(leads_row, total_col, round(tot))
+            put(leads_row, avg_col, round(tot / len(leads_by_month)))
+
+    # --- Conversion Rate: the label says Leads/Sessions, so use GA4 sessions.
+    # The old full-rebuild divided by GSC clicks instead, which contradicts
+    # both the label and the numbers already in the row.
+    conv_row = _find_row(values, _ROW_CONVERSION)
+    if conv_row:
+        sessions_row = _find_row(values, _GA4_ROW_ALIASES["sessions"])
+        for m in months:
+            ga_month = (ga4_data or {}).get(m)
+            sessions = None
+            if ga_month and ga_month.get("sessions"):
+                sessions = ga_month["sessions"]
+            elif sessions_row:
+                sessions = _as_number(_sheet_cell(values, sessions_row, month_col[m]))
+            leads = leads_by_month.get(m)
+            if leads is not None and sessions:
+                put(conv_row, month_col[m], "%.2f%%" % (leads / sessions * 100))
+            elif not _sheet_cell(values, conv_row, month_col[m]).strip():
+                put(conv_row, month_col[m], "n/a")
+
+    # --- Footer timestamp ---
+    now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    for idx, row in enumerate(values, 1):
+        if row and str(row[0]).startswith("Last updated:"):
+            put(idx, 1, "Last updated: %s  |  Data source: Google Search "
+                        "Console + Google Analytics" % now)
+            break
+
+    ws.batch_update(updates, value_input_option="USER_ENTERED")
+    logger.info("Updated %d cells on '%s' (targeted; NOTES, WhatsApp button "
+                "clicks and hand-entered GA4 months left intact)",
+                len(updates), sheet_name)
+    return ws
+
+
+def _write_web_report_full(sh, year, gsc_overview, gsc_pages, gsc_top,
+                           wa_leads, ga4_data, gsc_pages_distinct=None):
+    """Build the whole 'Web CBI {year}' tab from the template.
+
+    Calls ws.clear(), so it only runs when the tab does not exist yet.
+    write_web_report() handles the update path; see the note above it.
+    """
     sheet_name = f"Web CBI {year}"
 
     try:
@@ -766,7 +1068,9 @@ def write_web_report(sh, year, gsc_overview, gsc_pages, gsc_top, wa_leads, ga4_d
         v = gsc_overview.get(m, {}).get("ctr", 0)
         ctr_row.append(f"{v:.2f}%")
         total_ctr += v
-    ctr_row += [f"{total_ctr:.2f}%", f"{total_ctr / max(num_months, 1):.2f}%"]
+    # Total is the period rate. Summing monthly percentages is meaningless.
+    period_ctr = (total_clicks / total_impr * 100) if total_impr else 0
+    ctr_row += [f"{period_ctr:.2f}%", f"{total_ctr / max(num_months, 1):.2f}%"]
     all_rows.append(ctr_row)
 
     # Avg Position
@@ -786,7 +1090,9 @@ def write_web_report(sh, year, gsc_overview, gsc_pages, gsc_top, wa_leads, ga4_d
         v = gsc_pages.get(m, 0)
         pages_row.append(v)
         total_pages += v
-    pages_row += [total_pages, round(total_pages / max(num_months, 1))]
+    # A page ranking in several months must not be counted once per month.
+    pages_row += [gsc_pages_distinct if gsc_pages_distinct is not None else "",
+                  round(total_pages / max(num_months, 1))]
     all_rows.append(pages_row)
 
     # ===== GA4 Metrics (if available) =====
@@ -1858,6 +2164,22 @@ def main():
             TOKEN_PATH.unlink()
         logger.info("Cleared existing token — will re-authorize")
 
+    if "--auth-only" in sys.argv:
+        # Re-authorize and STOP. Deliberately exits before any sheet write.
+        # It used to guard against write_web_report() calling ws.clear(),
+        # which wiped the hand-entered GA4 rows whenever GA4 came back
+        # empty; the targeted writer no longer clears the tab. Kept because
+        # verifying scopes before writing anything is still the safer order.
+        if TOKEN_PATH.exists():
+            TOKEN_PATH.unlink()
+        creds = get_credentials()
+        logger.info("Authorized. Scopes on new token:")
+        for s in (creds.scopes or []):
+            logger.info("  - %s", s)
+        has_ga4 = any("analytics.readonly" in s for s in (creds.scopes or []))
+        logger.info("analytics.readonly present: %s", has_ga4)
+        sys.exit(0 if has_ga4 else 1)
+
     if "--year" in sys.argv:
         idx = sys.argv.index("--year")
         if idx + 1 < len(sys.argv):
@@ -1883,6 +2205,9 @@ def main():
     logger.info("--- Fetching GSC monthly pages count ---")
     gsc_pages = get_gsc_monthly_pages_count(creds, year)
 
+    logger.info("--- Fetching GSC distinct pages (year to date) ---")
+    gsc_pages_distinct = get_gsc_distinct_pages(creds, year)
+
     logger.info("--- Fetching GSC top pages ---")
     gsc_top = get_gsc_top_pages(creds, year)
 
@@ -1900,7 +2225,8 @@ def main():
 
     # ---- Write reports ----
     logger.info("--- Writing Web Report ---")
-    write_web_report(sh, year, gsc_overview, gsc_pages, gsc_top, wa_leads, ga4_data)
+    write_web_report(sh, year, gsc_overview, gsc_pages, gsc_top, wa_leads,
+                     ga4_data, gsc_pages_distinct=gsc_pages_distinct)
 
     logger.info("--- Writing Keyword Report ---")
     write_keyword_report(sh, year, keyword_data)
