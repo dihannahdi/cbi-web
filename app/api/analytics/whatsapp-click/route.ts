@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { writeFile, readFile, mkdir } from 'fs/promises';
+import { writeFile, readFile, mkdir, appendFile } from 'fs/promises';
 import { join } from 'path';
 import { existsSync } from 'fs';
 
@@ -15,7 +15,7 @@ import { existsSync } from 'fs';
  * treat this file as a durable lead-tracking store.
  *
  * The DURABLE source of truth for WhatsApp lead counts is the GA4 event
- * `whatsapp_button_click` (GA4 property G-16L2MWL33B), fired client-side
+ * `whatsapp_button_click` (GA4 property G-QQ90XL5KS5), fired client-side
  * directly to Google Analytics in lib/whatsapp-analytics.ts — it does not
  * depend on this file or this server at all. See
  * scripts/gsc-sheets-monitor/monthly_report.py (get_whatsapp_leads_ga4_monthly
@@ -36,11 +36,19 @@ interface ClickEvent {
   userAgent: string;
   referrer: string;
   locale: string;
+  // Added when per-CTA attribution shipped (see lib/whatsapp-analytics.ts).
+  // Optional because events written before that have neither field.
+  source?: string;
+  context?: Record<string, unknown>;
 }
 
 const ANALYTICS_DIR = join(process.cwd(), 'data');
 const ANALYTICS_FILE = join(ANALYTICS_DIR, 'whatsapp-clicks.json');
-const MAX_STORED_CLICKS = 1000;
+const ARCHIVE_FILE = join(ANALYTICS_DIR, 'whatsapp-clicks-archive.jsonl');
+// Hot file cap. Raised from 1000 on 2026-09-07: at the old cap the file held
+// only ~3 months and every new click silently destroyed the oldest one.
+// Anything trimmed past this now goes to ARCHIVE_FILE instead of being lost.
+const MAX_STORED_CLICKS = 10000;
 
 /**
  * Read stored clicks, tolerating both the current bare-array format and the
@@ -89,8 +97,27 @@ export async function POST(request: NextRequest) {
       clicks.push(clickData);
 
       // Keep only the last MAX_STORED_CLICKS to prevent unbounded file growth.
+      const overflow =
+        clicks.length > MAX_STORED_CLICKS
+          ? clicks.slice(0, clicks.length - MAX_STORED_CLICKS)
+          : [];
       const trimmed =
         clicks.length > MAX_STORED_CLICKS ? clicks.slice(-MAX_STORED_CLICKS) : clicks;
+
+      // Append what fell out of the hot file to an append-only JSONL archive
+      // so history survives the cap. One line per event means no read+parse of
+      // existing content, so the cost stays constant however large it grows.
+      // Its own try/catch: losing the archive must never block the hot write.
+      if (overflow.length > 0) {
+        try {
+          await appendFile(
+            ARCHIVE_FILE,
+            overflow.map(event => JSON.stringify(event)).join('\n') + '\n'
+          );
+        } catch (archiveError) {
+          console.error('WhatsApp click archive append failed (non-fatal):', archiveError);
+        }
+      }
 
       await writeFile(ANALYTICS_FILE, JSON.stringify(trimmed, null, 2));
 
