@@ -120,3 +120,8 @@ scripts/gsc-sheets-monitor/gsc_sheets_monitor.py
 scripts/strapi-gsc-setup/api/gsc-sync/controllers/gsc-sync.ts
 scripts/strapi-gsc-setup/fix-ts.sh
 scripts/strapi-gsc-setup/test-sync.sh
+
+# Python bytecode from the GSC monitor scripts. Generated on every run,
+# never source.
+__pycache__/
+*.pyc
