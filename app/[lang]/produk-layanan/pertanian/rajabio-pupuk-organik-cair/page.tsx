@@ -887,7 +887,7 @@ export default async function RajabioProductPage({
             <div className="lg:w-1/2">
               <div className="relative aspect-square max-w-lg mx-auto lg:mx-0">
                 <Image
-                  src="/products/rajabio/rajabio-cover.webp"
+                  src="/products/rajabio/rajabio-mockup.webp"
                   alt={`${data.name} - ${data.subtitle}`}
                   width={600}
                   height={600}

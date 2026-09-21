@@ -287,7 +287,7 @@ const Agriculture = async ({
                 <div className="relative aspect-square max-w-xs mx-auto">
                   <div className="relative rounded-2xl overflow-hidden bg-white/10 backdrop-blur-sm p-4">
                     <Image
-                      src="/products/rajabio/rajabio-cover.webp"
+                      src="/products/rajabio/rajabio-mockup.webp"
                       alt="RAJABIO - Pupuk Organik Cair"
                       width={300}
                       height={300}
