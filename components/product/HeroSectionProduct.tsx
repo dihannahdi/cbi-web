@@ -45,7 +45,7 @@ const HeroSectionProduct = ({
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
-          src="/products/rajabio/rajabio-poster.jpg"
+          src="/products/rajabio/rajabio-hero.webp"
           alt=""
           fill
           priority

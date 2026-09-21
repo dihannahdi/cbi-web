@@ -396,7 +396,7 @@ export async function generateMetadata({
       locale: lang === 'en' ? 'en_US' : 'id_ID',
       type: 'website',
       images: [{
-        url: `${SITE_CONFIG.url}/products/rajabio/rajabio-cover.webp`,
+        url: `${SITE_CONFIG.url}/products/rajabio/rajabio-hero.webp`,
         width: 1200,
         height: 630,
         alt: data.name + " - " + data.subtitle,
@@ -406,7 +406,7 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title,
       description,
-      images: [`${SITE_CONFIG.url}/products/rajabio/rajabio-cover.webp`],
+      images: [`${SITE_CONFIG.url}/products/rajabio/rajabio-hero.webp`],
     },
     alternates: {
       canonical: `${SITE_CONFIG.url}/${lang}/produk-layanan/pertanian/rajabio-pupuk-organik-cair`,
@@ -521,7 +521,7 @@ export default async function RajabioProductPage({
         ? ['RAJABIO LOF', 'RAJABIO Pupuk Organik', 'Pupuk Organik Cair RAJABIO', 'POC RAJABIO']
         : ['RAJABIO LOF', 'RAJABIO Organic Fertilizer', 'RAJABIO Liquid Organic Fertilizer'],
       description: data.description,
-      image: `${SITE_CONFIG.url}/products/rajabio/rajabio-cover.webp`,
+      image: `${SITE_CONFIG.url}/products/rajabio/rajabio-mockup.webp`,
       url: `${SITE_CONFIG.url}/${lang}/produk-layanan/pertanian/rajabio-pupuk-organik`,
       sku: 'RAJABIO-1L',
       mpn: 'RAJABIO-LOF-2024',
@@ -547,7 +547,7 @@ export default async function RajabioProductPage({
       brand: {
         '@type': 'Brand',
         name: 'RAJABIO',
-        logo: `${SITE_CONFIG.url}/products/rajabio/rajabio-cover.webp`,
+        logo: `${SITE_CONFIG.url}/products/rajabio/rajabio-mockup.webp`,
       },
       
       // Category Hierarchy (for AI understanding)
@@ -656,7 +656,7 @@ export default async function RajabioProductPage({
     generateVideoSchema({
       name: lang === 'id' ? "Bekas Produksi Batu Bata Kini Berproduksi Lagi Berkat RAJABIO" : "Former Brick Production Now Producing Again Thanks to RAJABIO",
       description: lang === 'id' ? "Testimoni petani dari Indramayu yang berhasil menghidupkan kembali lahan bekas produksi batu bata menggunakan pupuk organik cair RAJABIO." : "Farmer testimonial from Indramayu successfully reviving former brick production land using RAJABIO liquid organic fertilizer.",
-      thumbnailUrl: `${SITE_CONFIG.url}/products/rajabio/rajabio-cover.webp`,
+      thumbnailUrl: `${SITE_CONFIG.url}/products/rajabio/rajabio-mockup.webp`,
       // Real YouTube publish timestamp (verified via itemprop="uploadDate", 2026-07-28)
       uploadDate: "2025-09-22T22:00:03-07:00",
       contentUrl: "https://www.youtube.com/watch?v=rRbK3D_gvS4",
@@ -668,7 +668,7 @@ export default async function RajabioProductPage({
     generateVideoSchema({
       name: lang === 'id' ? "Testimoni Pak Parjan Indramayu - RAJABIO POC" : "Pak Parjan Indramayu Testimonial - RAJABIO LOF",
       description: lang === 'id' ? "Pak Parjan dari Indramayu membagikan pengalamannya menggunakan pupuk organik cair RAJABIO untuk meningkatkan hasil panen padi." : "Pak Parjan from Indramayu shares his experience using RAJABIO liquid organic fertilizer to increase rice harvest.",
-      thumbnailUrl: `${SITE_CONFIG.url}/products/rajabio/rajabio-cover.webp`,
+      thumbnailUrl: `${SITE_CONFIG.url}/products/rajabio/rajabio-mockup.webp`,
       // Real YouTube publish timestamp (verified via itemprop="uploadDate", 2026-07-28)
       uploadDate: "2025-09-03T20:30:42-07:00",
       contentUrl: "https://www.youtube.com/watch?v=_B3pONNfGEI",
@@ -680,7 +680,7 @@ export default async function RajabioProductPage({
     generateVideoSchema({
       name: lang === 'id' ? "Cara Efektif Menekan Biaya Produksi Padi 60% dengan RAJABIO" : "Effective Way to Reduce Rice Production Costs 60% with RAJABIO",
       description: lang === 'id' ? "Tutorial lengkap cara menggunakan pupuk organik cair RAJABIO untuk menekan biaya produksi padi hingga 60% tanpa mengurangi hasil panen." : "Complete tutorial on using RAJABIO liquid organic fertilizer to reduce rice production costs up to 60% without reducing harvest.",
-      thumbnailUrl: `${SITE_CONFIG.url}/products/rajabio/rajabio-cover.webp`,
+      thumbnailUrl: `${SITE_CONFIG.url}/products/rajabio/rajabio-mockup.webp`,
       // Real YouTube publish timestamp (verified via itemprop="uploadDate", 2026-07-28)
       uploadDate: "2025-08-25T20:03:51-07:00",
       contentUrl: "https://www.youtube.com/watch?v=IkHUqxjLuIE",
@@ -692,7 +692,7 @@ export default async function RajabioProductPage({
     generateVideoSchema({
       name: lang === 'id' ? "Testimoni Pak Parman Batang - RAJABIO Pupuk Organik" : "Pak Parman Batang Testimonial - RAJABIO Organic Fertilizer",
       description: lang === 'id' ? "Petani dari Batang, Pak Parman, berbagi kesuksesannya menggunakan POC RAJABIO untuk pertanian organik yang menguntungkan." : "Farmer from Batang, Pak Parman, shares his success using RAJABIO LOF for profitable organic farming.",
-      thumbnailUrl: `${SITE_CONFIG.url}/products/rajabio/rajabio-cover.webp`,
+      thumbnailUrl: `${SITE_CONFIG.url}/products/rajabio/rajabio-mockup.webp`,
       // Real YouTube publish timestamp (verified via itemprop="uploadDate", 2026-07-28)
       uploadDate: "2025-08-19T03:16:44-07:00",
       contentUrl: "https://www.youtube.com/watch?v=zGF2bYyClhk",
@@ -706,7 +706,7 @@ export default async function RajabioProductPage({
       description: lang === 'id' 
         ? "Panduan lengkap aplikasi pupuk organik cair (POC) RAJABIO untuk hasil panen maksimal. Dosis standar 5ml per liter air, aplikasi setiap 1-2 minggu."
         : "Complete guide for applying RAJABIO liquid organic fertilizer (LOF) for maximum harvest. Standard dose 5ml per liter water, apply every 1-2 weeks.",
-      image: "/products/rajabio/rajabio-cover.webp",
+      image: "/products/rajabio/rajabio-mockup.webp",
       totalTime: "PT15M",
       estimatedCost: { value: 62000, currency: "IDR" },
       steps: [
@@ -715,7 +715,7 @@ export default async function RajabioProductPage({
           text: lang === 'id' 
             ? "Campurkan 5ml (1 tutup botol) pupuk organik cair RAJABIO dengan 1 liter air bersih. Untuk 1 tangki semprot 15 liter, gunakan 8 tutup kemasan (±75ml). Aduk hingga merata."
             : "Mix 5ml (1 bottle cap) of RAJABIO liquid organic fertilizer with 1 liter of clean water. For 1 sprayer tank of 15 liters, use 8 bottle caps (±75ml). Stir until evenly mixed.",
-          image: "/products/rajabio/rajabio-cover.webp",
+          image: "/products/rajabio/rajabio-mockup.webp",
         },
         {
           name: lang === 'id' ? "Aplikasi Pada Lahan" : "Apply to Land",
@@ -827,7 +827,7 @@ export default async function RajabioProductPage({
     // Fixes GSC issue: "Missing field 'acquireLicensePage'" and "Missing field 'creator'"
     // @see https://developers.google.com/search/docs/appearance/structured-data/image-license-metadata
     generateImageObjectSchema({
-      url: '/products/rajabio/rajabio-cover.webp',
+      url: '/products/rajabio/rajabio-mockup.webp',
       name: `${data.name} - ${data.subtitle} Product Image`,
       caption: lang === 'id' 
         ? 'RAJABIO Pupuk Organik Cair Premium - Kemasan 1 Liter'
@@ -844,7 +844,7 @@ export default async function RajabioProductPage({
     
     // 9. Additional ImageObject for Hero/Poster Image
     generateImageObjectSchema({
-      url: '/products/rajabio/rajabio-poster.jpg',
+      url: '/products/rajabio/rajabio-hero.webp',
       name: `${data.name} - ${lang === 'id' ? 'Banner Promosi' : 'Promotional Banner'}`,
       caption: lang === 'id' 
         ? 'RAJABIO - Pupuk Organik Cair Terbaik Indonesia'
@@ -867,7 +867,7 @@ export default async function RajabioProductPage({
 
       {/* Hero Section - Matching Agriculture Landing Page Typography */}
       <HeroSectionGeneral
-        imgUrl="/products/rajabio/rajabio-poster.jpg"
+        imgUrl="/products/rajabio/rajabio-hero.webp"
         category="Pupuk Organik"
         title={
           <h1 className="p-4 text-center text-3xl font-bold !leading-tight text-white lg:text-5xl xl:text-[56px]">

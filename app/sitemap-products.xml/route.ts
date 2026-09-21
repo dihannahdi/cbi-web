@@ -165,10 +165,10 @@ const productVideos: Record<string, VideoData[]> = {
     { id: "_B3pONNfGEI", title: "TESTIMONI PAK PARJAN DARI INDRAMAYU - CENTRA BIOTECH", embedUrl: "https://www.youtube.com/embed/_B3pONNfGEI", type: "youtube", thumbnailUrl: "https://i.ytimg.com/vi/_B3pONNfGEI/maxresdefault.jpg", duration: "180", description: "Testimoni Pak Parjan dari Indramayu tentang penggunaan FLORAONE Pupuk Hayati untuk padi" },
     { id: "IkHUqxjLuIE", title: "CARA EFEKTIF MENEKAN BIAYA PRODUKSI PADI HINGGA 60%", embedUrl: "https://www.youtube.com/embed/IkHUqxjLuIE", type: "youtube", thumbnailUrl: "https://i.ytimg.com/vi/IkHUqxjLuIE/maxresdefault.jpg", duration: "240", description: "Tutorial cara efektif menekan biaya produksi padi menggunakan produk FLORAONE dari Centra Biotech" },
     { id: "zGF2bYyClhk", title: "TESTIMONI PAK PARMAN DARI BATANG - CENTRA BIOTECH", embedUrl: "https://www.youtube.com/embed/zGF2bYyClhk", type: "youtube", thumbnailUrl: "https://i.ytimg.com/vi/zGF2bYyClhk/maxresdefault.jpg", duration: "180", description: "Testimoni Pak Parman dari Batang tentang efektivitas FLORAONE Pupuk Hayati" },
-    { id: "7593292407202909461", title: "FLORAONE di Lapangan #1", embedUrl: "https://www.tiktok.com/embed/v2/7593292407202909461", type: "tiktok", thumbnailUrl: "https://www.centrabiotechindonesia.com/products/floraone/floraone-cover.webp", duration: "60", description: "Video aplikasi FLORAONE Pupuk Hayati di lapangan petani" },
-    { id: "7589298285819563285", title: "FLORAONE di Lapangan #2", embedUrl: "https://www.tiktok.com/embed/v2/7589298285819563285", type: "tiktok", thumbnailUrl: "https://www.centrabiotechindonesia.com/products/floraone/floraone-cover.webp", duration: "60", description: "Testimoni petani menggunakan FLORAONE untuk meningkatkan kesuburan tanah" },
-    { id: "7567321822954360085", title: "FLORAONE di Lapangan #3", embedUrl: "https://www.tiktok.com/embed/v2/7567321822954360085", type: "tiktok", thumbnailUrl: "https://www.centrabiotechindonesia.com/products/floraone/floraone-cover.webp", duration: "60", description: "Demonstrasi penggunaan FLORAONE Pupuk Hayati di sawah" },
-    { id: "7512399240962854161", title: "FLORAONE di Lapangan #4", embedUrl: "https://www.tiktok.com/embed/v2/7512399240962854161", type: "tiktok", thumbnailUrl: "https://www.centrabiotechindonesia.com/products/floraone/floraone-cover.webp", duration: "60", description: "Hasil panen optimal dengan FLORAONE Pupuk Hayati" }
+    { id: "7593292407202909461", title: "FLORAONE di Lapangan #1", embedUrl: "https://www.tiktok.com/embed/v2/7593292407202909461", type: "tiktok", thumbnailUrl: "https://www.centrabiotechindonesia.com/products/floraone/floraone-mockup.webp", duration: "60", description: "Video aplikasi FLORAONE Pupuk Hayati di lapangan petani" },
+    { id: "7589298285819563285", title: "FLORAONE di Lapangan #2", embedUrl: "https://www.tiktok.com/embed/v2/7589298285819563285", type: "tiktok", thumbnailUrl: "https://www.centrabiotechindonesia.com/products/floraone/floraone-mockup.webp", duration: "60", description: "Testimoni petani menggunakan FLORAONE untuk meningkatkan kesuburan tanah" },
+    { id: "7567321822954360085", title: "FLORAONE di Lapangan #3", embedUrl: "https://www.tiktok.com/embed/v2/7567321822954360085", type: "tiktok", thumbnailUrl: "https://www.centrabiotechindonesia.com/products/floraone/floraone-mockup.webp", duration: "60", description: "Demonstrasi penggunaan FLORAONE Pupuk Hayati di sawah" },
+    { id: "7512399240962854161", title: "FLORAONE di Lapangan #4", embedUrl: "https://www.tiktok.com/embed/v2/7512399240962854161", type: "tiktok", thumbnailUrl: "https://www.centrabiotechindonesia.com/products/floraone/floraone-mockup.webp", duration: "60", description: "Hasil panen optimal dengan FLORAONE Pupuk Hayati" }
   ],
   'simbios': [
     { id: "rRbK3D_gvS4", title: "DULU BEKAS PRODUKSI BATU BATA, KINI SUDAH BERPRODUKSI LAGI BERKAT CENTRA BIOTECH", embedUrl: "https://www.youtube.com/embed/rRbK3D_gvS4", type: "youtube", thumbnailUrl: "https://i.ytimg.com/vi/rRbK3D_gvS4/maxresdefault.jpg", duration: "300", description: "Testimoni petani tentang keberhasilan menggunakan produk SIMBIOS Pupuk Hayati Premium dari Centra Biotech Indonesia" },
@@ -185,10 +185,10 @@ const productVideos: Record<string, VideoData[]> = {
     { id: "_B3pONNfGEI", title: "TESTIMONI PAK PARJAN DARI INDRAMAYU - RAJABIO", embedUrl: "https://www.youtube.com/embed/_B3pONNfGEI", type: "youtube", thumbnailUrl: "https://i.ytimg.com/vi/_B3pONNfGEI/maxresdefault.jpg", duration: "180", description: "Testimoni Pak Parjan dari Indramayu tentang penggunaan RAJABIO Pupuk Organik untuk padi" },
     { id: "IkHUqxjLuIE", title: "CARA EFEKTIF MENEKAN BIAYA PRODUKSI PADI HINGGA 60% DENGAN RAJABIO", embedUrl: "https://www.youtube.com/embed/IkHUqxjLuIE", type: "youtube", thumbnailUrl: "https://i.ytimg.com/vi/IkHUqxjLuIE/maxresdefault.jpg", duration: "240", description: "Tutorial cara efektif menekan biaya produksi padi menggunakan produk RAJABIO dari Centra Biotech" },
     { id: "zGF2bYyClhk", title: "TESTIMONI PAK PARMAN DARI BATANG - RAJABIO", embedUrl: "https://www.youtube.com/embed/zGF2bYyClhk", type: "youtube", thumbnailUrl: "https://i.ytimg.com/vi/zGF2bYyClhk/maxresdefault.jpg", duration: "180", description: "Testimoni Pak Parman dari Batang tentang efektivitas RAJABIO Pupuk Organik Cair" },
-    { id: "7593292407202909461", title: "RAJABIO di Lapangan #1", embedUrl: "https://www.tiktok.com/embed/v2/7593292407202909461", type: "tiktok", thumbnailUrl: "https://www.centrabiotechindonesia.com/products/rajabio/rajabio-cover.webp", duration: "60", description: "Video aplikasi RAJABIO Pupuk Organik Cair di lapangan petani" },
-    { id: "7589298285819563285", title: "RAJABIO di Lapangan #2", embedUrl: "https://www.tiktok.com/embed/v2/7589298285819563285", type: "tiktok", thumbnailUrl: "https://www.centrabiotechindonesia.com/products/rajabio/rajabio-cover.webp", duration: "60", description: "Testimoni petani menggunakan RAJABIO untuk meningkatkan kesuburan tanah" },
-    { id: "7567321822954360085", title: "RAJABIO di Lapangan #3", embedUrl: "https://www.tiktok.com/embed/v2/7567321822954360085", type: "tiktok", thumbnailUrl: "https://www.centrabiotechindonesia.com/products/rajabio/rajabio-cover.webp", duration: "60", description: "Demonstrasi penggunaan RAJABIO Pupuk Organik di sawah" },
-    { id: "7512399240962854161", title: "RAJABIO di Lapangan #4", embedUrl: "https://www.tiktok.com/embed/v2/7512399240962854161", type: "tiktok", thumbnailUrl: "https://www.centrabiotechindonesia.com/products/rajabio/rajabio-cover.webp", duration: "60", description: "Hasil panen optimal dengan RAJABIO Pupuk Organik Cair" }
+    { id: "7593292407202909461", title: "RAJABIO di Lapangan #1", embedUrl: "https://www.tiktok.com/embed/v2/7593292407202909461", type: "tiktok", thumbnailUrl: "https://www.centrabiotechindonesia.com/products/rajabio/rajabio-mockup.webp", duration: "60", description: "Video aplikasi RAJABIO Pupuk Organik Cair di lapangan petani" },
+    { id: "7589298285819563285", title: "RAJABIO di Lapangan #2", embedUrl: "https://www.tiktok.com/embed/v2/7589298285819563285", type: "tiktok", thumbnailUrl: "https://www.centrabiotechindonesia.com/products/rajabio/rajabio-mockup.webp", duration: "60", description: "Testimoni petani menggunakan RAJABIO untuk meningkatkan kesuburan tanah" },
+    { id: "7567321822954360085", title: "RAJABIO di Lapangan #3", embedUrl: "https://www.tiktok.com/embed/v2/7567321822954360085", type: "tiktok", thumbnailUrl: "https://www.centrabiotechindonesia.com/products/rajabio/rajabio-mockup.webp", duration: "60", description: "Demonstrasi penggunaan RAJABIO Pupuk Organik di sawah" },
+    { id: "7512399240962854161", title: "RAJABIO di Lapangan #4", embedUrl: "https://www.tiktok.com/embed/v2/7512399240962854161", type: "tiktok", thumbnailUrl: "https://www.centrabiotechindonesia.com/products/rajabio/rajabio-mockup.webp", duration: "60", description: "Hasil panen optimal dengan RAJABIO Pupuk Organik Cair" }
   ]
 };
 
@@ -270,7 +270,7 @@ export async function GET() {
   const rajabioEntries = locales.map((locale) => {
     const path = '/produk-layanan/pertanian/rajabio-pupuk-organik-cair';
     const lastModified = new Date().toISOString();
-    const imageUrl = `${BASE_URL}/products/rajabio/rajabio-cover.webp`;
+    const imageUrl = `${BASE_URL}/products/rajabio/rajabio-mockup.webp`;
     const videoEntries = generateVideoEntries('rajabio');
     
     return `
@@ -312,7 +312,7 @@ export async function GET() {
   const floraoneEntries = locales.map((locale) => {
     const path = '/produk-layanan/pertanian/floraone-pupuk-hayati';
     const lastModified = new Date().toISOString();
-    const imageUrl = `${BASE_URL}/products/floraone/floraone-cover.webp`;
+    const imageUrl = `${BASE_URL}/products/floraone/floraone-mockup.webp`;
     const videoEntries = generateVideoEntries('floraone');
     
     return `

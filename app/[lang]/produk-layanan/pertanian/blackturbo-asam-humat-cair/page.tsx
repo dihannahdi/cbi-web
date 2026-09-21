@@ -201,7 +201,7 @@ export async function generateMetadata({
       description: description,
       images: strapiData?.heroImage?.url 
         ? [`${process.env.NEXT_PUBLIC_URL_API}${strapiData.heroImage.url}`]
-        : ['/Cover Black Turbo.webp'],
+        : ['/products/blackturbo/blackturbo-mockup.webp'],
       type: 'website',
     },
     alternates: {
@@ -250,7 +250,7 @@ export default async function BlackTurboPage({
   const productSchema = generateProductSchema({
     name: data.name,
     description: data.description,
-    image: '/Cover Black Turbo.webp',
+    image: '/products/blackturbo/blackturbo-mockup.webp',
     url: `${SITE_CONFIG.url}/${lang}/produk-layanan/pertanian/blackturbo-asam-humat`,
     brand: 'Centra Biotech Indonesia',
     // NOTE: no `offers` here on purpose (was a fake `price: 0`). No real,
@@ -276,7 +276,7 @@ export default async function BlackTurboPage({
 
   // ImageObject Schema for Product Images - Google Image License Metadata
   const imageSchema = generateImageObjectSchema({
-    url: '/Cover Black Turbo.webp',
+    url: '/products/blackturbo/blackturbo-mockup.webp',
     name: `BLACK TURBO - ${lang === 'id' ? 'Asam Humat Cair' : 'Liquid Humic Acid'}`,
     caption: lang === 'id' 
       ? 'BLACK TURBO Asam Humat Cair - Pembenah Tanah Premium'
