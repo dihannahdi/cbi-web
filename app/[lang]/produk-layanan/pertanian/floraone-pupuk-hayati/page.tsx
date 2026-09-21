@@ -280,7 +280,7 @@ export async function generateMetadata({
       locale: lang === 'en' ? 'en_US' : 'id_ID',
       type: 'website',
       images: [{
-        url: `${SITE_CONFIG.url}/products/floraone/floraone-cover.webp`,
+        url: `${SITE_CONFIG.url}/products/floraone/floraone-hero.webp`,
         width: 1200,
         height: 630,
         alt: data.name + " - " + data.subtitle,
@@ -290,7 +290,7 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title,
       description,
-      images: [`${SITE_CONFIG.url}/products/floraone/floraone-cover.webp`],
+      images: [`${SITE_CONFIG.url}/products/floraone/floraone-hero.webp`],
     },
     alternates: {
       canonical: `${SITE_CONFIG.url}/${lang}/produk-layanan/pertanian/floraone-pupuk-hayati`,
@@ -404,8 +404,8 @@ export default async function FloraOnePage({
         { "@type": "PropertyValue", "name": "Organic Certification", "value": "LeSOS 240-LSO-005-IDN-04-18" },
       ],
       "image": [
-        `${SITE_CONFIG.url}/products/floraone/floraone-cover.webp`,
-        `${SITE_CONFIG.url}/products/floraone/floraone-bottle.webp`,
+        `${SITE_CONFIG.url}/products/floraone/floraone-mockup.webp`,
+        `${SITE_CONFIG.url}/products/floraone/floraone-hero.webp`,
       ],
       // NOTE: no "offers" here on purpose (previously a fake price of 60000
       // that was never displayed anywhere on the rendered page). This is a
@@ -610,7 +610,7 @@ export default async function FloraOnePage({
     // ImageObject Schema for Product Images - Google Image License Metadata
     // Fixes GSC issue: "Missing field 'acquireLicensePage'" and "Missing field 'creator'"
     generateImageObjectSchema({
-      url: '/products/floraone/floraone-cover.webp',
+      url: '/products/floraone/floraone-mockup.webp',
       name: `FLORA ONE - ${lang === 'id' ? 'Pupuk Hayati Premium' : 'Premium Biological Fertilizer'}`,
       caption: lang === 'id' 
         ? 'FLORA ONE Pupuk Hayati - 5 Mikroba Menguntungkan untuk Pertanian'
@@ -632,7 +632,7 @@ export default async function FloraOnePage({
 
       {/* Hero Section - Matching RajaBio */}
       <HeroSectionGeneral
-        imgUrl="/products/floraone/floraone-cover.webp"
+        imgUrl="/products/floraone/floraone-hero.webp"
         category="Pupuk Hayati"
         title={
           <h1 className="p-4 text-center text-3xl font-bold !leading-tight text-white lg:text-5xl xl:text-[56px]">

@@ -59,7 +59,7 @@ export default async function AgricultureProductsPage({
       ],
       price: 'Rp 62.000',
       badge: lang === 'id' ? 'BESTSELLER' : 'BESTSELLER',
-      image: '/products/rajabio/rajabio-cover.webp',
+      image: '/products/rajabio/rajabio-mockup.webp',
       href: `/${lang}/produk/pertanian/rajabio-pupuk-organik-cair`,
       color: 'from-green-600 to-green-700',
       textColor: 'text-green-600',

@@ -308,7 +308,7 @@ export async function generateMetadata({
       locale: lang === 'en' ? 'en_US' : 'id_ID',
       type: 'website',
       images: [{
-        url: `${SITE_CONFIG.url}/products/rajabio/rajabio-cover.webp`,
+        url: `${SITE_CONFIG.url}/products/rajabio/rajabio-mockup.webp`,
         width: 1200,
         height: 630,
         alt: data.name + " - " + data.subtitle,
@@ -318,7 +318,7 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title,
       description,
-      images: [`${SITE_CONFIG.url}/products/rajabio/rajabio-cover.webp`],
+      images: [`${SITE_CONFIG.url}/products/rajabio/rajabio-mockup.webp`],
     },
     alternates: {
       canonical: `${SITE_CONFIG.url}/${lang}/rajabio-pupuk-organik-cair`,
@@ -386,7 +386,7 @@ export default async function RajabioProductPage({
       description: data.description,
       brand: "Centra Biotech Indonesia",
       url: `/${lang}/rajabio-pupuk-organik-cair`,
-      image: `/products/rajabio/rajabio-cover.webp`,
+      image: `/products/rajabio/rajabio-mockup.webp`,
       sku: "RAJABIO-1L",
       category: lang === 'id' ? 'Pupuk Organik Cair' : 'Liquid Organic Fertilizer',
       offers: {
@@ -404,7 +404,7 @@ export default async function RajabioProductPage({
     generateVideoSchema({
       name: lang === 'id' ? "RAJABIO Pupuk Organik - Video Testimoni" : "RAJABIO Organic Fertilizer - Testimonial Video",
       description: data.description,
-      thumbnailUrl: `${SITE_CONFIG.url}/products/rajabio/rajabio-cover.webp`,
+      thumbnailUrl: `${SITE_CONFIG.url}/products/rajabio/rajabio-mockup.webp`,
       uploadDate: "2024-01-01",
       embedUrl: EXTERNAL_LINKS.youtubeEmbed,
     }),
@@ -483,7 +483,7 @@ export default async function RajabioProductPage({
                 {/* Main Product Image */}
                 <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-white/10 backdrop-blur-sm p-4">
                   <Image
-                    src="/products/rajabio/rajabio-cover.webp"
+                    src="/products/rajabio/rajabio-mockup.webp"
                     alt={`${data.name} - ${data.subtitle}`}
                     width={600}
                     height={600}
@@ -645,7 +645,7 @@ export default async function RajabioProductPage({
             {/* Secondary Image - Poster */}
             <div className="relative aspect-[3/4] max-w-md mx-auto lg:mx-0 rounded-2xl overflow-hidden shadow-xl">
               <Image
-                src="/products/rajabio/rajabio-poster.jpg"
+                src="/products/rajabio/rajabio-hero.webp"
                 alt="RAJABIO Poster"
                 fill
                 className="object-cover"
