@@ -654,7 +654,7 @@ export default async function FloraOnePage({
             <div className="lg:w-1/2">
               <div className="relative aspect-square max-w-lg mx-auto lg:mx-0">
                 <Image
-                  src="/products/floraone/floraone-cover.webp"
+                  src="/products/floraone/floraone-mockup.webp"
                   alt={`${data.name} - ${data.subtitle}`}
                   width={600}
                   height={600}
